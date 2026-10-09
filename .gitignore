@@ -1,0 +1,30 @@
+# SECRETE - nu se comiteaza niciodata
+*.env
+.env*
+*token*
+*secret*
+*credential*
+*.key
+*.pem
+oauth.json
+tokens.json
+account*.json
+
+# DEPENDINTE
+node_modules/
+package-lock.json
+.venv/
+__pycache__/
+*.pyc
+
+# TEMPORARE
+*.log
+*.tmp
+.DS_Store
+/tmp/
+/sandbox/
+
+# PRODUSE LOCALE (nu sursa)
+*.docx
+!ALEX-KIT/CV-URI/*.docx
+*.pdf
