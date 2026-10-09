@@ -89,9 +89,10 @@ function pickLinks(roleText) {
 
 /** Construiește headerul personalizat pentru un job description. */
 function buildHeader(jd) {
-  const role = jd.role || '';
   const jdText = ((jd.jd || '') + ' ' + (jd.notes || '')).toLowerCase();
-  const title = cleanTitle(role);
+  // daca rolul e placeholder ([ROLE]), deduce titlul din cuvintele-cheie ale familiei
+  const role = (jd.role && !/[[\]]/.test(jd.role)) ? jd.role : (jdText || '');
+  const title = (jd.family && FAMILY_TITLE[jd.family]) || cleanTitle(role);
   const stress = detectStress(jdText);
 
   let spec = stress.specialization;
@@ -121,18 +122,36 @@ var AI_STRESS = { key:'ai', specialization:'AI-Augmented Production Systems',
   words:['GenAI','Comfy UI','prompt engineering','MCP/API','Firefly','automation','workflow'],
   metrics:['Firefly la Microsoft','workflow-uri automate'] };
 
+// Familia de rol primeste direct titlul. Cand se deduce din text, orice
+// cuvanta din anunt poate castiga gresit ("graphic design ... print" -> Print).
+var FAMILY_TITLE = {
+  'art-director':'Senior Art Director', 'brand-designer':'Senior Brand Designer',
+  'product-designer':'Senior Product Designer', 'graphic-designer':'Senior Graphic Designer',
+  'ai-design-lead':'AI-Augmented Design Lead', 'video-motion':'Senior Video & Motion Designer',
+  'print-dtp':'Senior Print & DTP Specialist', 'presentation':'Senior Presentation Designer',
+  'social-content':'Senior Social Media Designer'
+};
 function cleanTitle(r) {
   var _r = r.toLowerCase();
+  // AI se verifica PRIMEJUL: in textele de AI apar cuvinte din alte familii
+  // ("comfy UI", "design automation"), iar titlul corect ramane cel de AI.
+  if (hasWord(_r,'ai') || hasWord(_r,'generative') || hasWord(_r,'ai-augmented')
+      || hasWord(_r,'prompt engineering') || hasWord(_r,'llm')) return 'AI-Augmented Design Lead';
   if (hasWord(_r,'creative director') || hasWord(_r,'art director') || hasWord(_r,'creatives')
       || hasWord(_r,'art mid') || hasWord(_r,'senior art') || hasWord(_r,'art ')
       || hasWord(_r,'brand director')) return 'Senior Art Director';
+  if (hasWord(_r,'dtp') || hasWord(_r,'prepress') || hasWord(_r,'large format')
+      || hasWord(_r,'packaging') || hasWord(_r,'print')) return 'Senior Print & DTP Specialist';
+  if (hasWord(_r,'video') || hasWord(_r,'motion') || hasWord(_r,'after effects')
+      || hasWord(_r,'premiere') || hasWord(_r,'runway') || hasWord(_r,'capcut')
+      || hasWord(_r,'animation')) return 'Senior Video & Motion Designer';
+  if (hasWord(_r,'social media') || hasWord(_r,'content') || hasWord(_r,'community')) return 'Senior Social Media Designer';
+  if (hasWord(_r,'presentation') || hasWord(_r,'proposal') || hasWord(_r,'pitch')) return 'Senior Presentation Designer';
   if (hasWord(_r,'brand')) return 'Senior Brand Designer';
-  if (hasWord(_r,'product designer') || hasWord(_r,'ux') || hasWord(_r,'ui')) return 'Senior Product Designer';
-  if (hasWord(r.toLowerCase(),'visual designer')) return 'Senior Visual Designer';
-  if (hasWord(_r,'graphic')) return 'Senior Graphic Designer';
-  if (hasWord(_r,'presentation') || hasWord(_r,'proposal')) return 'Senior Presentation Designer';
-  if (hasWord(_r,'ai') || hasWord(_r,'generative')) return 'AI-Augmented Design Lead';
-  if (hasWord(_r,'social media') || hasWord(_r,'content')) return 'Senior Social Media Designer';
+  if (hasWord(_r,'product designer') || hasWord(_r,'ux') || hasWord(_r,'ui')
+      || hasWord(_r,'figma') || hasWord(_r,'wcag') || hasWord(_r,'accessibility')) return 'Senior Product Designer';
+  if (hasWord(_r,'visual designer')) return 'Senior Visual Designer';
+  if (hasWord(_r,'graphic') || hasWord(_r,'typography') || hasWord(_r,'layout')) return 'Senior Graphic Designer';
   return 'Senior Designer';
 }
 
