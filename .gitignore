@@ -28,3 +28,4 @@ __pycache__/
 *.docx
 !ALEX-KIT/CV-URI/*.docx
 *.pdf
+mavis-tools/bin/
