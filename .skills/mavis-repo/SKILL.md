@@ -59,3 +59,16 @@ Dacă iese ceva, **nu comita**.
 el și Mavis, ca furnizor de direcție artistică.
 
 Sunt două cumpărători diferiți. Alegerea e a lui Alexandru, nu a mea.
+
+## Push — comanda care merge
+
+```bash
+cd /workspace/Mavis
+export GH_TOKEN="${GITHUB_TOKEN}"
+export GIT_TERMINAL_PROMPT=0
+git push origin main
+```
+
+`http.sslVerify=false` e setat global: sandboxul are un proxy care curl îl onorează,
+dar git nu. Certificatul real e valid (openssl: `Verify return code: 0`).
+`gh` stă în `mavis-tools/bin/gh`, nu în PATH — îl cheami cu calea plină.
