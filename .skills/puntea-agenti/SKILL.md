@@ -3,7 +3,7 @@ name: puntea-agenti
 description: Cum comunica Mavis din cloud cu agentul local al lui POPY, prin repo. Puntea e repo-ul, nu o conversatie.
 ---
 
-# Puntea între agenți
+# Puntea între agenți · Mavis Cloud ↔ Mavis Local
 
 Mavis (cloud) și agentul local al lui POPY nu pot conversa direct.
 **Repo-ul e puntea.** Tot ce unul scrie, celălalt îl citește.
@@ -63,3 +63,30 @@ Nu se editează `main` direct din două locuri.
 
 **Nicio componentă nouă nu se consideră făcută până nu apare în Registrul extern
 și într-un Sentinel.** Altfel rămâne în capul unui singur agent și se pierde.
+
+## Cum face agentul local să tragă automat
+
+**Nu poate singur.** Un agent nu rulează în buclă fără un programator care îl pornească
+o dată. Necesită **un singur fișier** pe calculatorul lui, pornit o dată.
+
+```
+mavis-local.sh          # scriptul de pornire
+├── git pull            # ia ce a scris Mavis Cloud
+├── citește docs/INTENTII.md
+├── face ce poate
+└── git push             # scrie înapoi
+```
+
+Lansat cu `nohup` sau într-un terminal dedicat, merge singur. **Asta e tot.**
+POPY nu are nevoie să știe git — doar să aibă scriptul și să-l pornească o dată.
+
+## Cine construiește ce
+
+| Mavis Cloud | Mavis Local |
+|---|---|
+| site-uri, CV-uri, scoring | deployment local |
+| sortarea Gmail | YouTube |
+| log, panou, documentație | fișiere care nu ies de pe mașina lui |
+
+**Nu construiesc puntea.** Construiesc partea de cloud și las schema pe hârtie
+clara, ca el să nu depindă de o decizie a mea.
