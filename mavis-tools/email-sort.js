@@ -13,14 +13,22 @@ const L = {
   finante:  'MAVIS/Finante',
   newsletter:'MAVIS/Newsletter',
   personal: 'MAVIS/Personal',
+  facturi:  'MAVIS/Facturi si conturi',
+  actiune:  'MAVIS/Actiune - de raspuns',
 };
 
 const WINDOW = 'older_than:1y newer_than:3y';
+// categoriile zilnice nu pot folosi fereastra de 1-3 ani
+const NO_WINDOW = new Set(['ai', 'actiune', 'facturi']);
 
 const CATS = [
   ['social',    `{from:skool from:facebook from:instagram from:tiktok from:pinterest from:polibrawl from:youtube}`],
   ['joburi',    `{from:jooble from:bestjobs from:hipo from:indeed from:jobleads from:recruit from:linkedin from:iqads from:designproject}`],
+  // AI si newsletter-urile vin ZILNIC: fereastra 'mai vechi de 1 an' le arunca pe TOATE.
   ['ai',        `{from:substack from:goatacademy from:aiautomationsociety from:beehiiv from:twine from:comfy from:deepmind from:openai from:anthropic subject:AI subject:"artificial intelligence"}`],
+  // etichete care NU aveau nicio regula - create goale
+  ['facturi',   `{subject:factura subject:factură subject:invoice subject:facturi}`],
+  ['actiune',   `{is:starred} {is:important is:unread}`],
   ['finante',   `{from:kraken from:tradingview from:bitunix from:coinbase from:binance subject:factura subject:investitie}`],
   ['newsletter',`{from:noreply from:no-reply from:newsletter from:digest from:promotions from:offers from:deals from:notificari from:notificări}`],
   ['personal',  `{from:happyadv from:alexfiloti from:family from:parinti}`],
@@ -47,7 +55,8 @@ async function threadIds(query) {
 
   const total = new Map();
   for (const [cat, flt] of CATS) {
-    const query = WINDOW + ' ' + flt + ' in:inbox -label:' + L[cat];
+    const w = NO_WINDOW.has(cat) ? '' : WINDOW + ' ';
+    const query = w + flt + ' in:inbox -label:' + L[cat];
     let ids = [];
     try { ids = await threadIds(query); } catch (e) { console.log('cautare blocata', cat, e.message.slice(0,40)); continue; }
     console.log('\n' + cat.toUpperCase() + ': ' + ids.length + ' thread-uri  (cota ' + q.state.used + ')');
