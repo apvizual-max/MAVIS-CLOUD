@@ -44,7 +44,7 @@ Dear your team team,
 
 A B2C company doesn't need "more designers" — it needs creative systems architects who understand the rigorous relationship between visual impact, economics, and production speed. You need one coherent system instead of fragmented execution. Your role needs someone who can make that structural, not decorative.
 
-I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smite and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
+I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smike and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
 
 I'm not avoiding the AI shift — I'm building on it. Over the past four years I've structured AI-augmented production pipelines using Comfy UI, Adobe Firefly, Ideogram, Runway and CapCut, with prompt engineering built on harness and JSON scripting. Deployed inside Microsoft's proposal centre, this turned generative tooling into an accelerator rather than a gimmick. The output stays on-brand and on-deadline.
 
@@ -92,7 +92,7 @@ Dear your team team,
 
 A B2C company doesn't need "more designers" — it needs creative systems architects who understand the rigorous relationship between visual impact, economics, and production speed. You need one coherent system instead of fragmented execution. Your role needs someone who can make that structural, not decorative.
 
-I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smite and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
+I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smike and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
 
 I'm not avoiding the AI shift — I'm building on it. Over the past four years I've structured AI-augmented production pipelines using Comfy UI, Adobe Firefly, Ideogram, Runway and CapCut, with prompt engineering built on harness and JSON scripting. Deployed inside Microsoft's proposal centre, this turned generative tooling into an accelerator rather than a gimmick. The output stays on-brand and on-deadline.
 
@@ -141,7 +141,7 @@ Dear your team team,
 
 A B2C company doesn't need "more designers" — it needs creative systems architects who understand the rigorous relationship between visual impact, economics, and production speed. You need one coherent system instead of fragmented execution. Your role needs someone who can make that structural, not decorative.
 
-I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smite and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
+I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smike and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
 
 I'm not avoiding the AI shift — I'm building on it. Over the past four years I've structured AI-augmented production pipelines using Comfy UI, Adobe Firefly, Ideogram, Runway and CapCut, with prompt engineering built on harness and JSON scripting. Deployed inside Microsoft's proposal centre, this turned generative tooling into an accelerator rather than a gimmick. The output stays on-brand and on-deadline.
 
@@ -189,7 +189,7 @@ Dear your team team,
 
 A B2C company doesn't need "more designers" — it needs creative systems architects who understand the rigorous relationship between visual impact, economics, and production speed. You need one coherent system instead of fragmented execution. Your role needs someone who can make that structural, not decorative.
 
-I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smite and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
+I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smike and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
 
 I'm not avoiding the AI shift — I'm building on it. Over the past four years I've structured AI-augmented production pipelines using Comfy UI, Adobe Firefly, Ideogram, Runway and CapCut, with prompt engineering built on harness and JSON scripting. Deployed inside Microsoft's proposal centre, this turned generative tooling into an accelerator rather than a gimmick. The output stays on-brand and on-deadline.
 
@@ -238,7 +238,7 @@ Dear your team team,
 
 A B2C company doesn't need "more designers" — it needs creative systems architects who understand the rigorous relationship between visual impact, economics, and production speed. You need production latency removed without cutting craft. Your role needs someone who can make that structural, not decorative.
 
-I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smite and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
+I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smike and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
 
 I'm not avoiding the AI shift — I'm building on it. Over the past four years I've structured AI-augmented production pipelines using Comfy UI, Adobe Firefly, Ideogram, Runway and CapCut, with prompt engineering built on harness and JSON scripting. Deployed inside Microsoft's proposal centre, this turned generative tooling into an accelerator rather than a gimmick. The output stays on-brand and on-deadline.
 
@@ -285,7 +285,7 @@ Dear your team team,
 
 A B2C company doesn't need "more designers" — it needs creative systems architects who understand the rigorous relationship between visual impact, economics, and production speed. You need one coherent system instead of fragmented execution. Your role needs someone who can make that structural, not decorative.
 
-I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smite and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
+I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smike and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
 
 I'm not avoiding the AI shift — I'm building on it. Over the past four years I've structured AI-augmented production pipelines using Comfy UI, Adobe Firefly, Ideogram, Runway and CapCut, with prompt engineering built on harness and JSON scripting. Deployed inside Microsoft's proposal centre, this turned generative tooling into an accelerator rather than a gimmick. The output stays on-brand and on-deadline.
 
@@ -332,7 +332,7 @@ Dear your team team,
 
 A B2C company doesn't need "more designers" — it needs creative systems architects who understand the rigorous relationship between visual impact, economics, and production speed. You need volume delivered without diluting the standard. Your role needs someone who can make that structural, not decorative.
 
-I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smite and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
+I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smike and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
 
 I'm not avoiding the AI shift — I'm building on it. Over the past four years I've structured AI-augmented production pipelines using Comfy UI, Adobe Firefly, Ideogram, Runway and CapCut, with prompt engineering built on harness and JSON scripting. Deployed inside Microsoft's proposal centre, this turned generative tooling into an accelerator rather than a gimmick. The output stays on-brand and on-deadline.
 
@@ -379,7 +379,7 @@ Dear your team team,
 
 A B2B company doesn't need "more designers" — it needs creative systems architects who understand the rigorous relationship between visual impact, economics, and production speed. You need technical complexity turned into visual clarity. Your role needs someone who can make that structural, not decorative.
 
-I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smite and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
+I've solved that exact problem at scale. At Shipley Associates supporting Microsoft PCoE, I systematised presentation frameworks and infographics for multimillion-dollar global deals under extreme deadline pressure. At Yokogawa Europe I built a repository of 200+ unified graphic templates across 12 countries, cutting visual production cycles by 30%. At Smike and Romexpo I directed 30+ multimedia campaigns and 10+ trademark rebrands, lifting brand visibility 30% while reducing media cost 20%.
 
 I'm not avoiding the AI shift — I'm building on it. Over the past four years I've structured AI-augmented production pipelines using Comfy UI, Adobe Firefly, Ideogram, Runway and CapCut, with prompt engineering built on harness and JSON scripting. Deployed inside Microsoft's proposal centre, this turned generative tooling into an accelerator rather than a gimmick. The output stays on-brand and on-deadline.
 

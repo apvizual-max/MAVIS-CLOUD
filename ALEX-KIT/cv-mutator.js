@@ -17,7 +17,7 @@ const LINKS = {
   romexpo:    'https://ap-id.ro/index.php/portfolio/branding-romexpo/',
   made:       'https://ap-id.ro/index.php/portfolio/made_com/',
   pathway:    'https://ap-id.ro/index.php/portfolio/ux_ui_online_casino/',
-  smite:      'https://ap-id.ro/index.php/portfolio/digital-work/',
+  smike:      'https://ap-id.ro/index.php/portfolio/digital-work/',
   ilpasso:    'https://ap-id.ro/index.php/portfolio/il-passo/',
   croitorul:  'https://ap-id.ro/index.php/portfolio/croitorultau-ro/',
   optima:     'https://ap-id.ro/index.php/portfolio/optima-call/',
