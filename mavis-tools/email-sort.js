@@ -23,7 +23,7 @@ const CATS = [
   ['ai',        `{from:substack from:goatacademy from:aiautomationsociety from:beehiiv from:twine from:comfy from:deepmind from:openai from:anthropic subject:AI subject:"artificial intelligence"}`],
   ['finante',   `{from:kraken from:tradingview from:bitunix from:coinbase from:binance subject:factura subject:investitie}`],
   ['newsletter',`{from:noreply from:no-reply from:newsletter from:digest from:promotions from:offers from:deals from:notificari from:notificări}`],
-  ['personal',  `{from:happyadv from:alexfiloti from:family from:parinti}],
+  ['personal',  `{from:happyadv from:alexfiloti from:family from:parinti}`],
 ];
 
 async function threadIds(query) {
