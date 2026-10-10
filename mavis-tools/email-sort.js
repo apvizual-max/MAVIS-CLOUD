@@ -56,7 +56,9 @@ async function threadIds(query) {
   const total = new Map();
   for (const [cat, flt] of CATS) {
     const w = NO_WINDOW.has(cat) ? '' : WINDOW + ' ';
-    const query = w + flt + ' in:inbox -label:' + L[cat];
+    // GHILIMELE OBLIGATORII: etichetele cu spatiu sau linie sunt stricate de Gmail.
+    // 'MAVIS/Actiune - de raspuns' -> '-' e citit ca operator NOT, query-ul da 0.
+    const query = w + flt + ' in:inbox -label:"' + L[cat] + '"';
     let ids = [];
     try { ids = await threadIds(query); } catch (e) { console.log('cautare blocata', cat, e.message.slice(0,40)); continue; }
     console.log('\n' + cat.toUpperCase() + ': ' + ids.length + ' thread-uri  (cota ' + q.state.used + ')');

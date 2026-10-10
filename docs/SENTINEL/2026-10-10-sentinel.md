@@ -8,7 +8,7 @@
 ## 1. Stare în cinci rânduri
 
 Repo-ul Mavis e pe GitHub, totul pe `main`, workflow-ul de verificare e **success**.
-Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 14 skill-uri proprii și
+Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 15 skill-uri proprii și
 14 importate. Site-ul de CV de Nivel 1 e funcțional pe 1 rol.
 **Următorul pas: celelalte 8 site-uri de Nivel 1.**
 
@@ -20,7 +20,7 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 14 skill-uri proprii și
 | `MAVIS/Joburi` | 4000 |
 | `MAVIS/AI si comunitati` | 0 |
 | `MAVIS/Social` | 2804 |
-| `MAVIS/Newsletter` | 2535 |
+| `MAVIS/Newsletter` | 2540 |
 | `MAVIS/Finante` | 63 |
 | `MAVIS/Personal` | 176 |
 | `MAVIS/Actiune - de raspuns` | 0 |
@@ -36,15 +36,15 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 14 skill-uri proprii și
 |---|---|
 | Remote | `https://github.com/apvizual-max/Mavis.git` |
 | Ramură | `main` |
-| Commit-uri | **10** |
-| Fișiere necomitate | **5** |
-| Ultimul commit | `060d443 Repar sintaxa stricata in email-sort.js - prinsa de workflow` |
+| Commit-uri | **14** |
+| Fișiere necomitate | **2** |
+| Ultimul commit | `6bde9ce Puntea intre agenti + canalul de intentii` |
 | Workflow | **success** |
 
 ### Proiect
 | | |
 |---|---|
-| Skill-uri proprii | **14** |
+| Skill-uri proprii | **15** |
 | Skill-uri importate (vendor) | **14** |
 | Site-uri de CV | **1** — graphic-designer |
 | Șabloane CV generice | **9** |
@@ -54,7 +54,7 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 14 skill-uri proprii și
 
 | Ce | Cum s-a verificat |
 |---|---|
-| Repo pe GitHub | `gh api repos/apvizual-max/Mavis` — 10 commit-uri pe `main` |
+| Repo pe GitHub | `gh api repos/apvizual-max/Mavis` — 14 commit-uri pe `main` |
 | Workflow verde | `gh run list` → **success** la ultimul push |
 | Fără secrete | verificarea rulează la fiecare push, blochează build-ul |
 | 22/22 fișiere JS valide | `node --check` pe fiecare, plus în workflow |
@@ -120,4 +120,4 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 14 skill-uri proprii și
 
 ---
 
-*Raport generat 2026-10-10 · 10 commit-uri · 28 skill-uri*
+*Raport generat 2026-10-10 · 14 commit-uri · 29 skill-uri*
