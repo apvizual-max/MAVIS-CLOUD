@@ -45,3 +45,23 @@ Regula: **dovada înaintea afirmației.**
 
 Nu spune „am reparat" fără să rulezi și să arăți rezultatul. Nu spune „se încarcă" fără
 să verifici procesul. Nu spune „e pe Drive" fără să cauți fișierul și să-l vezi.
+
+## Flux CI — de acum înainte
+
+Nu mai împing direct în `main`. Fluxul care face funcționare verificarea și
+review-ul automat:
+
+```bash
+git checkout -b numele-ramurii
+# ... modificările ...
+git commit -m "ce s-a făcut"
+git push -u origin numele-ramurii
+gh pr create --base main --head numele-ramurii --title "..." --body "..."
+```
+
+Ce se întâmplă automat la PR:
+- rulează `.github/workflows/verify.yml` → 5 verificări
+- **agentul de code review examinează diff-ul**
+
+Fără pull request, reviewerul nu are ce vedea. Asta a fost eroarea inițială:
+am împins 10 commit-uri direct în `main`, pe o singură ramură.
