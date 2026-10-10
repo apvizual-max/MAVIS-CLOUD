@@ -68,7 +68,7 @@ def main():
             '<td><b>%s</b><div style="color:#94a3b8;font-size:12.5px;margin-top:3px">%s</div></td></tr>'
             % (esc(e['t']), esc(e['nivel']), esc(e['msg']), esc(e.get('detaliu', '')))
             for e in erori)
-        prompt = ('Repo apvizual-max/Mavis. Citeste docs/LOG-SISTEM.json, filtreaza '
+        prompt = ('Repo apvizual-max/MAVIS-CLOUD. Citeste docs/LOG-SISTEM.json, filtreaza '
                 'nivel=eroare sau critic, repara fiecare, verifica, apoi scrie in log.')
     else:
         err_rows = '<tr><td colspan="3" style="color:#64748b;padding:14px 12px">Nicio eroare.</td></tr>'
@@ -162,7 +162,7 @@ pre{{background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:15px
 
 <header>
     <h1>Mavis <span>Cloud</span> · Tot ce există</h1>
-    <p class="sub">{azi} · <a href="https://github.com/apvizual-max/Mavis">apvizual-max/Mavis</a> ·
+    <p class="sub">{azi} · <a href="https://github.com/apvizual-max/MAVIS-CLOUD">apvizual-max/MAVIS-CLOUD</a> ·
     ramura <code class="mono">{esc(branch)}</code> · {commits} commit-uri ·
     {dirty} necomitate</p>
     <div class="top">

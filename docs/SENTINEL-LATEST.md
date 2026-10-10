@@ -34,7 +34,7 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 15 skill-uri proprii și
 ### Repo
 | | |
 |---|---|
-| Remote | `https://github.com/apvizual-max/Mavis.git` |
+| Remote | `https://github.com/apvizual-max/MAVIS-CLOUD.git` |
 | Ramură | `main` |
 | Commit-uri | **14** |
 | Fișiere necomitate | **2** |
@@ -54,7 +54,7 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 15 skill-uri proprii și
 
 | Ce | Cum s-a verificat |
 |---|---|
-| Repo pe GitHub | `gh api repos/apvizual-max/Mavis` — 14 commit-uri pe `main` |
+| Repo pe GitHub | `gh api repos/apvizual-max/MAVIS-CLOUD` — 14 commit-uri pe `main` |
 | Workflow verde | `gh run list` → **success** la ultimul push |
 | Fără secrete | verificarea rulează la fiecare push, blochează build-ul |
 | 22/22 fișiere JS valide | `node --check` pe fiecare, plus în workflow |

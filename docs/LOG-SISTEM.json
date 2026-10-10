@@ -1,6 +1,14 @@
 {
  "intrari": [
   {
+   "t": "2026-10-10 21:57:29",
+   "nivel": "info",
+   "msg": "Repo redenumit: apvizual-max/Mavis -> apvizual-max/MAVIS-CLOUD",
+   "rol": "git",
+   "detaliu": "",
+   "commit": "bdefb8f"
+  },
+  {
    "t": "2026-10-10 20:36:39",
    "nivel": "info",
    "msg": "14.146 mesaje sortate pe 8 etichete",
@@ -98,6 +106,6 @@
   }
  ],
  "nivel": {
-  "info": 12
+  "info": 13
  }
 }

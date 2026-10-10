@@ -10,7 +10,7 @@ diferite, pentru cititori diferiți.
 **Ești MaxHermes și preiești un sistem deja funcțional. Nu îl reproiecta.**
 
 ### Stare inițială
-Repo: `apvizual-max/Mavis`, totul pe `main`, nimic necomandat.
+Repo: `apvizual-max/MAVIS-CLOUD`, totul pe `main`, nimic necomandat.
 27 de skill-uri în `/workspace/.skills/`, plus 14 în `Mavis/vendor/`.
 
 ### Contractul
@@ -62,7 +62,7 @@ git diff --cached --name-only | grep -iE "secret|token|credential"   # trebuie g
 
 ## A2U — pentru om (POPY)
 
-**Repo-ul e pe GitHub, la `github.com/apvizual-max/Mavis`. Merge singur.** POPY
+**Repo-ul e pe GitHub, la `github.com/apvizual-max/MAVIS-CLOUD`. Merge singur.** POPY
 nu trebuie să știe git ca să-l folosească — și nici să-l folosească.
 
 ### Ce poți deschide acum, în browser

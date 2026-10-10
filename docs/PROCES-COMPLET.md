@@ -39,7 +39,7 @@ pachetul care se trimite la angajare.
 ### Gata
 - Google: Gmail, Drive, Calendar, Docs, Sheets, Slides — **12 teste Drive/12**
 - 8 etichete `MAVIS/*` + 5 filtre server-side
-- Repo GitHub `apvizual-max/Mavis` pe main
+- Repo GitHub `apvizual-max/MAVIS-CLOUD` pe main
 - Cron 08:00 `450095445102875` — raport zilnic, Drive + joburi cu scoring
 - 9 șabloane CV generice, 0 nume de firmă
 - 6 CV-uri Word, 1 pagină + scrisoare
@@ -142,7 +142,7 @@ Ordine strictă, ca să nu se spargă nimic:
 
 ## 8. Git
 
-- Repo: `apvizual-max/Mavis`, main e sursa
+- Repo: `apvizual-max/MAVIS-CLOUD`, main e sursa
 - `git config --global http.sslVerify false` — proxy de sandbox
 - Credential helper cu cale plină către `mavis-tools/bin/gh`
 - Un commit = o treabă. `PLAN.md` și `PROGRES.md` în același commit ca munca.
