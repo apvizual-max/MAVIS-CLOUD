@@ -1,0 +1,103 @@
+{
+ "intrari": [
+  {
+   "t": "2026-10-10 20:36:39",
+   "nivel": "info",
+   "msg": "14.146 mesaje sortate pe 8 etichete",
+   "rol": "gmail",
+   "detaliu": "",
+   "commit": "bc6a680"
+  },
+  {
+   "t": "2026-10-10 20:36:39",
+   "nivel": "info",
+   "msg": "Sentinel si Registru extern create",
+   "rol": "documentatie",
+   "detaliu": "",
+   "commit": "bc6a680"
+  },
+  {
+   "t": "2026-10-10 20:36:38",
+   "nivel": "info",
+   "msg": "Site CV Graphic Designer construit",
+   "rol": "graphic-designer",
+   "detaliu": "3 taburi, 12 proiecte reale, strat de date separat de UI",
+   "commit": "bc6a680"
+  },
+  {
+   "t": "2026-10-10 20:36:38",
+   "nivel": "info",
+   "msg": "14 skill-uri importate din emilkowalski/skills",
+   "rol": "skilluri",
+   "detaliu": "",
+   "commit": "bc6a680"
+  },
+  {
+   "t": "2026-10-10 20:36:38",
+   "nivel": "info",
+   "msg": "7 skill-uri noi create din lectii",
+   "rol": "skilluri",
+   "detaliu": "generic-vs-specific, job-sourcing-methods, cv-generation-pipeline, data-driven-site-build, gmail-label-correction, sandbox-gotchas, google-drive-file-organization",
+   "commit": "bc6a680"
+  },
+  {
+   "t": "2026-10-10 20:36:38",
+   "nivel": "info",
+   "msg": "Workflow GitHub Actions verde la 5 verificari",
+   "rol": "git",
+   "detaliu": "",
+   "commit": "bc6a680"
+  },
+  {
+   "t": "2026-10-10 20:36:38",
+   "nivel": "info",
+   "msg": "Flux CI: ramura + PR in loc de push direct in main",
+   "rol": "git",
+   "detaliu": "",
+   "commit": "bc6a680"
+  },
+  {
+   "t": "2026-10-10 20:36:38",
+   "nivel": "info",
+   "msg": "Corectat numaratorul: replace(' ','') sterga primul spatiu",
+   "rol": "gmail",
+   "detaliu": "3 etichete raportate ca 0, erau pline",
+   "commit": "bc6a680"
+  },
+  {
+   "t": "2026-10-10 20:36:38",
+   "nivel": "info",
+   "msg": "Renumit MAVIS/Actiune - de raspuns -> MAVIS/De raspuns",
+   "rol": "gmail",
+   "detaliu": "Gmail nu indexeaza etichete cu liniuta",
+   "commit": "bc6a680"
+  },
+  {
+   "t": "2026-10-10 20:36:38",
+   "nivel": "info",
+   "msg": "Panou de bord redenumit Mavis Cloud",
+   "rol": "sistem",
+   "detaliu": "",
+   "commit": "bc6a680"
+  },
+  {
+   "t": "2026-10-10 20:36:38",
+   "nivel": "info",
+   "msg": "Sistem de log pornit: plafon 150, rotatie FIFO",
+   "rol": "sistem",
+   "detaliu": "",
+   "commit": "bc6a680"
+  },
+  {
+   "t": "2026-10-10 20:36:38",
+   "nivel": "info",
+   "msg": "Contact real introdus in site",
+   "rol": "graphic-designer",
+   "detaliu": "apvisual.arond@gmail.com / +40722121752",
+   "commit": "bc6a680"
+  }
+ ],
+ "nivel": {
+  "info": 12
+ }
+}

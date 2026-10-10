@@ -24,7 +24,11 @@ CV-uri) e activă. Continuă pe lista din `PLAN.md` până când apare o decizie
 
 ## Git — reguli stricte
 
-1. `main` nu primește nimic fără cerință explicită.
+**0. Se lucrează DIRECT pe `main`.** POPY a cerut asta explicit: nu fac ramuri
+pentru feature-uri, decât **când el cere explicit**. Fiecare lucru se comite
+direct pe `main` și se împinge imediat.
+
+1. `main` primește totul, fără excepții, fără ramuri.
 2. Un commit, o treabă. Mesajul spune *ce* s-a făcut, nu *că* s-a făcut.
 3. Nu comite: parole, tokenuri, `.env`, `oauth.json`, `node_modules`, loguri.
 4. `PLAN.md` și `PROGRES.md` se actualizează în același commit ca munca făcută.
@@ -46,10 +50,10 @@ Regula: **dovada înaintea afirmației.**
 Nu spune „am reparat" fără să rulezi și să arăți rezultatul. Nu spune „se încarcă" fără
 să verifici procesul. Nu spune „e pe Drive" fără să cauți fișierul și să-l vezi.
 
-## Flux CI — de acum înainte
+## Flux CI — când POPY cere ramură
 
-Nu mai împing direct în `main`. Fluxul care face funcționare verificarea și
-review-ul automat:
+Lucrezi direct pe `main` în mod normal. **Ramurile se fac doar când POPY cere.**
+Când cere, fluxul care face funcționare verificarea și review-ul automat:
 
 ```bash
 git checkout -b numele-ramurii

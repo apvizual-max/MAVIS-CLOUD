@@ -1,6 +1,5 @@
 {
   "_nota": "Strat de date pentru site-urile de CV. Fiecare rol are fisierul lui. UI-ul ramane acelasi, se schimba doar datele.",
-
   "rol": {
     "slug": "graphic-designer",
     "titluSite": "Senior Graphic Designer",
@@ -8,12 +7,11 @@
     "pozitionare": "Executing Design That Holds Up in Production",
     "rolWord": "graphic designer",
     "diferentaVsArtDirector": "Art direction coordoneaza si gestioneaza. Graphic designer executa si creeaza. Acelasi meiestesit, alt post.",
-    "email": "[EMAIL]",
-    "telefon": "[TELEFON]",
+    "email": "apvisual.arond@gmail.com",
+    "telefon": "+40722121752",
     "oras": "Bucharest, Romania",
     "website": "ap-id.ro"
   },
-
   "cv": {
     "rezumat": "Graphic designer with 20+ years in visual design and 4 building AI-augmented production systems. Delivered 25,000+ product visuals across 12 European countries for Microsoft, Nikon and Yokogawa. Builds brand systems that survive contact with real production, and brings generative AI into the pipeline so volume rises without the standard dropping. Execution and creativity, at production speed.",
     "competente": [
@@ -42,31 +40,113 @@
       }
     ],
     "experienta": [
-      { "perioada": "2000 — prezent", "rol": "Senior Graphic Designer / Art Director", "detaliu": "Direcție artistică și execuție pentru clienți din tech, industrie și retail." },
-      { "perioada": "1996 — 2000", "rol": "Graphic Designer", "detaliu": "Agenție, campanii end-to-end pe toate mediile." },
-      { "perioada": "Învățare continuă", "rol": "Formare în design grafic și tipografie", "detaliu": "20+ ani de practică continuă." }
+      {
+        "perioada": "2000 — prezent",
+        "rol": "Senior Graphic Designer / Art Director",
+        "detaliu": "Direcție artistică și execuție pentru clienți din tech, industrie și retail."
+      },
+      {
+        "perioada": "1996 — 2000",
+        "rol": "Graphic Designer",
+        "detaliu": "Agenție, campanii end-to-end pe toate mediile."
+      },
+      {
+        "perioada": "Învățare continuă",
+        "rol": "Formare în design grafic și tipografie",
+        "detaliu": "20+ ani de practică continuă."
+      }
     ],
     "educatie": [
       "Formare în design grafic și tipografie",
       "Perfecționare continuă în direcție artistică și sisteme vizuale"
     ]
   },
-
   "portofolio": [
-    { "client": "Smite", "categorie": "Agenție", "titlu": "Campanii end-to-end", "note": "Identitate, benneruri, postere, materiale de magazin, cărți de vizită, promovare online. Proiecte pentru grilul, Aderma și îmbrăcăminte.", "status": "Agenție închisă între timp" },
-    { "client": "Aderma", "categorie": "Cosmetică", "titlu": "Sistem vizual de marcă", "note": "Campanii complete pe toate mediile, de la promovare online la materiale tipărite pentru magazine.", "status": "Digital" },
-    { "client": "Aderma Protect", "categorie": "Cosmetică", "titlu": "Ambalaj și etichetare", "note": "Sisteme grafice pentru produse de îngrijire.", "status": "Digital" },
-    { "client": "Creafac", "categorie": "Cosmetică", "titlu": "Reclame pentru copii și tineri", "note": "Produse cosmetice pentru copii și tineri, produse pentru un partener farmaceutic mare. Reclame, ambalaj, materiale de campanie.", "status": "Digital" },
-    { "client": "City Grill", "categorie": "Lanț de restaurante", "titlu": "Identitate vizuală de lanț", "note": "Sistem vizual cu tehnică de progresie, aplicat în toate punctele lanțului din țară.", "status": "Prezent în portofoliu" },
-    { "client": "Smite", "categorie": "Agenție", "titlu": "Puncte de grilaj", "note": "Materiale de grilaj și signalistică urbană.", "status": "Agenție închisă" },
-    { "client": "Smite", "categorie": "Agenție", "titlu": "Linii de îmbrăcăminte", "note": "Campanii pentru branduri de îmbrăcăminte.", "status": "Agenție închisă" },
-    { "client": "Yokogawa", "categorie": "Industrial", "titlu": "Sistem de 200+ șabloane", "note": "Dezpozit centralizat de șabloane grafice și ghiduri pentru 12 țări.", "status": "Prezent în portofoliu" },
-    { "client": "Microsoft", "categorie": "Enterprise", "titlu": "Propuneri comerciale", "note": "Sisteme de prezentare și infografice pentru conturi globale.", "status": "Prezent în portofoliu" },
-    { "client": "Nikon", "categorie": "Tech", "titlu": "Campanii multi-canal", "note": "50+ campanii online și vizualizări de produs.", "status": "Prezent în portofoliu" },
-    { "client": "Veeam", "categorie": "Tech", "titlu": "Vizualizări de produs", "note": "Materiale grafice pentru produse enterprise.", "status": "Prezent în portofoliu" },
-    { "client": "ASSA ABLOY", "categorie": "Industrial", "titlu": "Documentație tehnică", "note": "Sisteme grafice pentru documentație și produse.", "status": "Prezent în portofoliu" }
+    {
+      "client": "Smite",
+      "categorie": "Agenție",
+      "titlu": "Campanii end-to-end",
+      "note": "Identitate, benneruri, postere, materiale de magazin, cărți de vizită, promovare online. Proiecte pentru grilul, Aderma și îmbrăcăminte.",
+      "status": "Agenție închisă între timp"
+    },
+    {
+      "client": "Aderma",
+      "categorie": "Cosmetică",
+      "titlu": "Sistem vizual de marcă",
+      "note": "Campanii complete pe toate mediile, de la promovare online la materiale tipărite pentru magazine.",
+      "status": "Digital"
+    },
+    {
+      "client": "Aderma Protect",
+      "categorie": "Cosmetică",
+      "titlu": "Ambalaj și etichetare",
+      "note": "Sisteme grafice pentru produse de îngrijire.",
+      "status": "Digital"
+    },
+    {
+      "client": "Creafac",
+      "categorie": "Cosmetică",
+      "titlu": "Reclame pentru copii și tineri",
+      "note": "Produse cosmetice pentru copii și tineri, produse pentru un partener farmaceutic mare. Reclame, ambalaj, materiale de campanie.",
+      "status": "Digital"
+    },
+    {
+      "client": "City Grill",
+      "categorie": "Lanț de restaurante",
+      "titlu": "Identitate vizuală de lanț",
+      "note": "Sistem vizual cu tehnică de progresie, aplicat în toate punctele lanțului din țară.",
+      "status": "Prezent în portofoliu"
+    },
+    {
+      "client": "Smite",
+      "categorie": "Agenție",
+      "titlu": "Puncte de grilaj",
+      "note": "Materiale de grilaj și signalistică urbană.",
+      "status": "Agenție închisă"
+    },
+    {
+      "client": "Smite",
+      "categorie": "Agenție",
+      "titlu": "Linii de îmbrăcăminte",
+      "note": "Campanii pentru branduri de îmbrăcăminte.",
+      "status": "Agenție închisă"
+    },
+    {
+      "client": "Yokogawa",
+      "categorie": "Industrial",
+      "titlu": "Sistem de 200+ șabloane",
+      "note": "Dezpozit centralizat de șabloane grafice și ghiduri pentru 12 țări.",
+      "status": "Prezent în portofoliu"
+    },
+    {
+      "client": "Microsoft",
+      "categorie": "Enterprise",
+      "titlu": "Propuneri comerciale",
+      "note": "Sisteme de prezentare și infografice pentru conturi globale.",
+      "status": "Prezent în portofoliu"
+    },
+    {
+      "client": "Nikon",
+      "categorie": "Tech",
+      "titlu": "Campanii multi-canal",
+      "note": "50+ campanii online și vizualizări de produs.",
+      "status": "Prezent în portofoliu"
+    },
+    {
+      "client": "Veeam",
+      "categorie": "Tech",
+      "titlu": "Vizualizări de produs",
+      "note": "Materiale grafice pentru produse enterprise.",
+      "status": "Prezent în portofoliu"
+    },
+    {
+      "client": "ASSA ABLOY",
+      "categorie": "Industrial",
+      "titlu": "Documentație tehnică",
+      "note": "Sisteme grafice pentru documentație și produse.",
+      "status": "Prezent în portofoliu"
+    }
   ],
-
   "scrisoare": {
     "salutare": "Dear [COMPANY] team,",
     "paragrafe": [
@@ -77,19 +157,23 @@
     ],
     "semnatura": "Sincerely,\nAlexandru Popescu\nSenior Graphic Designer"
   },
-
   "contact": {
-    "_nota": "Fara formular de contact la nivelul 1. Se adauga la finalul proiectului.",
-    "email": "[EMAIL]",
-    "telefon": "[TELEFON]",
+    "_nota": "Contact real, introdus 2026-10-10 de POPY. Fara formular de contact inca - se adauga la finalul proiectului.",
+    "email": "apvisual.arond@gmail.com",
+    "telefon": "+40722121752",
     "oras": "Bucharest, Romania",
     "website": "ap-id.ro",
     "linkuri": [
-      { "eticheta": "Website", "url": "https://ap-id.ro" },
-      { "eticheta": "LinkedIn", "url": "[LINKEDIN_URL]" }
+      {
+        "eticheta": "Website",
+        "url": "https://ap-id.ro"
+      },
+      {
+        "eticheta": "LinkedIn",
+        "url": "[LINKEDIN_URL]"
+      }
     ]
   },
-
   "reguli": {
     "lungimeMaxima": "1.5 pagini tiparite, 3 ecrane citite",
     "reguli": [
