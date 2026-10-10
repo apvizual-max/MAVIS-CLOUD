@@ -27,8 +27,9 @@ async function count(query, label) {
   const l = await k.gmail.labels();
   const mavis = (l.labels || []).filter(x => x.name.startsWith('MAVIS/'));
   for (const lab of mavis) {
-    // GHILIMELE OBLIGATORII: 'MAVIS/Actiune - de raspuns' contine spatiu SI linie.
-    // Fara ele, Gmail citeste '-' ca operator NOT si intoarce 0.
+    // GHILIMELE OBLIGATORII pentru etichetele cu SPATIU.
+    // PENTRU LINIUTA nu ajuta: Gmail nu indexeaza deloc eticheta,
+    // chiar si cu ghilimele. Singura solutie e un nume fara linie.
     const c = await count('label:"' + lab.name + '"', lab.name);
     out.push([lab.name, c.total, c.capped]);
     console.log(pad(lab.name, 30) + String(c.total).padStart(7) + (c.capped ? '  (plafon)' : ''));

@@ -80,3 +80,52 @@ posibil ca o direcție să fie reparată și cealaltă nu.
 `MAVIS/Actiune - de raspuns` = **0**. Eticheta există, dar nicio regulă nu o populează.
 Un astfel de etichetă goală e mai rea decât nicio etichetă: **te induce în eroare că
 ai un sistem când de fapt nu ai.** Fie se scrie regula, fie se șterge eticheta.
+
+
+## Etichetele cu liniuță sunt de neindexat
+
+`MAVIS/Actiune - de raspuns` a fost aplicat cu succes — `labelIds` conținea `Label_33` —
+dar **nicio interogare nu îl găsea**:
+
+| Interogare | Rezultat |
+|---|---|
+| `label:"MAVIS/Actiune - de raspuns"` | 0 |
+| `label:"MAVIS/Actiune"` | 0 |
+| `label:MAVIS/Actiune` | 0 |
+| `is:starred label:"MAVIS/Actiune - de raspuns"` | 0 |
+
+Gmail **nu poate indexa** o etichetă al cărei nume conține o liniuță. Ghilimele nu
+ajută. Singura soluție: **redenumești fără liniuță.**
+
+```js
+PATCH gmail/v1/users/me/labels/{id}   { name: 'MAVIS/De raspuns' }
+// imediat: 500 thread-uri devin găsibile
+```
+
+## Spațiul cere ghilimele, liniuța cere alt nume
+
+| În nume | Ce se întâmplă |
+|---|---|
+| spațiu | funcționează **cu ghilimele**, fără se strică |
+| liniuță | **nu merge deloc**, nici cu ghilimele |
+
+## Regula: zero liniuțe în numele etichetelor
+
+```
+MAVIS/De raspuns          ✅
+MAVIS/Actiune - de raspuns ❌ de neindexat
+```
+
+## Mai multe capcane de interogare, în aceeași zi
+
+1. `resultSizeEstimate` — plafonat, minte
+2. `in:inbox` — contrazice „mailuri cu stea", pentru că acestea le-am scos din
+   inbox la sortare. **Căutam lucruri pe care eu le mutasem.**
+3. `.replace(' ','')` — șterge **doar primul** spațiu, deci rupe orice etichetă cu
+   spațiu, și raportează 0 pentru un folder plin
+
+## Diagnosticul de zero
+
+Când o interogare întoarce 0, **întreabă de ce**, nu concluziona „e gol".
+Verifică în ordine: numele are liniuță? → spațiu fără ghilimele? → `in:inbox`
+exclus? → contorul manipulează corect numele?

@@ -14,7 +14,7 @@ const L = {
   newsletter:'MAVIS/Newsletter',
   personal: 'MAVIS/Personal',
   facturi:  'MAVIS/Facturi si conturi',
-  actiune:  'MAVIS/Actiune - de raspuns',
+  actiune:  'MAVIS/De raspuns',
 };
 
 const WINDOW = 'older_than:1y newer_than:3y';
@@ -57,8 +57,12 @@ async function threadIds(query) {
   for (const [cat, flt] of CATS) {
     const w = NO_WINDOW.has(cat) ? '' : WINDOW + ' ';
     // GHILIMELE OBLIGATORII: etichetele cu spatiu sau linie sunt stricate de Gmail.
-    // 'MAVIS/Actiune - de raspuns' -> '-' e citit ca operator NOT, query-ul da 0.
-    const query = w + flt + ' in:inbox -label:"' + L[cat] + '"';
+    // Liniuta din nume face eticheta DE NEINDEXABILA - nicio forma de cautare
+    // nu o gaseste. De aceea s-a renumit 'MAVIS/De raspuns'.
+    // 'actiune' prinde si ce a fost deja sortat in alta categorie si scos din
+    // inbox. Cu 'in:inbox' ar da 0, pentru ca mailurile cu stea nu mai sunt acolo.
+    const inbox = (cat === 'actiune') ? '' : ' in:inbox';
+    const query = w + flt + inbox + ' -label:"' + L[cat] + '"';
     let ids = [];
     try { ids = await threadIds(query); } catch (e) { console.log('cautare blocata', cat, e.message.slice(0,40)); continue; }
     console.log('\n' + cat.toUpperCase() + ': ' + ids.length + ' thread-uri  (cota ' + q.state.used + ')');
