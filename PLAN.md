@@ -109,7 +109,7 @@ Pentru că am început să planificăm Faza 2 și Faza 3 înainte ca Faza 0 să 
 - **Skin Media** — Nikon, Aiper, Pure Electric, Ninja · 50+ campanii · hibrid București 2024
 - **Yokogawa** — remote, mai 2021 – ian 2024 · **12 țări europene** · 200+ template-uri
 - **STEP IT Academy** — profesor design grafic, advertising, Adobe, prepress · oct 2023 – iul 2024
-- **Pathway** — 2018–2019 · **Smike** (Art Director; City Grill, Ducray, Aderma) — 2017–2018
+- **Pathway** — 2018–2019 · **Smite** (Art Director; City Grill, Ducray, Aderma) — 2017–2018
 - **Romexpo** — 2015–2017 · **MADE.com** — 2020, 25.000+ imagini
 - **AP-ID.ro** — fondator, aug 2010 – prezent · Serus Dacia, CRD Credit, Engino Toys, Optima Call, Auditeco, Soho Design
 - **Studii:** BA Economic Studies & European Integration, RAU, 2004–2008, GPA 9,70/10 · Business Summer School ASE 2006, 9,50/10

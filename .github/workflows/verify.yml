@@ -1,0 +1,66 @@
+name: Verificare
+
+# Pornește la fiecare push pe main și la fiecare pull request.
+# Blochează build-ul dacă apare un secret, un JSON invalid sau JavaScript stricat.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verificare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Niciun secret în commit
+        run: |
+          HIT=$(git ls-files | grep -iE '(^|/)(\.env|oauth\.json|tokens?\.json|.*\.pem|.*\.key|.*credentials.*)$' || true)
+          if [ -n "$HIT" ]; then
+            echo "❌ SECRET ÎN COMMIT — build oprit:"; echo "$HIT"; exit 1
+          fi
+          echo "✅ niciun fisier de secret"
+
+      - name: JSON-uri valide
+        run: |
+          python3 - <<'PY'
+          import json, glob, sys
+          bad = 0
+          for f in glob.glob('**/*.json', recursive=True):
+              if 'node_modules' in f or f.endswith('package-lock.json'):
+                  continue
+              try:
+                  json.load(open(f, encoding='utf-8'))
+              except Exception as e:
+                  print('❌ JSON INCORECT:', f, e); bad = 1
+          print('✅ toate JSON-urile sunt valide' if not bad else '')
+          sys.exit(bad)
+          PY
+
+      - name: JavaScript fără erori de sintaxă
+        run: |
+          bad=0
+          for f in $(find . -name "*.js" -not -path "*/node_modules/*"); do
+            if ! node --check "$f"; then bad=1; fi
+          done
+          [ $bad -eq 0 ] && echo "✅ sintaxă JS corectă"
+          exit $bad
+
+      - name: Site-ul se construiește
+        run: |
+          python3 SITE/build.py graphic-designer
+          test -s SITE/dist/graphic-designer.index.html
+          echo "✅ site generat"
+
+      - name: Șabloanele generice nu conțin nume de firmă
+        run: |
+          HIT=$(grep -ril "saatchi\|bell studio\|ontheroof\|flaminjoy\|international waters" ALEX-KIT/SABLOANE/ 2>/dev/null || true)
+          if [ -n "$HIT" ]; then
+            echo "❌ SABLOANE NE-GENERICE:"; echo "$HIT"; exit 1
+          fi
+          echo "✅ șabloanele sunt generice"

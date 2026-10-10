@@ -1,4 +1,4 @@
-# SECRETE - nu se comiteaza niciodata
+# SECRETE — nu se comiteaza niciodata
 *.env
 .env*
 *token*
@@ -23,11 +23,8 @@ __pycache__/
 .DS_Store
 /tmp/
 /sandbox/
-
-# PRODUSE LOCALE (nu sursa)
-*.docx
-!ALEX-KIT/CV-URI/*.docx
-*.pdf
-mavis-tools/bin/
-SITE/dist/
 SITE/prev-*.png
+mavis-tools/bin/
+
+# PRODUSE GENERATE — se construiesc la deploy, nu se versioneaza
+SITE/dist/
