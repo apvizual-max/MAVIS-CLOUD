@@ -7,7 +7,7 @@ Tab-uri: PANO · SITE CV · PUNTE · JULES/GIT/GITHUB · PROMPT
 Actiunile se salveaza local si se exporta ca fisier, pe care POPY il trimite.
 Site-ul e static: nu poate scrie in repo. Asta e limita lui, spusa deschis.
 """
-import os, json, glob, datetime, subprocess
+import os, json, glob, datetime, subprocess, shutil
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(BASE)
@@ -52,10 +52,17 @@ def copiaza_docs():
              open(os.path.join(dst, os.path.basename(f)), 'w', encoding='utf-8') as b:
             b.write(a.read())
         n += 1
-    # pastreaza vizualizatorul daca exista deja
-    viz = os.path.join(DIST, 'docs', 'index.html')
-    if os.path.exists(viz):
-        os.makedirs(dst, exist_ok=True)
+    # vizualizatorul ramane langa documente
+    # vizualizatorul e creat o data si pastrat in repo, nu se suprascrie
+
+    # CSS-ul vizualizatorului trebuie SAU LANGa el, nu doar in repo.
+    # Deployul trimite doar dist/, deci ../css/ din docs/ dava 404.
+    css_src = os.path.join(BASE, 'css', 'doc.css')
+    css_dst = os.path.join(DIST, 'css')
+    os.makedirs(css_dst, exist_ok=True)
+    if os.path.exists(css_src):
+        shutil.copyfile(css_src, os.path.join(css_dst, 'doc.css'))
+        n += 1
     return n
 
 def main():
