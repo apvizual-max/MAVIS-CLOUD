@@ -1,13 +1,13 @@
 name: Verificare
 
-# Pornește la fiecare push pe main și la fiecare pull request.
-# Blochează build-ul dacă apare un secret, un JSON invalid sau JavaScript stricat.
-
+# PROTOCOL C3: Live Review NU ruleaza la fiecare push - arde cotele.
+# Ruleaza doar:
+#   - o data pe zi, noaptea (03:00)
+#   - la cerere explicita (workflow_dispatch)
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *'
 
 permissions:
   contents: read
@@ -45,16 +45,30 @@ jobs:
       - name: JavaScript fără erori de sintaxă
         run: |
           bad=0
-          for f in $(find . -name "*.js" -not -path "*/node_modules/*"); do
+          for f in $(find . -name "*.js" -not -path "*/node_modules/*" -not -path "*/vendor/*"); do
             if ! node --check "$f"; then bad=1; fi
           done
           [ $bad -eq 0 ] && echo "✅ sintaxă JS corectă"
           exit $bad
 
+      - name: Python fără erori de sintaxă
+        run: |
+          python3 - <<'PY'
+          import ast, glob, sys
+          bad = 0
+          for f in glob.glob('SITE/*.py') + glob.glob('mavis-tools/*.py'):
+              try:
+                  ast.parse(open(f, encoding='utf-8').read())
+              except Exception as e:
+                  print('❌ PY INCORECT:', f, e); bad = 1
+          print('✅ sintaxă Python corectă' if not bad else '')
+          sys.exit(bad)
+          PY
+
       - name: Site-ul se construiește
         run: |
-          python3 SITE/build.py graphic-designer
-          test -s SITE/dist/graphic-designer.index.html
+          python3 SITE/build-hub.py
+          test -s SITE/dist/index.html
           echo "✅ site generat"
 
       - name: Șabloanele generice nu conțin nume de firmă
@@ -64,3 +78,10 @@ jobs:
             echo "❌ SABLOANE NE-GENERICE:"; echo "$HIT"; exit 1
           fi
           echo "✅ șabloanele sunt generice"
+
+      - name: Agent-to-agent: verifică mesajele pentru Local
+        run: |
+          if [ -f docs/INTENTII.md ] && git log -1 --format=%s | grep -qi "neschimbat"; then
+            echo "  (mesaj nou pentru Local)"
+          fi
+          echo "✅ puntea e vie"

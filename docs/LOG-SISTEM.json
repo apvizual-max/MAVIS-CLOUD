@@ -1,6 +1,38 @@
 {
  "intrari": [
   {
+   "t": "2026-10-11 20:48:54",
+   "nivel": "info",
+   "msg": "Circuit breaker 50 commituri, doar pentru LOCAL",
+   "rol": "guvernanta",
+   "detaliu": "",
+   "commit": "046287b"
+  },
+  {
+   "t": "2026-10-11 20:48:54",
+   "nivel": "info",
+   "msg": "git-autonom.md si git-install.md create",
+   "rol": "guvernanta",
+   "detaliu": "",
+   "commit": "046287b"
+  },
+  {
+   "t": "2026-10-11 20:48:54",
+   "nivel": "info",
+   "msg": "Skill de control creat: skill-mavis-cloud-control",
+   "rol": "guvernanta",
+   "detaliu": "",
+   "commit": "046287b"
+  },
+  {
+   "t": "2026-10-11 20:48:54",
+   "nivel": "info",
+   "msg": "Protocol C3 aplicat: Live Review nu mai ruleaza la push",
+   "rol": "guvernanta",
+   "detaliu": "doar 03:00 zilnic si la cerere",
+   "commit": "046287b"
+  },
+  {
    "t": "2026-10-11 20:20:27",
    "nivel": "info",
    "msg": "Regula generala implementata: totul in repo automat",
@@ -186,6 +218,6 @@
   }
  ],
  "nivel": {
-  "info": 23
+  "info": 27
  }
 }

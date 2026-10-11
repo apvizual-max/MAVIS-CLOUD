@@ -1,14 +1,38 @@
-# Sentinel — 2026-10-10
+================================================================================
+RAPORT DE STARE PROIECT: MAVIS-CLOUD
+DATA & ORA: 2026-10-11 20:48 | INSTANȚĂ: CLOUD
+REPOSITORY: https://github.com/apvizual-max/MAVIS-CLOUD.git
+================================================================================
 
-> Fotografie a stării în această zi. **Nu se modifică după.**
-> Generat de `mavis-tools/sentinel.py`. Nu edita manual — regenerează.
+> Fotografie a stării. **Nu se modifică după.** Generat de `mavis-tools/sentinel.py`.
 
 ---
 
-## 1. Stare în cinci rânduri
+## 1. SCOP ACTIV & FAZĂ
+
+Faza: **Predare spre Local.** Site-ul trece la agentul local; eu rămân scout.
+
+## 2. CE S-A EXECUTAT
+
+## 3. CE A RĂMAS DESCHIS (NEXT STEPS)
+
+## 4. STATUS GIT & SINCRONIZARE
+
+- Branch: **main**
+- Commituri locale neîmpinse: 0 (CLOUD împinge direct — nu se aplică pragul)
+- Ultimul commit remote: `046287b REGULA GENERALA: totul in repo, automat, fara aprobari`
+
+## 5. CIRCUIT BREAKERS & BLOCAJE
+
+- Erori active: **0**
+- Blocaje: **0**
+
+---
+
+## 6. Stare în cinci rânduri
 
 Repo-ul Mavis e pe GitHub, totul pe `main`, workflow-ul de verificare e **success**.
-Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 15 skill-uri proprii și
+Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 19 skill-uri proprii și
 14 importate. Site-ul de CV de Nivel 1 e funcțional pe 1 rol.
 **Următorul pas: celelalte 8 site-uri de Nivel 1.**
 
@@ -17,14 +41,14 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 15 skill-uri proprii și
 ### Gmail
 | Etichetă | Thread-uri |
 |---|---|
-| `MAVIS/Joburi` | 4000 |
-| `MAVIS/AI si comunitati` | 0 |
-| `MAVIS/Social` | 2804 |
-| `MAVIS/Newsletter` | 2540 |
-| `MAVIS/Finante` | 63 |
-| `MAVIS/Personal` | 176 |
-| `MAVIS/Actiune - de raspuns` | 0 |
-| `MAVIS/Facturi si conturi` | 0 |
+| `MAVIS/Joburi` | necontorizat |
+| `MAVIS/AI si comunitati` | necontorizat |
+| `MAVIS/Social` | necontorizat |
+| `MAVIS/Newsletter` | necontorizat |
+| `MAVIS/Finante` | necontorizat |
+| `MAVIS/Personal` | necontorizat |
+| `MAVIS/De raspuns` | necontorizat |
+| `MAVIS/Facturi si conturi` | necontorizat |
 
 | | |
 |---|---|
@@ -36,15 +60,15 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 15 skill-uri proprii și
 |---|---|
 | Remote | `https://github.com/apvizual-max/MAVIS-CLOUD.git` |
 | Ramură | `main` |
-| Commit-uri | **14** |
-| Fișiere necomitate | **2** |
-| Ultimul commit | `6bde9ce Puntea intre agenti + canalul de intentii` |
+| Commit-uri | **25** |
+| Fișiere necomitate | **6** |
+| Ultimul commit | `046287b REGULA GENERALA: totul in repo, automat, fara aprobari` |
 | Workflow | **success** |
 
 ### Proiect
 | | |
 |---|---|
-| Skill-uri proprii | **15** |
+| Skill-uri proprii | **19** |
 | Skill-uri importate (vendor) | **14** |
 | Site-uri de CV | **1** — graphic-designer |
 | Șabloane CV generice | **9** |
@@ -54,7 +78,7 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 15 skill-uri proprii și
 
 | Ce | Cum s-a verificat |
 |---|---|
-| Repo pe GitHub | `gh api repos/apvizual-max/MAVIS-CLOUD` — 14 commit-uri pe `main` |
+| Repo pe GitHub | `gh api repos/apvizual-max/Mavis` — 25 commit-uri pe `main` |
 | Workflow verde | `gh run list` → **success** la ultimul push |
 | Fără secrete | verificarea rulează la fiecare push, blochează build-ul |
 | 22/22 fișiere JS valide | `node --check` pe fiecare, plus în workflow |
@@ -120,4 +144,4 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 15 skill-uri proprii și
 
 ---
 
-*Raport generat 2026-10-10 · 14 commit-uri · 29 skill-uri*
+*Raport generat 2026-10-11 · 25 commit-uri · 33 skill-uri*

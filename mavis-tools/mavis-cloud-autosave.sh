@@ -56,6 +56,21 @@ PY
 # ── scrie în log ───────────────────────────────────────────────────────────
 note() { python3 mavis-tools/log.py "$1" "$2" --rol="autosave" >/dev/null 2>&1 || true; }
 
+# pragul 50 - PROTOCOL C2. Aplica pentru instanta LOCAL.
+# Pentru CLOUD nu se aplica: containerul e volatil, datele trebuie impinse imediat.
+PRAG="${MAVIS_PRAG:-50}"
+ROLE="${MAVIS_ROLE:-CLOUD}"
+
+prag_check() {
+  [ "$ROLE" = "LOCAL" ] || return 0
+  local x; x=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo 0)
+  if [ "$x" -ge "$PRAG" ]; then
+    echo "" >> "$REPO/.prag-alert"
+    echo "[ALERTĂ PRAG GIT]: $x commituri locale neîmpinse (prag >= $PRAG)." >> "$REPO/.prag-alert"
+    echo "  Solicit rezoluție R0: push pe remote sau continuăm acumularea locală?"
+  fi
+}
+
 while true; do
   # 1. ia ce a venit de la Local
   if git pull --rebase origin main >/dev/null 2>&1; then
@@ -90,5 +105,9 @@ while true; do
       fi
     fi
   fi
+  # circuit breaker
+  [ -f "$REPO/.prag-alert" ] && { echo ""; cat "$REPO/.prag-alert"; echo ""; }
+  prag_check
+
   sleep "$INTERVAL"
 done

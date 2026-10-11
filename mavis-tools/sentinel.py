@@ -71,25 +71,55 @@ def main():
     gmail = {}
     for lbl in ['MAVIS/Joburi', 'MAVIS/AI si comunitati', 'MAVIS/Social',
                 'MAVIS/Newsletter', 'MAVIS/Finante', 'MAVIS/Personal',
-                'MAVIS/Actiune - de raspuns', 'MAVIS/Facturi si conturi']:
-        gmail[lbl] = count_paginiq('label:' + lbl.replace(' ', '') )
+                'MAVIS/De raspuns', 'MAVIS/Facturi si conturi']:
+        # GHILIMELE OBLIGATORII - vezi skill gmail-label-correction
+        gmail[lbl] = count_paginiq('label:"' + lbl + '"')
     inbox = count_paginiq('in:inbox')
     trash = count_paginiq('in:trash')
 
     # ---- workflow ----
-    wf = sh('%s run list --repo apvizual-max/Mavis --limit 1 '
+    wf = sh('%s run list --repo apvizual-max/MAVIS-CLOUD --limit 1 '
             '--json conclusion --jq ".[0].conclusion" 2>/dev/null' % GH) or 'necunoscut'
 
     g = '\n'.join('| `%s` | %s |' % (k, v) for k, v in gmail.items())
 
-    md = f"""# Sentinel — {TODAY}
+    log = json.load(open(os.path.join(REPO, 'docs', 'LOG-SISTEM.json'), encoding='utf-8')) \
+        if os.path.exists(os.path.join(REPO, 'docs', 'LOG-SISTEM.json')) else {'intrari': [], 'nivel': {}}
+    prag = sh('git rev-list --count origin/main..HEAD') or '0'
+    erori = [i for i in log.get('intrari', []) if i.get('nivel') in ('eroare', 'critic')]
 
-> Fotografie a stării în această zi. **Nu se modifică după.**
-> Generat de `mavis-tools/sentinel.py`. Nu edita manual — regenerează.
+    md = f"""================================================================================
+RAPORT DE STARE PROIECT: MAVIS-CLOUD
+DATA & ORA: {TODAY} {datetime.datetime.now():%H:%M} | INSTANȚĂ: CLOUD
+REPOSITORY: {remote}
+================================================================================
+
+> Fotografie a stării. **Nu se modifică după.** Generat de `mavis-tools/sentinel.py`.
 
 ---
 
-## 1. Stare în cinci rânduri
+## 1. SCOP ACTIV & FAZĂ
+
+Faza: **Predare spre Local.** Site-ul trece la agentul local; eu rămân scout.
+
+## 2. CE S-A EXECUTAT
+
+## 3. CE A RĂMAS DESCHIS (NEXT STEPS)
+
+## 4. STATUS GIT & SINCRONIZARE
+
+- Branch: **{branch}**
+- Commituri locale neîmpinse: {prag} (CLOUD împinge direct — nu se aplică pragul)
+- Ultimul commit remote: `{last}`
+
+## 5. CIRCUIT BREAKERS & BLOCAJE
+
+- Erori active: **{len(erori)}**
+- Blocaje: **{0 if not erori else len(erori)}**
+
+---
+
+## 6. Stare în cinci rânduri
 
 Repo-ul Mavis e pe GitHub, totul pe `{branch}`, workflow-ul de verificare e **{wf}**.
 Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există {len(own)} skill-uri proprii și
