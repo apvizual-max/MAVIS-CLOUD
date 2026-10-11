@@ -40,8 +40,27 @@ ACTIUNI = [
  ('Foloseste Jules',       'Apeleaza Jules pentru review si aplica ce propune.'),
 ]
 
+def copiaza_docs():
+    """Documentele trebuie sa existe LANGA site, nu doar in repo.
+    Link catre ../docs/ da 404 daca serverul nu are folderul."""
+    src = os.path.join(REPO, 'docs')
+    dst = os.path.join(DIST, 'docs')
+    os.makedirs(dst, exist_ok=True)
+    n = 0
+    for f in glob.glob(os.path.join(src, '*.md')):
+        with open(f, encoding='utf-8') as a, \
+             open(os.path.join(dst, os.path.basename(f)), 'w', encoding='utf-8') as b:
+            b.write(a.read())
+        n += 1
+    # pastreaza vizualizatorul daca exista deja
+    viz = os.path.join(DIST, 'docs', 'index.html')
+    if os.path.exists(viz):
+        os.makedirs(dst, exist_ok=True)
+    return n
+
 def main():
     os.makedirs(DIST, exist_ok=True)
+    ndocs = copiaza_docs()
     azi = datetime.date.today().isoformat()
 
     branch  = sh('git rev-parse --abbrev-ref HEAD') or 'main'
@@ -97,7 +116,7 @@ def main():
         '<button class="act" data-t="%s" data-c="%s">%s</button>' % (
             esc(t), esc(c), esc(t)) for t, c in ACTIUNI)
 
-    doc_rows = ''.join('<tr><td><a href="../docs/%s">%s</a></td></tr>' % (esc(d), esc(d)) for d in docs)
+    doc_rows = ''.join('<tr><td><a href="docs/?doc=%s">%s</a></td></tr>' % (esc(d), esc(d)) for d in docs)
     sab_rows = ''.join('<li class="mono">%s</li>' % esc(s) for s in sab)
 
     html = f"""<!DOCTYPE html><html lang="ro"><head><meta charset="UTF-8">
@@ -220,8 +239,10 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
   <h2>Skill-uri <span class="ct">{len(own)} proprii + {len(vend)} vendor</span></h2>
   <table><thead><tr><th>Nume</th><th>Ce face</th><th>Origine</th></tr></thead><tbody>{srows}</tbody></table>
 
-  <h2>Documentație</h2>
+  <h2>Documentație <span class="ct">{len(docs)} fișiere, deschise din panou</span></h2>
   <table><tbody>{doc_rows}</tbody></table>
+  <div class="note"><b>Se deschid aici, nu te trimit în altă parte.</b> Fiecare document
+  e copiat lângă panou, ca linkul să funcționeze și offline.</div>
 
   <h2>Ultimul commit</h2>
   <p class="mono" style="color:#94a3b8">{esc(last)}</p>
@@ -322,7 +343,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
   </div>
   <h2>Documentația de instrumentare</h2>
   <div class="note">Am scris <code class="mono">docs/JULES-INSTRUMENTARE.md</code> cu ce ai văzut
-  în capturi și ce trebuie configurat. <a href="https://github.com/apvizual-max/MAVIS-CLOUD/blob/main/docs/JULES-INSTRUMENTARE.md">Vezi aici</a></div>
+  în capturi și ce trebuie configurat. <a href="docs/?doc=JULES-INSTRUMENTARE.md">Vezi aici</a></div>
 
   <h2>Live Review — panoul lui</h2>
   <div class="note">Funcționează. În captura ta scrie „No review pipeline data yet" — asta înseamnă
@@ -461,3 +482,4 @@ if __name__ == '__main__':
     p, s, n, e, l = main()
     print('OK  %s' % p)
     print('    %d roluri · %d skill-uri · %d erori · %d intrari log' % (s, n, e, l))
+    print('    docs/ copiate langa panou')

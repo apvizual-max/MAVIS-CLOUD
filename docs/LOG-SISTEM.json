@@ -1,6 +1,22 @@
 {
  "intrari": [
   {
+   "t": "2026-10-11 13:16:03",
+   "nivel": "info",
+   "msg": "Reparat: setup script Jules cu sudo, set -uo pipefail",
+   "rol": "jules",
+   "detaliu": "eroarea era Permission denied pe apt, Jules nu ruleaza ca root",
+   "commit": "71f2db2"
+  },
+  {
+   "t": "2026-10-11 13:16:03",
+   "nivel": "info",
+   "msg": "Reparat: documentele nu mai dau 404, vizualizator inclus",
+   "rol": "site",
+   "detaliu": "",
+   "commit": "71f2db2"
+  },
+  {
    "t": "2026-10-10 21:59:00",
    "nivel": "info",
    "msg": "Jules a gasit 30+ probleme reale, inclusiv lipsa testelor",
@@ -138,6 +154,6 @@
   }
  ],
  "nivel": {
-  "info": 17
+  "info": 19
  }
 }
