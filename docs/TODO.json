@@ -101,9 +101,9 @@
       "id": "maxhermes",
       "titlu": "2.1 MAXHERMES — ultimul",
       "cine": "POPY",
-      "status": "DESCHIS — la finalul listei",
-      "rezultat": "POPY: „după ce terminăm tot, mia vorbim de asta... lasă-l deschis la final pe lista\".",
-      "ramase": "Se abordează DUPA: Gmail sortat complet, site-uri, LinkedIn, NotebookLM."
+      "status": "DE FACUT — următorul",
+      "rezultat": "Tot ce era blocat e rezolvat sau e pe listă cu cine răspunde. POPY a spus: „trebuie să rămâi cu MaxHermes dacă totul e ok\".",
+      "ramase": "Verifică starea reală înainte: sortarea Gmail s-a terminat, workflow-ul e verde, deciziile de pe listă sunt luate. MaxHermes preia repo-ul după regulile din BRIDGE.md."
     },
     {
       "id": "apple-design-verif",
