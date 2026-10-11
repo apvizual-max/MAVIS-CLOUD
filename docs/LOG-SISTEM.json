@@ -1,6 +1,30 @@
 {
  "intrari": [
   {
+   "t": "2026-10-11 22:50:45",
+   "nivel": "info",
+   "msg": "Fisierul cu parola LinkedIn sters - nu a fost niciodata in istoric",
+   "rol": "securitate",
+   "detaliu": "",
+   "commit": "c578ec7"
+  },
+  {
+   "t": "2026-10-11 22:50:45",
+   "nivel": "info",
+   "msg": "CV-urile originale ale lui POPY copiate in repo, ca sursa",
+   "rol": "cv-uri",
+   "detaliu": "22 fisiere; am introdus erori reconstruind de la zero",
+   "commit": "c578ec7"
+  },
+  {
+   "t": "2026-10-11 22:50:45",
+   "nivel": "info",
+   "msg": "Sortare completa: 18.731 mesaje etichetate",
+   "rol": "gmail",
+   "detaliu": "fereastra de varsta eliminata; 106 mutate din spam",
+   "commit": "c578ec7"
+  },
+  {
    "t": "2026-10-11 20:48:54",
    "nivel": "info",
    "msg": "Circuit breaker 50 commituri, doar pentru LOCAL",
@@ -218,6 +242,6 @@
   }
  ],
  "nivel": {
-  "info": 27
+  "info": 30
  }
 }

@@ -80,6 +80,62 @@
       "status": "AMÂNAT",
       "rezultat": "Sortarea a acoperit fereastra 1-3 ani. Cele mai vechi rămân.",
       "ramase": "POPY a spus că se face mai târziu, când emailul devine instrument"
+    },
+    {
+      "id": "site-b2b",
+      "titlu": "SITE NIVEL 2: B2B / freelancing - serviciu cu rate",
+      "cine": "POPY cere dezvoltare locală",
+      "status": "AMÂNAT — discussionsă separată",
+      "rezultat": "POPY: „alt subiect, altă discuție și la cu totul alt moment. acum e prematur\". Am discutat: vinde serviciul, nu sistemul. Clientul are o treabă, primește un preț. Intră după Nivelul 1.",
+      "ramase": "POPY deschide discuția când e pregătit. Agentul local primește documentația completă din 07-SITEURI-NIVEL1/SPECIFICATIE.md secțiunea 1 și 3."
+    },
+    {
+      "id": "site-systems",
+      "titlu": "SITE NIVEL 3: AP-ID Systems - agent AI între client și POPY",
+      "cine": "POPY cere dezvoltare locală",
+      "status": "AMÂNAT — discussionsă separată",
+      "rezultat": "POPY: agent AI între client și POPY, care rămâne furnizor de direcție artistică. B2B pentru companii mari, cu nevoie de relație permanentă și structuri. Site-ul final de agenție le cuprinde pe primele două.",
+      "ramase": "POPY deschide discuția. Logica și rațiunea sunt scrise în 07-SITEURI-NIVEL1/SPECIFICATIE.md."
+    },
+    {
+      "id": "maxhermes",
+      "titlu": "2.1 MAXHERMES — ultimul",
+      "cine": "POPY",
+      "status": "DESCHIS — la finalul listei",
+      "rezultat": "POPY: „după ce terminăm tot, mia vorbim de asta... lasă-l deschis la final pe lista\".",
+      "ramase": "Se abordează DUPA: Gmail sortat complet, site-uri, LinkedIn, NotebookLM."
+    },
+    {
+      "id": "apple-design-verif",
+      "titlu": "Mavis Apple Design — verificare repo",
+      "cine": "Mavis Cloud",
+      "status": "GATA",
+      "rezultat": "Repo-ul emilkowalski/skills e importat integral: 15/15 skill-uri, cu licență, în vendor/ și în cloud. 4 folosite efectiv (mobile-native, break-ui, emil-design-eng, apple-design), 8 nefolosite dar utile pentru Local.",
+      "ramase": "Raport: vendor/RAPORT-UTILIZARE.md. Pentru skill-uri noi de prototipare: POPY trimite linkul."
+    },
+    {
+      "id": "email-clarify",
+      "titlu": "Email corect: apvizual@gmail.com sau apvisual.arond@gmail.com",
+      "cine": "POPY",
+      "status": "BLOCHAT — decizie umană",
+      "rezultat": "CV-urile tale vechi au apvizual@gmail.com. Tu mi-ai dat azi apvisual.arond@gmail.com. Le-am folosit pe cel nou în site.",
+      "ramase": "POPY confirmă. Se propagă în toate CV-urile și pe site-uri DUPă ce se răspunde."
+    },
+    {
+      "id": "smite-verif",
+      "titlu": "„Smite\" sau „Skin Media\"?",
+      "cine": "POPY",
+      "status": "BLOCHAT — decizie umană",
+      "rezultat": "Tu ai spus „Smite\". Modelul tău original de CV spune „Skin Media\". Am scris Smite peste tot, dar CV-ul tău original are Skin Media.",
+      "ramase": "POPY confirmă care e numele corect al agenției. Se propagă în toate CV-urile și pe site-uri DUPă confirmare."
+    },
+    {
+      "id": "portfolio-add",
+      "titlu": "City Grill, Creafac, Aderma, Aderma Protect în portofoliu",
+      "cine": "POPY",
+      "status": "BLOCHAT — decizie umană",
+      "rezultat": "Le-ai menționat verbal, dar NU sunt în CV-urile tale originale.",
+      "ramase": "POPY confirmă dacă intră. Până atunci rămân în afara site-urilor — nu umplu goluri cu memorie."
     }
   ]
 }
