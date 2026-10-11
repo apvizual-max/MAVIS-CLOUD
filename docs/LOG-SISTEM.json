@@ -1,6 +1,30 @@
 {
  "intrari": [
   {
+   "t": "2026-10-11 14:28:48",
+   "nivel": "info",
+   "msg": "2 skilluri noi: git auto commit R0 push, si github setup",
+   "rol": "skilluri",
+   "detaliu": "",
+   "commit": "f857669"
+  },
+  {
+   "t": "2026-10-11 14:28:48",
+   "nivel": "info",
+   "msg": "DEPLOYMENT FIXAT: unul singur, nu se mai face altul",
+   "rol": "regula",
+   "detaliu": "https://da15e9yb994ps.space.minimax.io - nu mai ating",
+   "commit": "f857669"
+  },
+  {
+   "t": "2026-10-11 14:28:48",
+   "nivel": "info",
+   "msg": "Tab TO DO adaugat, cu 10 sarcini si status",
+   "rol": "interfata",
+   "detaliu": "",
+   "commit": "f857669"
+  },
+  {
    "t": "2026-10-11 13:16:03",
    "nivel": "info",
    "msg": "Reparat: setup script Jules cu sudo, set -uo pipefail",
@@ -154,6 +178,6 @@
   }
  ],
  "nivel": {
-  "info": 19
+  "info": 22
  }
 }

@@ -1,0 +1,85 @@
+{
+  "_nota": "Lista de sarcini. Se actualizeaza la fiecare schimbare reala. Citita de build-hub.py pentru tab-ul TO DO.",
+  "sarcini": [
+    {
+      "id": "jules-env",
+      "titlu": "Jules - Environment setup script",
+      "cine": "POPY",
+      "status": "GATA",
+      "rezultat": "Scriptul ruleaza cu succes. Jules a clonat repo-ul, a instalat git si ripgrep, a confirmat node v22.22.1, npm 11.11.0, python3 3.12.13.",
+      "ramase": ""
+    },
+    {
+      "id": "jules-memory",
+      "titlu": "Jules - Knowledge / Add Memory",
+      "cine": "POPY",
+      "status": "GATA",
+      "rezultat": "Memorii adăugate.",
+      "ramase": ""
+    },
+    {
+      "id": "jules-var",
+      "titlu": "Jules - Environment variables",
+      "cine": "POPY",
+      "status": "GATA",
+      "rezultat": "Variabile setate. POPY a raportat că sunt corecte.",
+      "ramase": ""
+    },
+    {
+      "id": "lrc-1",
+      "titlu": "Live Review - primul pull request ca să prindă prima rulare",
+      "cine": "POPY sau Mavis Cloud",
+      "status": "URMĂTORUL",
+      "rezultat": "Live Review activ pe cont (hexmos.com, free 30%). Nu a rulat: nu a existat PR.",
+      "ramase": "git push -u origin <ramura>  apoi  gh pr create --base main. ATENȚIE: ramura se face DOAR dacă POPY cere. Altfel: main → push → PR deschis de la distanță."
+    },
+    {
+      "id": "jules-test",
+      "titlu": "Cererea de teste de la Jules",
+      "cine": "Jules",
+      "status": "AMÂNAT",
+      "rezultat": "Amânat până se rezolvă fluxul Live Review. Jules a identificat deja că nu există un singur test automat.",
+      "ramase": "amânat până se rezolvă fluxul Live Review. Task scris în docs/JULES-INSTRUMENTARE.md"
+    },
+    {
+      "id": "jules-workflow",
+      "titlu": "Workflow cu teste automate",
+      "cine": "Mavis Cloud",
+      "status": "AMÂNAT",
+      "rezultat": "Amânat până când testele există.",
+      "ramase": "după ce Jules scrie testele, le adaug în verify.yml"
+    },
+    {
+      "id": "site-uri",
+      "titlu": "Site-uri de CV pentru celelalte roluri",
+      "cine": "Mavis Cloud",
+      "status": "DE FACUT",
+      "rezultat": "1 din 9. graphic-designer merge; restul ies din același build.py.",
+      "ramase": "art-director, brand-designer, product-designer, ai-design-lead, video-motion, print-dtp, presentation, social-content"
+    },
+    {
+      "id": "cv-generice",
+      "titlu": "CV-uri Word regenerate din șabloanele generice",
+      "cine": "Mavis Cloud",
+      "status": "DE FACUT",
+      "rezultat": "7 CV-uri există, dar cu date particulare de firmă.",
+      "ramase": "regenerare din șabloane, cu [COMPANY] și [ROLE]"
+    },
+    {
+      "id": "jules-api",
+      "titlu": "Apeluri Jules prin API",
+      "cine": "Mavis Cloud",
+      "status": "AMÂNAT",
+      "rezultat": "Cheia e stocată în secrets.",
+      "ramase": "după ce POPY confirmă Environment + Memory + PR"
+    },
+    {
+      "id": "gmail-inbox",
+      "titlu": "3.000+ mailuri rămase în inbox",
+      "cine": "POPY + Mavis Cloud",
+      "status": "AMÂNAT",
+      "rezultat": "Sortarea a acoperit fereastra 1-3 ani. Cele mai vechi rămân.",
+      "ramase": "POPY a spus că se face mai târziu, când emailul devine instrument"
+    }
+  ]
+}

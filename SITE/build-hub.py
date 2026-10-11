@@ -68,6 +68,11 @@ def copiaza_docs():
 def main():
     os.makedirs(DIST, exist_ok=True)
     ndocs = copiaza_docs()
+    todo = {'sarcini': []}
+    tp = os.path.join(REPO, 'docs', 'TODO.json')
+    if os.path.exists(tp):
+        try: todo = json.load(open(tp, encoding='utf-8'))
+        except Exception: pass
     azi = datetime.date.today().isoformat()
 
     branch  = sh('git rev-parse --abbrev-ref HEAD') or 'main'
@@ -118,6 +123,19 @@ def main():
     sab = sorted(os.path.basename(p) for p in glob.glob(os.path.join(REPO, 'ALEX-KIT', 'SABLOANE', '*.md')))
     docs = sorted(os.path.basename(p) for p in glob.glob(os.path.join(REPO, 'docs', '*.md')))
     nskill = len(own) + len(vend)
+
+    BAND = {'GATA': '#14b8a6', 'URMĂTORUL': '#fbbf24', 'DE FACUT': '#94a3b8', 'AMÂNAT': '#64748b'}
+    todo_rows = ''.join(
+        '<tr><td><b>%s</b><div style="color:#64748b;font-size:11.5px;margin-top:2px">%s</div></td>'
+        '<td style="color:#94a3b8">%s</td>'
+        '<td><span class="lv" style="color:%s;background:%s18;border:1px solid %s33">%s</span></td>'
+        '<td style="color:#94a3b8;font-size:13px">%s</td>'
+        '<td style="color:#cbd5e1;font-size:13px">%s</td></tr>' % (
+            esc(x['titlu']), esc(x.get('id','')), esc(x.get('cine','-')),
+            BAND.get(x.get('status',''), '#94a3b8'), BAND.get(x.get('status',''), '#94a3b8'),
+            BAND.get(x.get('status',''), '#94a3b8'), esc(x.get('status','')),
+            esc(x.get('rezultat','-')), esc(x.get('ramase','') or '<span style="color:#14b8a6">nimic</span>'))
+        for x in todo.get('sarcini', []))
 
     act_btns = ''.join(
         '<button class="act" data-t="%s" data-c="%s">%s</button>' % (
@@ -220,6 +238,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
   <button class="tab" aria-selected="false" data-p="punte">Punte · Bridge</button>
   <button class="tab" aria-selected="false" data-p="jules">Jules · Git · GitHub</button>
   <button class="tab" aria-selected="false" data-p="prompt">Prompt · Acțiuni</button>
+  <button class="tab" aria-selected="false" data-p="todo">TO DO</button>
 </div></nav>
 
 <div class="wrap">
@@ -393,6 +412,16 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
   <div class="note warn"><b>Asta e un site static.</b> Butoanele nu pot scrie direct în repo-ul meu —
   un site fără server nu are cum. De aceea funcționează pe <b>coadă + copiere</b>: apeși, îți iese
   promptul, îl trimiți aici. Singura cale sigură prin care cerința ta ajunge la mine.</div>
+</section>
+
+<!-- ============ TO DO ============ -->
+<section class="pane" id="todo">
+  <h2>TO DO <span class="ct">{len(todo.get('sarcini', []))} sarcini</span></h2>
+  <table><thead><tr><th>Sarcină</th><th>Cine</th><th>Status</th><th>Stare acum</th><th>Mai rămâne</th></tr></thead>
+  <tbody>{todo_rows}</tbody></table>
+  <div class="note"><b>Lista se actualizează singură.</b> Vine din
+  <code class="mono">docs/TODO.json</code>, pe care îl modific la fiecare schimbare
+  reală de stare. Nu e text tastat de mână în interfață.</div>
 </section>
 
 </div>
