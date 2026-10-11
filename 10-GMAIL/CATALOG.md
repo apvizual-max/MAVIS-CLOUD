@@ -23,7 +23,7 @@
 
 ```
 MAVIS/Joburi               8.062
-MAVIS/Newsletter           3.764
+MAVIS/Newsletter           4.103
 MAVIS/Social               2.818
 MAVIS/AI si comunitati     2.398
 MAVIS/De raspuns           1.345
@@ -31,8 +31,9 @@ MAVIS/Facturi si conturi      97
 MAVIS/Personal               176
 MAVIS/Finante                 71
 GUNOI                         0
+SPAM                           0
                               ─────
-                       18.731 total etichetat
+                       19.070 total etichetat
 ```
 
 **Crește pe măsură ce sortarea completă rulează** — fereastra de vârstă a fost

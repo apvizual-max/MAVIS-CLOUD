@@ -1,6 +1,14 @@
 {
  "intrari": [
   {
+   "t": "2026-10-11 22:53:39",
+   "nivel": "info",
+   "msg": "Prima sortare completa s-a terminat: 19.070 etichetate",
+   "rol": "gmail",
+   "detaliu": "re Pornit pe restul",
+   "commit": "ff1db01"
+  },
+  {
    "t": "2026-10-11 22:50:45",
    "nivel": "info",
    "msg": "Fisierul cu parola LinkedIn sters - nu a fost niciodata in istoric",
@@ -242,6 +250,6 @@
   }
  ],
  "nivel": {
-  "info": 30
+  "info": 31
  }
 }

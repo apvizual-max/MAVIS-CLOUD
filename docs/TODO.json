@@ -141,9 +141,9 @@
       "id": "sort-full-final",
       "titlu": "Sortare completa Gmail — verificare finala dupa terminare",
       "cine": "Mavis Cloud",
-      "status": "IN CURS",
-      "rezultat": "Fereastra de varsta eliminata, tot inbox-ul procesat. 18.731 la ultima numarare stabila, in crestere.",
-      "ramase": "Așteaptă terminarea procesului, numără curat, și scrie cifra finală aici."
+      "status": "DE FACUT",
+      "rezultat": "Prima rulare s-a terminat. A etichetat 19.070 de mesaje (Joburi 8.062, Newsletter 4.103, Social 2.818, AI 2.398, De raspuns 1.345, Facturi 97, Personal 176, Finante 71). Inbox-ul mai are pagini nesortate.",
+      "ramase": "Repornit pe ce a ramas. Ruleaza in fundal. Verificarea finala se face cand procesul se opreste - nu se masoara in timpul sortarii."
     },
     {
       "id": "masura-concurenta",
