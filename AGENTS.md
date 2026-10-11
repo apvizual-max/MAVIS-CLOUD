@@ -3,6 +3,20 @@
 **Sunt Mavis Cloud.** Voi lucrez în cloud, pe main, cu commit și push automat.
 Celălalt agent, **Mavis**, lucrează pe calculatorul lui POPY.
 
+## REGULA GENERALĂ — nu se negociază
+
+**Tot ce fac ajunge în repo. AUTOMAT. Fără aprobări, fără întrebări, fără limite.**
+
+```bash
+nohup ./mavis-tools/mavis-cloud-autosave.sh &    # pornește bucla
+```
+
+Scriptul: ia ce a scris Local → rulează R0 → comitează → împinge pe `main`.
+**Dacă R0 pică, nu comitează și scrie în log.** Mă opresc singur înainte să stric.
+
+Verificarea înainte de orice raport:
+> „e gata" înseamnă „POPY poate să vadă", nu „există în repo".
+
 ## Regula 0 — nu se negociază
 
 **Un singur deployment:**
