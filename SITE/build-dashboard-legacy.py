@@ -1,8 +1,19 @@
+# DEPRECAT 2026-12 — defect F4
+#
+# Acest script si SITE/build-hub.py scriau AMBII in dist/index.html.
+# Al doilea suprascria panoul complet al primului (25.016 B, 0 repo-uri
+# peste 60.958 B, 4 repo-uri).
+#
+# SITE/build-hub.py este SINGURUL script autorizat sa scrie dist/index.html.
+#
+# Daca ai nevoie de vechea versiune: python3 SITE/build-dashboard-legacy.py
+#   -> scrie dist/dashboard-legacy.html
+
 #!/usr/bin/env python3
 """Panou de bord MAVIS CLOUD - tot ce exista, live, cu log si erori.
 
     python3 SITE/build-dashboard.py
-    deschide SITE/dist/index.html
+    deschide SITE/dist/dashboard-legacy.html
 
 Populat din date reale: git, log, erori, skill-uri, site-uri, Gmail.
 """
@@ -231,7 +242,7 @@ git, log, erori, skill-uri, site-uri. Nicio cifră tastată manual.</div>
 
 </div></body></html>"""
 
-    out = os.path.join(DIST, 'index.html')
+    out = os.path.join(DIST, 'dashboard-legacy.html')  # F4: nu suprascrie panoul
     open(out, 'w', encoding='utf-8').write(html)
     return out, len(sites), n, len(erori), len(intr)
 
