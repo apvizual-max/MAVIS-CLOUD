@@ -25,3 +25,13 @@ livrare: unde trebuie să ajungă rezultatul
 - `scope: local` → nu începe, scrie handoff
 - fără livrare definită → nu lucra
 - termină în `QUEUE/DONE/`, nu înlocuiește cerința
+
+---
+
+## Tichete
+
+### [TASK-001] Audit Documentatie Skills si Structura Foldere
+cerut de: local | data: 2026-10-12
+scope: cloud
+ce trebuie: Fa un inventar complet al celor 19 skill-uri proprii si 16 vendor din .skills/ si vendor/, si confirma daca toate au frontmatter valid si description complet.
+livrare: QUEUE/DONE/TASK-001.md
