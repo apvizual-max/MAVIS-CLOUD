@@ -33,3 +33,7 @@ SITE/dist/
 *LinkedIn*Access*
 *credential*
 *password*
+
+# OAuth Google - NU se comiteaza niciodata
+credentials.json
+client_secret*.json
