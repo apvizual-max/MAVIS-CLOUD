@@ -207,5 +207,10 @@
       "Fără tabele — se strică pe mobil",
       "Contrast minim 4.5:1 pentru textul mic"
     ]
+  },
+  "portofolio_dovedire_video": {
+    "_nota": "Formula standard obligatorie pentru dovada video. Nu se promite nimic ce nu poate fi trimis.",
+    "text": "proof of work provided on request",
+    "ro": "dovezile video se furnizează la cerere"
   }
 }
