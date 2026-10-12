@@ -7,7 +7,7 @@
     "pozitionare": "Executing Design That Holds Up in Production",
     "rolWord": "graphic designer",
     "diferentaVsArtDirector": "Art direction coordoneaza si gestioneaza. Graphic designer executa si creeaza. Acelasi meiestesit, alt post.",
-    "email": "apvisual.arond@gmail.com",
+    "email": "apvizual@gmail.com",
     "telefon": "+40722121752",
     "oras": "Bucharest, Romania",
     "website": "ap-id.ro"
@@ -63,88 +63,111 @@
   },
   "portofolio": [
     {
-      "client": "Smite",
-      "categorie": "Agenție",
-      "titlu": "Campanii end-to-end",
-      "note": "Identitate, benneruri, postere, materiale de magazin, cărți de vizită, promovare online. Proiecte pentru grilul, Aderma și îmbrăcăminte.",
-      "status": "Agenție închisă între timp"
+      "client": "Yokogawa Europe",
+      "categorie": "Industrial",
+      "titlu": "Identitate corporate, 12 țări",
+      "note": "200+ șabloane grafice, ghiduri de stil, sisteme vizuale unificate.",
+      "url": "https://ap-id.ro/index.php/portfolio/yokogawa/",
+      "status": "pe site"
     },
     {
-      "client": "Aderma",
-      "categorie": "Cosmetică",
-      "titlu": "Sistem vizual de marcă",
-      "note": "Campanii complete pe toate mediile, de la promovare online la materiale tipărite pentru magazine.",
-      "status": "Digital"
+      "client": "ROMEXPO",
+      "categorie": "Evenimente",
+      "titlu": "Identitate vizuală pentru expoziții",
+      "note": "Propuneri de trademark pentru 15+ expoziții internaționale înregistrate.",
+      "url": "https://ap-id.ro/index.php/portfolio/branding-romexpo/",
+      "status": "pe site"
+    },
+    {
+      "client": "AP-ID",
+      "categorie": "Branduri bespoke",
+      "titlu": "Colecție de proiecte de branding",
+      "note": "Inițiative de identitate, manuale de marcă, sisteme de logo.",
+      "url": "https://ap-id.ro/index.php/branding_projects/",
+      "status": "pe site"
+    },
+    {
+      "client": "Croitorul Tau",
+      "categorie": "Tailoring premium",
+      "titlu": "Lansare de brand comercial",
+      "note": "Identitate completă pentru brand de tailoring premium.",
+      "url": "https://ap-id.ro/index.php/portfolio/croitorul-tau/",
+      "status": "pe site"
+    },
+    {
+      "client": "City Grill Group",
+      "categorie": "Lanț de restaurante",
+      "titlu": "Identitate vizuală de lanț",
+      "note": "Proiecte de direcție artistică pentru brandul de restaurante.",
+      "url": "https://ap-id.ro/index.php/portfolio/city-grill/",
+      "status": "pe site"
     },
     {
       "client": "Aderma Protect",
       "categorie": "Cosmetică",
-      "titlu": "Ambalaj și etichetare",
-      "note": "Sisteme grafice pentru produse de îngrijire.",
-      "status": "Digital"
+      "titlu": "Sistem vizual de marcă",
+      "note": "Direcție artistică pentru brandul de cosmetică.",
+      "url": "https://ap-id.ro/index.php/portfolio/aderma-protect/",
+      "status": "pe site"
     },
     {
-      "client": "Creafac",
+      "client": "IL PASSO",
+      "categorie": "Retail premium",
+      "titlu": "Aliniere identitate și produs",
+      "note": "Identitate vizuală, interfețe e-commerce, fotografie de produs.",
+      "url": "https://ap-id.ro/index.php/portfolio/branding-il-passo/",
+      "status": "de verificat URL"
+    },
+    {
+      "client": "Optima Call",
+      "categorie": "SaaS / B2B",
+      "titlu": "Panou de control și dashboard-uri",
+      "note": "Dashboard cu metrici, rutare apeluri, tracking live.",
+      "url": "https://ap-id.ro/index.php/portfolio/optima-call/",
+      "status": "pe site"
+    },
+    {
+      "client": "Smite",
+      "categorie": "Agenție",
+      "titlu": "Art Director",
+      "note": "30+ campanii multimedia, rebranding-uri de trademark, creștere 20-25% interacțiune online.",
+      "status": "agenție închisă · dovedare pe cerere"
+    },
+    {
+      "client": "Skin Media",
+      "categorie": "Agenție",
+      "titlu": "Senior Graphic Designer / Video",
+      "note": "50+ campanii de marketing pentru Nikon, Aiper, Pure Electric, Ninja. +20% vânzări.",
+      "status": "agenție închisă · dovedare pe cerere",
+      "url": "https://ap-id.ro/index.php/portfolio/branding-il-passo/"
+    },
+    {
+      "client": "Ducray",
       "categorie": "Cosmetică",
-      "titlu": "Reclame pentru copii și tineri",
-      "note": "Produse cosmetice pentru copii și tineri, produse pentru un partener farmaceutic mare. Reclame, ambalaj, materiale de campanie.",
-      "status": "Digital"
+      "titlu": "Direcție artistică",
+      "note": "Brand de cosmetică din același grup ca Aderma Protect.",
+      "status": "agenție · dovedare pe cerere"
     },
     {
-      "client": "City Grill",
-      "categorie": "Lanț de restaurante",
-      "titlu": "Identitate vizuală de lanț",
-      "note": "Sistem vizual cu tehnică de progresie, aplicat în toate punctele lanțului din țară.",
-      "status": "Prezent în portofoliu"
+      "client": "Engino Toys",
+      "categorie": "Jocuri / jucării",
+      "titlu": "Identitate de brand",
+      "note": "Proiect de identitate realizat prin AP-ID.ro.",
+      "status": "agenție · dovedare pe cerere"
     },
     {
-      "client": "Smite",
+      "client": "Tripingers Agency",
       "categorie": "Agenție",
-      "titlu": "Puncte de grilaj",
-      "note": "Materiale de grilaj și signalistică urbană.",
-      "status": "Agenție închisă"
+      "titlu": "Direcție artistică",
+      "note": "30+ campanii, creștere 20-25% a interacțiunii online.",
+      "status": "agenție · dovedare pe cerere"
     },
     {
-      "client": "Smite",
-      "categorie": "Agenție",
-      "titlu": "Linii de îmbrăcăminte",
-      "note": "Campanii pentru branduri de îmbrăcăminte.",
-      "status": "Agenție închisă"
-    },
-    {
-      "client": "Yokogawa",
-      "categorie": "Industrial",
-      "titlu": "Sistem de 200+ șabloane",
-      "note": "Dezpozit centralizat de șabloane grafice și ghiduri pentru 12 țări.",
-      "status": "Prezent în portofoliu"
-    },
-    {
-      "client": "Microsoft",
-      "categorie": "Enterprise",
-      "titlu": "Propuneri comerciale",
-      "note": "Sisteme de prezentare și infografice pentru conturi globale.",
-      "status": "Prezent în portofoliu"
-    },
-    {
-      "client": "Nikon",
-      "categorie": "Tech",
-      "titlu": "Campanii multi-canal",
-      "note": "50+ campanii online și vizualizări de produs.",
-      "status": "Prezent în portofoliu"
-    },
-    {
-      "client": "Veeam",
-      "categorie": "Tech",
-      "titlu": "Vizualizări de produs",
-      "note": "Materiale grafice pentru produse enterprise.",
-      "status": "Prezent în portofoliu"
-    },
-    {
-      "client": "ASSA ABLOY",
-      "categorie": "Industrial",
-      "titlu": "Documentație tehnică",
-      "note": "Sisteme grafice pentru documentație și produse.",
-      "status": "Prezent în portofoliu"
+      "client": "Alte proiecte",
+      "categorie": "Diverse",
+      "titlu": "Restul dosarului",
+      "note": "WuXing, La Stampa Cafe, DaCIA Beer, RestoByte, LogOut Cafe, Bio Ortoclinic, BU Online, Digital U, Baltic Invest, Dacia Serus.",
+      "status": "dovedare pe cerere"
     }
   ],
   "scrisoare": {
@@ -158,8 +181,8 @@
     "semnatura": "Sincerely,\nAlexandru Popescu\nSenior Graphic Designer"
   },
   "contact": {
-    "_nota": "Contact real, introdus 2026-10-10 de POPY. Fara formular de contact inca - se adauga la finalul proiectului.",
-    "email": "apvisual.arond@gmail.com",
+    "_nota": "Email verificat in ALEX_LINK_MATRIX si toate CV-urile: apvizual@gmail.com",
+    "email": "apvizual@gmail.com",
     "telefon": "+40722121752",
     "oras": "Bucharest, Romania",
     "website": "ap-id.ro",
