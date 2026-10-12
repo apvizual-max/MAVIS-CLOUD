@@ -5,7 +5,7 @@ name: Invoke Jules
 # 1. eticheta 'jules' pe un GitHub issue  → "label on, task live"
 # 2. mențiune @jules pe un comentariu de PR  → DOAR dacă Jules are deja
 #    un PR deschis, și doar în Reactive Mode
-# 3. jules-invoke action (asta e aici)       → declanșează din orice eveniment
+# 3. jules-action (asta e aici)       → declanșează din orice eveniment
 # 4. Jules CLI                               → jules remote new / task create
 #
 # #3 este singurul care se poate programa. Îl folosim pentru eticheta 'jules'
@@ -40,9 +40,9 @@ jobs:
       # eticheta 'jules' pe issue declanșează automat
       - name: Task din eticheta 'jules'
         if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'jules')
-        uses: google-labs-code/jules-invoke@v1
+        uses: google-labs-code/jules-action@v1.0.0
         with:
-          api-key: ${{ secrets.JULES_API_KEY }}
+          jules_api_key: ${{ secrets.JULES_API_KEY }}
           prompt: |
             Citește AGENTS.md și docs/HANDOFF-COMPLET.md înainte de orice lucru.
             Citește issue-ul: ${{ github.event.issue.title }}
@@ -53,17 +53,17 @@ jobs:
       # invocare manuală din workflow_dispatch
       - name: Task manual
         if: github.event_name == 'workflow_dispatch'
-        uses: google-labs-code/jules-invoke@v1
+        uses: google-labs-code/jules-action@v1.0.0
         with:
-          api-key: ${{ secrets.JULES_API_KEY }}
+          jules_api_key: ${{ secrets.JULES_API_KEY }}
           prompt: ${{ github.event.inputs.sarcina }}
 
       # sweep săptămânal: audit, nu implementare
       - name: Audit săptămânal
         if: github.event_name == 'schedule'
-        uses: google-labs-code/jules-invoke@v1
+        uses: google-labs-code/jules-action@v1.0.0
         with:
-          api-key: ${{ secrets.JULES_API_KEY }}
+          jules_api_key: ${{ secrets.JULES_API_KEY }}
           prompt: |
             Audit săptămânal. NU construiește nimic.
             1. Citește docs/LOG-SISTEM.json, filtrează nivel=eroare sau critic
