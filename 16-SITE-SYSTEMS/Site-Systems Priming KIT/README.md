@@ -21,3 +21,4 @@ Agent AI intre client si POPY
 > **Niciun agent nu începe acest capitol cu memorie goală și fără context.**
 > Se citește acest folder, apoi se lucrează.
 
+**Notebook:** `MavisCloud-APIDSystems`

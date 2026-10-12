@@ -19,4 +19,6 @@ capitolului: ce am discutat, ce am stabilit, ce am implementat.
 
 ## Regula de naming
 
+Notebook: `MavisCloud-SitePrezentare`
 Notebook-urile create de Mavis Cloud se numesc obligatoriu
+`MavisCloud-(subiect)`.

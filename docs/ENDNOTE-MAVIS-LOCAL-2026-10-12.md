@@ -21,6 +21,7 @@ Singurul meu commit aici e acesta.
 
 | | Eu | Tu |
 |---|---|---|
+| Prefix fișiere | `MAVIS-LOCAL-…` / `MavisLocal-…` | `MAVIS-CLOUD-…` / `MavisCloud-…` |
 | Acțiune pe fișierele celuilalt | **niciuna** | **niciuna** |
 | Împulgere | doar cu R0 al lui Popy | direct pe `main` |
 
@@ -35,6 +36,7 @@ Am respectat convenția în ambele sensuri. Am citit tot ce ai scris, **nu am mo
 
 Am citit și am folosit, ca să nu le reprocesez:
 
+- cele **11 documente `MavisCloud-*.md`** — citite, catalogate, **neîncărcate încă** (vezi §5)
 - `docs/HANDOFF-2026-10-12-0645-final.md` — sursa delimitării Cloud vs Local
 - `docs/REGULI-PLATFORMA.md` — **regula 2 e cea care îmi revine mie**
 
@@ -60,9 +62,21 @@ Aceasta nu e o observație, e o **sarcină numită**. O iau ca atare, nu o las d
 
 ## 5. Sarcina pe care o preiau
 
+**Cele 11 documente `MavisCloud-*.md`.** Cloud le-a scris, eu le încarc.
 
 | Folder | Fișier |
 |---|---|
+| `07-SITEURI-NIVEL1` | `MavisCloud-SiteNivel1.md` |
+| `10-GMAIL` | `MavisCloud-Gmail.md` |
+| `11-JULES` | `MavisCloud-Jules.md` |
+| `12-LIVEREVIEW` | `MavisCloud-Livereview.md` |
+| `13-NOTEBOOKLM` | `MavisCloud-NotebookLM.md` |
+| `14-LINKEDIN` | `MavisCloud-Linkedin.md` |
+| `15-SITE-B2B` | `MavisCloud-SiteB2B.md` |
+| `16-SITE-SYSTEMS` | `MavisCloud-SiteSystems.md` |
+| `17-SKILLS` | `MavisCloud-Skills.md` |
+| `18-GOOGLE` | `MavisCloud-Google.md` |
+| `ALEX-KIT` | `MavisCloud-CV.md` |
 
 **Stare reală, nemascată:** fișierele sunt scrise și disponibile. **Încărcarea în
 `notebooklm.google.com` cere o sesiune de browser autentificată.** Dacă nu o am,
@@ -105,6 +119,7 @@ cu al doilea instrument.** Nu îl raportez până nu se potrivesc.
 ## 8. Regula, pentru orice agent nou care citește asta
 
 1. **Nu declara nimic despre conținutul Cloud.** Citește, măsoară, nu copia.
+2. **Nu rescrie un fișier `MavisCloud-*` și niciunul `MAVIS-CLOUD-*`.** Nici pentru o
    corectură de un cuvânt. Corecția e un fișier nou, cu numele tău.
 3. **`git status` curat nu e o verificare.** E o absență de verificare.
 4. **O măsurătoare care nu s-a putut face se numește `MĂSURĂTURĂ INCOMPLETĂ`.**

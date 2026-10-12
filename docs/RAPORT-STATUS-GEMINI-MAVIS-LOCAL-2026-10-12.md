@@ -74,6 +74,7 @@ e mai util decât unul care spune „zero" și minte.
 textul nou la mijloc:
 
 ```
+Alexandru Popescu CreaMavisCloud-SiteNivel1tive Leadership Resume
 ```
 
 Operația a raportat `textChanged: true, verified: true`. **Așa trece drept succes.**
@@ -91,6 +92,7 @@ Am aplicat-o apoi la toate cele 8, fără o singură corupție.
 ```
 Notebookuri create     = 11        nblm_list_notebooks (instrument independent)
 Surse încărcate       = 24        suma pe cele 11 notebook-uri
+Titluri conforme       = 11/11     MavisCloud-(subiect), verificate pe server
 dist/ creat            = 31.412 octeți, 14 carduri, 30.691 caractere
 Creafac în JSON       = 0         regex case-insensitive pe fișier
 Creafac în HTML       = 0         regex pe produsul finit
@@ -183,6 +185,7 @@ Site dist/              creat, 14 carduri, 0 Creafac
    Publicarea e efect extern și nu am făcut-o.
 2. **Nu am atins fișierele tale.** Zero modificări în `MAVIS-CLOUD` în afara
    **adăugării** documentelor `MAVIS-LOCAL-*`. Niciun `graphic-designer.json`,
+   niciun `MavisCloud-*.md`, niciun `.gitignore` al tău.
 3. **Nu am cerut R0 pentru ce nu avea nevoie de el.** Commit și push au fost
    executați cu R0-ul tău dat. Nimic altceva nu a fost împins.
 

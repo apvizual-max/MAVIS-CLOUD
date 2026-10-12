@@ -21,3 +21,4 @@ Agent de audit de la Google, pe GitHub
 > **Niciun agent nu începe acest capitol cu memorie goală și fără context.**
 > Se citește acest folder, apoi se lucrează.
 
+**Notebook:** `MavisCloud-Jules`

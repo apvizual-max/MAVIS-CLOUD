@@ -154,6 +154,7 @@ Calea fără Enterprise: CLI-ul `nlm`, care se autentifică prin **sesiune de br
 
 ```
 CLOUD    pregătesc  câte un document per folder, găti de încărcat,
+                    numit MavisCloud-(subiect), conținut complet. Comit.
 LOCAL    deschide   notebooklm.google.com, creează notebook-ul,
          face       încarcă documentele din repo, îmi dă ID-ul
 ```
@@ -270,6 +271,7 @@ Aderma Protect, IL PASSO, Optima Call, Yokogawa, ROMEXPO, Croitorul Tau · linku
 *De ce Local:* deploy-ul e instrumentul tău.
 
 **8.3 — Notebook-uri din documente gata**
+Documentele sunt pregătite în repo, cu numele `MavisCloud-(subiect)`.
 *De ce Local:* NotebookLM cere browser.
 
 ---

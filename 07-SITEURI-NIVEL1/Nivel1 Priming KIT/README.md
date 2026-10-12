@@ -21,3 +21,4 @@ Site de prezentare, unul per rol de CV
 > **Niciun agent nu începe acest capitol cu memorie goală și fără context.**
 > Se citește acest folder, apoi se lucrează.
 
+**Notebook:** `MavisCloud-SitePrezentare`

@@ -95,6 +95,7 @@ LOCAL (el)  → deschide notebooklm.google.com, creează notebook-ul,
 
 Nu am nevoie de **nicio** cheie nouă ca să fac primul pas.
 
+**Fac asta:** pentru fiecare folder din repo, pregătesc **un document, gata de încărcat**, cu numele `MavisCloud-(subiect)` și conținutul lui. Îl comit.
 
 **Tu sau Local:** deschideți NotebookLM, creezi notebook-ul, tragi documentele din repo.
 
