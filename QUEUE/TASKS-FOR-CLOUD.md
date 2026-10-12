@@ -30,7 +30,7 @@ livrare: unde trebuie să ajungă rezultatul
 
 ## Tichete
 
-### [TASK-001] Audit Documentatie Skills si Structura Foldere
+### [x] TASK-001 Audit Documentatie Skills si Structura Foldere
 cerut de: local | data: 2026-10-12
 scope: cloud
 ce trebuie: Fa un inventar complet al celor 19 skill-uri proprii si 16 vendor din .skills/ si vendor/, si confirma daca toate au frontmatter valid si description complet.
