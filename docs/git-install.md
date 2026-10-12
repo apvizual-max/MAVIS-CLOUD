@@ -23,7 +23,7 @@ git config --global init.defaultBranch main
 |---|---|---|
 | `GITHUB_TOKEN` | manager de secrete | commit + push + API |
 | `JULES_API_KEY` | manager de secrete | apeluri Jules |
-| `LINKEDIN_EMAIL` | manager de secrete | LinkedIn |
+| `GOOGLE_EMAIL` | manager de secrete | LinkedIn |
 | `LINKEDIN_PASSWORD` | manager de secrete | LinkedIn |
 
 **Regulă:** `.gitignore` acoperă `*.env`, `*token*`, `*secret*`, `oauth.json`,

@@ -18,7 +18,7 @@
 **Verificare făcută:** `git log --all -- "*LinkedIn Access*"` → gol.
 
 **Cheile stau în managerul de secrete:**
-`LINKEDIN_EMAIL` · `LINKEDIN_PASSWORD`
+`GOOGLE_EMAIL` · `LINKEDIN_PASSWORD`
 
 ## 3. Email — o neconcordanță de rezolvat
 
