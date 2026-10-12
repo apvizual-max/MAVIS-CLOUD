@@ -38,3 +38,19 @@ sesiune deschisă.
 ---
 
 *Adaugă aici, în ordine, cu dată. Nu șterge intrările vechi.*
+---
+
+### [2026-10-12] NotebookLM — acces și sinteză
+
+**POPY a cerut:**
+- să intri în notebook-urile lui și să fac sinteză de lucruri
+- prin remote, folosind Mavis
+
+**Ce e nevoie:**
+Localul are deja Hermes, cookie-urile și browserul. Intră în notebook-uri,
+face sinteza cerută, o scrie în repo.
+
+**Mavis Cloud nu face asta și nu încearcă.** Nu are browser, nu are sesiune.
+Nu instalez nimic, nu ating configurația lui Hermes, nu schimb nimic.
+
+**Un singur lucru de la POPY:** spune ce sinteză vrei, într-un rând.
