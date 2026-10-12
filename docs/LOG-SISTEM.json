@@ -1,6 +1,38 @@
 {
  "intrari": [
   {
+   "t": "2026-10-12 00:53:08",
+   "nivel": "info",
+   "msg": "3 intrebari pe care le puteam verifica singur - rezolvate, eliminate din lista",
+   "rol": "regula",
+   "detaliu": "",
+   "commit": "eb323a2"
+  },
+  {
+   "t": "2026-10-12 00:53:08",
+   "nivel": "info",
+   "msg": "11 Priming KIT-uri create, unul pe capitol",
+   "rol": "structura",
+   "detaliu": "",
+   "commit": "eb323a2"
+  },
+  {
+   "t": "2026-10-12 00:53:08",
+   "nivel": "info",
+   "msg": "Portofoliu reconstruit: 14 proiecte VERIFICATE din matricea lui POPY",
+   "rol": "site",
+   "detaliu": "",
+   "commit": "eb323a2"
+  },
+  {
+   "t": "2026-10-12 00:53:07",
+   "nivel": "info",
+   "msg": "Email corectat: apvizual@gmail.com (verificat in 17 surse)",
+   "rol": "site",
+   "detaliu": "",
+   "commit": "eb323a2"
+  },
+  {
    "t": "2026-10-11 22:53:39",
    "nivel": "info",
    "msg": "Prima sortare completa s-a terminat: 19.070 etichetate",
@@ -250,6 +282,6 @@
   }
  ],
  "nivel": {
-  "info": 31
+  "info": 35
  }
 }
