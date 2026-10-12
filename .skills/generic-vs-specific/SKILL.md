@@ -40,7 +40,7 @@ Cele 9 familii de rol: `art-director`, `brand-designer`, `product-designer`,
 ## Ce rămâne particular, intenționat
 
 - **Numele de clienți și cifrele** — sunt ale lui POPY, nu ale sablonului
-- **Realizările concrete** — Smite, City Grill, Creafac, Aderma
+- **Realizările concrete** — Smite, City Grill, Aderma
 - **Linkurile de portofoliu** — trebuie verificate, nu inventate
 
 Astea stau în stratul de date, nu în UI. UI-ul nu conține niciodată un nume de firmă.

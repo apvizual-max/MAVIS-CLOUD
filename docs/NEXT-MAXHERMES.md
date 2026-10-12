@@ -62,7 +62,7 @@ Nu le poate rezolva niciun agent. **Aștept răspunsul lui POPY:**
 1. **Email:** `apvizual@gmail.com` (în CV-urile vechi) sau
    `apvisual.arond@gmail.com` (dat azi)?
 2. **„Smite" sau „Skin Media"?** — CV-ul original spune Skin Media
-3. **City Grill, Creafac, Aderma, Aderma Protect** — intră în portofoliu?
+3. **City Grill, Aderma, Aderma Protect** — intră în portofoliu?
 
 **Cât timp nu sunt rezolvate, site-urile nu se publică cu date de contact greșite.**
 

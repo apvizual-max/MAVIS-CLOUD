@@ -94,8 +94,8 @@ Notebookuri create     = 11        nblm_list_notebooks (instrument independent)
 Surse încărcate       = 24        suma pe cele 11 notebook-uri
 Titluri conforme       = 11/11     MavisCloud-(subiect), verificate pe server
 dist/ creat            = 31.412 octeți, 14 carduri, 30.691 caractere
-Creafac în JSON       = 0         regex case-insensitive pe fișier
-Creafac în HTML       = 0         regex pe produsul finit
+ în JSON       = 0         regex case-insensitive pe fișier
+ în HTML       = 0         regex pe produsul finit
 IL PASSO              = HTTP 404  Invoke-WebRequest HEAD
 Control city-grill    = HTTP 200  aceeași metodă, alt URL
 Control aderma-protect= HTTP 200  aceeași metodă, alt URL
@@ -174,7 +174,7 @@ MAVIS-CLOUD             MATCH=True   b5a40c05
 MAVIS-OPTIMUS-CI        MATCH=True   29cd597c
 Optimus-Mavis-Skills    MATCH=True   8de349e4
 Notebookuri MavisCloud  11/11 conforme, 24 surse
-Site dist/              creat, 14 carduri, 0 Creafac
+Site dist/              creat, 14 carduri, 0
 ```
 
 ---

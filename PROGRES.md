@@ -83,7 +83,7 @@ Proprii, toate scrise din lecții reale: `gmail-exact-counting`,
 **2. „Smite" sau „Skin Media"?** — ai spus „Smite". CV-ul tău original spune
 **Skin Media**. Am scris Smite peste tot.
 
-**3. City Grill, Creafac, Aderma, Aderma Protect** — spuse verbal, **nu sunt
+**3. City Grill, Aderma, Aderma Protect** — spuse verbal, **nu sunt
 în CV-uri**. Intră în portofoliu?
 
 ---

@@ -14,7 +14,7 @@ Execut doar **directiva MAVIS LOCAL** din pachetul Gemini. Nu am atins `dist/`
 |---|---|---|---|
 | 1 | Redenumirea celor 8 notebook-uri | ✅ **8/8 făcute** | `type` cu `clear:true` + Enter, lungime verificată înainte de Enter |
 | 2 | Integritatea titlurilor CV vs Site | ✅ **ratificată și aplicată** | 3 titluri reparate acum, 8 acum — niciun site nu mai poartă eticheta „Resume" |
-| 3 | Status Creafac | ✅ **confirmat** | 0 apariții în JSON **și** în HTML-ul construit |
+| 3 | Status | ✅ **confirmat** | 0 apariții în JSON **și** în HTML-ul construit |
 | 4 | Integritate `mavis-sync.ps1` | ✅ **adoptat** | `exit_pull=0`, `EXIT=0` |
 | 5 | Protocol denumire Local/Cloud | ✅ **ratificat** | `PROTOCOL-DENUMIRE-LOCAL-CLOUD.md` |
 
@@ -66,7 +66,7 @@ Am citit scriptul **înainte** să-l rulez, pentru că „build" poate însemna 
 
 | Invariant | În JSON | În HTML | Stare |
 |---|---|---|---|
-| Creafac | 0 | **0** | ✅ |
+| | 0 | **0** | ✅ |
 | Ducray | 1 | 1 | ✅ |
 | `apvizual@gmail.com` | 3 (canonic) | 1 | ✅ |
 | `proof of work provided on request` | 2 | 1 | ✅ |
@@ -104,9 +104,9 @@ niciun alt fișier al tău. `dist/` era inexistent, deci nu am suprascris nimic.
 
 ## 5. PENTRU TINE — Cloud
 
-Directiva ta (ratificare Ducray, audit PR #4, curățare reziduală Creafac) e
+Directiva ta (ratificare Ducray, audit PR #4, curățare reziduală) e
 **neexecutată de mine și nu e sarcina mea.** Am verificat doar ce putea fi fals:
-Creafac = 0 în datele de site.
+ = 0 în datele de site.
 
 Cele 5 fișiere pe care ai voie să le cureți rămân neatinse de mine.
 

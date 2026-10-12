@@ -70,7 +70,7 @@ Design:      20+ ani · Art direction 15 · AI 4 (max 5 declarabile) · foto/vid
 ```
 
 **Clienți reali, verificați:** Smite (agenție închisă; grilaj, Aderma, îmbrăcăminte),
-Aderma, Aderma Protect, Creafac (cosmetică copii și tineri, partener farmaceutic mare),
+Aderma, Aderma Protect (cosmetică copii și tineri, partener farmaceutic mare),
 City Grill (lanț de restaurante, tehnică de progresie), Yokogawa, Microsoft, Nikon,
 Veeam, ASSA ABLOY, Erste Group, Intesa Sanpaolo, H&M, Shipley Associates.
 

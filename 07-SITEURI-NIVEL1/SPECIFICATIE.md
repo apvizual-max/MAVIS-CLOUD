@@ -94,7 +94,7 @@ portofoliul tău                             ← proiecte reale
 | **Microsoft PCoE** | propuneri, WCAG | în CV-ul tău |
 | **AP-ID.ro** | Serus Dacia, CRD Credit, Engino, Optima Call | în CV-ul tău |
 | **Smite** | ⚠️ **în dispută** — tu ai spus „Smite", modelul tău original spune „Skin Media" | **de verificat** |
-| **City Grill, Creafac, Aderma** | spuse verbal, **nu în CV-uri** | **de adăugat, cu confirmare** |
+| **City Grill, Aderma** | spuse verbal, **nu în CV-uri** | **de adăugat, cu confirmare** |
 
 > **Regulă:** dacă nu e în CV-urile tale originale, **nu intră pe site**
 > până nu confirmi. Las gol, nu umplu cu memorie.
@@ -123,7 +123,7 @@ site-uri construite      ⬜ — Local
 ## 9. Ce trebuie întrebat lui POPY
 
 1. **„Smite" sau „Skin Media"?** — apare în dispute între ce spus verbal și CV
-2. **City Grill, Creafac, Aderma** — intră în portofoliu? Nu sunt în CV-uri
+2. **City Grill, Aderma** — intră în portofoliu? Nu sunt în CV-uri
 3. **Email** — CV-urile tale au `apvizual@gmail.com`, tu mi-ai dat
    `apvisual.arond@gmail.com`. **Care e corect?**
 4. **Contact** — `[EMAIL]` și `[TELEFON]` rămân placeholder sau se completează acum?
