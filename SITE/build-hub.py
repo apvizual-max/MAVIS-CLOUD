@@ -13,12 +13,61 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(BASE)
 DIST = os.path.join(BASE, 'dist')
 
+# Unde stau LOCAL cele 4 repo-uri. repos.json tine date despre ele
+# (nume/rol/ramura/remote), dar NU tine cale pe disc - pentru ca aceleasi
+# repo-uri au alte cai in cloud si pe masina lui Popy. Comanda ruleaza pe
+# masina lui Popy, deci maparea de aici e cea valida.
+CALE_REPO = {
+    'MAVIS-CLOUD':           REPO,
+    'MAVIS-OPTIMUS-CI':      os.path.dirname(REPO),
+    'pkms-vault-automation': r'D:\Alex_Knowlege_Vault',
+    'Optimus-Mavis-Skills':  r'C:\Users\apviz\.minimax\agents\mavis\skills',
+}
+
 def sh(c, cwd=REPO, t=25):
     try:
         return subprocess.run(c, shell=True, cwd=cwd, capture_output=True,
                               text=True, timeout=t).stdout.strip()
     except Exception:
         return ''
+
+def stare_repo(name, branch):
+    """Masura starea REALA a unui repo: HEAD, ramura, MATCH, murdare, fisiere.
+
+    Interogam RAMURA DIN CONFIGURATIE, nu 'main'Blind. pkms-vault-automation
+    e pe 'master', iar 'git ls-remote origin main' intoarce VID cu exit 0 -
+    un verificator scris prost citeste asta ca dezincronizare cand e ok."""
+    cale = CALE_REPO.get(name)
+    d = {'nume': name, 'ramura': branch, 'cale': cale or 'necunoscuta',
+         'head': '-', 'remote': '-', 'match': None, 'murdare': '-',
+         'fisiere': '-', 'exista': bool(cale and os.path.isdir(cale))}
+    if not d['exista']:
+        return d
+    d['head']    = sh('git rev-parse HEAD', cwd=cale)[:12] or '-'
+    d['murdare'] = len(sh('git status --porcelain', cwd=cale, t=40).splitlines())
+    n = sh('git ls-files', cwd=cale, t=60)
+    d['fisiere'] = len(n.splitlines()) if n else 0
+    d['remote']  = sh(f'git ls-remote origin refs/heads/{branch}', cwd=cale, t=40)[:12] or 'ref absent'
+    # Ref absent inseamna "nu stiu", NU "dezincronizat". Se pastreaza ca atare.
+    d['match'] = (d['head'] == d['remote']) if d['remote'] not in ('ref absent', '-') else None
+    return d
+
+def citeste_repo():
+    """Citeste repos.json si masoara fiecare repo de pe disc."""
+    p = os.path.join(BASE, 'date', 'repos.json')
+    if not os.path.exists(p):
+        return []
+    try:
+        cfg = json.load(open(p, encoding='utf-8'))
+    except Exception:
+        return []
+    out = []
+    for r in cfg:
+        d = stare_repo(r.get('name', '?'), r.get('branch', 'main'))
+        d['rol'] = r.get('role', '')
+        d['remote_url'] = r.get('remote', '')
+        out.append(d)
+    return out
 
 def esc(s):
     return (str(s).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
@@ -74,6 +123,29 @@ def main():
         try: todo = json.load(open(tp, encoding='utf-8'))
         except Exception: pass
     azi = datetime.date.today().isoformat()
+
+    repos = citeste_repo()
+    n_ok = sum(1 for r in repos if r['match'] is True)
+    n_r = len(repos)
+
+    def badge(m):
+        if m is True:
+            return '<span class="tag ok">MATCH</span>'
+        if m is False:
+            return '<span class="tag" style="background:rgba(248,113,113,.12);color:#f87171;border-color:rgba(248,113,113,.3)">NESINCRON</span>'
+        return '<span class="tag" style="color:#64748b">NECUNOSCUT</span>'
+
+    repo_rows = ''.join(
+        '<tr><td class="mono"><b>%s</b><div style="color:#64748b;font-size:11.5px">%s</div></td>'
+        '<td>%s</td><td class="mono">%s</td><td class="mono">%s</td><td>%s</td>'
+        '<td style="text-align:right">%s</td><td style="text-align:right">%s</td></tr>' % (
+            esc(r['nume']), esc(r['rol']),
+            '<span class="tag">%s</span>' % esc(r['ramura']),
+            esc(r['head']), esc(r['remote']), badge(r['match']),
+            esc(r['murdare']), esc(r['fisiere']))
+        for r in repos) or (
+        '<tr><td colspan="7" style="color:#64748b;padding:14px 12px">'
+        'repos.json lipseste sau nu poate fi citit.</td></tr>')
 
     branch  = sh('git rev-parse --abbrev-ref HEAD') or 'main'
     commits = sh('git rev-list --count HEAD') or '0'
@@ -247,11 +319,21 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
 <section class="pane on" id="pano">
   <div class="grid">
     <div class="card"><div class="n">{nskill}</div><div class="l">skill-uri</div></div>
+    <div class="card {'bad' if (n_r and n_ok < n_r) else ''}"><div class="n">{n_ok}/{n_r}</div><div class="l">repo-uri MATCH</div></div>
     <div class="card"><div class="n">{len(sites)}</div><div class="l">site-uri CV</div></div>
     <div class="card"><div class="n">{len(sab)}</div><div class="l">șabloane</div></div>
     <div class="card {'bad' if erori else ''}"><div class="n">{len(erori)}</div><div class="l">erori</div></div>
     <div class="card"><div class="n">{len(intr)}</div><div class="l">în log</div></div>
   </div>
+
+  <h2>Repo-uri <span class="ct">{n_ok} din {n_r} sincronizate · măsurat pe disc, nu declarat</span></h2>
+  <table><thead><tr><th>Repo · rol</th><th>Ramură</th><th>HEAD local</th><th>HEAD remote</th>
+  <th>Stare</th><th style="text-align:right">Modif.</th><th style="text-align:right">Fișiere</th></tr></thead>
+  <tbody>{repo_rows}</tbody></table>
+  <div class="note"><b>Se interogează ramura configurată, nu orbește pe <code class="mono">main</code>.</b>
+  <code class="mono">pkms-vault-automation</code> e pe <code class="mono">master</code>; interogarea lui pe
+  <code class="mono">main</code> întoarce <b>vid cu exit 0</b>, iar un verificator scris prost citește
+  asta ca dezincronizare. „Ref absent" e starea <b>NECUNOSCUT</b>, nu starea <b>NESINCRON</b>.</div>
 
   <h2>Erori <span class="ct">{len(erori)} de rezolvat</span></h2>
   <table><thead><tr><th>Timp</th><th>Nivel</th><th>Ce</th></tr></thead><tbody>{err_rows}</tbody></table>
