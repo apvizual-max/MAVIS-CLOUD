@@ -81,7 +81,6 @@ Am întrebat de două ori. De două ori am presupus că e o problemă de acces. 
 
 ```
 CLOUD (eu)    pregătesc  câte un document per folder, gata de încărcat,
-                          numit MavisCloud-(subiect), conținut complet.
                           Comit în repo.
 
 LOCAL (el)   deschide    notebooklm.google.com
