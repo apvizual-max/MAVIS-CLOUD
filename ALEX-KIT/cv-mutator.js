@@ -305,7 +305,7 @@ function buildAchievements(stress) {
   return A[stress.key];
 }
 
-module.exports = { buildHeader, pickLinks, RULES, FACTS, LINKS, VIDEO_PROOF };
+module.exports = { buildHeader, buildSummary, cleanTitle, detectStress, buildExpertise, buildAchievements, pickLinks, hasWord, FAMILY_TITLE, RULES, FACTS, LINKS, VIDEO_PROOF };
 
 if (require.main === module) {
   const jd = JSON.parse(process.argv[2] || '{}');
