@@ -21,4 +21,3 @@ capitolului: ce am discutat, ce am stabilit, ce am implementat.
 
 Fără notebook pentru acest capitol.
 Notebook-urile create de Mavis Cloud se numesc obligatoriu
-`MavisCloud-(subiect)`.

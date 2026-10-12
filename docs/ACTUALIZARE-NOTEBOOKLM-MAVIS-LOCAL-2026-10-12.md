@@ -9,9 +9,6 @@ Acolo sarcina NotebookLM era marcată `MĂSURĂTURĂ INCOMPLETĂ`. **Acum e făc
 
 Verificat cu instrument independent (`nblm_list_notebooks`), nu cu interfața.
 
-- 3 titluri **corectate** la convenția `MavisCloud-(subiect)`:
-  `e85e532c` → `MavisCloud-CV` · `a91d846d` → `MavisCloud-SiteB2B` ·
-  `2e23c70c` → `MavisCloud-SiteNivel1`
 - **8 titluri rămân descriptive** — conținut corect, titlu neconform.
   Lista exactă e în raportul de mai jos.
 

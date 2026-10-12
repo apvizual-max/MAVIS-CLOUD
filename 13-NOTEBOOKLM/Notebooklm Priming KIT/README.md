@@ -21,4 +21,3 @@ Cercetare cu citari, pe documente reale
 > **Niciun agent nu începe acest capitol cu memorie goală și fără context.**
 > Se citește acest folder, apoi se lucrează.
 
-**Notebook:** `MavisCloud-NotebookLM`

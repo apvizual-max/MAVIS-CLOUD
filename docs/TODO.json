@@ -235,10 +235,8 @@
     },
     {
       "id": "notebook-naming",
-      "titlu": "Conventie de naming: MavisCloud-(subiect)",
       "cine": "Mavis Cloud",
       "status": "GATA",
-      "rezultat": "Toate notebook-urile create de mine se numesc MavisCloud-(subiect). Ex: MavisCloud-NotebookLM.",
       "ramase": "POPY pune informatia in ele mai tarziu."
     },
     {

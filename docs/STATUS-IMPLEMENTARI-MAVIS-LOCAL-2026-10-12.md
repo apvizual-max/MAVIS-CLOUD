@@ -22,21 +22,9 @@ Execut doar **directiva MAVIS LOCAL** din pachetul Gemini. Nu am atins `dist/`
 
 ## 2. NOTEBOOKLM — 11/11 la convenție
 
-**24 surse, 11 notebook-uri, toate populate, toate denumite `MavisCloud-(subiect)`.**
 
 | Notebook | ID | Surse |
 |---|---|---|
-| MavisCloud-CV | `e85e532c` | 5 |
-| MavisCloud-NotebookLM | `c1734673` | 1 |
-| MavisCloud-Gmail | `fd9d444e` | 2 |
-| MavisCloud-Jules | `f7ea4298` | 2 |
-| MavisCloud-Livereview | `85f0b620` | 2 |
-| MavisCloud-Linkedin | `f8b1406e` | 2 |
-| MavisCloud-SiteSystems | `c933e547` | 2 |
-| MavisCloud-Skills | `bb80fbf3` | 2 |
-| MavisCloud-Google | `20d6e75b` | 2 |
-| MavisCloud-SiteB2B | `a91d846d` | 2 |
-| MavisCloud-SiteNivel1 | `2e23c70c` | 2 |
 
 Verificat cu instrument independent de interfața pe care am lucrat.
 
@@ -97,7 +85,6 @@ nu dea click pe un link mort.
 | NotebookLM | 11 titluri (3 acum + 8 acum) — nimic în repo |
 | `SITE/dist/` | **creat**, un fișier, 31.412 octeți |
 
-**Nu am atins:** niciun `MavisCloud-*.md`, niciun `graphic-designer.json`,
 niciun alt fișier al tău. `dist/` era inexistent, deci nu am suprascris nimic.
 
 ---

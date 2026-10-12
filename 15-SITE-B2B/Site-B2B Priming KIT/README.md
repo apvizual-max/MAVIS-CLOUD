@@ -21,4 +21,3 @@ Serviciu cu rata si pe ora
 > **Niciun agent nu începe acest capitol cu memorie goală și fără context.**
 > Se citește acest folder, apoi se lucrează.
 
-**Notebook:** `MavisCloud-B2B`
