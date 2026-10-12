@@ -78,10 +78,3 @@ jobs:
             echo "❌ SABLOANE NE-GENERICE:"; echo "$HIT"; exit 1
           fi
           echo "✅ șabloanele sunt generice"
-
-      - name: Agent-to-agent: verifică mesajele pentru Local
-        run: |
-          if [ -f docs/INTENTII.md ] && git log -1 --format=%s | grep -qi "neschimbat"; then
-            echo "  (mesaj nou pentru Local)"
-          fi
-          echo "✅ puntea e vie"
