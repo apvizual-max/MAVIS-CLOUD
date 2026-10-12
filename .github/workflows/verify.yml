@@ -51,6 +51,11 @@ jobs:
           [ $bad -eq 0 ] && echo "✅ sintaxă JS corectă"
           exit $bad
 
+      - name: Teste automate CV Mutator
+        run: |
+          node --test ALEX-KIT/cv-mutator.test.js
+          echo "✅ teste cv-mutator trecute"
+
       - name: Python fără erori de sintaxă
         run: |
           python3 - <<'PY'
