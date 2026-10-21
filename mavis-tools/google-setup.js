@@ -12,9 +12,12 @@
  *
  * Nu scrie nimic in repo. Nu trimite nimic. Nu atinge Drive sau Gmail.
  *
- *   node mavis-tools/google-setup.js            -> flux complet
+ *   node mavis-tools/google-setup.js            -> flux complet (6 scope-uri)
  *   node mavis-tools/google-setup.js --check    -> doar raport, nu schimba nimic
  *   node mavis-tools/google-setup.js --print    -> arata si valorile pe ecran
+ *   node mavis-tools/google-setup.js --with-photos  -> adauga scope-urile Photos
+ *                                                     (requires Photos Library API
+ *                                                      enabled in the Cloud project)
  */
 const fs = require('fs');
 const path = require('path');
@@ -29,6 +32,8 @@ const TOKENS_FILE = path.join(DIR, 'tokens', 'mavis.json');
 const ENV_OUT = path.join(DIR, 'cloud-secret.env');
 const CHECK = process.argv.includes('--check');
 const PRINT = process.argv.includes('--print');
+const WITH_PHOTOS = process.argv.includes('--with-photos');
+const WAIT_MS = 10 * 60 * 1000; // cat timp asteptam redirect-ul de la Google
 
 const C = {
   b: (s) => `\x1b[1m${s}\x1b[0m`, g: (s) => `\x1b[32m${s}\x1b[0m`,
@@ -96,13 +101,27 @@ function openBrowser(url) {
       client_secret: await ask('client_secret: '),
       kind: 'introdus manual',
     };
+    // salvam automat, ca data viitoare sa nu mai trebuiasca introdus manual
+    try {
+      fs.mkdirSync(DIR, { recursive: true });
+      fs.writeFileSync(CREDS_FILE, JSON.stringify({ installed: { client_id: c.client_id, client_secret: c.client_secret } }, null, 2), { mode: 0o600 });
+      fs.chmodSync(CREDS_FILE, 0o600);
+      console.log(C.g('Salvat automat in ' + CREDS_FILE + C.d(' (chmod 600)')));
+    } catch (e) { console.log(C.y('Nu am putut salva credentials.json: ' + e.message)); }
   } else {
     console.log(C.g('Client OAuth gasit (' + c.kind + ').'));
   }
   if (!c.client_id || !c.client_secret) { console.log(C.r('Fara client_id/client_secret nu pot continua.')); process.exit(1); }
 
-  const scopes = AUTH.FULL_SCOPES;
+  const scopes = WITH_PHOTOS
+    ? [...AUTH.FULL_SCOPES, ...AUTH.PHOTOS_SCOPES]
+    : AUTH.FULL_SCOPES;
   console.log(C.d('Scope-uri cerute:\n  ' + scopes.join('\n  ') + '\n'));
+  if (WITH_PHOTOS) {
+    console.log(C.y('ATENTIE: scope-ul photoslibrary.readwrite cere ca Photos Library API sa fie'));
+    console.log(C.y('ACTIVATA in proiectul Cloud (APIs & Services -> Library). Daca nu e,'));
+    console.log(C.y('Google raspunde invalid_scope si NU te redirectioneaza inapoi.\n'));
+  }
 
   const server = http.createServer((req, res) => {
     const u = new URL(req.url, 'http://127.0.0.1');
@@ -112,9 +131,10 @@ function openBrowser(url) {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     if (err) {
       res.end(`<h2>EROARE</h2><p>${err}</p><p>${u.searchParams.get('error_description') || ''}</p>`);
+      clearTimeout(timer);
       server.close(); console.log(C.r('\nConsimtamant refuzat / eroare: ' + err)); process.exit(1);
     }
-    res.end('<h2>OK</h2><p>Autentificare reusita. Poti inchide fereastra.</p>');
+    res.end('<h2>Cod primit</h2><p>Se verifica acum la Google. Daca terminalul afiseaza un token, e gata. Poti inchide fereastra.</p>');
     server.close();
     exchange(code);
   });
@@ -138,7 +158,25 @@ function openBrowser(url) {
   console.log(C.d('Dupa ce consimti, revino aici. Astept...\n'));
   openBrowser(url);
 
+  // Daca Google arata o pagina de eroare (ex. invalid_scope), NU te redirectioneaza
+  // inapoi — serverul ar astepta la infinit. Timeout-ul explica exact ce s-a intamplat.
+  const timer = setTimeout(() => {
+    console.log(C.r('\nTimp expirat — nu a venit niciun redirect de la Google.\n'));
+    console.log(C.b('Cele mai probabile cauze:\n'));
+    console.log('  1. ' + C.y('invalid_scope') + ' — un scope cerut nu e valid pentru proiectul tau.');
+    console.log('     Fix: API-ul corespunzator nu e activata in proiectul Cloud.');
+    console.log('     Pentru Photos: APIs & Services -> Library -> "Photos Library API" -> Enable.');
+    console.log('     Sau ruleaza fara Photos: ' + C.g('node mavis-tools/google-setup.js') + '\n');
+    console.log('  2. Ai refuzat consimtamantul, sau ai inchis fereastra fara sa alegi "Accept".\n');
+    console.log('  3. Browserul a deschis pagina, dar portul s-a schimbat intre timp.\n');
+    console.log(C.d('Ruleaza din nou. Daca tot pica, porneste cu: node mavis-tools/google-setup.js --check\n'));
+    server.close();
+    process.exit(1);
+  }, WAIT_MS);
+  timer.unref?.();
+
   async function exchange(code) {
+    clearTimeout(timer);
     try {
       const r = await fetch('https://oauth2.googleapis.com/token', {
         method: 'POST',

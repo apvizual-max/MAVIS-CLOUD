@@ -103,7 +103,19 @@ const SCOPES = {
   driveFile: 'https://www.googleapis.com/auth/drive.file',
 };
 
-/** Setul complet folosit de google-setup.js. */
+/**
+ * Setul implicit (6 scope-uri) — cele care functioneaza fara API-uri suplimentare
+ * activate in proiectul Cloud.
+ *
+ * DE CE NU PENTRU PHOTOS: scope-ul photoslibrary.* este respins de Google cu
+ * `invalid_scope` daca Photos Library API nu e activata in proiect. Google
+ * raporteaza scope-urile pentru API-uri neactivate drept "invalid" — vezi
+ * raportul de eroare: valid=[...], invalid=[photoslibrary.readwrite].
+ *
+ * In plus, masurat 2026-10-21: `photoslibrary.googleapis.com` este blocat de
+ * egress-ul sandboxului de cloud (0/6 conexiuni). Deci Photos se face de la
+ * Local, oricum. Nu blocam restul setup-ului pentru el.
+ */
 const FULL_SCOPES = [
   SCOPES.drive,
   SCOPES.gmail,
@@ -111,8 +123,10 @@ const FULL_SCOPES = [
   SCOPES.docs,
   SCOPES.spreadsheets,
   SCOPES.slides,
-  SCOPES.photosReadwrite,
 ];
+
+/** Scope-uri pentru Google Photos — doar daca Photos Library API e activata in proiect. */
+const PHOTOS_SCOPES = [SCOPES.photosReadwrite];
 
 /** Setul minim: ce trebuie ca Drive + Gmail sa mearga in cloud. */
 const CORE_SCOPES = [SCOPES.drive, SCOPES.gmail, SCOPES.calendar];
@@ -125,6 +139,7 @@ module.exports = {
   readJson,
   SCOPES,
   FULL_SCOPES,
+  PHOTOS_SCOPES,
   CORE_SCOPES,
   CREDS_FILE,
   TOKENS_FILE,

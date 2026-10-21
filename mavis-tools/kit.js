@@ -41,7 +41,20 @@ function refresh() {
     }, r => {
       let d = ''; r.on('data', c => d += c); r.on('end', () => {
         let j; try { j = JSON.parse(d); } catch { j = { raw: d }; }
-        j.error ? rej(new Error(j.error + (j.error_description ? ': ' + j.error_description : ''))) : res(j.access_token);
+        if (j.error) {
+          let msg = j.error + (j.error_description ? ': ' + j.error_description : '');
+          if (j.error === 'invalid_grant') {
+            // Doua cauze principale, ambele dau invalid_grant:
+            msg += '\n  Diagnostic: tokenul a expirat sau a fost revocat. Verifica doua lucruri:\n'
+              + '   1. "7 zile": OAuth consent screen in Testing => refresh tokenul expira in 7 zile.\n'
+              + '      Fix: Publishing status -> In production, apoi reia google-setup.js.\n'
+              + '   2. Client si token din clienti diferiti: GOOGLE_CLIENT_ID (env) trebuie sa fie\n'
+              + '      din ACELASI OAuth client care a generat GOOGLE_REFRESH_TOKEN.\n'
+              + '      Daca tokenul vine din ~/' + (AUTH.TOKENS_FILE.replace(process.env.HOME || '', '~')) + ', regenereaza-l\n'
+              + '      cu google-setup.js pe aceeasi masina si pune toate 3 cheile impreuna.';
+          }
+          rej(new Error(msg));
+        } else res(j.access_token);
       });
     });
     req.on('error', rej); req.write(body); req.end();

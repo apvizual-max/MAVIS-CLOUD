@@ -122,7 +122,8 @@ Dacă nu îl ai:
    - Gmail API
    - Google Calendar API
    - Google Docs API · Google Sheets API · Google Slides API
-   - Google Photos Library API
+   - Google Photos Library API — **doar dacă vrei Photos.** Fără ea, scope-ul
+     `photoslibrary.readwrite` este respins (vezi 5.3)
 3. **APIs & Services → OAuth consent screen**
    - User type: **External**
    - Adaugă `apvizual@gmail.com` în Test users
@@ -140,11 +141,48 @@ node mavis-tools/google-setup.js
 
 Se deschide browserul → apeși Accept → revii în terminal. Gata.
 
+Dacă nu ai încă `credentials.json`, scriptul îl cere pe loc și **îl salvează automat**
+(`chmod 600`). Nu mai trebuie să scrii nimic cu mâna.
+
 Verificare înainte de a continua:
 ```bash
 node mavis-tools/google-setup.js --check
 ```
 Îți arată exact ce scope-uri sunt acordate și care lipsesc.
+
+### 5.3 Eroarea `invalid_scope` — și de ce nu te întoarce browserul
+
+```
+Error 400: invalid_scope
+valid=[drive, gmail.modify, calendar, documents, spreadsheets, presentations]
+invalid=[photoslibrary.readwrite]
+```
+
+**Ce se întâmplă:** Google consideră un scope „invalid" dacă API-ul corespunzător
+**nu este activat** în proiectul Cloud. Deci nu e un scope greșit — e un API neactivat.
+
+**Și de ce scriptul părea blocat:** Google afișează pagina de eroare și **nu te
+redirecționează înapoi** — deci serverul local nu primește nimic și aștepta la infinit.
+Acum scriptul are timeout de 10 minute și îți spune exact ce s-a întâmplat.
+
+**Reparul 1 (recomandat, 1 minut):** activează **Photos Library API** în proiect:
+APIs & Services → Library → „Photos Library API" → Enable. Apoi:
+
+```bash
+node mavis-tools/google-setup.js --with-photos
+```
+
+**Reparul 2 (mai rapid):** renunță la Photos deocamdată — e oricum blocat din cloud:
+
+```bash
+node mavis-tools/google-setup.js
+```
+
+Default-ul cere **6 scope-uri** (fără Photos). Restul funcționează imediat.
+
+> **De ce Photos e separat:** măsurat 2026-10-21 — `photoslibrary.googleapis.com`
+> nu răspunde din sandbox-ul de cloud (0/6 conexiuni, DNS ok). De pe calculatorul
+> tău merge. Deci Photos se face de la Local oricum; nu blochăm restul pentru el.
 
 ---
 
@@ -199,7 +237,6 @@ Sau, dacă MiniMax repară blocajul de rețea, devine posibil și din cloud.
 ---
 
 ## 7. „7 zile" — de ce contează și cum îți scapă
-
 Dacă OAuth consent screen-ul e în **Testing**, refresh token-ul **moare în 7 zile**.
 Nu șaptămână — 7 zile. Apoi: `invalid_grant`, și Google Drive/Gmail devin
 muți fără nicio explicație.

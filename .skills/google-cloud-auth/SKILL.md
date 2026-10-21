@@ -34,10 +34,19 @@ Nu se scriu în repo, în chat, sau prin Jules/GitHub.
 | Simptom | Cauză | Repar |
 |---|---|---|
 | `lipsesc: GOOGLE_CLIENT_ID, ...` | cheile nu sunt în secret manager | pasul 2 |
-| `invalid_grant` | app-ul OAuth e în **Testing** → tokenul moare în 7 zile | `Publishing status → In production`, apoi reia `google-setup.js` |
+| `Error 400: invalid_scope` | API-ul unui scope **nu e activat** în proiectul Cloud (de ex. Photos Library API). Google nu te redirecționează înapoi → scriptul aștepta | activează API-ul în Cloud Console, apoi `--with-photos`; sau rulează fără Photos (default) |
+| `invalid_grant` | app-ul OAuth e în **Testing** → tokenul moare în 7 zile; **sau** client_id și refresh_token din clienti diferiți | `Publishing status → In production`, apoi reia `google-setup.js` |
 | `HTTP 403 insufficient authentication scopes` | scope lipsește | reia `google-setup.js` cu scope-ul complet |
 | `HTTP 404` la Docs/Sheets/Slides | host greșit | `docs.googleapis.com` / `sheets.googleapis.com` / `slides.googleapis.com` — **nu** `www.googleapis.com` |
 | `http=000` pe photos sau `*mcp.googleapis.com` | host blocat de egress din cloud | rulează de la Local |
+
+## Scope-uri
+
+**Implicit (6, funcționează fără API-uri suplimentare):** drive, gmail.modify, calendar,
+documents, spreadsheets, presentations.
+
+**Opțional:** `photoslibrary.readwrite` — **doar** cu `--with-photos` și **doar** dacă
+Photos Library API e activată în proiect. Altfel Google răspunde `invalid_scope`.
 
 ## Regula „7 zile"
 
