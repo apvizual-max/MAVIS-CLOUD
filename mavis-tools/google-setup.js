@@ -148,6 +148,36 @@ function openBrowser(url) {
     console.log(C.y('Google raspunde invalid_scope si NU te redirectioneaza inapoi.\n'));
   }
 
+  // PRE-FLIGHT: verificam clientul inainte sa deschidem browserul.
+  // Un refresh_token fictiv -> Google verifica clientul + secretul, apoi da invalid_grant.
+  // Daca da invalid_client, stiam ca client_id-ul sau secretul e gresit, fara sa pierdem un tur.
+  console.log(C.d('Verific clientul OAuth la Google...'));
+  try {
+    const pf = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        client_id: c.client_id, client_secret: c.client_secret,
+        refresh_token: 'PREFLIGHT_PROBE_INVALID', grant_type: 'refresh_token',
+      }).toString(),
+    });
+    const pj = await pf.json();
+    if (pj.error === 'invalid_client') {
+      console.log(C.r('\nClientul OAuth nu e acceptat de Google: ' + (pj.error_description || pj.error) + '\n'));
+      console.log(C.b('Cauze posibile:\n'));
+      console.log('  1. client_id sau client_secret copiat cu greseli (spatii, linii noi, caractere lipsa).');
+      console.log('  2. Clientul a fost sters din proiectul Cloud.');
+      console.log('  3. Clientul apartine unui proiect Google gestionat automat (gen-lang-client-*),');
+      console.log('     nu unuia creat de tine. Acel client nu are consent pentru Drive/Gmail.\n');
+      console.log(C.d('Repar: creeaza un client propriu in Google Cloud Console -> Clients ->\n'));
+      console.log(C.d('Create client -> Desktop app. Detalii in docs/GOOGLE-INTEGRARE.md\n'));
+      process.exit(1);
+    }
+    console.log(C.g('Client acceptat de Google.\n'));
+  } catch (e) {
+    console.log(C.y('Pre-flight nu a putut rula (' + e.message + '). Continui oricum.\n'));
+  }
+
   const server = http.createServer((req, res) => {
     const u = new URL(req.url, 'http://127.0.0.1');
     if (u.pathname !== '/callback') { res.writeHead(404); return res.end('not found'); }

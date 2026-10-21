@@ -40,6 +40,37 @@ function readJson(p) {
   try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return null; }
 }
 
+/**
+ * JSON tolerant la erori de copiere manuala.
+ * Caz real: fisierul avea un `"` la inceput si `}}` la final ->
+ * JSON.parse arunca, iar credentialele dispareau silent.
+ * Recuperam primul `{` ... ultimul `}` si re incercam.
+ */
+function readJsonTolerant(p) {
+  const raw = (() => { try { return fs.readFileSync(p, 'utf8'); } catch { return null; } })();
+  if (!raw) return null;
+  try { return JSON.parse(raw); } catch { /* mai jos */ }
+  // Extragem primul obiect JSON BALANSAT: de la primul '{' pana la paranteza
+  // care ii corespunde. Asta repara si gunoi ramas dupa (ex: '}}' la final).
+  const s = raw.indexOf('{');
+  if (s === -1) return null;
+  let depth = 0, inStr = false, esc = false, end = -1;
+  for (let i = s; i < raw.length; i++) {
+    const ch = raw[i];
+    if (inStr) {
+      if (esc) esc = false;
+      else if (ch === '\\') esc = true;
+      else if (ch === '"') inStr = false;
+      continue;
+    }
+    if (ch === '"') inStr = true;
+    else if (ch === '{') depth++;
+    else if (ch === '}') { depth--; if (depth === 0) { end = i; break; } }
+  }
+  if (end === -1) return null;
+  try { return JSON.parse(raw.slice(s, end + 1)); } catch { return null; }
+}
+
 function fromEnv() {
   const id = envVal('client_id');
   const sec = envVal('client_secret');
@@ -55,8 +86,8 @@ function fromEnv() {
 }
 
 function fromFiles() {
-  const c = readJson(CREDS_FILE);
-  const t = readJson(TOKENS_FILE);
+  const c = readJsonTolerant(CREDS_FILE);
+  const t = readJsonTolerant(TOKENS_FILE);
   if (!c || !t) return null;
   const inst = c.installed || c.web || c; // desktop client = installed, web = web
   const client_id = inst.client_id;
@@ -154,6 +185,7 @@ module.exports = {
   fromEnv,
   fromFiles,
   readJson,
+  readJsonTolerant,
   SCOPES,
   FULL_SCOPES,
   PHOTOS_SCOPES,
