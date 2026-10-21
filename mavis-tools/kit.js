@@ -29,32 +29,54 @@ function creds() {
 }
 
 function refresh() {
-  return new Promise((res, rej) => {
+  return (async () => {
     const c = creds();
     const body = new URLSearchParams({
       client_id: c.client_id, client_secret: c.client_secret,
       refresh_token: c.refresh_token, grant_type: 'refresh_token',
     }).toString();
+    // 2026-10-22: folosim fetch, NU https.request.
+    // Sandbox-ul de cloud are un proxy pe care https.request nu-l onoreaza
+    // ("Client network socket disconnected before secure TLS connection was
+    // established"), dar fetch merge — masurat, in cloud, pe acelasi request.
+    // Fetch exista in Node 18+; pentru Node mai vechi, caiem inapoi pe https.
+    if (typeof fetch !== 'function') return refreshLegacy(body);
+    const r = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body,
+    });
+    const d = await r.text();
+    let j; try { j = JSON.parse(d); } catch { j = { raw: d }; }
+    if (j.error) {
+      let msg = j.error + (j.error_description ? ': ' + j.error_description : '');
+      if (j.error === 'invalid_grant') {
+        // Doua cauze principale, ambele dau invalid_grant:
+        msg += '\n  Diagnostic: tokenul a expirat sau a fost revocat. Verifica doua lucruri:\n'
+          + '   1. "7 zile": OAuth consent screen in Testing => refresh tokenul expira in 7 zile.\n'
+          + '      Fix: Publishing status -> In production, apoi reia google-setup.js.\n'
+          + '   2. Client si token din clienti diferiti: GOOGLE_CLIENT_ID (env) trebuie sa fie\n'
+          + '      din ACELASI OAuth client care a generat GOOGLE_REFRESH_TOKEN.\n'
+          + '   Daca tokenul vine din ~/' + (AUTH.TOKENS_FILE.replace(process.env.HOME || '', '~')) + ', regenereaza-l\n'
+          + '   cu google-setup.js pe aceeasi masina si pune toate 3 cheile impreuna.';
+      }
+      throw new Error(msg);
+    }
+    return j.access_token;
+  })();
+}
+
+/** Fallback pentru Node < 18 (fara fetch global). */
+function refreshLegacy(body) {
+  return new Promise((res, rej) => {
     const req = https.request({
       hostname: 'oauth2.googleapis.com', path: '/token', method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': Buffer.byteLength(body) },
     }, r => {
       let d = ''; r.on('data', c => d += c); r.on('end', () => {
         let j; try { j = JSON.parse(d); } catch { j = { raw: d }; }
-        if (j.error) {
-          let msg = j.error + (j.error_description ? ': ' + j.error_description : '');
-          if (j.error === 'invalid_grant') {
-            // Doua cauze principale, ambele dau invalid_grant:
-            msg += '\n  Diagnostic: tokenul a expirat sau a fost revocat. Verifica doua lucruri:\n'
-              + '   1. "7 zile": OAuth consent screen in Testing => refresh tokenul expira in 7 zile.\n'
-              + '      Fix: Publishing status -> In production, apoi reia google-setup.js.\n'
-              + '   2. Client si token din clienti diferiti: GOOGLE_CLIENT_ID (env) trebuie sa fie\n'
-              + '      din ACELASI OAuth client care a generat GOOGLE_REFRESH_TOKEN.\n'
-              + '      Daca tokenul vine din ~/' + (AUTH.TOKENS_FILE.replace(process.env.HOME || '', '~')) + ', regenereaza-l\n'
-              + '      cu google-setup.js pe aceeasi masina si pune toate 3 cheile impreuna.';
-          }
-          rej(new Error(msg));
-        } else res(j.access_token);
+        if (j.error) rej(new Error(j.error + (j.error_description ? ': ' + j.error_description : '')));
+        else res(j.access_token);
       });
     });
     req.on('error', rej); req.write(body); req.end();
@@ -93,31 +115,29 @@ function req(method, url, data, quotaMethod) {
 }
 
 function attempt(method, url, data, t, n, qm) {
-  return new Promise((res, rej) => {
+  return (async () => {
     const body = data ? JSON.stringify(data) : null;
-    const r = https.request(url, {
+    // fetch, nu https.request — vezi refresh() pentru motiv (proxy de sandbox).
+    const resp = await fetch(url, {
       method,
       headers: {
         Authorization: 'Bearer ' + t, 'Content-Type': 'application/json',
         ...(body ? { 'Content-Length': Buffer.byteLength(body) } : {}),
       },
-    }, resp => {
-      let d = ''; resp.on('data', c => d += c); resp.on('end', () => {
-        let j; try { j = d ? JSON.parse(d) : {}; } catch { j = { raw: d }; }
-        const rl = resp.statusCode === 429 || (resp.statusCode === 403 && /rateLimit|Quota exceeded/i.test(JSON.stringify(j)));
-        if (rl && n < 5) {
-          const wait = resp.headers['retry-after'] ? +resp.headers['retry-after'] * 1000 : QUOTA_MGR.backoffMs(n);
-          return setTimeout(() => {
-            QUOTA_MGR.state.used += QUOTA_MGR.costOf(qm);
-            attempt(method, url, data, t, n + 1, qm).then(res, rej);
-          }, wait);
-        }
-        if (resp.statusCode >= 400) rej(new Error(`HTTP ${resp.statusCode}: ${JSON.stringify(j).slice(0, 300)}`));
-        else res(j);
-      });
+      body: body || undefined,
     });
-    r.on('error', rej); if (body) r.write(body); r.end();
-  });
+    const d = await resp.text();
+    let j; try { j = d ? JSON.parse(d) : {}; } catch { j = { raw: d }; }
+    const rl = resp.status === 429 || (resp.status === 403 && /rateLimit|Quota exceeded/i.test(JSON.stringify(j)));
+    if (rl && n < 5) {
+      const wait = resp.headers.get('retry-after') ? +resp.headers.get('retry-after') * 1000 : QUOTA_MGR.backoffMs(n);
+      QUOTA_MGR.state.used += QUOTA_MGR.costOf(qm);
+      await new Promise(r => setTimeout(r, wait));
+      return attempt(method, url, data, t, n + 1, qm);
+    }
+    if (resp.status >= 400) throw new Error(`HTTP ${resp.status}: ${JSON.stringify(j).slice(0, 300)}`);
+    return j;
+  })();
 }
 
 // ---------- DRIVE ----------
