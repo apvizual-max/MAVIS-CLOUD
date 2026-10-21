@@ -11,6 +11,23 @@ const https = require('https');
 const AUTH = require('./google-auth.js');
 const QUOTA_MGR = require('./quota.js');
 
+/**
+ * fetch cu retry. Masurat 2026-10-22 in sandboxul de cloud: conexiunea
+ * spre *.googleapis.com pica intermitent (~1 din 5 = connect timeout).
+ * Un retry aici salveaza o operatie intreaga; erorile HTTP NU se retriesaza
+ * (se intorc direct, ca sa putem trata 403/404 corect).
+ */
+async function fetchRetry(url, opts = {}, tries = 4) {
+  let lastErr = null;
+  for (let i = 0; i < tries; i++) {
+    if (i) await new Promise(r => setTimeout(r, 1200 * i));
+    try {
+      return await fetch(url, { ...opts, signal: AbortSignal.timeout(20000) });
+    } catch (e) { lastErr = e; }
+  }
+  throw lastErr || new Error('fetch esuat: ' + url);
+}
+
 let _tok = null, _exp = 0, _authCache = null;
 
 function creds() {
@@ -41,7 +58,7 @@ function refresh() {
     // established"), dar fetch merge — masurat, in cloud, pe acelasi request.
     // Fetch exista in Node 18+; pentru Node mai vechi, caiem inapoi pe https.
     if (typeof fetch !== 'function') return refreshLegacy(body);
-    const r = await fetch('https://oauth2.googleapis.com/token', {
+    const r = await fetchRetry('https://oauth2.googleapis.com/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body,
@@ -118,7 +135,7 @@ function attempt(method, url, data, t, n, qm) {
   return (async () => {
     const body = data ? JSON.stringify(data) : null;
     // fetch, nu https.request — vezi refresh() pentru motiv (proxy de sandbox).
-    const resp = await fetch(url, {
+    const resp = await fetchRetry(url, {
       method,
       headers: {
         Authorization: 'Bearer ' + t, 'Content-Type': 'application/json',

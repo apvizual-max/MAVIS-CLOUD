@@ -55,19 +55,45 @@ function client() {
   if (!c) { console.log(C.r('Nu am client OAuth.')); process.exit(1); }
 
   console.log(C.d('Schimb codul...'));
-  const r = await fetch('https://oauth2.googleapis.com/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      client_id: c.client_id, client_secret: c.client_secret,
-      code, grant_type: 'authorization_code', redirect_uri: REDIRECT_URI,
-    }).toString(),
-  });
-  const j = await r.json();
+  // Retei: din sandboxul de cloud, conexiunea la oauth2.googleapis.com pica
+  // intermitent (masurat 2026-10-22: ~1 din 5 requesturi = connect timeout).
+  // Un cod de autorizare e de unica folosinta, deci o pica de retea NU
+  // trebuie sa consume codul — de aici retries.
+  const payload = new URLSearchParams({
+    client_id: c.client_id, client_secret: c.client_secret,
+    code, grant_type: 'authorization_code', redirect_uri: REDIRECT_URI,
+  }).toString();
+  let j = null, lastErr = null;
+  for (let i = 0; i < 5; i++) {
+    if (i) {
+      const wait = 1500 * i;
+      console.log(C.y('  retea instabila — reiau in ' + wait + 'ms (incep ' + (i + 1) + '/5)'));
+      await new Promise(z => setTimeout(z, wait));
+    }
+    try {
+      const r = await fetch('https://oauth2.googleapis.com/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: payload,
+        signal: AbortSignal.timeout(20000),
+      });
+      j = await r.json();
+      lastErr = null;
+      break;
+    } catch (e) { lastErr = e; j = null; }
+  }
+  if (!j) {
+    console.log(C.r('\nNu am putut contacta Google: ' + (lastErr?.cause?.code || lastErr?.message)));
+    console.log(C.y('Codul de autorizare NU s-a consumat (nu a ajuns la Google). Reia cu acelasi cod.\n'));
+    process.exit(1);
+  }
   if (j.error) {
     console.log(C.r('\nSchimbul a esuat: ' + j.error + ' — ' + (j.error_description || '') + '\n'));
     if (j.error === 'redirect_uri_mismatch') {
       console.log(C.y('Portul asteptat: ' + REDIRECT_PORT + '. Reia cu GOOGLE_REDIRECT_PORT=<port> ...\n'));
+    }
+    if (j.error === 'invalid_grant') {
+      console.log(C.y('Codul a fost consumat sau a expirat. Deschide linkul de autorizare din nou, ia un cod nou.\n'));
     }
     process.exit(1);
   }
