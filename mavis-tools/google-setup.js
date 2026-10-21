@@ -69,6 +69,16 @@ async function check() {
   console.log('tokens/mavis.json:', d.files.tokens_mavis_json ? C.g('exista') : C.r('lipseste'), '—', TOKENS_FILE);
   const c = credsFromDisk() || credsFromEnv();
   console.log('client OAuth     :', c ? C.g(c.kind) : C.r('niciun client OAuth'));
+  if (c) {
+    console.log('  client_id      :', c.client_id);
+    console.log('  sursa          :', c.kind === 'env' ? 'env vars' : 'credentials.json');
+    const e = credsFromEnv();
+    const d = credsFromDisk();
+    if (e && d && e.client_id !== d.client_id) {
+      console.log(C.y('  ATENTIE: env vars si credentials.json au clienti DIFERITI.'));
+      console.log(C.y('  Fisierul castiga. Verifica daca e cel pe care il vrei.'));
+    }
+  }
   const t = AUTH.readJson(TOKENS_FILE);
   if (t && t.scope) {
     console.log('\nscope-uri deja acordate:');
@@ -93,6 +103,21 @@ function openBrowser(url) {
 
   console.log(C.b('\n=== GOOGLE SETUP ===\n'));
   let c = credsFromDisk() || credsFromEnv();
+
+  // Daca exista ambele surse si difera, spunem clar care castiga.
+  // Asta a prins un caz real: fisierul scris de mana cu o gresela de un caracter
+  // castiga in fata env vars-ului corect, iar Google raspunde "OAuth client was not found".
+  const fromDisk = credsFromDisk();
+  const fromEnv = credsFromEnv();
+  if (fromDisk && fromEnv && fromDisk.client_id !== fromEnv.client_id) {
+    console.log(C.y('\nATENTIE: ai DOUĂ clienti OAuth diferiti.\n'));
+    console.log('  credentials.json : ' + fromDisk.client_id);
+    console.log('  env vars         : ' + fromEnv.client_id);
+    console.log(C.d('  Folosesc credentials.json (fisierul are prioritate).'));
+    console.log(C.d('  Daca vrei varianta din env: redenumeste sau sterge fisierul.\n'));
+  }
+  c = fromDisk || fromEnv;
+
   if (!c) {
     console.log(C.y('Nu am gasit un client OAuth.'));
     console.log(C.d('Creeaza unul in Google Cloud Console -> APIs & Services -> Credentials -> Create Credentials -> OAuth client ID -> Application type: Desktop app.\n'));
