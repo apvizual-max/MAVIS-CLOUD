@@ -10,6 +10,9 @@ Nu conector nativ (nu există în Marketplace MiniMax).
 
 ## Cele 4 chei
 
+Accepta si forma cu sufix: `GOOGLE_CLIENT_ID_MAVIS_CLOUD`, `GOOGLE_CLIENT_SECRET_MAVIS_CLOUD`,
+`GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD`.
+
 ```
 GOOGLE_CLIENT_ID      = <client id, forma xxx.apps.googleusercontent.com>
 GOOGLE_CLIENT_SECRET  = <client secret>
@@ -77,6 +80,7 @@ Sursă: https://support.google.com/cloud/answer/15549945
 | `mavis-tools/google-auth.js` | rezolvarea credentialelor: env (cloud) sau fișiere (local) |
 | `mavis-tools/kit.js` | clientul Google — Drive, Gmail, Calendar, Docs, Sheets, Slides, Photos |
 | `mavis-tools/google-setup.js` | fluxul OAuth + generarea cheilor (rulezi la Local) |
+| `mavis-tools/google-exchange.js` | transforma un cod de autorizare in refresh_token (fara browser local) |
 | `mavis-tools/google-verify.js` | verificare read-only per serviciu (rulezi în Cloud) |
 | `mavis-tools/test-endpoints.js` | test permanent: URL-urile API-urilor sunt corecte? |
 | `docs/GOOGLE-INTEGRARE.md` | ghidul complet, cu surse |

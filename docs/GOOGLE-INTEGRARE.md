@@ -82,6 +82,7 @@ Direct pe API-urile Google, cu credentialele tale. Funcționează din cloud
 | `mavis-tools/google-auth.js` | singura sursă de adevăr pentru credentiale: env (cloud) sau fișiere (local) |
 | `mavis-tools/kit.js` | clientul Google — **refăcut**: lazy, cu Calendar/Docs/Sheets/Slides/Photos adăugate |
 | `mavis-tools/google-setup.js` | fluxul OAuth + generarea cheilor. Rulezi la Local. |
+| `mavis-tools/google-exchange.js` | schimbă un cod de autorizare în `refresh_token`, fără browser local. |
 | `mavis-tools/google-verify.js` | verificare read-only din cloud. Fiecare serviciu, cu cod HTTP real. |
 | `mavis-tools/test-endpoints.js` | test permanent: verifică că URL-urile API-urilor sunt corecte |
 

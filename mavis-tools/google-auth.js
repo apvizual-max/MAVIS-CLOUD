@@ -19,21 +19,38 @@ const HOME = process.env.HOME || '/root';
 const CREDS_FILE = path.join(HOME, '.google-mcp', 'credentials.json');
 const TOKENS_FILE = path.join(HOME, '.google-mcp', 'tokens', 'mavis.json');
 
+// POPY a adaugat cheile in secret manager cu sufixul _MAVIS_CLOUD, ca sa nu se
+// confunde cu cele locale. Acceptam ambele forme — prima care exista castiga.
+const ENV_KEYS = {
+  client_id: ['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_ID_MAVIS_CLOUD'],
+  client_secret: ['GOOGLE_CLIENT_SECRET', 'GOOGLE_CLIENT_SECRET_MAVIS_CLOUD'],
+  refresh_token: ['GOOGLE_REFRESH_TOKEN', 'GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD'],
+  email: ['GOOGLE_EMAIL'],
+  maps: ['GOOGLE_MAPS_API_KEY'],
+};
+
+function envVal(kind) {
+  for (const n of (ENV_KEYS[kind] || [])) {
+    if (process.env[n]) return { value: process.env[n], name: n };
+  }
+  return null;
+}
+
 function readJson(p) {
   try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return null; }
 }
 
 function fromEnv() {
-  const client_id = process.env.GOOGLE_CLIENT_ID;
-  const client_secret = process.env.GOOGLE_CLIENT_SECRET;
-  const refresh_token = process.env.GOOGLE_REFRESH_TOKEN;
-  if (!client_id || !client_secret || !refresh_token) return null;
+  const id = envVal('client_id');
+  const sec = envVal('client_secret');
+  const tok = envVal('refresh_token');
+  if (!id || !sec || !tok) return null;
   return {
-    client_id,
-    client_secret,
-    refresh_token,
+    client_id: id.value,
+    client_secret: sec.value,
+    refresh_token: tok.value,
     source: 'env',
-    source_detail: ['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'GOOGLE_REFRESH_TOKEN'],
+    source_detail: [id.name, sec.name, tok.name],
   };
 }
 
@@ -63,11 +80,11 @@ function resolve() {
 /** Diagnostic fara secreti. Spune EXACT ce lipseste. */
 function describe() {
   const env = {
-    GOOGLE_CLIENT_ID: !!process.env.GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET: !!process.env.GOOGLE_CLIENT_SECRET,
-    GOOGLE_REFRESH_TOKEN: !!process.env.GOOGLE_REFRESH_TOKEN,
-    GOOGLE_EMAIL: !!process.env.GOOGLE_EMAIL,
-    GOOGLE_MAPS_API_KEY: !!process.env.GOOGLE_MAPS_API_KEY,
+    client_id: envVal('client_id')?.name || null,
+    client_secret: envVal('client_secret')?.name || null,
+    refresh_token: envVal('refresh_token')?.name || null,
+    email: envVal('email')?.name || null,
+    maps_api_key: envVal('maps')?.name || null,
   };
   const files = {
     credentials_json: fs.existsSync(CREDS_FILE),
@@ -75,9 +92,9 @@ function describe() {
   };
   const r = resolve();
   const missing = [];
-  if (!env.GOOGLE_CLIENT_ID && !files.credentials_json) missing.push('GOOGLE_CLIENT_ID');
-  if (!env.GOOGLE_CLIENT_SECRET && !files.credentials_json) missing.push('GOOGLE_CLIENT_SECRET');
-  if (!env.GOOGLE_REFRESH_TOKEN && !files.tokens_mavis_json) missing.push('GOOGLE_REFRESH_TOKEN');
+  if (!env.client_id && !files.credentials_json) missing.push('GOOGLE_CLIENT_ID');
+  if (!env.client_secret && !files.credentials_json) missing.push('GOOGLE_CLIENT_SECRET');
+  if (!env.refresh_token && !files.tokens_mavis_json) missing.push('GOOGLE_REFRESH_TOKEN');
   return {
     resolved: !!r,
     source: r ? r.source : null,
