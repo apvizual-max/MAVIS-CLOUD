@@ -1,22 +1,36 @@
 # MavisCloud-Google
 
 **Document pentru încărcare în notebookul `MavisCloud-Google`**
-Pregătit de Mavis Cloud · 2026-10-12 · gata de încărcare
+Pregătit de Mavis Cloud · 2026-10-21 · stare reală, măsurată
 
-Google Workspace: Gmail, Drive, Calendar, Docs, Sheets, Presentations
+Google Workspace: Gmail, Drive, Calendar, Docs, Sheets, Slides
 
 ---
 
-**Stare** — Conectat și funcțional.
+**Stare** — ⛔ Credentialele NU sunt încă în Cloud. Setup-ul e gata, un command.
 
-**Drive** — 12/12 capabilități verificate: create, download, rename, move, trash, restore, copy, search, inspect.
+**Ce e măsurat acum** — din sandbox-ul de cloud:
+- Google Drive API → merge
+- Gmail API → merge
+- Calendar API → merge
+- Docs / Sheets / Slides → merge
+- Google Photos → ⛔ host blocat de rețea din cloud (`photoslibrary.googleapis.com`, 0/6)
+- Google Workspace MCP servers (oficiale) → ⛔ tot blocate din cloud (`*mcp.googleapis.com`, 0/6)
 
-**Structură** — /Alex Work/ cu 00-INTRARE, 01-IDENTITATE, 02-CERERI, 03-PROIECTE, 04-ARHIVA, 90-SETUP.
+**Conector nativ MiniMax pentru Google** → nu există în Marketplace
+(catalog: Hundsun, Qichacha, EverMe, PKUlaw, Office, WPS, WeCom; cache runtime: figma, github).
+
+**Cum se rezolvă** → OAuth propriu. 4 chei în secret manager:
+`GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_REFRESH_TOKEN`, `GOOGLE_EMAIL`.
+
+**Setup** → `node mavis-tools/google-setup.js` (la Local) → `node mavis-tools/google-verify.js` (în Cloud)
 
 **Regulă** — NUNCIODATĂ ștergere definitivă. Trash doar, și se poate restaura.
 
 **Identitate** — apvizual@gmail.com — singurul email pe tot sistemul.
 
+**Detalii complete** — `docs/GOOGLE-INTEGRARE.md`
+
 ---
 
-*2026-10-12 · Mavis Cloud · fișier gata de încărcare în notebookul `MavisCloud-Google`*
+*2026-10-21 · Mavis Cloud · măsurat, nu estimat*

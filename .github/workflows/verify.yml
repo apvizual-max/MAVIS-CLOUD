@@ -70,6 +70,11 @@ jobs:
           sys.exit(bad)
           PY
 
+      - name: Endpoint-uri Google validate
+        run: |
+          node mavis-tools/test-endpoints.js
+          echo "✅ endpoint-uri Google verificate (404 = URL gresit)"
+
       - name: Site-ul se construiește
         run: |
           python3 SITE/build-hub.py
