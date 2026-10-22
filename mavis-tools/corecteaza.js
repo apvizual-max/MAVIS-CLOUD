@@ -33,7 +33,7 @@ function classify(m) {
   const idToName = new Map(ALL_IDS.map(n => [byName.get(n), n]));
 
   const counts = {}; const kept = [];
-  for (const m of msgs) {
+  await Promise.all(msgs.map(async m => {
     const primary = classify(m);
     counts[primary] = (counts[primary] || 0) + 1;
     // scoate TOATE etichetele MAVIS vechi
@@ -46,7 +46,7 @@ function classify(m) {
     } else {
       await k.gmail.removeLabel(m.id, ['INBOX']);
     }
-  }
+  }));
 
   console.log('=== REZULTAT CORECTAT ===');
   for (const [c, n] of Object.entries(counts).sort((a,b)=>b[1]-a[1]))
