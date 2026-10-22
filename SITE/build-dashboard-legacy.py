@@ -25,7 +25,7 @@ DIST = os.path.join(BASE, 'dist')
 
 def sh(c, cwd=REPO, t=25):
     try:
-        return subprocess.run(c, shell=True, cwd=cwd, capture_output=True,
+        return subprocess.run(c, shell=False, cwd=cwd, capture_output=True,
                               text=True, timeout=t).stdout.strip()
     except Exception:
         return ''
@@ -42,12 +42,12 @@ def main():
     azi = datetime.date.today().isoformat()
 
     # ---- git ----
-    branch  = sh('git rev-parse --abbrev-ref HEAD') or 'main'
-    commits = sh('git rev-list --count HEAD') or '0'
-    dirty   = len(sh('git status --porcelain').splitlines())
-    last    = sh('git log --oneline -1')
-    remote  = sh('git remote get-url origin')
-    neimpush = sh('git log origin/main..HEAD --oneline') if remote else ''
+    branch  = sh(['git', 'rev-parse', '--abbrev-ref', 'HEAD']) or 'main'
+    commits = sh(['git', 'rev-list', '--count', 'HEAD']) or '0'
+    dirty   = len(sh(['git', 'status', '--porcelain']).splitlines())
+    last    = sh(['git', 'log', '--oneline', '-1'])
+    remote  = sh(['git', 'remote', 'get-url', 'origin'])
+    neimpush = sh(['git', 'log', 'origin/main..HEAD', '--oneline']) if remote else ''
 
     # ---- log ----
     log = {'intrari': [], 'nivel': {}}

@@ -26,7 +26,7 @@ CALE_REPO = {
 
 def sh(c, cwd=REPO, t=25):
     try:
-        return subprocess.run(c, shell=True, cwd=cwd, capture_output=True,
+        return subprocess.run(c, shell=False, cwd=cwd, capture_output=True,
                               text=True, timeout=t).stdout.strip()
     except Exception:
         return ''
@@ -43,11 +43,11 @@ def stare_repo(name, branch):
          'fisiere': '-', 'exista': bool(cale and os.path.isdir(cale))}
     if not d['exista']:
         return d
-    d['head']    = sh('git rev-parse HEAD', cwd=cale)[:12] or '-'
-    d['murdare'] = len(sh('git status --porcelain', cwd=cale, t=40).splitlines())
-    n = sh('git ls-files', cwd=cale, t=60)
+    d['head']    = sh(['git', 'rev-parse', 'HEAD'], cwd=cale)[:12] or '-'
+    d['murdare'] = len(sh(['git', 'status', '--porcelain'], cwd=cale, t=40).splitlines())
+    n = sh(['git', 'ls-files'], cwd=cale, t=60)
     d['fisiere'] = len(n.splitlines()) if n else 0
-    d['remote']  = sh(f'git ls-remote origin refs/heads/{branch}', cwd=cale, t=40)[:12] or 'ref absent'
+    d['remote']  = sh(['git', 'ls-remote', 'origin', f'refs/heads/{branch}'], cwd=cale, t=40)[:12] or 'ref absent'
     # Ref absent inseamna "nu stiu", NU "dezincronizat". Se pastreaza ca atare.
     d['match'] = (d['head'] == d['remote']) if d['remote'] not in ('ref absent', '-') else None
     return d
@@ -147,12 +147,12 @@ def main():
         '<tr><td colspan="7" style="color:#64748b;padding:14px 12px">'
         'repos.json lipseste sau nu poate fi citit.</td></tr>')
 
-    branch  = sh('git rev-parse --abbrev-ref HEAD') or 'main'
-    commits = sh('git rev-list --count HEAD') or '0'
-    dirty   = len(sh('git status --porcelain').splitlines())
-    last    = sh('git log --oneline -1')
-    remote  = sh('git remote get-url origin')
-    neimp = sh('git log origin/main..HEAD --oneline') or ''
+    branch  = sh(['git', 'rev-parse', '--abbrev-ref', 'HEAD']) or 'main'
+    commits = sh(['git', 'rev-list', '--count', 'HEAD']) or '0'
+    dirty   = len(sh(['git', 'status', '--porcelain']).splitlines())
+    last    = sh(['git', 'log', '--oneline', '-1'])
+    remote  = sh(['git', 'remote', 'get-url', 'origin'])
+    neimp = sh(['git', 'log', 'origin/main..HEAD', '--oneline']) or ''
 
     log = {'intrari': [], 'nivel': {}}
     lp = os.path.join(REPO, 'docs', 'LOG-SISTEM.json')
