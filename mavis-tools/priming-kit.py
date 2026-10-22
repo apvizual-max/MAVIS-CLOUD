@@ -26,9 +26,23 @@ CAPITOLE = {
 }
 
 def git_state():
+    import shlex
+    import os
     def sh(c):
-        return subprocess.run(c, shell=True, cwd=REPO, capture_output=True,
-                              text=True, timeout=20).stdout.strip()
+        try:
+            stderr_devnull = False
+            if isinstance(c, str):
+                if ' 2>/dev/null' in c:
+                    c = c.replace(' 2>/dev/null', '')
+                    stderr_devnull = True
+                cmd = shlex.split(c, posix=(os.name == 'posix'))
+            else:
+                cmd = c
+            stderr = subprocess.DEVNULL if stderr_devnull else None
+            return subprocess.run(cmd, shell=False, cwd=REPO, capture_output=True,
+                                  text=True, timeout=20, stderr=stderr).stdout.strip()
+        except Exception:
+            return ''
     return sh('git rev-list --count HEAD'), sh('git log --oneline -1'), sh('git remote get-url origin')
 
 def scrie(folder, titlu, subiect, notebook, commits, last, remote):

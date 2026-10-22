@@ -38,34 +38,10 @@ Design:  20+ ani · Art direction 15 · AI 4 · foto/video/UX câte 5
 - împingi pe `main` fără aprobare
 - tot ce iese ajunge în repo
 
-## 6.1 Task Google — daca POPY cere consimtamant
-
-Se poate face **integral la Local**, fara ca un secret sa treaca prin chat:
-
-```bash
-cd <repo> && git pull
-node mavis-tools/google-local.js
-```
-
-- deschide browserul pe calculatorul lui POPY
-- el apasa Allow
-- scriptul prinde codul, face schimbul, scrie
-  `~/.google-mcp/tokens/mavis.json` si `~/.google-mcp/cloud-secret.env`
-- **nu trimite tokenul in chat** — il pune POPY direct in secret manager
-  (Mavis Cloud → Environmental Information → Secrets), campul
-  `GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD`
-
-Apoi, din Cloud: `node mavis-tools/google-verify.js` → verdict real per serviciu.
-
-**De ce nu se face prin chat:** platforma mascheaza valorile din secret manager in
-mesaje. Un link de autorizare trimis prin chat ajunge in browser cu
-`{{ARCHON_SECRET:...}}` in loc de client_id real → *Error 401: invalid_client*.
-Client ID e identificator public → sta in repo, in `mavis-tools/google-client.json`.
-
 ## 7. Prima sarcină la începutul sesiunii
 
 ```
-git clone https://github.com/apvizual-max/MAVIS-CLOUD.git
+git clone https://github.com/apvizual-max/MAVIS-CLOUD
 cd MAVIS-CLOUD
 cat AGENTS.md
 ls 18-GOOGLE/

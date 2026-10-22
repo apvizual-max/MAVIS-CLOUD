@@ -14,7 +14,9 @@ API  = 'http://localhost:8080'   # se inlocuieste mai jos daca e nevoie
 
 def apeleaza_api(comanda):
     """Ruleaza mavis CLI ca sa ia mesajele de sesiune."""
-    r = subprocess.run(['mavis', command], capture_output=True, text=True, timeout=90)
+    import shlex
+    import os
+    r = subprocess.run(['mavis'] + shlex.split(comanda, posix=(os.name == 'posix')), capture_output=True, text=True, timeout=90)
     return r.stdout
 
 def main():

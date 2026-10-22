@@ -41,7 +41,7 @@ Design:  20+ ani · Art direction 15 · AI 4 · foto/video/UX câte 5
 ## 7. Prima sarcină la începutul sesiunii
 
 ```
-git clone https://github.com/apvizual-max/MAVIS-CLOUD.git
+git clone https://github.com/apvizual-max/MAVIS-CLOUD
 cd MAVIS-CLOUD
 cat AGENTS.md
 ls 07-SITEURI-NIVEL1/

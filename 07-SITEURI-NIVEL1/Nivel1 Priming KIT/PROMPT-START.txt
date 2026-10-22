@@ -3,11 +3,11 @@ PROMPT DE START — trimite asta într-o sesiție nouă, pe capitolul Site-uri N
 ────────────────────────────────────────────────────────────
 Continui proiectul MAVIS-CLOUD, capitolul Site-uri Nivel 1.
 
-Repo: https://github.com/apvizual-max/MAVIS-CLOUD.git
-Ultimul commit cunoscut: eb323a2 Prima sortare completa terminata: 19.070 mesaje etichetate
+Repo: https://github.com/apvizual-max/MAVIS-CLOUD
+Ultimul commit cunoscut: 97ecf49 Google: local flow afiseaza tokenul in formatul secret manager + arhitectura sistemului in DEFINITIE-OPERATIONALA
 
 Fă asta, în ordine:
-1. git clone https://github.com/apvizual-max/MAVIS-CLOUD.git && cd MAVIS-CLOUD
+1. git clone https://github.com/apvizual-max/MAVIS-CLOUD && cd MAVIS-CLOUD
 2. Citește AGENTS.md
 3. Citește folderul 07-SITEURI-NIVEL1/ și tot 07-SITEURI-NIVEL1/*Priming*/
 4. Rezumă în 5 rânduri: unde suntem, ce e gata, ce lipsește, ce e blocat

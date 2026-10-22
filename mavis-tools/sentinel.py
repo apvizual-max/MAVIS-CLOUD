@@ -13,15 +13,26 @@ DIR   = os.path.join(REPO, 'docs', 'SENTINEL')
 GH    = os.path.join(REPO, 'mavis-tools', 'bin', 'gh')
 TODAY = datetime.date.today().isoformat()
 
+import shlex
+import os
 def sh(c, cwd=REPO, t=25):
     try:
-        return subprocess.run(c, shell=True, cwd=cwd, capture_output=True,
-                              text=True, timeout=t).stdout.strip()
+        stderr_devnull = False
+        if isinstance(c, str):
+            if ' 2>/dev/null' in c:
+                c = c.replace(' 2>/dev/null', '')
+                stderr_devnull = True
+            cmd = shlex.split(c, posix=(os.name == 'posix'))
+        else:
+            cmd = c
+        stderr = subprocess.DEVNULL if stderr_devnull else None
+        return subprocess.run(cmd, shell=False, cwd=cwd, capture_output=True,
+                              text=True, timeout=t, stderr=stderr).stdout.strip()
     except Exception:
         return ''
 
 def git(*a):
-    return sh('git ' + ' '.join(a))
+    return sh(['git'] + list(a))
 
 def count_paginiq(q):
     """Numara prin paginare reala - resultSizeEstimate e plafonat."""

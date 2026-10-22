@@ -1,7 +1,7 @@
 ================================================================================
 RAPORT DE STARE PROIECT: MAVIS-CLOUD
-DATA & ORA: 2026-10-11 20:48 | INSTANȚĂ: CLOUD
-REPOSITORY: https://github.com/apvizual-max/MAVIS-CLOUD.git
+DATA & ORA: 2026-10-22 02:43 | INSTANȚĂ: CLOUD
+REPOSITORY: https://github.com/apvizual-max/MAVIS-CLOUD
 ================================================================================
 
 > Fotografie a stării. **Nu se modifică după.** Generat de `mavis-tools/sentinel.py`.
@@ -18,9 +18,9 @@ Faza: **Predare spre Local.** Site-ul trece la agentul local; eu rămân scout.
 
 ## 4. STATUS GIT & SINCRONIZARE
 
-- Branch: **main**
+- Branch: **jules-1444065520982484942-6baef044**
 - Commituri locale neîmpinse: 0 (CLOUD împinge direct — nu se aplică pragul)
-- Ultimul commit remote: `046287b REGULA GENERALA: totul in repo, automat, fara aprobari`
+- Ultimul commit remote: `97ecf49 Google: local flow afiseaza tokenul in formatul secret manager + arhitectura sistemului in DEFINITIE-OPERATIONALA`
 
 ## 5. CIRCUIT BREAKERS & BLOCAJE
 
@@ -31,10 +31,10 @@ Faza: **Predare spre Local.** Site-ul trece la agentul local; eu rămân scout.
 
 ## 6. Stare în cinci rânduri
 
-Repo-ul Mavis e pe GitHub, totul pe `main`, workflow-ul de verificare e **success**.
-Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 19 skill-uri proprii și
-14 importate. Site-ul de CV de Nivel 1 e funcțional pe 1 rol.
-**Următorul pas: celelalte 8 site-uri de Nivel 1.**
+Repo-ul Mavis e pe GitHub, totul pe `jules-1444065520982484942-6baef044`, workflow-ul de verificare e **necunoscut**.
+Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 22 skill-uri proprii și
+14 importate. Site-ul de CV de Nivel 1 e funcțional pe 0 rol.
+**Următorul pas: celelalte 9 site-uri de Nivel 1.**
 
 ## 2. Numerele — contorizate, nu estimate
 
@@ -52,34 +52,34 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 19 skill-uri proprii și
 
 | | |
 |---|---|
-| `in:inbox` (neatins) | **4000** |
-| `in:trash` | **0** |
+| `in:inbox` (neatins) | **necontorizat** |
+| `in:trash` | **necontorizat** |
 
 ### Repo
 | | |
 |---|---|
-| Remote | `https://github.com/apvizual-max/MAVIS-CLOUD.git` |
-| Ramură | `main` |
-| Commit-uri | **25** |
+| Remote | `https://github.com/apvizual-max/MAVIS-CLOUD` |
+| Ramură | `jules-1444065520982484942-6baef044` |
+| Commit-uri | **1** |
 | Fișiere necomitate | **6** |
-| Ultimul commit | `046287b REGULA GENERALA: totul in repo, automat, fara aprobari` |
-| Workflow | **success** |
+| Ultimul commit | `97ecf49 Google: local flow afiseaza tokenul in formatul secret manager + arhitectura sistemului in DEFINITIE-OPERATIONALA` |
+| Workflow | **necunoscut** |
 
 ### Proiect
 | | |
 |---|---|
-| Skill-uri proprii | **19** |
+| Skill-uri proprii | **22** |
 | Skill-uri importate (vendor) | **14** |
-| Site-uri de CV | **1** — graphic-designer |
-| Șabloane CV generice | **9** |
+| Site-uri de CV | **0** — niciunul |
+| Șabloane CV generice | **10** |
 | CV-uri Word | **7** |
 
 ## 3. Gata, cu dovezi
 
 | Ce | Cum s-a verificat |
 |---|---|
-| Repo pe GitHub | `gh api repos/apvizual-max/Mavis` — 25 commit-uri pe `main` |
-| Workflow verde | `gh run list` → **success** la ultimul push |
+| Repo pe GitHub | `gh api repos/apvizual-max/Mavis` — 1 commit-uri pe `jules-1444065520982484942-6baef044` |
+| Workflow verde | `gh run list` → **necunoscut** la ultimul push |
 | Fără secrete | verificarea rulează la fiecare push, blochează build-ul |
 | 22/22 fișiere JS valide | `node --check` pe fiecare, plus în workflow |
 | Șabloane generice | `grep` nu găsește niciun nume de firmă |
@@ -89,12 +89,12 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 19 skill-uri proprii și
 
 ## 4. Ne făcut, în ordine
 
-1. Site-urile de Nivel 1 rămase (8 roluri) — 7 JSON-uri, același `build.py`
+1. Site-urile de Nivel 1 rămase (9 roluri) — 7 JSON-uri, același `build.py`
 2. CV-urile Word regenerate din șabloane, cu date generice
 3. `MAVIS/Actiune - de raspuns` — regulă scrisă, rulează acum
 4. `MAVIS/Facturi si conturi` — regulă scrisă, rulează acum
 5. `MAVIS/AI si comunitati` — fereastra 1–3 ani era greșită, reparată
-6. 4000 thread-uri rămase în inbox
+6. necontorizat thread-uri rămase în inbox
 7. NotebookLM
 8. LinkedIn — pregătit, trimis de POPY
 9. Nivel 2: B2B / freelancing
@@ -144,4 +144,4 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există 19 skill-uri proprii și
 
 ---
 
-*Raport generat 2026-10-11 · 25 commit-uri · 33 skill-uri*
+*Raport generat 2026-10-22 · 1 commit-uri · 36 skill-uri*
