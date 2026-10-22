@@ -184,9 +184,10 @@ def main():
     for s in sorted(own):
         n = os.path.basename(s); f = os.path.join(s, 'SKILL.md'); desc = ''
         if os.path.exists(f):
-            for ln in open(f, encoding='utf-8'):
-                if ln.startswith('description:'):
-                    desc = ln.split(':', 1)[1].strip()[:100]; break
+            with open(f, encoding='utf-8') as fd:
+                for ln in fd:
+                    if ln.startswith('description:'):
+                        desc = ln.split(':', 1)[1].strip()[:100]; break
         srows += '<tr><td class="mono">%s</td><td>%s</td><td><span class="tag %s">%s</span></td></tr>' % (
             n, esc(desc), 'v' if n in vn else '', 'vendor' if n in vn else 'propriu')
 
