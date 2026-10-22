@@ -173,12 +173,15 @@ function req(method, url, data, quotaMethod) {
 
 function attempt(method, url, data, t, n, qm) {
   return (async () => {
-    const body = data ? JSON.stringify(data) : null;
+    // RAW: bypass pentru endpoint-uri multipart (Drive upload). {__raw, __contentType}.
+    const isRaw = !!(data && data.__raw !== undefined);
+    const body = data ? (isRaw ? data.__raw : JSON.stringify(data)) : null;
+    const ctype = isRaw ? data.__contentType : 'application/json';
     // fetch, nu https.request — vezi refresh() pentru motiv (proxy de sandbox).
     const resp = await fetchRetry(url, {
       method,
       headers: {
-        Authorization: 'Bearer ' + t, 'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + t, 'Content-Type': ctype,
         ...(body ? { 'Content-Length': Buffer.byteLength(body) } : {}),
       },
       body: body || undefined,
@@ -203,9 +206,24 @@ const drive = {
   get: (id) => req('GET', `https://www.googleapis.com/drive/v3/files/${id}?fields=id,name,mimeType,parents,modifiedTime,size,description`),
   mkdir: (name, parent = 'root') => req('POST', 'https://www.googleapis.com/drive/v3/files',
     { name, mimeType: 'application/vnd.google-apps.folder', parents: [parent] }),
-  upload: (name, content, mime = 'text/plain', parent = 'root') => req('POST',
-    'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart',
-    { metadata: { name, parents: [parent] }, file: { mimeType: mime, content } }),
+  // Upload real: endpointul multipart cere corp multipart/related CU doua parti
+  // (metadata JSON + continut). Un corp JSON obisnuit este acceptat de API dar
+  // metadata e IGNORATA -> fisierul ramane "Untitled", fara parinte, cu mimeType gresit.
+  upload: (name, content, mime = 'text/plain', parent = 'root') => {
+    const boundary = 'mavis-' + Date.now().toString(16) + '-' + Math.random().toString(16).slice(2);
+    const meta = JSON.stringify({ name, parents: [parent] });
+    const raw =
+      `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${meta}\r\n` +
+      `--${boundary}\r\nContent-Type: ${mime}\r\n\r\n${content}\r\n` +
+      `--${boundary}--`;
+    return req('POST',
+      'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,mimeType,size,parents,webViewLink',
+      { __raw: raw, __contentType: `multipart/related; boundary=${boundary}` });
+  },
+  // Actualizeaza continutul unui fisier existent, fara sa creeze altul.
+  replaceContent: (id, content, mime = 'text/markdown') => req('PATCH',
+    `https://www.googleapis.com/upload/drive/v3/files/${id}?uploadType=media&fields=id,name,mimeType,size,parents`,
+    { __raw: content, __contentType: mime }),
   move: (id, newParent, oldParent) => req('PATCH', `https://www.googleapis.com/drive/v3/files/${id}?addParents=${newParent}&removeParents=${oldParent}`, {}),
   rename: (id, name) => req('PATCH', `https://www.googleapis.com/drive/v3/files/${id}`, { name }),
   trashed: (id, val) => req('PATCH', `https://www.googleapis.com/drive/v3/files/${id}`, { trashed: val }), // false = recuperare
