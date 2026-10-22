@@ -1,7 +1,7 @@
 // Corectie: reclasifica tot inbox-ul cu regex corect, o singura eticheta primara
 const k = require('./kit.js');
 const fs = require('fs');
-const msgs = JSON.parse(fs.readFileSync('/workspace/mavis-tools/inbox.json'));
+function getMsgs() { try { return JSON.parse(fs.readFileSync('/workspace/mavis-tools/inbox.json')); } catch (e) { return []; } }
 
 const LABELS = {
   joburi: 'MAVIS/Joburi', ai: 'MAVIS/AI si comunitati', social: 'MAVIS/Social',
@@ -18,7 +18,7 @@ const SOCIAL= /\b(linkedin|skool|facebook|instagram|twitter|discord|pinterest|ti
 function classify(m) {
   const f = m.from || '', s = m.subj || '';
   if (/(happyadv|iqads)/i.test(f)) return s.includes('Follow-up') || s.includes('aplicare') ? 'actiune' : 'personal';
-  if (/\b(factur|facturi|facture|invoice)\b/i.test(s)) return 'facturi';
+  if (/(factura|factur|facturi|facture|invoice)/i.test(s)) return 'facturi';
   if (FIN.test(f) || FIN.test(s)) return 'finante';
   if (JOB.test(f) || JOB.test(s)) return 'joburi';
   if (SOCIAL.test(f)) return 'social';
@@ -26,6 +26,7 @@ function classify(m) {
   return 'news';
 }
 
+if (require.main === module) {
 (async () => {
   const existing = await k.gmail.labels();
   const byName = new Map(existing.labels.map(l => [l.name, l.id]));
@@ -33,6 +34,7 @@ function classify(m) {
   const idToName = new Map(ALL_IDS.map(n => [byName.get(n), n]));
 
   const counts = {}; const kept = [];
+  const msgs = getMsgs();
   for (const m of msgs) {
     const primary = classify(m);
     counts[primary] = (counts[primary] || 0) + 1;
@@ -60,3 +62,6 @@ function classify(m) {
   const unread = await k.gmail.list('is:unread', 1);
   console.log('VERIFICARE -> necitite ramase:', (unread.resultSizeEstimate || (unread.messages||[]).length));
 })().catch(e => console.error('E:', e.message));
+}
+
+module.exports = { classify };
