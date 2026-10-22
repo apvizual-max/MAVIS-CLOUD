@@ -27,9 +27,9 @@ CAPITOLE = {
 
 def git_state():
     def sh(c):
-        return subprocess.run(c, shell=True, cwd=REPO, capture_output=True,
+        return subprocess.run(c, cwd=REPO, capture_output=True,
                               text=True, timeout=20).stdout.strip()
-    return sh('git rev-list --count HEAD'), sh('git log --oneline -1'), sh('git remote get-url origin')
+    return sh(['git', 'rev-list', '--count', 'HEAD']), sh(['git', 'log', '--oneline', '-1']), sh(['git', 'remote', 'get-url', 'origin'])
 
 def scrie(folder, titlu, subiect, notebook, commits, last, remote):
     d = os.path.join(REPO, folder, folder.split('-')[-1] + ' Priming KIT'
