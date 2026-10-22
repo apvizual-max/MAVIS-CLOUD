@@ -90,3 +90,69 @@ Version control e git: commit pe main, push, și istoricul rămâne.
 
 Am făcut exact greșit aceasta: am creat 3 site-uri în loc să fac 1 și să-l
 actualizez. **Nu se mai repetă.**
+## AUDIT VIZIBILITATE — înainte de a schimba vizibilitatea unui repo
+
+**Regula:** `git clone --depth 1` ascunde exact ce cauți. Auditul se face pe
+**istoric complet + toate ramurile**.
+
+```bash
+git clone https://x-access-token:$GITHUB_TOKEN@github.com/OWNER/REPO.git
+cd REPO
+git fetch --unshallow
+git fetch origin "+refs/heads/*:refs/remotes/origin/*"
+git log --all -p > /tmp/audit.patch     # TOT istoricul, TOATE ramurile
+wc -c /tmp/audit.patch
+```
+
+Apoi, pe `/tmp/audit.patch`, caută **valori**, nu pattern-uri de detectie:
+`ghp_[A-Za-z0-9]{36}` · `1//[A-Za-z0-9_-]{30,}` · `GOCSPX-[A-Za-z0-9_-]{20,}` ·
+`AIza[0-9A-Za-z_-]{30,}` · `AKIA[0-9A-Z]{16}` · `glpat-` · `xox[baprs]-` ·
+chei private.
+
+**Fals pozitive frecvente** (verificate 2026-10-22, nu presupune):
+- `ghp_xxxx…`, `GOCSPX-aaaa…`, `xoxb-your-slack-bot-token` → placeholder-uri
+- `AKIAIOSFODNN7EXAMPLE` → cheia exemplu oficială AWS
+- șiruri de tip `1//…` găsite **în interiorul unui JPEG base64** → coincidență de octeți
+- fixture-urile din auto-testele detectorului de secrete al vaultului
+- `+@app.get`, `+@app.post` → decoratori de cod, nu e-mailuri
+
+**Verifică dacă o valoare e vie**, nu doar prezentă:
+- refresh token: `POST https://oauth2.googleapis.com/token` cu `grant_type=refresh_token`
+  → `invalid_grant: Malformed auth code` = tokenul nu e al clientului ăsta
+  → `invalid_grant: Token has been expired or revoked` = token real, mort
+- cheie API: `GET https://www.googleapis.com/discovery/v1/apis?key=KEY`
+  → **400 „API key not valid"** = moartă · **403** = **vie**, cu restricții
+- revocare: `POST https://oauth2.googleapis.com/revoke` cu `token=...` (fără credențiale!)
+
+**Principiul de decizie:**
+| Conținut | Vizibilitate |
+|---|---|
+| config, motor, docs, skill-uri, contracte | **public** |
+| secrete | revocate + rotite, niciodată în repo |
+| arhive, transcripte, media, date de terți | **privat** |
+
+Auditul complet al celor 10 repo-uri: `docs/AUDIT-VIZIBILITATE-REPO-URI.md`.
+
+## VALORI DE SECRETE — nu le scrie NICIODATA într-un repo public
+
+**Măsurat 2026-10-22:** am scris două refresh token-uri și o cheie API **cu
+valoarea completă** într-un document dintr-un repo public. **GitHub secret
+scanning a refuzat push-ul** — corect, și exact pentru motivul care contează:
+repo-ul e public, deci valoarea e expusă.
+
+**Regula:**
+- În documente (mai ales publice) scrii **prefix + referință**:
+  `AIzaSyAy…(restul în secret manager: NUME_SECRET)`
+- **Valoarea completă stă în secret manager** (`secret create --name=... --value=...`),
+  de unde o iai din panou.
+- **Valoare revocată** tot nu se scrie complet: poate fi încă validă pentru alt
+  client, și istoricul e public.
+- Fals pozitivele rămân false pozitive — vezi tabelul de mai sus.
+
+**Dacă ai scris deja o valoare reală într-un commit NEîmpins:**
+`git reset --soft HEAD~1` → redactează → `git add -A` → commit nou. Nu ajunge
+istoric — nu a fost împins, deci nu există de șters.
+
+**Dacă ai împins deja:** trebuie rescris istoricul (filter-repo / BFG) **și**
+valoarea trebuie rotată/revocată. Rotirea e obligatorie oricum — rescrierea
+istoricului nu anulează o valoare deja clonată.

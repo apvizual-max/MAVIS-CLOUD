@@ -96,3 +96,22 @@ git push origin main
 `http.sslVerify=false` e setat global: sandboxul are un proxy care curl îl onorează,
 dar git nu. Certificatul real e valid (openssl: `Verify return code: 0`).
 `gh` stă în `mavis-tools/bin/gh`, nu în PATH — îl cheami cu calea plină.
+
+## HARTA VIZIBILITATE — starea repo-urilor
+
+| Repo | Stare | Ce e |
+|---|---|---|
+| `MAVIS-CLOUD` | **public** | proceduri, skill-uri, unelte, bridge Local↔Cloud |
+| `pkms-vault-automation` | **public** | motorul vaultului, indexurile, docurile AI-Kit |
+| `hermes-doctor` | **public** | unelta de diagnostic |
+| `MAVIS-OPTIMUS-CI` | **public** | integrarea continuă |
+| `OPTIMUS-Backbone` | **public** | backbonele sistemului |
+| `Optimus-Mavis-Skills` | **public** | skill-urile vii |
+| `hermes-local-backup` | **public** | config Sentinel, `SOUL.md`, jurnal operațional, cron, MCP |
+| `hermes-agent-temp` | **privat** | oglindă proiect OSS + istoric cu secrete |
+| `Qwen-Ecosystem-Dashboard` | **privat** | back-up de sesiune, transcripte, media |
+| `SENTINEL_PRIME` | **privat** | corpus de conversații, frame-uri video |
+
+Audit: `docs/AUDIT-VIZIBILITATE-REPO-URI.md`.
+**Regula:** înainte de a schimba vizibilitatea → audit complet (istoric +
+toate ramurile). Vezi skill-ul de git, secțiunea „AUDIT VIZIBILITATE".

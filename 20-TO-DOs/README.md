@@ -60,9 +60,14 @@ recomandarea mea. Nu o întrebare goală.
 | # | Data | Task | Tip | Stare |
 |---|---|---|---|---|
 | 01 | 2026-10-22 | [Publish la aplicația OAuth](2026-10-22-PUBLISH-APP-OAUTH.md) | configurări | ⏳ așteaptă pe tine |
-| 02 | 2026-10-22 | [pkms-vault-automation: public sau privat](2026-10-22-PKMS-VAULT-REPO-VIZIBILITATE.md) | aprobări | ⏳ așteaptă pe tine |
+| 02 | 2026-10-22 | [pkms-vault-automation: public sau privat](2026-10-22-PKMS-VAULT-REPO-VIZIBILITATE.md) | aprobări | ✅ **DECIZIE: PUBLIC** — rezolvat 2026-10-22 |
 | 03 | 2026-10-22 | [Ce workflow-uri vrei pe Gmail și pe Drive](2026-10-22-WORKFLOW-URI-DIRECTIE.md) | strategie | ⏳ așteaptă pe tine |
 | 04 | 2026-10-21 | [Profilul tău ca designer (blochează CV-urile)](2026-10-21-PROFIL-DESIGNER.md) | strategie | ⏳ așteaptă pe tine |
+| 05 | 2026-10-22 | [Rotește cheia API Google expusă](2026-10-22-ROTIRE-API-KEY-GOOGLE.md) | configurări | ⏳ așteaptă pe tine |
+
+**Rezolvat 2026-10-22:** auditul complet de vizibilitate al celor 10 repo-uri
+→ `docs/AUDIT-VIZIBILITATE-REPO-URI.md`. 7 publice, 3 private, 2 refresh token-uri
+revocate. Singura acțiune rămasă: rotația cheii API din TO DO 05.
 
 **Regula de mișcare:** un TO DO se închide doar cu măsurătoare, nu cu intenție.
 
