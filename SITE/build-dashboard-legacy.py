@@ -23,6 +23,11 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(BASE)
 DIST = os.path.join(BASE, 'dist')
 
+ICON = {'debug': '·', 'info': '›', 'atentie': '!', 'eroare': '✕', 'critic': '■'}
+CUL  = {'debug': '#64748b', 'info': '#14b8a6', 'atentie': '#fbbf24',
+        'eroare': '#f87171', 'critic': '#ef4444'}
+
+
 def sh(c, cwd=REPO, t=25):
     try:
         return subprocess.run(c, shell=True, cwd=cwd, capture_output=True,
@@ -30,26 +35,22 @@ def sh(c, cwd=REPO, t=25):
     except Exception:
         return ''
 
+
 def esc(s):
-    return (str(s).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'))
+    return str(s).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
-ICON = {'debug': '·', 'info': '›', 'atentie': '!', 'eroare': '✕', 'critic': '■'}
-CUL  = {'debug': '#64748b', 'info': '#14b8a6', 'atentie': '#fbbf24',
-        'eroare': '#f87171', 'critic': '#ef4444'}
 
-def main():
-    os.makedirs(DIST, exist_ok=True)
-    azi = datetime.date.today().isoformat()
-
-    # ---- git ----
-    branch  = sh('git rev-parse --abbrev-ref HEAD') or 'main'
+def get_git_info():
+    branch = sh('git rev-parse --abbrev-ref HEAD') or 'main'
     commits = sh('git rev-list --count HEAD') or '0'
-    dirty   = len(sh('git status --porcelain').splitlines())
-    last    = sh('git log --oneline -1')
-    remote  = sh('git remote get-url origin')
+    dirty = len(sh('git status --porcelain').splitlines())
+    last = sh('git log --oneline -1')
+    remote = sh('git remote get-url origin')
     neimpush = sh('git log origin/main..HEAD --oneline') if remote else ''
+    return branch, commits, dirty, last, remote, neimpush
 
-    # ---- log ----
+
+def get_log_and_errors():
     log = {'intrari': [], 'nivel': {}}
     lp = os.path.join(REPO, 'docs', 'LOG-SISTEM.json')
     if os.path.exists(lp):
@@ -57,67 +58,99 @@ def main():
             log = json.load(open(lp, encoding='utf-8'))
         except Exception:
             pass
+
     intr = log.get('intrari', [])[:150]
     erori = [i for i in intr if i['nivel'] in ('eroare', 'critic')]
-    atn   = [i for i in intr if i['nivel'] == 'atentie']
+    atn = [i for i in intr if i['nivel'] == 'atentie']
 
     log_rows = ''
     for i in intr:
         c = CUL.get(i['nivel'], '#94a3b8')
         log_rows += (
-        '<tr><td class="mono" style="white-space:nowrap;color:#64748b">%s</td>'
-        '<td><span class="lv" style="color:%s;background:%s18;border:1px solid %s33">%s %s</span></td>'
-        '<td>%s</td><td style="color:#94a3b8">%s</td></tr>' % (
-            esc(i['t']), c, c, c, ICON.get(i['nivel'], '›'), esc(i['nivel']),
-            esc(i['msg']), esc(i.get('rol', '-'))))
+            '<tr><td class="mono" style="white-space:nowrap;color:#64748b">%s</td>'
+            '<td><span class="lv" style="color:%s;background:%s18;border:1px solid %s33">%s %s</span></td>'
+            '<td>%s</td><td style="color:#94a3b8">%s</td></tr>' % (
+                esc(i['t']), c, c, c, ICON.get(i['nivel'], '›'), esc(i['nivel']),
+                esc(i['msg']), esc(i.get('rol', '-'))
+            )
+        )
 
-    # ---- erori ----
     if erori:
         err_rows = ''.join(
             '<tr><td class="mono" style="color:#64748b;white-space:nowrap">%s</td>'
             '<td><span class="lv" style="color:#f87171;background:#f8717118;border:1px solid #f8717133">%s</span></td>'
             '<td><b>%s</b><div style="color:#94a3b8;font-size:12.5px;margin-top:3px">%s</div></td></tr>'
             % (esc(e['t']), esc(e['nivel']), esc(e['msg']), esc(e.get('detaliu', '')))
-            for e in erori)
+            for e in erori
+        )
         prompt = ('Repo apvizual-max/MAVIS-CLOUD. Citeste docs/LOG-SISTEM.json, filtreaza '
-                'nivel=eroare sau critic, repara fiecare, verifica, apoi scrie in log.')
+                  'nivel=eroare sau critic, repara fiecare, verifica, apoi scrie in log.')
     else:
         err_rows = '<tr><td colspan="3" style="color:#64748b;padding:14px 12px">Nicio eroare.</td></tr>'
         prompt = 'Nicio eroare de rezolvat.'
 
-    # ---- skill-uri ----
-    own  = sorted(d for d in glob.glob(os.path.join(REPO, '.skills', '*')) if os.path.isdir(d))
+    niveluri = ' · '.join('%s %d' % (k, v) for k, v in log.get('nivel', {}).items()) or 'gol'
+
+    return intr, erori, atn, log_rows, err_rows, prompt, niveluri
+
+
+def get_skills_info():
+    own = sorted(d for d in glob.glob(os.path.join(REPO, '.skills', '*')) if os.path.isdir(d))
     vend = sorted(d for d in glob.glob(os.path.join(REPO, 'vendor', '*')) if os.path.isdir(d))
-    vn   = [os.path.basename(v) for v in vend]
+    vn = [os.path.basename(v) for v in vend]
     srows = ''
     for s in sorted(own):
-        n = os.path.basename(s); f = os.path.join(s, 'SKILL.md'); desc = ''
+        n = os.path.basename(s)
+        f = os.path.join(s, 'SKILL.md')
+        desc = ''
         if os.path.exists(f):
-            for ln in open(f, encoding='utf-8'):
-                if ln.startswith('description:'):
-                    desc = ln.split(':', 1)[1].strip()[:110]; break
+            with open(f, encoding='utf-8') as file:
+                for ln in file:
+                    if ln.startswith('description:'):
+                        desc = ln.split(':', 1)[1].strip()[:110]
+                        break
         src = 'vendor' if n in vn else 'propriu'
         srows += '<tr><td class="mono">%s</td><td>%s</td><td><span class="tag %s">%s</span></td></tr>' % (
             n, esc(desc), 'v' if src == 'vendor' else '', src)
 
-    # ---- site-uri ----
+    return own, vend, srows
+
+
+def get_sites_info():
     sites = sorted(os.path.basename(p).replace('.index.html', '')
-                for p in glob.glob(os.path.join(DIST, '*.index.html')))
+                   for p in glob.glob(os.path.join(DIST, '*.index.html')))
     site_rows = ''.join(
         '<tr><td><a href="%s.index.html">%s</a></td>'
         '<td><span class="tag ok">gata</span></td><td>deschide</td></tr>' % (s, s) for s in sites)
+    return sites, site_rows
 
-    # ---- documente ----
+
+def get_docs_info():
     docs = sorted(os.path.basename(p) for p in glob.glob(os.path.join(REPO, 'docs', '*.md')))
     doc_rows = ''.join('<tr><td><a href="../docs/%s">%s</a></td></tr>' % (esc(d), esc(d)) for d in docs)
+    return docs, doc_rows
 
+
+def get_templates_info():
     sab = sorted(os.path.basename(p) for p in glob.glob(os.path.join(REPO, 'ALEX-KIT', 'SABLOANE', '*.md')))
     cvs = sorted(os.path.basename(p) for p in glob.glob(os.path.join(REPO, 'ALEX-KIT', 'CV-URI', '*.docx')))
     sab_rows = ''.join('<li class="mono">%s</li>' % esc(s) for s in sab)
-    cv_rows  = ''.join('<li class="mono">%s</li>' % esc(c) for c in cvs)
+    cv_rows = ''.join('<li class="mono">%s</li>' % esc(c) for c in cvs)
+    return sab, cvs, sab_rows, cv_rows
+
+
+def main():
+    os.makedirs(DIST, exist_ok=True)
+    azi = datetime.date.today().isoformat()
+
+    branch, commits, dirty, last, remote, neimpush = get_git_info()
+    intr, erori, atn, log_rows, err_rows, prompt, niveluri = get_log_and_errors()
+    own, vend, srows = get_skills_info()
+    sites, site_rows = get_sites_info()
+    docs, doc_rows = get_docs_info()
+    sab, cvs, sab_rows, cv_rows = get_templates_info()
 
     n = len(own) + len(vend)
-    niveluri = ' · '.join('%s %d' % (k, v) for k, v in log.get('nivel', {}).items()) or 'gol'
 
     html = f"""<!DOCTYPE html><html lang="ro"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
