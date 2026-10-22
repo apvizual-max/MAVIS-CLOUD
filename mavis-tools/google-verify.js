@@ -25,6 +25,108 @@ function rec(service, status, detail) {
   }
 }
 
+async function verifyToken(k) {
+  let info = null;
+  try {
+    info = await k.tokeninfo();
+    rec('token', 'OK', `email=${info.email} expira_in=${info.expires_in}s`);
+  } catch (e) {
+    rec('token', 'FAIL', e.message.slice(0, 160));
+    if (JSON_OUT) console.log(JSON.stringify(results, null, 2));
+    else {
+      console.log(C.r('\nTokenul nu se poate reface. Daca primeste "invalid_grant", vezi docs/GOOGLE-INTEGRARE.md sectiunea "7 zile".\n'));
+    }
+    process.exit(1);
+  }
+
+  const granted = String(info.scope || '').split(/\s+/).filter(Boolean);
+  if (!JSON_OUT) {
+    console.log(C.d('\nscope-uri acordate:'));
+    for (const s of granted) console.log(C.d('  · ' + s));
+    console.log('');
+  }
+  return granted;
+}
+
+async function verifyDrive(k) {
+  try {
+    const a = await k.drive.about();
+    rec('drive:about', 'OK', `${a.user.emailAddress} | folosit ${a.storageQuota.usage} / ${a.storageQuota.limit} bytes`);
+  } catch (e) { rec('drive:about', 'FAIL', e.message.slice(0, 160)); }
+
+  try {
+    const r = await k.drive.list("name='Alex Work' and mimeType='application/vnd.google-apps.folder' and trashed=false");
+    if (r.files.length) {
+      const folder = r.files[0];
+      const kids = await k.drive.list(`'${folder.id}' in parents and trashed=false`, 100);
+      rec('drive:Alex Work', 'OK', `exista, ${kids.files.length} elemente (primele 100)`);
+    } else {
+      rec('drive:Alex Work', 'BLOCKED', 'folderul nu a fost gasit — verifica numele exact');
+    }
+  } catch (e) { rec('drive:Alex Work', 'FAIL', e.message.slice(0, 160)); }
+}
+
+async function verifyGmail(k) {
+  try {
+    const p = await k.gmail.profile();
+    rec('gmail:profile', 'OK', `${p.emailAddress} | ${p.messagesTotal} mesaje | ${p.threadsTotal} thread-uri`);
+  } catch (e) { rec('gmail:profile', 'FAIL', e.message.slice(0, 160)); }
+
+  try {
+    const l = await k.gmail.labels();
+    const mavis = l.labels.filter(x => x.name.startsWith('MAVIS/'));
+    rec('gmail:etichete', 'OK', `${l.labels.length} etichete total, ${mavis.length} din seria MAVIS/*`);
+  } catch (e) { rec('gmail:etichete', 'FAIL', e.message.slice(0, 160)); }
+}
+
+async function verifyCalendar(k) {
+  try {
+    const c = await k.calendar.list();
+    rec('calendar', 'OK', `${c.items.length} calendare: ${c.items.slice(0, 4).map(x => x.summary).join(', ')}`);
+  } catch (e) { rec('calendar', 'FAIL', e.message.slice(0, 160)); }
+}
+
+async function verifyNativeDocs(k) {
+  async function findNative(mime, label, probe) {
+    try {
+      const r = await k.drive.list(`mimeType='${mime}' and trashed=false`, 5);
+      if (!r.files.length) { rec(label, 'BLOCKED', 'scope ok, dar nu exista niciun fisier de acest tip in Drive'); return; }
+      const f = r.files[0];
+      const out = await probe(f.id);
+      rec(label, 'OK', `"${f.name}" — ${out}`);
+    } catch (e) { rec(label, 'FAIL', e.message.slice(0, 160)); }
+  }
+
+  await findNative('application/vnd.google-apps.document', 'docs',
+    async (id) => { const d = await k.docs.get(id); return `${d.title} | ${(d.body?.content || []).length} blocuri`; });
+
+  await findNative('application/vnd.google-apps.spreadsheet', 'sheets',
+    async (id) => { const v = await k.sheets.values(id, 'A1:Z50'); return `${v.range} = ${(v.values || []).length} randuri`; });
+
+  await findNative('application/vnd.google-apps.presentation', 'slides',
+    async (id) => { const s = await k.slides.get(id); return `${s.title} | ${(s.slides || []).length} slide-uri`; });
+}
+
+async function verifyPhotos(k) {
+  try {
+    const a = await k.photos.albums(20);
+    rec('photos:albums', 'OK', `${(a.albums || []).length} albume`);
+  } catch (e) { rec('photos:albums', 'FAIL', e.message.slice(0, 160)); }
+}
+
+async function verifyMaps() {
+  const mk = process.env.GOOGLE_MAPS_API_KEY;
+  if (!mk) {
+    rec('maps', 'BLOCKED', 'needs GOOGLE_MAPS_API_KEY (API key, nu OAuth) + proiect Cloud cu billing');
+  } else {
+    try {
+      const r = await fetch('https://maps.googleapis.com/maps/api/geocode/json?address=Bucharest&key=' + encodeURIComponent(mk));
+      const j = await r.json();
+      rec('maps', j.status === 'OK' ? 'OK' : 'BLOCKED', `status=${j.status} ${j.error_message || ''}`.slice(0, 140));
+    } catch (e) { rec('maps', 'FAIL', e.message.slice(0, 120)); }
+  }
+}
+
 (async () => {
   const d = AUTH.describe();
 
@@ -47,102 +149,14 @@ function rec(service, status, detail) {
   try { k = require('./kit.js'); }
   catch (e) { rec('kit', 'FAIL', e.message); process.exit(1); }
 
-  // ---- token ----
-  let info = null;
-  try {
-    info = await k.tokeninfo();
-    rec('token', 'OK', `email=${info.email} expira_in=${info.expires_in}s`);
-  } catch (e) {
-    rec('token', 'FAIL', e.message.slice(0, 160));
-    if (JSON_OUT) console.log(JSON.stringify(results, null, 2));
-    else {
-      console.log(C.r('\nTokenul nu se poate reface. Daca primeste "invalid_grant", vezi docs/GOOGLE-INTEGRARE.md sectiunea "7 zile".\n'));
-    }
-    process.exit(1);
-  }
+  const granted = await verifyToken(k);
+  await verifyDrive(k);
+  await verifyGmail(k);
+  await verifyCalendar(k);
+  await verifyNativeDocs(k);
+  await verifyPhotos(k);
+  await verifyMaps();
 
-  const granted = String(info.scope || '').split(/\s+/).filter(Boolean);
-  const has = (s) => granted.includes(s);
-  if (!JSON_OUT) {
-    console.log(C.d('\nscope-uri acordate:'));
-    for (const s of granted) console.log(C.d('  · ' + s));
-    console.log('');
-  }
-
-  // ---- DRIVE ----
-  try {
-    const a = await k.drive.about();
-    rec('drive:about', 'OK', `${a.user.emailAddress} | folosit ${a.storageQuota.usage} / ${a.storageQuota.limit} bytes`);
-  } catch (e) { rec('drive:about', 'FAIL', e.message.slice(0, 160)); }
-
-  try {
-    const r = await k.drive.list("name='Alex Work' and mimeType='application/vnd.google-apps.folder' and trashed=false");
-    if (r.files.length) {
-      const folder = r.files[0];
-      const kids = await k.drive.list(`'${folder.id}' in parents and trashed=false`, 100);
-      rec('drive:Alex Work', 'OK', `exista, ${kids.files.length} elemente (primele 100)`);
-    } else {
-      rec('drive:Alex Work', 'BLOCKED', 'folderul nu a fost gasit — verifica numele exact');
-    }
-  } catch (e) { rec('drive:Alex Work', 'FAIL', e.message.slice(0, 160)); }
-
-  // ---- GMAIL ----
-  try {
-    const p = await k.gmail.profile();
-    rec('gmail:profile', 'OK', `${p.emailAddress} | ${p.messagesTotal} mesaje | ${p.threadsTotal} thread-uri`);
-  } catch (e) { rec('gmail:profile', 'FAIL', e.message.slice(0, 160)); }
-
-  try {
-    const l = await k.gmail.labels();
-    const mavis = l.labels.filter(x => x.name.startsWith('MAVIS/'));
-    rec('gmail:etichete', 'OK', `${l.labels.length} etichete total, ${mavis.length} din seria MAVIS/*`);
-  } catch (e) { rec('gmail:etichete', 'FAIL', e.message.slice(0, 160)); }
-
-  // ---- CALENDAR ----
-  try {
-    const c = await k.calendar.list();
-    rec('calendar', 'OK', `${c.items.length} calendare: ${c.items.slice(0, 4).map(x => x.summary).join(', ')}`);
-  } catch (e) { rec('calendar', 'FAIL', e.message.slice(0, 160)); }
-
-  // ---- DOCS / SHEETS / SLIDES (prin gasirea unui fisier real) ----
-  async function findNative(mime, label, probe) {
-    try {
-      const r = await k.drive.list(`mimeType='${mime}' and trashed=false`, 5);
-      if (!r.files.length) { rec(label, 'BLOCKED', 'scope ok, dar nu exista niciun fisier de acest tip in Drive'); return; }
-      const f = r.files[0];
-      const out = await probe(f.id);
-      rec(label, 'OK', `"${f.name}" — ${out}`);
-    } catch (e) { rec(label, 'FAIL', e.message.slice(0, 160)); }
-  }
-
-  await findNative('application/vnd.google-apps.document', 'docs',
-    async (id) => { const d = await k.docs.get(id); return `${d.title} | ${(d.body?.content || []).length} blocuri`; });
-
-  await findNative('application/vnd.google-apps.spreadsheet', 'sheets',
-    async (id) => { const v = await k.sheets.values(id, 'A1:Z50'); return `${v.range} = ${(v.values || []).length} randuri`; });
-
-  await findNative('application/vnd.google-apps.presentation', 'slides',
-    async (id) => { const s = await k.slides.get(id); return `${s.title} | ${(s.slides || []).length} slide-uri`; });
-
-  // ---- PHOTOS ----
-  try {
-    const a = await k.photos.albums(20);
-    rec('photos:albums', 'OK', `${(a.albums || []).length} albume`);
-  } catch (e) { rec('photos:albums', 'FAIL', e.message.slice(0, 160)); }
-
-  // ---- MAPS (are nevoie de API key, nu de OAuth) ----
-  const mk = process.env.GOOGLE_MAPS_API_KEY;
-  if (!mk) {
-    rec('maps', 'BLOCKED', 'needs GOOGLE_MAPS_API_KEY (API key, nu OAuth) + proiect Cloud cu billing');
-  } else {
-    try {
-      const r = await fetch('https://maps.googleapis.com/maps/api/geocode/json?address=Bucharest&key=' + encodeURIComponent(mk));
-      const j = await r.json();
-      rec('maps', j.status === 'OK' ? 'OK' : 'BLOCKED', `status=${j.status} ${j.error_message || ''}`.slice(0, 140));
-    } catch (e) { rec('maps', 'FAIL', e.message.slice(0, 120)); }
-  }
-
-  // ---- verdict ----
   const ok = results.filter(r => r.status === 'OK').length;
   const blocked = results.filter(r => r.status === 'BLOCKED').length;
   const failed = results.filter(r => r.status === 'FAIL').length;
