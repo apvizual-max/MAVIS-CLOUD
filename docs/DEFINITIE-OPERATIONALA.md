@@ -10,6 +10,30 @@
 > **Agentul Local este mecanicul din atelierul tău fizic, iar Agentul de Cloud
 > este un server extern închis într-un container temporar pe infrastructura MiniMax.**
 
+## Arhitectura sistemului — 2026-10-22
+
+Definita de POPY, acceptata ca atare:
+
+| Suprafata | Ce este | Cine lucreaza acolo |
+|---|---|---|
+| **Google Drive** | **Suprafata de lucru.** PKM personal (Personal Knowledge Management System) + **executia efectiva** — Gmail si GDrive | POPY + Mavis Cloud |
+| **GitHub `apvizual-max/MAVIS-CLOUD`** | **Configuratia sistemului** + back-up + **puntea de comunicare** directa intre Mavis Cloud si Mavis Local | ambii agenti |
+| **Mavis Local** | Administreaza **configuratia** | agentul de pe calculatorul lui POPY |
+| **Mavis Cloud** | Agent pe cloud | eu |
+
+**Trei reguli care rezulta din asta:**
+
+1. **WORK ≠ CONFIG.** Munca efectiva se face in Gmail si GDrive. Folderul
+   `Alex Work/` **nu mai exista** — a fost inlocuit de Drive.
+2. **Repo-ul nu e locul de munca.** E locul unde sistemul e *definit* si
+   *versionat*. Orice livrabil intra aici, pe `main`, cu commit si push
+   automat, **fara aprobare**.
+3. **Integrarea e continua.** Feedback-ul circula Local ↔ Cloud prin repo.
+   Repo-ul e **public** (2026-10-22) ca aplicatiile conectate sa-l analizeze.
+
+**Focus curent:** *system configurations* — repo-ul GitHub + folderul
+`18-GOOGLE/` alocat Google.
+
 ## De ce nu pot edita fișiere pe Cloud
 
 Cloud trăiește pe serverele MiniMax, într-un mediu complet izolat. **Nu are acces

@@ -166,6 +166,12 @@ async function fetchRetry(url, opts, tries = 4) {
   console.log(C.b('Daca browserul nu s-a deschis, deschide manual:\n'));
   console.log(C.g(url) + '\n');
   console.log(C.d('Dupa ce consimti, revino aici. Astept...\n'));
+  console.log(C.b('  ATENTIE - cele doua URL-uri sunt diferite:\n'));
+  console.log(C.d('  1. URL-ul de DESCHIS (de mai sus)   -> accounts.google.com/o/oauth2/v2/auth?...'));
+  console.log(C.d('     Asta e cererea. NU contine codul.\n'));
+  console.log(C.b('  2. URL-ul dupa Allow (adresa browserului) -> http://127.0.0.1:8976/?code=4/0Aean...'));
+  console.log(C.d('     ASTA contine codul. Daca faci asta manual, copiaza bara de adresa de ACOLO.'));
+  console.log(C.d('     Acest script o prinde singur - nu trebuie sa faci nimic.\n'));
   openBrowser(url);
 
   async function exchange(code) {
@@ -202,11 +208,15 @@ async function fetchRetry(url, opts, tries = 4) {
       console.log(C.g('\nOK. Totul e gata.\n'));
       console.log('  token salvat : ' + TOKENS_FILE);
       console.log('  chei cloud   : ' + ENV_OUT);
-      console.log('\n' + C.b('Pune aceste 3 valori in secret manager (Mavis Cloud):\n'));
-      console.log('  GOOGLE_CLIENT_ID     = ' + c.client_id);
-      console.log('  GOOGLE_CLIENT_SECRET = ' + c.client_secret);
-      console.log('  GOOGLE_REFRESH_TOKEN = ' + j.refresh_token);
-      console.log(C.d('\nRefresh tokenul e cel mai important - primele doua poti sa le regenerezi oricand.\n'));
+      console.log('\n' + C.b('Pune aceste 3 valori in secret manager (Mavis Cloud):'));
+      console.log(C.d('  (Environmental Information -> Secrets -> numele de mai jos, valoarea de dupa =)\n'));
+      console.log('  GOOGLE_CLIENT_ID_MAVIS_CLOUD     = ' + c.client_id);
+      console.log('  GOOGLE_CLIENT_SECRET_MAVIS_CLOUD = ' + c.client_secret);
+      console.log('  GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD = ' + j.refresh_token);
+      console.log('\n' + C.b('  DOAR linia de refresh token conteaza daca primele doua sunt deja puse:'));
+      console.log('  GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD = ' + j.refresh_token);
+      console.log(C.d('\n  Refresh tokenul e cel mai important - primele doua poti sa le regenerezi oricand.'));
+      console.log(C.d('  Copiaza linia de mai sus, fara "GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD = " - doar valoarea.\n'));
       process.exit(0);
     } catch (e) { console.log(C.r('Eroare: ' + e.message)); process.exit(1); }
   }
