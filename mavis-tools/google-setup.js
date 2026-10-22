@@ -22,7 +22,7 @@
 const fs = require('fs');
 const path = require('path');
 const http = require('http');
-const { exec } = require('child_process');
+const child_process = require('child_process');
 const AUTH = require('./google-auth.js');
 
 const HOME = process.env.HOME || require('os').homedir();
@@ -95,9 +95,10 @@ async function check() {
 
 function openBrowser(url) {
   const cmd = process.platform === 'darwin' ? 'open' : process.platform === 'win32' ? 'start' : 'xdg-open';
-  try { exec(`${cmd} "${url}"`, () => {}); } catch { /* merge fara browser, POPY deschide linkul manual */ }
+  try { child_process.exec(`${cmd} "${url}"`, () => {}); } catch { /* merge fara browser, POPY deschide linkul manual */ }
 }
 
+if (require.main === module) {
 (async () => {
   if (CHECK) return check();
 
@@ -284,3 +285,6 @@ function openBrowser(url) {
     } catch (e) { console.log(C.r('Eroare: ' + e.message)); process.exit(1); }
   }
 })();
+}
+
+module.exports = { openBrowser };
