@@ -90,6 +90,53 @@ Un `cp -r` a transformat workspace-ul în 209 MB. `node_modules` se exclude, apo
 accesibile prin API pe plan free.** Nu se configurează automat. Se activează din
 interfața web, manual, de POPY.
 
+## 10. Platforma mascheaza valorile din secret manager in chat
+
+`{{ARCHON_SECRET:GOOGLE_CLIENT_ID_MAVIS_CLOUD}}` — in locul valorii reale.
+
+**Semnul:** un link cu `client_id` ajunge in browser cu
+`client_id=%7B%7BARCHON_SECRET%3A...%7D%7D` → Google raspunde
+*Error 401: invalid_client*, desi clientul e corect.
+
+**Test:** valoarea citita din env (`node -e 'console.log(process.env.X)'`) e
+**completa**, dar in chat apare placeholder → problema e **livrarea**, nu
+credentialul.
+
+**Fix:** identificatorii publici (`client_id`) stau in repo
+(`mavis-tools/google-client.json`); artefactul se genereaza in repo; livrezi
+**URL de repo**. Detalii: skill `mavis-secure-delivery`.
+
+## 11. `api.github.com` are certificat expirat in sandbox
+
+```
+TLSv1.3 (IN), TLS alert, certificate expired (557)
+```
+
+Sandboxul prezinta un cert expirat pentru `api.github.com`. `git push` merge
+totusi, pentru ca `http.sslVerify=false` e setat global.
+
+**Fix pentru apelurile REST:** `curl -k` (bypass verificarea).
+
+```bash
+curl -sk -H "Authorization: Bearer $GITHUB_TOKEN" \
+  https://api.github.com/repos/<owner>/<repo>
+```
+
+Cu `-k`, `api.github.com` raspunde 200. Fara `-k`, tot ce vine pe acest host
+da 000 / `CERT_HAS_EXPIRED`.
+
+## 12. Reteaua catre googleapis.com e intermitenta
+
+Masurat 2026-10-22: ~20-50% din cereri esueaza cu `UND_ERR_CONNECT_TIMEOUT`
+sau `CERT_HAS_EXPIRED`. Intermittent, pe toate host-urile Google.
+
+**Consecinta:** o eroare de retea **NU e** o eroare de credential. Nu
+concluziona nimic despre client daca requestul n-a ajuns la Google.
+
+`kit.js` si `google-connect.js` au retry-uri. Un cod de autorizare **nu se
+consuma** daca handshake-ul TLS pică (requestul nu a ajuns la Google) — deci
+reia cu acelasi cod.
+
 ## Ordinea de verificare la ceva ce "nu merge"
 
 1. Fișierul există? `ls`

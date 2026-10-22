@@ -26,13 +26,32 @@ description: Reguli pentru lucrul in repo-ul Mavis - cum se face commit, cine de
 cd /workspace/Mavis
 git add -A
 git commit -m "ce s-a facut, intr-o linie"
+git push origin main
 ```
 
-- `main` nu primește nimic fără cerință explicită.
+- **`main` direct. Fără ramuri**, fără excepție — ramură doar dacă POPY cere.
+- **Comit și push FĂRĂ aprobare.** POPY a cerut explicit (2026-10-22):
+  *„niciodată să ceri permisiune pentru comit și push, orice lucru am face"*.
+  **Nu cere confirmare după commit.** Împinge și raportează.
+- **Un livrabil care stă doar în conversație e un livrabil pierdut.** Fiecare
+  document, cod, status, plan intră în repo, în folderul potrivit
+  (`NN-AREA/`, `docs/`, `mavis-tools/`), în același commit cu munca.
 - `PLAN.md` și `PROGRES.md` se actualizează în același commit ca munca.
 - Nu comite: tokenuri, `.env`, `oauth.json`, `node_modules`, loguri.
-- După un commit, **spune-i lui Alexandru și cere confirmare.** Dacă tăc de mult,
-  reamintește-i că n-a dat merge.
+- Repo-ul este **public** (2026-10-22), ca aplicațiile conectate să-l analizeze.
+
+## Livrarea valorilor care vin din secret manager
+
+Platforma **maschează** valorile din secret manager în mesajele de chat:
+`{{ARCHON_SECRET:NUME}}`. Un link cu `client_id` trimis în chat ajunge în
+browser cu placeholder → *Error 401: invalid_client*. Măsurat 2026-10-22.
+
+**Regula:** identificatorii publici (`client_id`, project number) stau în repo,
+ca sursă unică. Scriptul generează artefactul în repo. Livrezi **URL de repo**.
+Secretele intră în panoul de secrete sau prin tool-ul `secret` — **niciodată în
+chat**.
+
+Detalii: skill `mavis-secure-delivery` · doc `docs/PROCEDURA-LIVRARE-SECRETE.md`.
 
 ## Ce nu intră niciodată
 

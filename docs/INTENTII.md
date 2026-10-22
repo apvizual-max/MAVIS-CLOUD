@@ -82,3 +82,23 @@ direct, nu prin chat.
 Checklist: `docs/GOOGLE-PRODUCTION-CHECKLIST.md`.
 
 **Mavis Cloud nu pune secrete în repo și nu cere POPY să le trimită în chat.**
+
+### [2026-10-22] Repo-ul a devenit PUBLIC
+
+**POPY a cerut:**
+- ca MAVIS-CLOUD să fie public, altfel aplicațiile conectate nu-l pot analiza
+- ca tot ce ține de proiect să fie sincronizat în repo, fără aprobări
+- ca procedura livrării linkului să fie documentată, ca să nu o mai batem în cap
+
+**Ce am făcut:**
+- Audit înainte de publicare: **zero secrete** în tot istoricul git, **zero
+  date personale ale terților** (doar contorizări și documentație). Verificat
+  cu scanare de `GOCSPX`, `ghp_`, `1//…`, `AIza`, chei private, adrese email.
+- Repo: `private: false` → **visibility: public**, confirmat cu acces anonim.
+- Procedura scrisă în `docs/PROCEDURA-LIVRARE-SECRETE.md` + skill nou
+  `.skills/mavis-secure-delivery/` + Regula 1 și Regula 2 în `AGENTS.md`.
+- **Skills-ul din repo erau vechi** — le-am sincronizat din runtime. Localul ar
+  fi continuat să lucreze cu proceduri greșite.
+
+**Ce rămâne de făcut de POPY:** trimite codul de autorizare (din bara de adresa
+a paginii `127.0.0.1:8976`). Restul îl face Mavis Cloud.
