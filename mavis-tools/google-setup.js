@@ -98,7 +98,7 @@ function openBrowser(url) {
   try { exec(`${cmd} "${url}"`, () => {}); } catch { /* merge fara browser, POPY deschide linkul manual */ }
 }
 
-(async () => {
+async function main() {
   if (CHECK) return check();
 
   console.log(C.b('\n=== GOOGLE SETUP ===\n'));
@@ -283,4 +283,10 @@ function openBrowser(url) {
       process.exit(0);
     } catch (e) { console.log(C.r('Eroare: ' + e.message)); process.exit(1); }
   }
-})();
+}
+
+if (require.main === module) {
+  main().catch(e => { console.error(e); process.exit(1); });
+}
+
+module.exports = { credsFromDisk, credsFromEnv, main };
