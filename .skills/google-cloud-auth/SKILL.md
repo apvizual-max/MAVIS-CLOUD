@@ -201,17 +201,34 @@ Google). Reia cu acelasi cod.
 
 Detalii: skill `mavis-secure-delivery` · doc `docs/PROCEDURA-LIVRARE-SECRETE.md`
 
-## Ce merge din cloud, măsurat 2026-10-22
+## Ce merge din cloud, măsurat 2026-10-22 04:40 (CONECTAT)
 
-❌ **ACUM: nimic.** `refresh_token` din secret manager e mort (`invalid_grant`).
-Clientul + secretul sunt valide — vezi testul decisiv de mai sus.
-Fix: `docs/GOOGLE-STATUS-2026-10-22.md` (o singură acțiune din partea lui POPY).
+✅ **Gmail** — 84.313 mesaje · 78.519 thread-uri · 50 etichete (8 MAVIS/*)
+✅ **Drive** — 104,07 GB / 5498 GB
+✅ **Calendar** — 4 calendare
+✅ **Sheets** — "Design_Jobs_Community_Board" → 23 rânduri
+✅ **Slides** — "441DPH-Brief slides…" → 7 slide-uri
+⚠️ **Docs** — `docs.googleapis.com` BLOCAT din cloud (HTTP 400, pagină anti-bot
+reCAPTCHA, nu JSON). **Contentul se citește prin Drive export**:
+`kit.docs.text(id)` → `drive/v3/files/{id}/export?mimeType=text/plain`. Merge.
+⛔ **Photos** — `photoslibrary.googleapis.com` — conexiune blocată din cloud
+⛔ **Maps** — cere `GOOGLE_MAPS_API_KEY` + proiect Cloud cu billing
+⛔ **Workspace MCP** — `*mcp.googleapis.com` — 0/6 conexiuni din cloud
 
-✅ **Funcționa (măsurat 2026-10-21, cu chei valide):** Drive, Gmail, Calendar,
-Docs, Sheets, Slides
-⛔ Google Photos (`photoslibrary.googleapis.com` — 0/6 conexiuni)
-⛔ Google Workspace MCP servers oficiali (`*mcp.googleapis.com` — 0/6)
-⛔ Google Maps (are nevoie de `GOOGLE_MAPS_API_KEY` + proiect Cloud cu billing)
+## Trapele reparate pe 2026-10-22 (nu le mai face)
+
+| Trapă | Simptom | Repar |
+|---|---|---|
+| Platforma maschează valorile din secret manager în chat | `Error 401: invalid_client` în browser | livrare prin repo (`google-link-file.js`) |
+| `cmd /c start "" "<url>"` pe Windows expandează `%VAR%` | **`Error 400 / Bad Request`** — linkul stricat | `rundll32 url.dll,FileProtocolHandler` |
+| Serverul verifica doar calea `/callback`, redirect_uri nu are cale | codul pierdut, scriptul nu face nimic | acceptă orice cale |
+| `https.request` nu onorează proxy-ul; gateway-ul dă **certificat expirat** | `CERT_HAS_EXPIRED` | `fetch` + fallback `https.request` fără verificare |
+| `docs.get` cu URL greșit `/docs/v1/` | 404 / anti-bot | `/document/v1/` + fallback prin Drive export |
+| Scriptul rulează o versiune veche (fără `git pull`) | Error 400 / comportament ciudat | `git pull` înainte, mesaj în script |
+
+**Regulă generală:** înainte să rulezi orice script Google Local:
+`git pull` obligatoriu. Versiunile vechi au scope-ul `photoslibrary` inclus,
+care dă `invalid_scope` → Error 400.
 
 ## Reguli
 

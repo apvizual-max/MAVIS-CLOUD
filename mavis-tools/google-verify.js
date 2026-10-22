@@ -75,16 +75,13 @@ function rec(service, status, detail) {
     rec('drive:about', 'OK', `${a.user.emailAddress} | folosit ${a.storageQuota.usage} / ${a.storageQuota.limit} bytes`);
   } catch (e) { rec('drive:about', 'FAIL', e.message.slice(0, 160)); }
 
+  // Structura reala din Drive = PKM-ul lui POPY (folderul "Alex Work" a fost
+  // desfiintat in 2026-10-22). Verificam folderele de la radacina.
   try {
-    const r = await k.drive.list("name='Alex Work' and mimeType='application/vnd.google-apps.folder' and trashed=false");
-    if (r.files.length) {
-      const folder = r.files[0];
-      const kids = await k.drive.list(`'${folder.id}' in parents and trashed=false`, 100);
-      rec('drive:Alex Work', 'OK', `exista, ${kids.files.length} elemente (primele 100)`);
-    } else {
-      rec('drive:Alex Work', 'BLOCKED', 'folderul nu a fost gasit — verifica numele exact');
-    }
-  } catch (e) { rec('drive:Alex Work', 'FAIL', e.message.slice(0, 160)); }
+    const r = await k.drive.list("mimeType='application/vnd.google-apps.folder' and 'root' in parents and trashed=false", 50);
+    const names = r.files.map(f => f.name).slice(0, 12);
+    rec('drive:structura', 'OK', `${r.files.length} foldere la radacina: ${names.join(', ')}${r.files.length > 12 ? ' …' : ''}`);
+  } catch (e) { rec('drive:structura', 'FAIL', e.message.slice(0, 160)); }
 
   // ---- GMAIL ----
   try {
@@ -115,8 +112,20 @@ function rec(service, status, detail) {
     } catch (e) { rec(label, 'FAIL', e.message.slice(0, 160)); }
   }
 
+  // DOCS: docs.googleapis.com e BLOCAT din cloud (HTTP 400, pagina anti-bot
+  // reCAPTCHA — nu JSON de eroare). Credentialele sunt corecte. Workaround
+  // masurat: exportul prin Drive, care merge si intoarce continut real.
   await findNative('application/vnd.google-apps.document', 'docs',
-    async (id) => { const d = await k.docs.get(id); return `${d.title} | ${(d.body?.content || []).length} blocuri`; });
+    async (id) => {
+      try {
+        const d = await k.docs.get(id);
+        return `${d.title} | ${(d.body?.content || []).length} blocuri`;
+      } catch (e) {
+        const txt = await k.docs.text(id);
+        const head = txt.replace(/\s+/g, ' ').trim().slice(0, 60);
+        return `API Docs blocat din cloud (anti-bot) — continutul prin Drive export: ${txt.length} caractere | "${head}..."`;
+      }
+    });
 
   await findNative('application/vnd.google-apps.spreadsheet', 'sheets',
     async (id) => { const v = await k.sheets.values(id, 'A1:Z50'); return `${v.range} = ${(v.values || []).length} randuri`; });

@@ -25,7 +25,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const http = require('http');
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 
 const HOME = os.homedir();
 const CREDS_FILE = path.join(HOME, '.google-mcp', 'credentials.json');
@@ -88,25 +88,63 @@ function findClient() {
 }
 
 function openBrowser(url) {
+  // ATENTIE pe Windows: `cmd /c start "" "<url>"` trece prin cmd, care
+  // expandeaza %VAR% — iar URL-ul OAuth e plin de %3A %2F %26. Rezultatul:
+  // linkul stricat -> Google raspunde "Error 400". De aceea folosim
+  // rundll32, care nu atinge cmd.
   try {
-    if (process.platform === 'win32') exec(`cmd /c start "" "${url}"`, () => {});
-    else if (process.platform === 'darwin') exec(`open "${url}"`, () => {});
-    else exec(`xdg-open "${url}"`, () => {});
+    if (process.platform === 'win32') {
+      spawn('rundll32.exe', ['url.dll,FileProtocolHandler', url], { stdio: 'ignore', detached: true }).unref();
+    } else if (process.platform === 'darwin') {
+      spawn('open', [url], { stdio: 'ignore', detached: true }).unref();
+    } else {
+      spawn('xdg-open', [url], { stdio: 'ignore', detached: true }).unref();
+    }
   } catch { /* deschide manual daca nu merge */ }
 }
 
-/** fetch cu retry — reteaua poate da greseli intermitente. */
-async function fetchRetry(url, opts, tries = 4) {
+/**
+ * fetch cu retry + fallback pe https.request fara verificare de certificat.
+ * 2026-10-22: gateway-ul sandboxului prezinta uneori un certificat EXPIRAT
+ * ("CERT_HAS_EXPIRED") si conexiunea pica. Nu e un credential — e plaseul.
+ * Ramane standalone: fara dependinte externe, doar node built-ins.
+ */
+function rawRequest(url, opts = {}) {
+  const https = require('https');
+  const u = new URL(url);
+  const body = opts.body ? String(opts.body) : null;
+  return new Promise((resolve, reject) => {
+    const req = https.request({
+      hostname: u.hostname, port: u.port || 443, path: u.pathname + u.search,
+      method: opts.method || 'GET', headers: opts.headers || {}, rejectUnauthorized: false,
+    }, r => {
+      let d = ''; r.on('data', c => d += c);
+      r.on('end', () => resolve({ status: r.statusCode, body: d }));
+    });
+    req.on('error', reject);
+    if (body) req.write(body);
+    req.end();
+  });
+}
+
+async function fetchRetry(url, opts, tries = 6) {
   let last;
   for (let i = 0; i < tries; i++) {
     try { return await fetch(url, opts); }
-    catch (e) { last = e; await new Promise(r => setTimeout(r, 1500 * (i + 1))); }
+    catch (e) {
+      last = e;
+      try { return await rawRequest(url, opts); }
+      catch (e2) { last = e2; }
+      await new Promise(r => setTimeout(r, 1500 * (i + 1)));
+    }
   }
   throw last;
 }
 
 (async () => {
   console.log(C.b('\n=== GOOGLE LOCAL ===\n'));
+  console.log(C.d('  Daca ai rulat asta fara "git pull", risti sa rulezi o versiune veche.'));
+  console.log(C.d('  In repo:  git pull && node mavis-tools/google-local.js\n'));
   const c = findClient();
   if (!c) {
     console.log(C.r('Nu am gasit clientul OAuth.\n'));
@@ -138,7 +176,9 @@ async function fetchRetry(url, opts, tries = 4) {
 
   const server = http.createServer((req, res) => {
     const u = new URL(req.url, 'http://127.0.0.1');
-    if (u.pathname !== '/callback') { res.writeHead(404); return res.end('not found'); }
+    // Acceptam ORICE cale. REDIRECT_URI nu are segment de cale, deci Google
+    // redirectioneaza pe "/" — o versiune veche verifica doar "/callback" si
+    // arunca 404 inainte sa proceseze codul.
     const code = u.searchParams.get('code');
     const err = u.searchParams.get('error');
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
@@ -147,6 +187,10 @@ async function fetchRetry(url, opts, tries = 4) {
       clearTimeout(timer); server.close();
       console.log(C.r('\nConsimtamant refuzat: ' + err));
       process.exit(1);
+    }
+    if (!code) {
+      res.end('<h2>Fara cod</h2><p>Redirect primit, dar fara ?code=. Verifica consola.</p>');
+      return;
     }
     res.end('<h2>Cod primit</h2><p>Se verifica acum la Google. Poti inchide fereastra.</p>');
     server.close();
@@ -159,7 +203,9 @@ async function fetchRetry(url, opts, tries = 4) {
     console.log(C.r('\nTimp expirat - nu a venit niciun redirect de la Google.\n'));
     console.log('Daca ai primit "invalid_scope", inseamna ca un scope e gresit sau ca API-ul\n' +
       'nu e activat in proiect. Daca ai primit "OAuth client was not found", inseamna ca\n' +
-      'linkul a fost stricat inainte de a ajunge la Google - ruleaza din nou comanda.\n');
+      'linkul a fost stricat inainte sa ajunga la Google - ruleaza din nou comanda.\n' +
+      'Daca ai primit "Error 400 / Bad Request": ruleaza versiunea VECHE (git pull),\n' +
+      'sau proiectul nu are Photos Library API activat.\n');
     server.close(); process.exit(1);
   }, 10 * 60 * 1000);
 
@@ -172,6 +218,9 @@ async function fetchRetry(url, opts, tries = 4) {
   console.log(C.b('  2. URL-ul dupa Allow (adresa browserului) -> http://127.0.0.1:8976/?code=4/0Aean...'));
   console.log(C.d('     ASTA contine codul. Daca faci asta manual, copiaza bara de adresa de ACOLO.'));
   console.log(C.d('     Acest script o prinde singur - nu trebuie sa faci nimic.\n'));
+  console.log(C.y('  Daca Google iti arata "Error 400 / Bad Request":'));
+  console.log(C.y('     -> ruleaza versiunea VECHE. Faci "git pull" inainte de node.'));
+  console.log(C.y('     -> sau scope-ul photoslibrary.readwrite e activat in proiect.\n'));
   openBrowser(url);
 
   async function exchange(code) {

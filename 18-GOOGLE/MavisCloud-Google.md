@@ -7,8 +7,23 @@ Google Workspace: Gmail, Drive, Calendar, Docs, Sheets, Slides
 
 ---
 
-**Stare** — ⛔ **Tokenul lipsește.** Clientul OAuth e corect și verificat.
-Mai trebuie **un singur consimțământ** în browser.
+**Stare** — ✅ **CONECTAT** (măsurat 2026-10-22 04:40). Tokenul e în secret
+manager, cele 6 scope-uri sunt acordate, verificarea live trece.
+
+| Serviciu | Stare | Măsurătoare |
+|---|---|---|
+| Gmail | ✅ | 84.313 mesaje · 78.519 thread-uri · 50 etichete (8 MAVIS/*) |
+| Drive | ✅ | 104,07 GB / 5498 GB |
+| Calendar | ✅ | 4 calendare |
+| Sheets | ✅ | "Design_Jobs_Community_Board" → 23 rânduri |
+| Slides | ✅ | "441DPH-Brief slides…" → 7 slide-uri |
+| Docs | ⚠️ | API-ul blocat din cloud (anti-bot) — **conținutul merge prin Drive export** |
+| Photos | ⛔ | blocat din cloud — merge de pe calculatorul lui POPY |
+| Maps | ⛔ | cere `GOOGLE_MAPS_API_KEY` + billing |
+
+**Următorul pas:** Testing → **In production**, ca tokenul să nu moară în
+7 zile (consimțământul a fost 2026-10-22 01:39 UTC). Checklist:
+`docs/GOOGLE-PRODUCTION-CHECKLIST.md`.
 
 **Ce e măsurat acum** (din sandbox-ul de cloud, cu cod HTTP real):
 - Google Drive API → merge

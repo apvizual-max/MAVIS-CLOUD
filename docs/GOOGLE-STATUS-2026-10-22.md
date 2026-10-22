@@ -166,3 +166,54 @@ finală („clientul din secret manager e al altui tool") a fost doar una dintre
 cauze. Cauza **suficientă** pentru eroarea din browser a fost mascarea. Ambele
 erau reale: clientul din secret manager era si el vechi, iar POPY l-a inlocuit
 intrucât ii-am spus ca ala e.
+
+---
+
+## 9. STARE FINALĂ — 2026-10-22 04:40 · CONECTAT
+
+Tokenul e obținut, scris în secret manager (`GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD`)
+și verificat live. **Măsurătoare reală:**
+
+| Serviciu | Stare | Măsurătoare |
+|---|---|---|
+| **token** | ✅ | 6 scope-uri acordate, `expires_in=3599s` |
+| **Gmail** | ✅ | apvizual@gmail.com · **84.313 mesaje** · **78.519 thread-uri** · 50 etichete (8 din seria MAVIS/*) |
+| **Calendar** | ✅ | 4 calendare: apvizual@gmail.com, Family, Holidays in Romania, Sărbători în România |
+| **Drive** | ✅ | **104,07 GB folosiți / 5498 GB** · 100+ fișiere listate |
+| **Sheets** | ✅ | "Design_Jobs_Community_Board" → 'Design Jobs'!A1:Z50 = 23 rânduri |
+| **Slides** | ✅ | "441DPH-Brief slides for GD senior_sep 2026" → 7 slide-uri |
+| **Docs** | ⚠️ | `docs.googleapis.com` **blocat din cloud** (HTTP 400, pagină anti-bot reCAPTCHA — nu JSON). Conținutul se citește prin **Drive export** (`drive/v3/files/{id}/export?mimeType=text/plain`) — merge, conținut real. |
+| **Photos** | ⛔ | `photoslibrary.googleapis.com` — conexiune blocată din cloud (0/6). De pe calculatorul lui merge. |
+| **Maps** | ⛔ | cere `GOOGLE_MAPS_API_KEY` + proiect Cloud cu billing |
+| **Workspace MCP** | ⛔ | `*mcp.googleapis.com` — 0/6 conexiuni din cloud |
+
+### Ce s-a reparat azi, ca să nu se mai întâmple
+
+1. **Mascarea secretelor în chat** → valorile din secret manager nu mai trec
+   prin chat. Linkul se livrează prin repo (`18-GOOGLE/AUTORIZARE-LINK.txt`),
+   client_id stă în repo ca identificator public (`mavis-tools/google-client.json`).
+2. **`https.request` vs `fetch`** în sandbox → `kit.js` folosește acum `fetch`
+   cu fallback pe `https.request` (fără verificare de certificat), pentru că
+   gateway-ul platformei prezintă uneori un **certificat expirat**.
+3. **`docs.get` avea URL-ul greșit** (`/docs/v1/` în loc de `/document/v1/`).
+   Corectat. Plus `docs.export()` / `docs.text()` prin Drive.
+4. **`google-local.js` nu procesa codul**: serverul verifica doar calea
+   `/callback`, dar redirect_uri nu are segment de cale → Google trimite pe `/`
+   → 404 → cod pierdut. Acum acceptă orice cale.
+5. **`google-local.js` strica linkul pe Windows**: `cmd /c start "" "<url>"`
+   trece prin cmd, care expandează `%VAR%` — iar URL-ul OAuth e plin de
+   `%3A %2F %26` → **Google răspundea „Error 400 / Bad Request"**. Acum folosește
+   `rundll32 url.dll,FileProtocolHandler`, care nu atinge cmd.
+6. **Scriptul nu spunea nimic** la rulare → acum afișează clientul, scope-urile,
+   linkul și avertismente pentru „Error 400" / versiune veche / `git pull`.
+
+### Observație de diagnostic
+
+`Error 400 / Bad Request` la authorize = **scope invalid** (ex.
+`photoslibrary.readwrite` fără Photos Library API activat) **sau** link
+corupt. Nu e credential. Verifică: scriptul e la zi? (`git pull`)
+
+### Următorul pas: In production
+
+Appul e în **Testing** → refresh tokenul moare în 7 zile de la consimțământ
+(2026-10-22 01:39 UTC). Checklist: `docs/GOOGLE-PRODUCTION-CHECKLIST.md`.

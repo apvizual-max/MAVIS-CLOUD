@@ -14,17 +14,18 @@
 | Prompt de start | ✅ `PROMPT-START.txt` |
 | Client OAuth verificat | ✅ Desktop, proiect `gen-lang-client-0284509562` |
 | Credentiale în secret manager | ✅ client_id + client_secret + email |
-| **Refresh token** | ⛔ **LIPSA** — lipsește un singur consimțământ |
+| **Refresh token** | ✅ **în secret manager** — `GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD` |
+| **Verificare live** | ✅ Gmail 84.313 mesaje · Drive 104 GB · Calendar 4 · Sheets 23 rânduri · Slides 7 |
 | Test de diagnostic | ✅ `mavis-tools/google-preflight.js` |
 
 ## Ce urmează
 
-1. **Un consimțământ în browser** → `18-GOOGLE/AUTORIZARE-LINK.txt` (linkul e generat
-   de `mavis-tools/google-link-file.js`).
-2. **Tokenul în secret manager** → `GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD`.
-3. **Verificare live** → `node mavis-tools/google-verify.js` din cloud.
-4. **In production** → `docs/GOOGLE-PRODUCTION-CHECKLIST.md`. Până atunci, tokenul
-   moare în 7 zile de la consimțământ (appul e în modul Testing).
+1. ~~Un consimțământ în browser~~ — **făcut 2026-10-22 01:39 UTC.**
+2. ~~Tokenul în secret manager~~ — **făcut.**
+3. ~~Verificare live~~ — **făcut: 6 servicii OK.**
+4. **In production** → `docs/GOOGLE-PRODUCTION-CHECKLIST.md`. **RĂMÂNE.** Până
+   atunci, tokenul moare în 7 zile de la consimțământ (appul e în modul Testing).
+5. **Re-consimțământ după publicare** — tokenul nou nu mai are limita de 7 zile.
 
 ## Regula de naming
 
