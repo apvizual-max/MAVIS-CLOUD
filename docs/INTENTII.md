@@ -54,3 +54,31 @@ face sinteza cerută, o scrie în repo.
 Nu instalez nimic, nu ating configurația lui Hermes, nu schimb nimic.
 
 **Un singur lucru de la POPY:** spune ce sinteză vrei, într-un rând.
+
+### [2026-10-22] Google — consimțământ OAuth, fără secrete prin chat
+
+**POPY a cerut:**
+- ca tot ce ține de Google să fie sincronizat în repo, fără să-i cer permisiune
+- să nu mai treacă prin chat niciun secret, pentru că platforma îl maschează
+
+**Ce e nevoie:**
+Clientul OAuth Desktop e corect și verificat din cloud. Lipsește **un singur
+consimțământ** în browser — de aici lipsește `GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD`.
+
+**Cum se rezolvă, fără secrete prin chat:**
+1. Linkul de autorizare e generat în repo: `18-GOOGLE/AUTORIZARE-LINK.txt`
+   (script: `mavis-tools/google-link-file.js`). POPY îl deschide din browser.
+2. POPY copiază bara de adresa cu `?code=...` și o trimite la Mavis Cloud.
+3. Mavis Cloud face schimbul: `node mavis-tools/google-connect.js "<url>"`,
+   scrie tokenul în secret manager, apoi verifică live:
+   `node mavis-tools/google-verify.js`.
+
+**Varianta Local**, dacă POPY vrea sa nu atinga browserul manual:
+`node mavis-tools/google-local.js` — flux complet pe calculatorul lui, cu
+`~/.google-mcp/credentials.json`. POPY pune refresh tokenul în secret manager
+direct, nu prin chat.
+
+**Apoi:** Testing → In production, ca tokenul să nu moară în 7 zile.
+Checklist: `docs/GOOGLE-PRODUCTION-CHECKLIST.md`.
+
+**Mavis Cloud nu pune secrete în repo și nu cere POPY să le trimită în chat.**

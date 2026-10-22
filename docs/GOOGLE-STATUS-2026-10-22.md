@@ -120,3 +120,49 @@ pentru Node < 18). Commit `0d5bfe5`, împins pe `main`.
 ---
 
 *2026-10-22 02:10 · Mavis Cloud · măsurat în cloud, pe sandbox-ul real*
+
+---
+
+## 8. ADDENDUM 03:40 — cauza reală a `invalid_client` în browser
+
+**Clientul OAuth era corect. Linkul era corect. Valoarea din link era mascată.**
+
+Screenshot-ul lui POPY arăta în bara de adresa:
+
+```
+accounts.google.com/signin/oauth/error?authError=...&client_id=%7B%7BARCHON_SECRET%3AGOOGLE_CLIENT_ID_MAVIS_CL...
+```
+
+`%7B%7B` = `{{`, `%3A` = `:` → **`{{ARCHON_SECRET:GOOGLE_CLIENT_ID_MAVIS_CLOUD}}`**.
+
+**Platforma mascheaza valorile din secret manager in mesajele mele.** Deci
+client_id-ul real n-a ajuns niciodata la Google — a ajuns un placeholder.
+Google a raspuns corect: „The OAuth client was not found", pentru ca intr-adevar
+nu exista un client cu numele ala.
+
+**Procesul meu a fost greșit:** am verificat clientul *din cloud* (unde valoarea
+era reala, fiind citita din env) si am presupus ca și linkul trimis lui POPY
+conține aceeasi valoare. Nu contine.
+
+**Dovada ca valoarea e reala in cloud, dar mascata in chat:**
+- `node -e` cu `process.env.GOOGLE_CLIENT_ID_MAVIS_CLOUD` → valoare **completa**
+- aceleasi valoare, scrisa in mesajul de chat → `{{ARCHON_SECRET:...}}`
+
+**Repar, aplicat:**
+- `mavis-tools/google-client.json` → client_id ca **identificator public** în repo
+  (Google nu-l considera confidential; apare in orice URL de autorizare).
+- `mavis-tools/google-link-file.js` → genereaza linkul in `18-GOOGLE/AUTORIZARE-LINK.txt`.
+  Livrare prin repo, unde mascarea nu exista.
+- `mavis-tools/google-preflight.js` → pasul 0 verifica **drift** intre
+  secret manager si repo.
+- Regula scrisa in skill: **nicio valoare din secret manager prin chat.**
+
+**Concluzie pentruMine:** daca o valoare vine din secret manager, nu o scriu in
+chat. O scriu intr-un fisier si livrez prin repo.
+
+**Notă de corectitudine:** diagnosticul din secțiunea 2 („client_id + secret
+valide, tokenul e mort") a fost corect **la nivel de cloud**, dar explicația
+finală („clientul din secret manager e al altui tool") a fost doar una dintre
+cauze. Cauza **suficientă** pentru eroarea din browser a fost mascarea. Ambele
+erau reale: clientul din secret manager era si el vechi, iar POPY l-a inlocuit
+intrucât ii-am spus ca ala e.

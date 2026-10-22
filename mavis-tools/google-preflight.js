@@ -24,6 +24,9 @@ const CID = process.env.GOOGLE_CLIENT_ID_MAVIS_CLOUD || process.env.GOOGLE_CLIEN
 const CSEC = process.env.GOOGLE_CLIENT_SECRET_MAVIS_CLOUD || process.env.GOOGLE_CLIENT_SECRET;
 const RT = process.env.GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD || process.env.GOOGLE_REFRESH_TOKEN;
 const REDIRECT = process.env.GOOGLE_REDIRECT_URI || 'http://127.0.0.1:8976';
+const fs = require('fs');
+const path = require('path');
+const REPO_CLIENT_JSON = path.join(__dirname, 'google-client.json');
 const SCOPES = [
   'https://www.googleapis.com/auth/drive',
   'https://www.googleapis.com/auth/gmail.modify',
@@ -50,6 +53,21 @@ async function fr(url, opts = {}, tries = 5) {
 (async () => {
   console.log(B('\n=== GOOGLE PREFLIGHT ===\n'));
 
+  // 0. drift: secret manager vs repo (google-client.json)
+  let drift = null;
+  try {
+    const cfg = JSON.parse(fs.readFileSync(REPO_CLIENT_JSON, 'utf8'));
+    if (cfg.client_id && CID && cfg.client_id !== CID) drift = { env: CID, repo: cfg.client_id };
+  } catch { /* fisierul nu exista — ok */ }
+  if (drift) {
+    console.log(R('  [0] drift client_id  secret manager != google-client.json'));
+    console.log(D(`      env  : ${drift.env}`));
+    console.log(D(`      repo : ${drift.repo}`));
+    console.log(Y('      Unul din ele e clientul vechi. Verifica in Cloud Console -> Clients.'));
+  } else {
+    console.log(G('  [0] drift client_id  OK') + D('  (env si repo coincid)'));
+  }
+
   // 1. credentiale
   const miss = [];
   if (!CID) miss.push('GOOGLE_CLIENT_ID');
@@ -67,16 +85,22 @@ async function fr(url, opts = {}, tries = 5) {
   // 2. token endpoint: clientul + secretul sunt recunoscute?
   //    invalid_grant  = client gasit, secret bun    -> OK
   //    invalid_client = client sau secret gresit    -> FAIL
-  let ok2 = false, e2 = '';
+  let ok2 = false, e2 = '', net2 = false;
   try {
     const r = await fr('https://oauth2.googleapis.com/token', {
       method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ client_id: CID, client_secret: CSEC, grant_type: 'authorization_code', code: 'PREFLIGHT_FAKE', redirect_uri: REDIRECT }),
-    });
+    }, 8);
     const j = await r.json().catch(() => ({}));
     ok2 = j.error === 'invalid_grant';
     e2 = `${j.error}${j.error_description ? ' — ' + j.error_description : ''}`;
-  } catch (e) { e2 = 'RETEA: ' + (e.cause?.code || e.message); }
+  } catch (e) { net2 = true; e2 = 'RETEA: ' + (e.cause?.code || e.message); }
+  if (net2) {
+    console.log(Y(`  [2] client la token   INDETERMINAT (retea)  ${e2}`));
+    console.log(Y('      Nu pot afirma nimic despre client. Mai incearca mai tarziu.'));
+    console.log(Y('      Daca persista, testeaza cu: curl -s -o /dev/null -w "%{http_code}" https://oauth2.googleapis.com/token\n'));
+    process.exit(3);
+  }
   console.log(ok2 ? G('  [2] client la token   OK') : R(`  [2] client la token   FAIL  ${e2}`));
   if (!ok2) {
     console.log(Y('      -> client_id sau client_secret din secret manager nu se potrivesc.'));
@@ -86,7 +110,7 @@ async function fr(url, opts = {}, tries = 5) {
 
   // 3. authorize endpoint: linkul de browser va functiona?
   //    Clientul rezolvat -> redirect cu opparams + dsh. Nu rezolvat -> fara ele.
-  let ok3 = false, e3 = '';
+  let ok3 = false, e3 = '', net3 = false;
   try {
     const p = new URLSearchParams({
       client_id: CID, redirect_uri: REDIRECT, response_type: 'code',
@@ -94,11 +118,16 @@ async function fr(url, opts = {}, tries = 5) {
     });
     const r = await fr('https://accounts.google.com/o/oauth2/v2/auth?' + p, {
       redirect: 'manual', headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120' },
-    });
+    }, 8);
     const loc = r.headers.get('location') || '';
     ok3 = loc.includes('opparams=') && loc.includes('dsh=');
     e3 = ok3 ? '' : 'clientul NU rezolva la authorize endpoint';
-  } catch (e) { e3 = 'RETEA: ' + (e.cause?.code || e.message); }
+  } catch (e) { net3 = true; e3 = 'RETEA: ' + (e.cause?.code || e.message); }
+  if (net3) {
+    console.log(Y(`  [3] client la auth    INDETERMINAT (retea)  ${e3}`));
+    console.log(Y('      Nu pot afirma nimic despre client. Mai incearca mai tarziu.\n'));
+    process.exit(3);
+  }
   console.log(ok3 ? G('  [3] client la auth    OK') : R(`  [3] client la auth    FAIL  ${e3}`));
   if (!ok3) {
     console.log(Y('      -> linkul de autorizare va da "Error 401: invalid_client" in browser.'));
