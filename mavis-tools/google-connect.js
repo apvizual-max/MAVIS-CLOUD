@@ -64,10 +64,10 @@ function client() {
     code, grant_type: 'authorization_code', redirect_uri: REDIRECT_URI,
   }).toString();
   let j = null, lastErr = null;
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 8; i++) {
     if (i) {
-      const wait = 1500 * i;
-      console.log(C.y('  retea instabila — reiau in ' + wait + 'ms (incep ' + (i + 1) + '/5)'));
+      const wait = Math.min(2000 * i, 8000);
+      console.log(C.y('  retea instabila — reiau in ' + wait + 'ms (incep ' + (i + 1) + '/8)'));
       await new Promise(z => setTimeout(z, wait));
     }
     try {
@@ -84,7 +84,8 @@ function client() {
   }
   if (!j) {
     console.log(C.r('\nNu am putut contacta Google: ' + (lastErr?.cause?.code || lastErr?.message)));
-    console.log(C.y('Codul de autorizare NU s-a consumat (nu a ajuns la Google). Reia cu acelasi cod.\n'));
+    console.log(C.y('Codul de autorizare NU s-a consumat (nu a ajuns la Google). Reia cu acelasi cod.'));
+    console.log(C.y('Daca persista, ruleaza din nou google-connect.js cu acelasi cod.\n'));
     process.exit(1);
   }
   if (j.error) {
