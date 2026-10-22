@@ -207,6 +207,13 @@ node mavis-tools/google-verify.js
 
 Outputul arată, pentru fiecare serviciu, un cod HTTP real:
 
+> ⚠️ **CORECTARE 2026-10-22.** Blocul de mai jos a fost scris ca **exemplu de
+> format**, dar arăta ca măsurătoare reală. **NU a fost măsurat.** La
+> 2026-10-22 s-a dovedit că secretul manager ținea credentialele unui **alt
+> OAuth client** (cel al lui Hermes CLI), deci tabelul „de mai jos" nu avea
+> ce să măsoare. **Nu te baza pe el.** Măsurătoarea reală e în
+> `docs/GOOGLE-STATUS-2026-10-22.md` și se obține cu `google-verify.js`.
+
 ```
   OK   drive:about          apvizual@gmail.com | folosit 1.2 GB / 15 GB
   OK   drive:Alex Work      exista, 34 elemente
