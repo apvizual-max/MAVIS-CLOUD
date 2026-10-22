@@ -63,6 +63,18 @@ livrarea, nu credentialul.** Nu cere lui POPY să schimbe chei.
 Procedura lungă: `docs/PROCEDURA-LIVRARE-SECRETE.md` ·
 Skill: `.skills/mavis-secure-delivery/`
 
+
+## Regula 2 — nu se negociază: comit și push fără aprobare
+
+POPY a cerut explicit: *„niciodată să ceri permisiune pentru comit și push,
+orice lucru am face"*. **Un livrabil care stă doar în conversație e un
+livrabil pierdut.** Fiecare document, cod, status și plan intră în repo, în
+folderul potrivit, și se împinge pe `main`.
+
+Repo-ul este **public** (2026-10-22) — ca aplicațiile conectate să-l poată
+analiza. Audit făcut înainte: **zero secrete** în istoric, **zero date
+personale ale terților**, doar contorizări și documentație.
+
 ## Regula 3 — nu se negociază: regulile vaultului, când atingi Drive
 
 Din 2026-10-22 am acces la vaultul live din Drive (`GDrive-Second_Brain_PKMS`,
@@ -85,17 +97,6 @@ node mavis-tools/drive-vault.js find "termen"
 
 **Interdicție:** nu scanezi niciodată tot arborele ca să găsești un fișier.
 Cotorul răspunde în sub o secundă — căutarea se face în `00_INDEX.md`.
-
-## Regula 2 — nu se negociază: comit și push fără aprobare
-
-POPY a cerut explicit: *„niciodată să ceri permisiune pentru comit și push,
-orice lucru am face"*. **Un livrabil care stă doar în conversație e un
-livrabil pierdut.** Fiecare document, cod, status și plan intră în repo, în
-folderul potrivit, și se împinge pe `main`.
-
-Repo-ul este **public** (2026-10-22) — ca aplicațiile conectate să-l poată
-analiza. Audit făcut înainte: **zero secrete** în istoric, **zero date
-personale ale terților**, doar contorizări și documentație.
 
 ## Fluxul la fiecare schimbare
 

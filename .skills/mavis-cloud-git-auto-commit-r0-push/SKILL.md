@@ -42,6 +42,23 @@ nu împingi, corectezi, și abia apoi.
 | build-ul site-ului | site-ul nu trebuie să fie rupt când îl vezi |
 | `ast.parse` pe Python | la fel |
 | secret în diff | nu comite niciodată tokenuri |
+| **`git status --porcelain` după commit** | **obligatoriu — trebuie să fie GOL** |
+
+> **Ultima linie a prins o eroare reală (2026-10-22):** un `git add -A && git commit`
+> a raportat succes, dar un fișier editat în aceeași sesiune a rămas **necomitat**
+> în working tree, iar push-ul a dus o versiune incompletă în repo. Verificarea
+> `git status --porcelain` **după** commit prinde asta imediat. Dacă nu e gol,
+> comitează din nou înainte de push.
+>
+> La fel: după push, verifică `git show origin/main:<fișier>` — nu te baza pe
+> `raw.githubusercontent.com`, care servește **cache vechi** (minutele 1-2).
+
+| Verificare | De ce |
+|---|---|
+| `node --check` pe tot JS-ul | a prins o sintaxă stricată după ce am comis |
+| build-ul site-ului | site-ul nu trebuie să fie rupt când îl vezi |
+| `ast.parse` pe Python | la fel |
+| secret în diff | nu comite niciodată tokenuri |
 
 ## Regulile dure
 
