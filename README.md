@@ -16,6 +16,9 @@ Nu conține parole, tokenuri sau chei. Acelea stau în managerul de secrete, nu 
 | `mavis-tools/` | Scripturile Google, Gmail, Drive. `kit.js` e clientul de bază |
 | `.skills/` | Procedurile reutilizabile, învățate din ce a mers |
 | `docs/` | Decizii, arhitectură, specificații |
+| `18-GOOGLE/` | **Setupul Google** — OAuth, token, proceduri, checklist In production |
+| `19-GDRIVE/` | **Operațiunile pe Drive** — vaultul PKMS, regulile lui, unelte |
+| `20-TO-DOs/` | **Working folder-ul lui POPY** — taskuri care nu pot fi rezolvate singure |
 | `inbox/` | Material care nu încă nu are casă |
 | `arhiva/` | Istoric, versiuni vechi |
 
@@ -42,6 +45,11 @@ Scurt:
 3. **Niciodată ștergere definitivă.** Trash da, `delete` nu.
 4. **Niciodată trimitere automată.** Mavis pregătește fișierele; Alexandru apasă butonul.
 5. **Raportează sursa fiecărei cifre.** Log de proces, numărare reală, sau estimare — spune care.
+6. **O singură sesiune re-autentifică la un moment dat.** `prompt=consent` revocă
+   refresh token-ul precedent — o a doua re-autentificare omoară tokenul celeilalte
+   sesiuni. `google-refresh.js` folosește `select_account` când tokenul e viu.
+7. **Înainte de orice operație Google într-o sesiune nouă:** `bash mavis-tools/bootstrap.sh`
+   (configurează proxy-ul git, clonează repo-ul, dă verdictul pe Drive/Gmail).
 
 ## Git
 

@@ -8,7 +8,7 @@ description: Cum lucrez cu vaultul PKMS din Google Drive - regulile care nu se c
 Din 2026-10-22, Mavis Cloud are acces live la vaultul
 `GDrive-Second_Brain_PKMS` (51.157 fișiere · 88,72 GiB · paritate 100%).
 
-**Contractul complet, al lui POPY:** `docs/REGULI-VAULT.md` în repo.
+**Contractul complet, al lui POPY:** `19-GDRIVE/REGULI-VAULT.md` în repo.
 **Arhitectura completă:** `docs/ARHITECTURA-SISTEM.md` în repo.
 
 ---
@@ -71,4 +71,4 @@ Zonele protejate (refuză automat): `Knights Templar`, `_SYSTEM`, `.obsidian`,
 
 - `google-cloud-auth` — OAuth, token, procedura de livrare
 - `mavis-secure-delivery` — valori din secret manager nu trec prin chat
-- Docuri: `docs/REGULI-VAULT.md`, `docs/ARHITECTURA-SISTEM.md`
+- Docuri: `19-GDRIVE/REGULI-VAULT.md`, `docs/ARHITECTURA-SISTEM.md`

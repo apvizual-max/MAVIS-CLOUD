@@ -78,7 +78,7 @@ personale ale terților**, doar contorizări și documentație.
 ## Regula 3 — nu se negociază: regulile vaultului, când atingi Drive
 
 Din 2026-10-22 am acces la vaultul live din Drive (`GDrive-Second_Brain_PKMS`,
-51.157 de fișiere). **Regulile lui, întregi, în `docs/REGULI-VAULT.md`.**
+51.157 de fișiere). **Regulile lui, întregi, în `19-GDRIVE/REGULI-VAULT.md`.**
 
 Scurt: **nu se șterge nimic. Nu se mută fără R0 și fără decizia lui POPY.**
 `00_INDEX.md` nu se editează manual (se regenerează). Nu se scriu căi de reper

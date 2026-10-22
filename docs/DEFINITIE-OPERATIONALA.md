@@ -43,7 +43,7 @@
 `18-GOOGLE/` alocat Google.
 
 **Regulile vaultului** (nu se sterge nimic, nu se muta fara R0, etc.):
-`docs/REGULI-VAULT.md`. Unelta: `mavis-tools/drive-vault.js`.
+`19-GDRIVE/REGULI-VAULT.md`. Unelta: `mavis-tools/drive-vault.js`.
 
 ---
 
