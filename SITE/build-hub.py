@@ -114,6 +114,13 @@ def copiaza_docs():
         n += 1
     return n
 
+def badge(m):
+    if m is True:
+        return '<span class="tag ok">MATCH</span>'
+    if m is False:
+        return '<span class="tag" style="background:rgba(248,113,113,.12);color:#f87171;border-color:rgba(248,113,113,.3)">NESINCRON</span>'
+    return '<span class="tag" style="color:#64748b">NECUNOSCUT</span>'
+
 def main():
     os.makedirs(DIST, exist_ok=True)
     ndocs = copiaza_docs()
@@ -127,13 +134,6 @@ def main():
     repos = citeste_repo()
     n_ok = sum(1 for r in repos if r['match'] is True)
     n_r = len(repos)
-
-    def badge(m):
-        if m is True:
-            return '<span class="tag ok">MATCH</span>'
-        if m is False:
-            return '<span class="tag" style="background:rgba(248,113,113,.12);color:#f87171;border-color:rgba(248,113,113,.3)">NESINCRON</span>'
-        return '<span class="tag" style="color:#64748b">NECUNOSCUT</span>'
 
     repo_rows = ''.join(
         '<tr><td class="mono"><b>%s</b><div style="color:#64748b;font-size:11.5px">%s</div></td>'
