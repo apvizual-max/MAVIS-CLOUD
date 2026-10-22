@@ -44,15 +44,18 @@ function rawRequest(url, opts = {}) {
       }));
     });
     req.on('error', reject);
+    // https.request nu are timeout implicit — fara asta poate atarna la nesfarsit
+    // daca conexiunea se plafoneaza fara sa dea erori.
+    req.setTimeout(20000, () => { req.destroy(new Error('rawRequest timeout: ' + url)); });
     if (body) req.write(body);
     req.end();
   });
 }
 
-async function fetchRetry(url, opts = {}, tries = 4) {
+async function fetchRetry(url, opts = {}, tries = 8) {
   let lastErr = null;
   for (let i = 0; i < tries; i++) {
-    if (i) await new Promise(r => setTimeout(r, 1200 * i));
+    if (i) await new Promise(r => setTimeout(r, Math.min(1200 * i, 6000)));
     try {
       return await fetch(url, { ...opts, signal: AbortSignal.timeout(20000) });
     } catch (e) {

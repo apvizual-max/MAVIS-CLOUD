@@ -137,6 +137,37 @@ concluziona nimic despre client daca requestul n-a ajuns la Google.
 consuma** daca handshake-ul TLS pică (requestul nu a ajuns la Google) — deci
 reia cu acelasi cod.
 
+## 13. `cmd /c start "" "<url>"` pe Windows rupe URL-urile OAuth
+
+```js
+exec(`cmd /c start "" "${url}"`)   // PROBLEM
+```
+
+`cmd.exe` expandeaza `%VAR%`. URL-ul OAuth e plin de `%3A %2F %26`, deci
+cmd le mananca. Rezultatul: **Google raspunde „Error 400 / Bad Request"**.
+
+Detectie: bara de adresa din browser arata un URL care **nu seamana** cu ce ai
+generat.
+
+**Fix:** nu trece prin cmd.
+
+```js
+spawn('rundll32.exe', ['url.dll,FileProtocolHandler', url], { stdio: 'ignore', detached: true }).unref();
+```
+
+Pe macOS: `spawn('open', [url])`. Pe Linux: `spawn('xdg-open', [url])`.
+
+**Regula:** orice URL cu `%` nu se deschide prin `cmd`. Nici macOS/Linux nu
+au nevoie de quoting.
+
+## 14. Redirect URI fara cale + server care verifica calea
+
+Daca `REDIRECT_URI = 'http://127.0.0.1:8976'`, Google redirectioneaza pe **`/`**.
+Un server care verifica `req.url === '/callback'` arunca 404 si **pierde
+codul** — fara niciun mesaj de eroare vizibil.
+
+**Fix:** accepta orice cale, verifica doar `?code=`.
+
 ## Ordinea de verificare la ceva ce "nu merge"
 
 1. Fișierul există? `ls`
