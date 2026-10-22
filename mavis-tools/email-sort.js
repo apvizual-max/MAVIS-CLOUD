@@ -71,14 +71,11 @@ async function threadIds(query) {
     const lab = M.get(L[cat]);
     for (let i = 0; i < ids.length; i += 100) {
       try {
-        await k.req('POST',
-          `https://gmail.googleapis.com/gmail/v1/users/me/threads/${ids[i]}/modify`,
-          { addLabelIds: [lab], removeLabelIds: ['INBOX', 'UNREAD'] });
-        const rest = ids.slice(i + 1, i + 101);
-        for (const t of rest) {
-          await k.req('POST', `https://gmail.googleapis.com/gmail/v1/users/me/threads/${t}/modify`,
-            { addLabelIds: [lab], removeLabelIds: ['INBOX', 'UNREAD'] });
-        }
+        const chunk = ids.slice(i, i + 100);
+        await Promise.all(chunk.map(t =>
+          k.req('POST', `https://gmail.googleapis.com/gmail/v1/users/me/threads/${t}/modify`,
+            { addLabelIds: [lab], removeLabelIds: ['INBOX', 'UNREAD'] })
+        ));
       } catch (e) { console.log('  blocat la', i, e.message.slice(0, 50)); break; }
       if (i % 1000 === 0) console.log('   ...', i, '/', ids.length);
     }
