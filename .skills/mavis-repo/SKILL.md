@@ -39,6 +39,11 @@ git push origin main
 - `PLAN.md` și `PROGRES.md` se actualizează în același commit ca munca.
 - Nu comite: tokenuri, `.env`, `oauth.json`, `node_modules`, loguri.
 - Repo-ul este **public** (2026-10-22), ca aplicațiile conectate să-l analizeze.
+- **Structura:** `18-GOOGLE/` = setupul Google · `19-GDRIVE/` = operațiile pe
+  Drive · `20-TO-DOs/` = working folder-ul lui POPY (taskuri pe care nu le pot
+  rezolva singur; metoda: logica ∩ rațiune ∩ strategie).
+- **Re-autentificarea e cu un singur scriitor** — `prompt=consent` revocă
+  tokenul precedent și omoară celelalte sesiuni.
 
 ## Livrarea valorilor care vin din secret manager
 

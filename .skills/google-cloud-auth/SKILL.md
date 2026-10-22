@@ -158,46 +158,45 @@ Aceasta e procedura care a mers, pas cu pas. **Repeta-o identic.**
 ```bash
 cd /workspace/mavis-cloud
 
-# 1. client_id-ul e in repo, ca identificator public
-cat mavis-tools/google-client.json
+# 0. (doar in sesiune NOUA) bootstrap: config git + clone + verdict
+bash mavis-tools/bootstrap.sh
 
-# 2. verifica: clientul e viu? drift? tokenul exista?
+# 1. verifica starea — verdict pe un singur rand, ~10 secunde
 node mavis-tools/google-preflight.js
 #    [0] drift client_id  OK / FAIL
 #    [1] credentiale      OK / TOKEN LIPSA
 #    [2] client la token  OK / FAIL / INDETERMINAT (retea)
 #    [3] client la auth   OK / FAIL
 #    [4] refresh token    OK / FAIL
-#  -> daca [3] e FAIL, problema e clientul, NU livrarea
-#  -> daca [4] e FAIL, trebuie consimtamant nou
+#  -> [3] FAIL = problema e clientul, NU livrarea
+#  -> [4] FAIL = trebuie re-autentificare (vezi mai jos)
+#  -> INDETERMINAT (retea) = NU concluziona nimic, reia mai tarziu
 
-# 3. genereaza linkul IN REPO (nu in chat)
-node mavis-tools/google-link-file.js
-#    -> scrie 18-GOOGLE/AUTORIZARE-LINK.txt
+# 2. genereaza linkul IN REPO + commit + push, fara aprobare
+node mavis-tools/google-refresh.js link
+#    -> scrie 18-GOOGLE/AUTORIZARE-LINK.txt, comiteaza, impinge
+#    -> iti da URL-ul de repo pe care sa-l dai lui POPY
 
-# 4. comit + push, fara aprobare
-git add -A && git commit -m "Google: link de autorizare regenerat" && git push origin main
+# 3. POPY deschide linkul -> Allow -> browserul moare pe 127.0.0.1:8976 (normal)
+#    -> copiaza bara de adresa cu ?code=... -> trimite prin chat (codul NU e secret)
 
-# 5. livreaza URL-ul de repo (nu contine secret, nu se mascheaza)
-#    https://github.com/apvizual-max/MAVIS-CLOUD/blob/main/18-GOOGLE/AUTORIZARE-LINK.txt
-#    raw: https://raw.githubusercontent.com/apvizual-max/MAVIS-CLOUD/main/18-GOOGLE/AUTORIZARE-LINK.txt
+# 4. schimba codul in refresh_token
+node mavis-tools/google-refresh.js code "http://127.0.0.1:8976/?code=..."
 
-# 6. POPY: deschide linkul -> Allow -> copiaza bara de adresa cu ?code=...
+# 5. scrie tokenul in secret manager prin tool-ul `secret` (NU in chat)
+#    create --name=GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD --value=<token>
 
-# 7. schimba codul in refresh_token (retry-uri incluse, reteaua pica)
-node mavis-tools/google-connect.js "http://127.0.0.1:8976/?code=..."
-
-# 8. scrie tokenul in secret manager (tool `secret`, NU chat)
-
-# 9. verifica live
+# 6. verifica live
 node mavis-tools/google-verify.js
 ```
 
-**Daca pasul 2 zice `INDETERMINAT (retea)`** — retelua din cloud e intermitenta.
-NU concluziona nimic despre credentiale. Reia mai tarziu.
-
-**Daca pasul 7 da "retea instabila"** — codul NU s-a consumat (n-a ajuns la
-Google). Reia cu acelasi cod.
+**REGULA CRITICA — o singura sesiune re-autentifica la un moment dat.**
+`prompt=consent` **revoca** refresh token-ul precedent pentru aceeasi pereche
+client+utilizator (docs oficiale Google). Deci daca doua sesiuni paralele se
+re-autentifica simultan, a doua omoara tokenul primei — si prima moare si ea.
+`google-refresh.js` foloseste automat `prompt=select_account` (non-revoking)
+cand exista un token viu; cand tokenul e deja mort, `consent` e corect
+(n-avem nimic de pierdut).
 
 Detalii: skill `mavis-secure-delivery` · doc `docs/PROCEDURA-LIVRARE-SECRETE.md`
 

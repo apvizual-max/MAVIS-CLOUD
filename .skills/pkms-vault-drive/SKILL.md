@@ -71,4 +71,4 @@ Zonele protejate (refuză automat): `Knights Templar`, `_SYSTEM`, `.obsidian`,
 
 - `google-cloud-auth` — OAuth, token, procedura de livrare
 - `mavis-secure-delivery` — valori din secret manager nu trec prin chat
-- Docuri: `19-GDRIVE/REGULI-VAULT.md`, `docs/ARHITECTURA-SISTEM.md`
+- Docuri: `19-GDRIVE/REGULI-VAULT.md`, `docs/ARHITECTURA-SISTEM.md`, `19-GDRIVE/MavisCloud-Drive.md`
