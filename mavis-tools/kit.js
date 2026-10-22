@@ -131,30 +131,52 @@ function req(method, url, data, quotaMethod) {
   return QUOTA_MGR.reserve(qm).then(() => token()).then(t => attempt(method, url, data, t, 0, qm));
 }
 
-function attempt(method, url, data, t, n, qm) {
-  return (async () => {
-    const body = data ? JSON.stringify(data) : null;
-    // fetch, nu https.request — vezi refresh() pentru motiv (proxy de sandbox).
-    const resp = await fetchRetry(url, {
-      method,
-      headers: {
-        Authorization: 'Bearer ' + t, 'Content-Type': 'application/json',
-        ...(body ? { 'Content-Length': Buffer.byteLength(body) } : {}),
-      },
-      body: body || undefined,
-    });
-    const d = await resp.text();
-    let j; try { j = d ? JSON.parse(d) : {}; } catch { j = { raw: d }; }
-    const rl = resp.status === 429 || (resp.status === 403 && /rateLimit|Quota exceeded/i.test(JSON.stringify(j)));
-    if (rl && n < 5) {
-      const wait = resp.headers.get('retry-after') ? +resp.headers.get('retry-after') * 1000 : QUOTA_MGR.backoffMs(n);
-      QUOTA_MGR.state.used += QUOTA_MGR.costOf(qm);
-      await new Promise(r => setTimeout(r, wait));
-      return attempt(method, url, data, t, n + 1, qm);
-    }
-    if (resp.status >= 400) throw new Error(`HTTP ${resp.status}: ${JSON.stringify(j).slice(0, 300)}`);
-    return j;
-  })();
+function buildRequestOptions(method, data, t) {
+  const body = data ? JSON.stringify(data) : null;
+  const headers = {
+    Authorization: 'Bearer ' + t,
+    'Content-Type': 'application/json',
+  };
+  if (body) {
+    headers['Content-Length'] = Buffer.byteLength(body);
+  }
+  return { method, headers, body: body || undefined };
+}
+
+async function parseResponse(resp) {
+  const d = await resp.text();
+  try {
+    return d ? JSON.parse(d) : {};
+  } catch {
+    return { raw: d };
+  }
+}
+
+function isRateLimited(status, parsedBody) {
+  return status === 429 || (status === 403 && /rateLimit|Quota exceeded/i.test(JSON.stringify(parsedBody)));
+}
+
+async function handleRateLimit(resp, n, qm) {
+  const wait = resp.headers.get('retry-after') ? +resp.headers.get('retry-after') * 1000 : QUOTA_MGR.backoffMs(n);
+  QUOTA_MGR.state.used += QUOTA_MGR.costOf(qm);
+  await new Promise(r => setTimeout(r, wait));
+}
+
+async function attempt(method, url, data, t, n, qm) {
+  const opts = buildRequestOptions(method, data, t);
+  const resp = await fetchRetry(url, opts);
+  const parsedBody = await parseResponse(resp);
+
+  if (isRateLimited(resp.status, parsedBody) && n < 5) {
+    await handleRateLimit(resp, n, qm);
+    return attempt(method, url, data, t, n + 1, qm);
+  }
+
+  if (resp.status >= 400) {
+    throw new Error(`HTTP ${resp.status}: ${JSON.stringify(parsedBody).slice(0, 300)}`);
+  }
+
+  return parsedBody;
 }
 
 // ---------- DRIVE ----------
