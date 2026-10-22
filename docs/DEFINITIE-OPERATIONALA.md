@@ -12,64 +12,38 @@
 
 ## Arhitectura sistemului — 2026-10-22
 
-Definita de POPY, acceptata ca atare:
+> **Varianta scurtă de mai jos e o simplificare.** Versiunea completă, măsurată
+> pe vault-ul live, e în **`docs/ARHITECTURA-SISTEM.md`** — include și al
+> treilea agent, al doilea repo, oglinda locală NVMe, baza Git decuplată și
+> taskurile programate. Citește-o pe aia, nu asta.
 
 | Suprafata | Ce este | Cine lucreaza acolo |
 |---|---|---|
-| **Google Drive** | **Suprafata de lucru.** PKM personal (Personal Knowledge Management System) + **executia efectiva** — Gmail si GDrive | POPY + Mavis Cloud |
+| **Google Drive** | **Suprafata de lucru.** PKM personal (vaultul `GDrive-Second_Brain_PKMS`) + **executia efectiva** — Gmail si GDrive | POPY + Mavis Local |
 | **GitHub `apvizual-max/MAVIS-CLOUD`** | **Configuratia sistemului** + back-up + **puntea de comunicare** directa intre Mavis Cloud si Mavis Local | ambii agenti |
-| **Mavis Local** | Administreaza **configuratia** | agentul de pe calculatorul lui POPY |
-| **Mavis Cloud** | Agent pe cloud | eu |
+| **Mavis Local** | Administreaza **configuratia** si opereaza zilnic in vault | agentul de pe calculatorul lui POPY |
+| **Mavis Cloud** (eu) | Agent pe cloud. Acces la Drive/Gmail prin OAuth | eu |
 
-**Trei reguli care rezulta din asta:**
+**Reguli care rezulta din asta:**
 
 1. **WORK ≠ CONFIG.** Munca efectiva se face in Gmail si GDrive. Folderul
-   `Alex Work/` **nu mai exista** — a fost inlocuit de Drive.
+   `Alex Work/` **nu mai exista** — a fost inlocuit de vaultul de pe Drive.
 2. **Repo-ul nu e locul de munca.** E locul unde sistemul e *definit* si
    *versionat*. Orice livrabil intra aici, pe `main`, cu commit si push
    automat, **fara aprobare**.
 3. **Integrarea e continua.** Feedback-ul circula Local ↔ Cloud prin repo.
    Repo-ul e **public** (2026-10-22) ca aplicatiile conectate sa-l analizeze.
+4. **Al doilea repo exista:** `apvizual-max/pkms-vault-automation` (ramura
+   `master`) — motorul vaultului, indexurile, documentatia, handoff-urile.
+   **Privat** — decizie de luat de POPY.
+5. **Exista un al treilea agent:** Antigravity Sentinel (Google DeepMind) —
+   operator backend / suveran, rescue operator pentru Mavis Local.
 
 **Focus curent:** *system configurations* — repo-ul GitHub + folderul
 `18-GOOGLE/` alocat Google.
 
-## De ce nu pot edita fișiere pe Cloud
-
-Cloud trăiește pe serverele MiniMax, într-un mediu complet izolat. **Nu are acces
-la hard disk-ul tău**, nu vede folderul proiectului, nu știe unde ai salvat
-HTML-ul, nu se poate lega la `localhost`.
-
-- **Local** → are drepturi de sistem: deschide fișiere, rescrie cod, salvează pe
-  disc, rezultatul apare instant în browserul tău.
-- **Cloud** → este „orb" la calculatorul tău. Singurul drum e un depozit extern
-  (GitHub) unde ambii au acces.
-
-**Nu e o scăpare. E cum a fost gândit.**
-
-## Pentru ce a fost creat Cloud
-
-### 1. Rulare asincronă
-Închizi laptopul, localul moare. Cloudul continuă. Iei o cercetare mare, apeși
-Enter, pleci, revii — **rezultatul e gata.**
-
-### 2. Sandbox de securitate
-Scripturi experimentale, pachete necunoscute, scraping agresiv. Localul îți
-sufle discul și îți blochează IP-ul de casă. Cloudul e o mașină virtuală izolată
-— se strică și se recreează, **calculatorul tău nu simte nimic.**
-
-### 3. Acces de oriunde
-De pe telefon, de pe altă stație, fără mediu de dev instalat. Se conectează prin
-API la Drive, Sheets, repo-uri.
-
-## Împărțirea rolurilor
-
-| Rol | Unde | De ce |
-|---|---|---|
-| **Local (Mavis)** | producție, fișiere, cod, site | singurul cu acces la disc și editare în timp real |
-| **Cloud (Mavis Cloud)** | cercetare, sinteză, date, rapoarte | singurul cu rulare lungă și fără stația ocupată |
-
-**Dacă scopul tău e să construiești și să editezi site-ul, rămâi pe Local.**
+**Regulile vaultului** (nu se sterge nimic, nu se muta fara R0, etc.):
+`docs/REGULI-VAULT.md`. Unelta: `mavis-tools/drive-vault.js`.
 
 ---
 
