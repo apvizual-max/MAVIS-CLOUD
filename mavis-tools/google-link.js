@@ -13,9 +13,18 @@
  */
 const AUTH = require('./google-auth.js');
 
+// FARA FALLBACK HARDCODAT. 2026-10-22: un client_id hardcodat a ramas
+// in repo si a fost folosit cand secretul avea alt client (cel pentru
+// Hermes CLI) -> "Error 401: invalid_client" in browser, fara explicatie.
+// Daca lipseste client_id, se opreste. Nu se mai inventeaza nimic.
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID
-  || process.env.GOOGLE_CLIENT_ID_MAVIS_CLOUD
-  || '1068987308935-5b7h17gt1c5hc4i1m6eginads37o3m2h.apps.googleusercontent.com';
+  || process.env.GOOGLE_CLIENT_ID_MAVIS_CLOUD;
+if (!CLIENT_ID) {
+  console.error('\n[ROSU] Nu exista GOOGLE_CLIENT_ID / GOOGLE_CLIENT_ID_MAVIS_CLOUD.');
+  console.error('       Fara client_id, linkul de autorizare ar fi invalid.');
+  console.error('       Pune client_id-ul in secret manager (Mavis Cloud) sau in env.\n');
+  process.exit(1);
+}
 
 const PORT = Number(process.env.GOOGLE_REDIRECT_PORT || 8976);
 const REDIRECT_URI = `http://127.0.0.1:${PORT}`;
