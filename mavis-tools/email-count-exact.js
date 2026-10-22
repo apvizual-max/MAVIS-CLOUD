@@ -22,7 +22,7 @@ async function count(query, label) {
   return { total, pages, capped };
 }
 
-(async () => {
+async function main() {
   const out = [];
   const l = await k.gmail.labels();
   const mavis = (l.labels || []).filter(x => x.name.startsWith('MAVIS/'));
@@ -36,6 +36,12 @@ async function count(query, label) {
   console.log(pad('GUNOI (total)', 30) + String(t.total).padStart(7) + (t.capped ? '  (plafon)' : ''));
   require('fs').writeFileSync('/workspace/mavis-tools/email-counts-exact.json', JSON.stringify(out, null, 2));
   console.log('\n-> email-counts.json');
-})();
+}
+
+if (require.main === module) {
+  main();
+}
+
+module.exports = { pad, count, main };
 
 function pad(s, n) { while (s.length < n) s += ' '; return s; }
