@@ -41,7 +41,8 @@ def count_paginiq(q):
     except Exception:
         return 'necontorizat'
 
-def main():
+
+def gather_stats():
     os.makedirs(DIR, exist_ok=True)
 
     # ---- git ----
@@ -88,6 +89,48 @@ def main():
     prag = sh('git rev-list --count origin/main..HEAD') or '0'
     erori = [i for i in log.get('intrari', []) if i.get('nivel') in ('eroare', 'critic')]
 
+    return {
+        'branch': branch,
+        'commits': commits,
+        'dirty': dirty,
+        'last': last,
+        'remote': remote,
+        'own': own,
+        'vend': vend,
+        'names': names,
+        'vnames': vnames,
+        'sites': sites,
+        'sab': sab,
+        'cvs': cvs,
+        'gmail': gmail,
+        'inbox': inbox,
+        'trash': trash,
+        'wf': wf,
+        'g': g,
+        'prag': prag,
+        'erori': erori
+    }
+
+def build_markdown(stats):
+    branch = stats['branch']
+    commits = stats['commits']
+    dirty = stats['dirty']
+    last = stats['last']
+    remote = stats['remote']
+    own = stats['own']
+    vend = stats['vend']
+    names = stats['names']
+    vnames = stats['vnames']
+    sites = stats['sites']
+    sab = stats['sab']
+    cvs = stats['cvs']
+    gmail = stats['gmail']
+    inbox = stats['inbox']
+    trash = stats['trash']
+    wf = stats['wf']
+    g = stats['g']
+    prag = stats['prag']
+    erori = stats['erori']
     md = f"""================================================================================
 RAPORT DE STARE PROIECT: MAVIS-CLOUD
 DATA & ORA: {TODAY} {datetime.datetime.now():%H:%M} | INSTANȚĂ: CLOUD
@@ -230,6 +273,14 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există {len(own)} skill-uri pro
 *Raport generat {TODAY} · {commits} commit-uri · {len(own) + len(vend)} skill-uri*
 """
 
+    return md
+
+def write_reports(md, stats):
+    own = stats['own']
+    vend = stats['vend']
+    sites = stats['sites']
+    inbox = stats['inbox']
+    trash = stats['trash']
     path = os.path.join(DIR, TODAY + '-sentinel.md')
     open(path, 'w', encoding='utf-8').write(md)
     open(os.path.join(REPO, 'docs', 'SENTINEL-LATEST.md'), 'w', encoding='utf-8').write(md)
@@ -247,6 +298,12 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există {len(own)} skill-uri pro
     print('OK  %s' % path)
     print('    inbox=%s trash=%s skilluri=%d siteuri=%d' % (inbox, trash, len(own) + len(vend), len(sites)))
     return path
+
+
+def main():
+    stats = gather_stats()
+    md = build_markdown(stats)
+    return write_reports(md, stats)
 
 if __name__ == '__main__':
     main()
