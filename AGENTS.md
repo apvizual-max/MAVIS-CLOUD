@@ -63,6 +63,29 @@ livrarea, nu credentialul.** Nu cere lui POPY să schimbe chei.
 Procedura lungă: `docs/PROCEDURA-LIVRARE-SECRETE.md` ·
 Skill: `.skills/mavis-secure-delivery/`
 
+## Regula 3 — nu se negociază: regulile vaultului, când atingi Drive
+
+Din 2026-10-22 am acces la vaultul live din Drive (`GDrive-Second_Brain_PKMS`,
+51.157 de fișiere). **Regulile lui, întregi, în `docs/REGULI-VAULT.md`.**
+
+Scurt: **nu se șterge nimic. Nu se mută fără R0 și fără decizia lui POPY.**
+`00_INDEX.md` nu se editează manual (se regenerează). Nu se scriu căi de reper
+în mână — se descoperă. Nu se atinge ramura Knights Templar, `_SYSTEM`,
+`.obsidian`, `.trash`, `.vault-intelligence`, `.claudian`, `.neural_memory`.
+
+**Unelta:** `mavis-tools/drive-vault.js` — read-only, cu o singură excepție:
+`quarantine` mută (nu șterge) și cere `--confirm` + motiv scris.
+
+```bash
+node mavis-tools/drive-vault.js root
+node mavis-tools/drive-vault.js ls "01_Projects"
+node mavis-tools/drive-vault.js read "COTOR.md"
+node mavis-tools/drive-vault.js find "termen"
+```
+
+**Interdicție:** nu scanezi niciodată tot arborele ca să găsești un fișier.
+Cotorul răspunde în sub o secundă — căutarea se face în `00_INDEX.md`.
+
 ## Regula 2 — nu se negociază: comit și push fără aprobare
 
 POPY a cerut explicit: *„niciodată să ceri permisiune pentru comit și push,
