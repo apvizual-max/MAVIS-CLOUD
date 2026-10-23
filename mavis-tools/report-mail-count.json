@@ -1,0 +1,135 @@
+{
+  "today": "2026/10/23",
+  "labels": [
+    {
+      "name": "MAVIS/Joburi",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 447
+      },
+      "newest": {
+        "id": "1a12bfc46840fb31",
+        "subject": "New jobs similar to Brand Designer,  Product Launches at Figma",
+        "date": "Sun, 11 Oct 2026 17:21:54 +0000 (UTC)",
+        "from": "LinkedIn <jobs-noreply@linkedin.com>"
+      },
+      "newestDate": "Sun, 11 Oct 2026 17:21:54 +0000 (UTC)"
+    },
+    {
+      "name": "MAVIS/AI si comunitati",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 159
+      },
+      "newest": {
+        "id": "1a12bb3958a41822",
+        "subject": "Executive Briefing: Which Limits in Your 2027 Plan Are Real, and Which Are From the Last Time You Tried?",
+        "date": "Sun, 11 Oct 2026 15:00:41 +0000",
+        "from": "\"Nate from Nate’s Substack\" <natesnewsletter@substack.com>"
+      },
+      "newestDate": "Sun, 11 Oct 2026 15:00:41 +0000"
+    },
+    {
+      "name": "MAVIS/Social",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 282
+      },
+      "newest": {
+        "id": "1a129d66139b278d",
+        "subject": "1 event happening tomorrow",
+        "date": "Sun, 11 Oct 2026 07:21:16 +0000 (UTC)",
+        "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
+      },
+      "newestDate": "Sun, 11 Oct 2026 07:21:16 +0000 (UTC)"
+    },
+    {
+      "name": "MAVIS/Newsletter",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 289
+      },
+      "newest": {
+        "id": "1a12c5f5b5566c0f",
+        "subject": "The Robinhood Big 3 Basket Is +46.59% in 1 year",
+        "date": "Sun, 11 Oct 2026 19:10:07 +0000 (UTC)",
+        "from": "\"Crypto.com\" <no-reply@news.crypto.com>"
+      },
+      "newestDate": "Sun, 11 Oct 2026 19:10:07 +0000 (UTC)"
+    },
+    {
+      "name": "MAVIS/Finante",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 9
+      },
+      "newest": {
+        "id": "1a112cd10810c41d",
+        "subject": "Ether.fi Partners with MoonPay to Power Full Stack Payments for Crypto Neobanking",
+        "date": "Tue, 6 Oct 2026 19:59:51 +0000 (UTC)",
+        "from": "MoonPay via LinkedIn <newsletters-noreply@linkedin.com>"
+      },
+      "newestDate": "Tue, 6 Oct 2026 19:59:51 +0000 (UTC)"
+    },
+    {
+      "name": "MAVIS/Personal",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 0
+      },
+      "newest": null,
+      "newestDate": null
+    },
+    {
+      "name": "MAVIS/De raspuns",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 49
+      },
+      "newest": {
+        "id": "1a120e8558d6b485",
+        "subject": "Re: Follow-up aplicare job Happy Advertising",
+        "date": "Fri, 9 Oct 2026 16:44:22 +0300",
+        "from": "Alexandru Popescu <apvizual@gmail.com>"
+      },
+      "newestDate": "Fri, 9 Oct 2026 16:44:22 +0300"
+    },
+    {
+      "name": "MAVIS/Facturi si conturi",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 3
+      },
+      "newest": {
+        "id": "1a120593ede9884b",
+        "subject": "Confirmare plată facturi prin Pago",
+        "date": "Fri, 09 Oct 2026 11:08:01 +0000 (UTC)",
+        "from": "\"Plăți Pago\" <plati@pagoplateste.ro>"
+      },
+      "newestDate": "Fri, 09 Oct 2026 11:08:01 +0000 (UTC)"
+    }
+  ],
+  "totals": {
+    "azi": 0,
+    "24h": 0,
+    "7z": 0,
+    "30z": 1238
+  },
+  "_nota": "mostrele de mesaje au fost eliminate inainte de commit (repo public)"
+}

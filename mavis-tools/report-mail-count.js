@@ -1,0 +1,77 @@
+#!/usr/bin/env node
+/**
+ * RAPORT ZILNIC — MĂSURĂTOARE ETAICHETE MAVIS/*
+ *
+ * Numără EXACT (paginare reală, nu resultSizeEstimate) mesajele pe fiecare
+ * etichetă MAVIS/*, pe mai multe ferestre de timp. Regula: zero-ul pe o
+ * fereastră nu înseamnă "eticheta e goală" — înseamnă "eticheta nu mai primește
+ * nimic în acea fereastră". De aceea măsurăm 4 ferestre + ultima dată.
+ *
+ * READ-ONLY. Nu trimite, nu șterge, nu modifică nimic.
+ */
+const k = require('./kit.js');
+const fs = require('fs');
+
+const TODAY = process.argv[2] || new Date().toISOString().slice(0, 10).replace(/-/g, '/');
+const OUT = process.argv[3] || '/workspace/Mavis/mavis-tools/report-mail-count.json';
+
+// ferestre: [eticheta, query]
+const WINDOWS = [
+  ['azi',      q => `${q} after:${TODAY}`],
+  ['24h',     q => `${q} newer_than:1d`],
+  ['7z',      q => `${q} newer_than:7d`],
+  ['30z',     q => `${q} newer_than:30d`],
+];
+
+async function countExact(query) {
+  let page = null, total = 0, pages = 0;
+  const ids = [];
+  do {
+    const url = 'https://gmail.googleapis.com/gmail/v1/users/me/messages?q='
+      + encodeURIComponent(query) + '&maxResults=500' + (page ? '&pageToken=' + encodeURIComponent(page) : '');
+    const r = await k.req('GET', url);
+    const ms = r.messages || [];
+    total += ms.length;
+    pages++;
+    for (const m of ms) ids.push(m.id);
+    page = r.nextPageToken || null;
+    if (page) await new Promise(res => setTimeout(res, 220));
+  } while (page);
+  return { total, pages, ids };
+}
+
+(async () => {
+  const l = await k.gmail.labels();
+  const mavis = (l.labels || []).filter(x => x.name.startsWith('MAVIS/'));
+  console.log('Etichete MAVIS/*: ' + mavis.length + ' -> ' + mavis.map(x => x.name).join(' | '));
+
+  const res = { today: TODAY, labels: [], totals: { azi: 0, '24h': 0, '7z': 0, '30z': 0 } };
+
+  for (const lab of mavis) {
+    const q = `label:"${lab.name}"`;
+    const row = { name: lab.name, counts: {}, newest: null, newestDate: null };
+    for (const [w, mk] of WINDOWS) {
+      const c = await countExact(mk(q));
+      row.counts[w] = c.total;
+      res.totals[w] = (res.totals[w] || 0) + c.total;
+      if (w === '30z' && c.ids.length) {
+        // ultima etichetare: ia cea mai recentă din 30z
+        const det = [];
+        for (const id of c.ids.slice(0, 25)) {
+          const m = await k.req('GET', 'https://gmail.googleapis.com/gmail/v1/users/me/messages/' + id + '?format=metadata&metadataHeaders=Subject&metadataHeaders=Date&metadataHeaders=From');
+          det.push({ id, subject: (m.payload && m.payload.headers || []).find(h => h.name === 'Subject')?.value, date: (m.payload && m.payload.headers || []).find(h => h.name === 'Date')?.value, from: (m.payload && m.payload.headers || []).find(h => h.name === 'From')?.value });
+        }
+        det.sort((a, b) => new Date(b.date) - new Date(a.date));
+        row.newest = det[0] || null;
+        row.newestDate = det[0] ? det[0].date : null;
+        row.samples = det.slice(0, 6);
+      }
+    }
+    res.labels.push(row);
+    console.log(`  ${row.name.padEnd(26)} azi=${String(row.counts.azi).padStart(4)}  24h=${String(row.counts['24h']).padStart(4)}  7z=${String(row.counts['7z']).padStart(5)}  30z=${String(row.counts['30z']).padStart(5)}  ultima=${row.newestDate || 'n/a'}`);
+  }
+
+  fs.writeFileSync(OUT, JSON.stringify(res, null, 2));
+  console.log('\nTOTALE: ' + JSON.stringify(res.totals));
+  console.log('-> ' + OUT);
+})();

@@ -8,6 +8,7 @@
 // Acum e lazy: daca nu exista credentiale, arunca doar la primul apel real,
 // cu mesaj care spune EXACT ce lipseste.
 const https = require('https');
+const path = require('path');
 const AUTH = require('./google-auth.js');
 const QUOTA_MGR = require('./quota.js');
 
@@ -166,10 +167,29 @@ function quotaMethodFor(url) {
   return 'messages.list'; // default conservator: 5 unitati
 }
 
+// Contor de cereri Google pentru regula lui Alex: max 200 cereri/rulare.
+// Numara la nivel de apel HTTP catre googleapis (nu cererile de token).
+// Persistenta la finalul procesului, ca raportul zilnic sa stie exact.
+const CALL_STATE = { calls: 0, byMethod: {} };
 function req(method, url, data, quotaMethod) {
   const qm = quotaMethod || quotaMethodFor(url);
+  CALL_STATE.calls++;
+  CALL_STATE.byMethod[qm] = (CALL_STATE.byMethod[qm] || 0) + 1;
   return QUOTA_MGR.reserve(qm).then(() => token()).then(t => attempt(method, url, data, t, 0, qm));
 }
+// Scrie consumul la iesirea din proces (fara a bloca iesirea).
+process.on('exit', () => {
+  if (!CALL_STATE.calls) return;
+  try {
+    const fs = require('fs');
+    const p = path.join(__dirname, '.api-usage.json');
+    let all = {};
+    try { all = JSON.parse(fs.readFileSync(p, 'utf8')); } catch (e) {}
+    const script = path.basename(process.argv[1] || 'inline');
+    all[script] = (all[script] || 0) + CALL_STATE.calls;
+    fs.writeFileSync(p, JSON.stringify(all, null, 2));
+  } catch (e) { /* silent: contorul e doar informativ */ }
+});
 
 function attempt(method, url, data, t, n, qm) {
   return (async () => {
@@ -316,4 +336,4 @@ const danger = {
   listTrash: (folderId = 'root') => req('GET', `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent("trashed=true and '" + folderId + "' in parents")}&fields=files(id,name,trashedTime)`),
 };
 
-module.exports = { drive, gmail, calendar, docs, sheets, slides, photos, token, tokeninfo, req, danger, creds, fetchRetry };
+module.exports = { drive, gmail, calendar, docs, sheets, slides, photos, token, tokeninfo, req, danger, creds, fetchRetry, CALL_STATE };
