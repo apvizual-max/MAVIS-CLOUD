@@ -71,9 +71,16 @@ const REPLY = [
 // rolul chiar de design? (titlul contine o cheie de tier 1 sau 2)
 const DESIGN_KW = ['art director','creative director','creative lead','head of creative','brand director','advertising lead','campaign art director','ad conceptor','creative systems','art mid','senior creatives','creatives','art team',
   'graphic designer','visual designer','senior graphic','ui/ux','ux/ui','ux designer','ui designer','product designer','interaction designer','web designer','dtp designer','brand designer','identity designer','graphic design','visual design','content designer','content specialist','creative designer'];
+// ⚡ Bolt Optimization: Memoize compiled RegExp to avoid recompiling in hot loops.
+const _hasWordCache = {};
 function hasWord(text, w) {
-  const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i').test(text);
+  let re = _hasWordCache[w];
+  if (!re) {
+    const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    re = new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i');
+    _hasWordCache[w] = re;
+  }
+  return re.test(text);
 }
 const isDesignRole = role => DESIGN_KW.some(k => hasWord(role || '', k));
 // motivul real din spatele scorului
