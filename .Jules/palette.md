@@ -1,0 +1,3 @@
+## 2024-05-19 - Improved form accessibility on Python-generated HTML
+**Learning:** Found that some static HTML generators like `SITE/build-hub.py` lacked proper `for` attribute linkages on form fields and missed `aria-label`s on icon-only interactive elements (`&times;`), significantly reducing screen reader usability.
+**Action:** When working on Python files containing large HTML strings, always check standard form elements (like `<label>`) and ensure they contain `for` attributes that map exactly to their input's `id`. Also, verify any icon-based action buttons contain descriptive `aria-label` attributes.

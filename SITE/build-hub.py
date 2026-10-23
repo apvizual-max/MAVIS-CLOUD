@@ -475,15 +475,15 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
   <div class="note"><b>Scrie problema în cuvintele tale.</b> Generatorul o transformă în prompt
   structurat pe care îl trimiți aici. Nu trebuie să știi să scrii prompturi.</div>
 
-  <label class="lbl">Ce vrei — în cuvintele tale</label>
+  <label for="dureri" class="lbl">Ce vrei — în cuvintele tale</label>
   <textarea class="inp" id="dureri" rows="4"
     placeholder="Ex: nu mai văd emailurile vechi, vreau să fie ordonate, și vreau să știu care cer răspuns"></textarea>
 
-  <label class="lbl">Criterii — cum știi că e rezolvat</label>
+  <label for="criterii" class="lbl">Criterii — cum știi că e rezolvat</label>
   <textarea class="inp" id="criterii" rows="2"
     placeholder="Ex: vreau să văd un raport, și să nu se piardă nimic"></textarea>
 
-  <label class="lbl">Ce NU ai voie să faci</label>
+  <label for="restrictii" class="lbl">Ce NU ai voie să faci</label>
   <textarea class="inp" id="restrictii" rows="2"
     placeholder="Ex: nu șterge nimic definitiv, nu trimite nimic în numele meu"></textarea>
 
@@ -530,7 +530,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
     if (!c.length) {{ box.innerHTML = '<p style="color:#64748b;font-size:13.5px;margin-top:12px">Coada e goală. Apasă un buton de mai sus.</p>'; return; }}
     box.innerHTML = c.map(function(x,i){{
       return '<div class="qitem"><span>'+ (i+1) +'. '+ x.titlu +'</span>'+
-             '<button title="șterge" onclick="stergeAcțiune('+i+')">&times;</button></div>';
+             '<button title="șterge" aria-label="Șterge acțiunea" onclick="stergeAcțiune('+i+')">&times;</button></div>';
     }}).join('');
   }}
   window.stergeActțiune = function(i){{ var c = coada(); c.splice(i,1); salveaza(c); }};
