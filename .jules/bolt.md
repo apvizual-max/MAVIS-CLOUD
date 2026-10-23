@@ -1,0 +1,3 @@
+## 2024-05-24 - Avoid dynamic RegExp compilation in hot loops
+**Learning:** The codebase heavily uses a helper function `hasWord(text, w)` which constructs a new `RegExp` object via `new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i')` dynamically on every invocation. When this is placed in hot loops (e.g., iterating through all jobs, scoring each, finding words across multiple arrays), it degrades performance.
+**Action:** When working on string boundaries and checking arrays of words, avoid dynamically compiling `RegExp`. Instead, implement a cache to memoize compiled `RegExp` objects so the compilation overhead is only paid once per unique word.

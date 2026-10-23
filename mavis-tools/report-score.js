@@ -133,9 +133,13 @@ const DISCIPLINE_D = [
   { score: 4, name: 'Adjacent Strategic', k: ['presentation designer','infographic','data visualization','dashboard','proposal','report design','deck'] },
 ];
 const SENIOR_KW_D = ['senior','sr.','sr ','snr','art director','art mid','creatives','lead','director','head of','chief','principal','architect','expert','staff','manager','global','seasoned','experienced','established','10+ years','9+ years','8+ years','7+ years','6+ years'];
+const _hasWordCache = {};
 function hasWord(text, w) {
-  const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i').test(text);
+  if (!_hasWordCache[w]) {
+    const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    _hasWordCache[w] = new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i');
+  }
+  return _hasWordCache[w].test(text);
 }
 /** Returneaza cuvanta care a ridicat axa si de unde vine (titlu sau prosa). */
 function axisFromProse(job) {

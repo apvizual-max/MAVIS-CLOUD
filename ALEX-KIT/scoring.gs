@@ -46,9 +46,14 @@ var DISCIPLINE = [
 var SENIOR_KW   = ['senior','sr.','sr ','snr','art director','art mid','creatives','lead','director','head of','chief','principal','architect','expert',
   'staff','manager','global','seasoned','experienced','established','10+ years','9+ years','8+ years','7+ years','6+ years'];
 var MID_KW      = ['mid-level','mid level','intermediate','5 years','5+ years','3-5 years','3+ years','4+ years'];
+
+var _hasWordCache = {};
 function hasWord(text, w) {
-  var esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i').test(text);
+  if (!_hasWordCache[w]) {
+    var esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    _hasWordCache[w] = new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i');
+  }
+  return _hasWordCache[w].test(text);
 }
 function hasAny(text, list) { for (var i=0;i<list.length;i++) if (hasWord(text, list[i])) return true; return false; }
 

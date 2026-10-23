@@ -11,7 +11,13 @@ const TEST_002 = `> "It must be a trade of Graphic designers (or at least the on
 >
 > Love to work with this guy. Thanks for the learning Alex."`;
 
-const HAS_WORD = (t, w) => new RegExp('(^|[^a-z0-9])' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z0-9])', 'i').test(t);
+const _hasWordCache = {};
+const HAS_WORD = (t, w) => {
+  if (!_hasWordCache[w]) {
+    _hasWordCache[w] = new RegExp('(^|[^a-z0-9])' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z0-9])', 'i');
+  }
+  return _hasWordCache[w].test(t);
+};
 const HAS_ANY = (t, l) => l.some(w => HAS_WORD(t, w));
 
 /** Tag-ul de business model vine din scoring. Il confirma / il corecteaza. */

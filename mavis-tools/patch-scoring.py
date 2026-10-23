@@ -6,9 +6,13 @@ s = io.open(p, encoding='utf-8').read()
 # 1) hasWord / hasAny
 if 'function hasWord' not in s:
     s = s.replace('var JUNIOR_KW   =',
-"""function hasWord(text, w) {
-  var esc = w.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');
-  return new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i').test(text);
+"""var _hasWordCache = {};
+function hasWord(text, w) {
+  if (!_hasWordCache[w]) {
+    var esc = w.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');
+    _hasWordCache[w] = new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i');
+  }
+  return _hasWordCache[w].test(text);
 }
 function hasAny(text, list) { for (var i=0;i<list.length;i++) if (hasWord(text, list[i])) return true; return false; }
 

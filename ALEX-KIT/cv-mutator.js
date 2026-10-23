@@ -109,9 +109,13 @@ function buildHeader(jd) {
 
 
 // LIMITE DE CUVANT OBLIGATORII: 'app' se potriveste in 'apply', 'ui' in 'build', 'ux' in 'flux'.
+var _hasWordCache = {};
 function hasWord(text, w) {
-  var esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i').test(text);
+  if (!_hasWordCache[w]) {
+    var esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    _hasWordCache[w] = new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i');
+  }
+  return _hasWordCache[w].test(text);
 }
 function hasAny(text, list) {
   for (var i = 0; i < list.length; i++) if (hasWord(text, list[i])) return true;
