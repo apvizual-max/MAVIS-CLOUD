@@ -6,5 +6,6 @@
   "report-drive-discover.js": 16,
   "verificare-filtre-inline.js": 1,
   "report-simulate-sort.js": 41,
-  "report-build.js": 21
+  "report-build.js": 21,
+  "inline": 2
 }
