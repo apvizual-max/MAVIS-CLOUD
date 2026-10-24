@@ -175,7 +175,7 @@ function req(method, url, data, quotaMethod) {
   const qm = quotaMethod || quotaMethodFor(url);
   CALL_STATE.calls++;
   CALL_STATE.byMethod[qm] = (CALL_STATE.byMethod[qm] || 0) + 1;
-  return QUOTA_MGR.reserve(qm).then(() => token()).then(t => attempt(method, url, data, t, 0, qm));
+  return QUOTA_MGR.reserve(qm).then(() => token()).then(t => attempt({ method, url, data, t, n: 0, qm }));
 }
 // Scrie consumul la iesirea din proces (fara a bloca iesirea).
 process.on('exit', () => {
@@ -191,7 +191,7 @@ process.on('exit', () => {
   } catch (e) { /* silent: contorul e doar informativ */ }
 });
 
-function attempt(method, url, data, t, n, qm) {
+function attempt({ method, url, data, t, n, qm }) {
   return (async () => {
     // RAW: bypass pentru endpoint-uri multipart (Drive upload). {__raw, __contentType}.
     const isRaw = !!(data && data.__raw !== undefined);
@@ -213,7 +213,7 @@ function attempt(method, url, data, t, n, qm) {
       const wait = resp.headers.get('retry-after') ? +resp.headers.get('retry-after') * 1000 : QUOTA_MGR.backoffMs(n);
       QUOTA_MGR.state.used += QUOTA_MGR.costOf(qm);
       await new Promise(r => setTimeout(r, wait));
-      return attempt(method, url, data, t, n + 1, qm);
+      return attempt({ method, url, data, t, n: n + 1, qm });
     }
     if (resp.status >= 400) throw new Error(`HTTP ${resp.status}: ${JSON.stringify(j).slice(0, 300)}`);
     return j;
