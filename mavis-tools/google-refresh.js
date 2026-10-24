@@ -131,7 +131,7 @@ async function exchange(code, cfg) {
   return { error: 'RETEA: ' + (last?.cause?.code || last?.message) + ' (codul NU s-a consumat, reia cu el)' };
 }
 
-(async () => {
+async function main() {
   const args = process.argv.slice(2);
   const cmd = args[0];
   const cfg = readClientConfig();
@@ -183,4 +183,10 @@ async function exchange(code, cfg) {
   console.log('    node mavis-tools/google-refresh.js code "<url>"      # schimbă codul → token\n');
   console.log(C.d('  REGULĂ: o singură sesiune face re-autentificare la un moment dat.'));
   console.log(C.d('  `prompt=consent` revocă tokenul precedent → celelalte sesiuni mor.\n'));
-})();
+}
+
+if (require.main === module) {
+  main();
+} else {
+  module.exports = { readClientConfig };
+}
