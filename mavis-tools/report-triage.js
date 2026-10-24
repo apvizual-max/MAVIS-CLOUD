@@ -39,9 +39,15 @@ const REPLY_TEXT = /action requested|opportunity|interview|invitatie|invitație|
 // ---- semnale ca un mesaj sa ceara o decizie legata de joburi ----
 const JOB_ALERT = /bestjobs|jooble|indeed|hipo|jobleads|recruit|linkedin job|job alert|joburi|locuri de munca|job openings/i;
 
+const _rxCache = new Map();
 function hasWord(text, w) {
-  const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i').test(text);
+  let rx = _rxCache.get(w);
+  if (!rx) {
+    const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    rx = new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i');
+    _rxCache.set(w, rx);
+  }
+  return rx.test(text);
 }
 function hasAny(text, list) { return list.some(k => hasWord(text, k)); }
 
