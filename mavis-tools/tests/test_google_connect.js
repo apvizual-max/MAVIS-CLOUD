@@ -29,4 +29,12 @@ test('extractCode', async (t) => {
     assert.equal(extractCode('just some random text'), null);
     assert.equal(extractCode('http://localhost/?state=123'), null);
   });
+
+  await t.test('returns null for empty code param value', () => {
+    assert.equal(extractCode('http://127.0.0.1:8976/callback?code='), null);
+    assert.equal(extractCode('?code='), null);
+    assert.equal(extractCode('&code='), null);
+    assert.equal(extractCode('http://localhost/?code=&state=123'), null);
+  });
+
 });
