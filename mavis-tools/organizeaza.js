@@ -44,19 +44,19 @@ function classify(m) {
 
   // 2. eticheteaza + citeste + arhiveaza
   const counts = {}; const kept = [];
-  for (const m of msgs) {
+  await Promise.all(msgs.map(async m => {
     const cats = classify(m);
     cats.forEach(c => counts[c] = (counts[c] || 0) + 1);
     const add = cats.map(c => ids[c]);
     const keep = cats.includes('personal') || cats.includes('actiune') || cats.includes('facturi');
-    // eticheteaza
-    await k.gmail.addLabel(m.id, add);
-    // marcheaza citit
-    await k.gmail.removeLabel(m.id, ['UNREAD']);
-    // archiveaza din inbox doar automatele
-    if (!keep) await k.gmail.removeLabel(m.id, ['INBOX']);
-    else kept.push({ subj: m.subj.slice(0, 70), from: m.from });
-  }
+    if (keep) kept.push({ subj: m.subj.slice(0, 70), from: m.from });
+
+    const p1 = k.gmail.addLabel(m.id, add);
+    const p2 = k.gmail.removeLabel(m.id, ['UNREAD']);
+    const p3 = !keep ? k.gmail.removeLabel(m.id, ['INBOX']) : Promise.resolve();
+
+    await Promise.all([p1, p2, p3]);
+  }));
 
   console.log('\n=== REZULTAT ===');
   for (const [c, n] of Object.entries(counts).sort((a,b)=>b[1]-a[1]))
