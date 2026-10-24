@@ -22,5 +22,29 @@ class TestBuildDashboardLegacy(unittest.TestCase):
         # Assert the result is an empty string
         self.assertEqual(result, '')
 
+    @patch('subprocess.run')
+    def test_sh_success(self, mock_run):
+        # Configure mock to return a successful result with whitespace
+        mock_process = unittest.mock.Mock()
+        mock_process.stdout = "   hello world \n "
+        mock_run.return_value = mock_process
+
+        result = bd.sh('echo hello')
+
+        self.assertEqual(result, 'hello world')
+        mock_run.assert_called_once_with(['echo', 'hello'], cwd=bd.REPO, capture_output=True, text=True, timeout=25)
+
+    @patch('subprocess.run')
+    def test_sh_custom_args(self, mock_run):
+        # Configure mock
+        mock_process = unittest.mock.Mock()
+        mock_process.stdout = "custom output"
+        mock_run.return_value = mock_process
+
+        result = bd.sh('ls -la', cwd='/custom/dir', t=10)
+
+        self.assertEqual(result, 'custom output')
+        mock_run.assert_called_once_with(['ls', '-la'], cwd='/custom/dir', capture_output=True, text=True, timeout=10)
+
 if __name__ == '__main__':
     unittest.main()
