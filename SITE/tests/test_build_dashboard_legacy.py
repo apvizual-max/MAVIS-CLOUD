@@ -21,6 +21,18 @@ class TestBuildDashboardLegacy(unittest.TestCase):
 
         # Assert the result is an empty string
         self.assertEqual(result, '')
+    def test_esc_basic_escaping(self):
+        self.assertEqual(bd.esc('a & b < c > d'), 'a &amp; b &lt; c &gt; d')
+
+    def test_esc_non_string(self):
+        self.assertEqual(bd.esc(123), '123')
+
+    def test_esc_empty_string(self):
+        self.assertEqual(bd.esc(''), '')
+
+    def test_esc_none(self):
+        self.assertEqual(bd.esc(None), 'None')
+
 
 if __name__ == '__main__':
     unittest.main()
