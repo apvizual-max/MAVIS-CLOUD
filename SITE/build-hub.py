@@ -7,7 +7,7 @@ Tab-uri: PANO · SITE CV · PUNTE · JULES/GIT/GITHUB · PROMPT
 Actiunile se salveaza local si se exporta ca fisier, pe care POPY il trimite.
 Site-ul e static: nu poate scrie in repo. Asta e limita lui, spusa deschis.
 """
-import os, json, glob, datetime, subprocess, shutil
+import os, json, glob, datetime, subprocess, shutil, shlex
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(BASE)
@@ -26,7 +26,8 @@ CALE_REPO = {
 
 def sh(c, cwd=REPO, t=25):
     try:
-        return subprocess.run(c, shell=True, cwd=cwd, capture_output=True,
+        args = shlex.split(c, posix=(os.name == 'posix'))
+        return subprocess.run(args, shell=False, cwd=cwd, capture_output=True,
                               text=True, timeout=t).stdout.strip()
     except Exception:
         return ''
