@@ -25,14 +25,11 @@ CAPITOLE = {
  'ALEX-KIT':       ('ALEX-KIT',     'Motorul de CV-uri, scoring, sabloane',            None),
 }
 
-import shlex
-
 def git_state():
-    def sh(c):
-        args = shlex.split(c, posix=(os.name == 'posix'))
+    def sh(args):
         return subprocess.run(args, shell=False, cwd=REPO, capture_output=True,
                               text=True, timeout=20).stdout.strip()
-    return sh('git rev-list --count HEAD'), sh('git log --oneline -1'), sh('git remote get-url origin')
+    return sh(['git', 'rev-list', '--count', 'HEAD']), sh(['git', 'log', '--oneline', '-1']), sh(['git', 'remote', 'get-url', 'origin'])
 
 def _write_readme(d, titlu, subiect, notebook, commits, last, remote, AZI):
     open(os.path.join(d, 'README.md'), 'w', encoding='utf-8').write(f"""# {titlu} — Priming KIT
