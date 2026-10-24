@@ -44,6 +44,7 @@ function client() {
   return null;
 }
 
+if (require.main === module) {
 (async () => {
   const code = extractCode(process.argv.slice(2).filter(a => a !== '--url')[0]);
   if (!code) {
@@ -128,3 +129,7 @@ function client() {
   console.log('GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD = ' + j.refresh_token);
   console.log('');
 })();
+
+} else {
+  module.exports = { extractCode };
+}
