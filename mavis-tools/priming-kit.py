@@ -5,7 +5,7 @@
 
 Un agent nou, cu 0 memorie si 0 context, primeste folderul si stie tot.
 """
-import os, datetime, subprocess
+import os, datetime, subprocess, shlex
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AZI  = datetime.date.today().isoformat()
@@ -27,7 +27,8 @@ CAPITOLE = {
 
 def git_state():
     def sh(c):
-        return subprocess.run(c, shell=True, cwd=REPO, capture_output=True,
+        args = shlex.split(c, posix=(os.name == 'posix'))
+        return subprocess.run(args, cwd=REPO, capture_output=True,
                               text=True, timeout=20).stdout.strip()
     return sh('git rev-list --count HEAD'), sh('git log --oneline -1'), sh('git remote get-url origin')
 
