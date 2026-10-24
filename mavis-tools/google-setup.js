@@ -95,12 +95,12 @@ async function check() {
 
 function openBrowser(url) {
   try {
-    if (process.platform === 'darwin') {
-      execFile('open', [url], () => {});
-    } else if (process.platform === 'win32') {
-      execFile('cmd', ['/c', 'start', '""', url], () => {});
+    if (process.platform === 'win32') {
+      execFile('rundll32.exe', ['url.dll,FileProtocolHandler', url], { stdio: 'ignore', detached: true }).unref();
+    } else if (process.platform === 'darwin') {
+      execFile('open', [url], { stdio: 'ignore', detached: true }).unref();
     } else {
-      execFile('xdg-open', [url], () => {});
+      execFile('xdg-open', [url], { stdio: 'ignore', detached: true }).unref();
     }
   } catch { /* merge fara browser, POPY deschide linkul manual */ }
 }
