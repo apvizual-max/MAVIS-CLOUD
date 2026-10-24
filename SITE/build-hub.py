@@ -535,10 +535,11 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
   function salveaza(c){{ localStorage.setItem(CHEIE, JSON.stringify(c)); rand(); }}
 
   function rand(){{
+    function escHtml(s){{ return (s||'').replace(/[&<>]/g, function(c){{return {{'&':'&amp;','<':'&lt;','>':'&gt;'}}[c];}}); }};
     var c = coada(), box = document.getElementById('coada');
     if (!c.length) {{ box.innerHTML = '<p style="color:#64748b;font-size:13.5px;margin-top:12px">Coada e goală. Apasă un buton de mai sus.</p>'; return; }}
     box.innerHTML = c.map(function(x,i){{
-      return '<div class="qitem"><span>'+ (i+1) +'. '+ x.titlu +'</span>'+
+      return '<div class="qitem"><span>'+ (i+1) +'. '+ escHtml(x.titlu) +'</span>'+
              '<button title="șterge" aria-label="Șterge acțiunea" onclick="stergeAcțiune('+i+')">&times;</button></div>';
     }}).join('');
   }}
