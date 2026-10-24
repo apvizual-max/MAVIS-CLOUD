@@ -1,0 +1,3 @@
+## 2024-10-23 - Interactive elements accessibility in dynamically generated UIs
+**Learning:** Found that custom tab interfaces generated dynamically via Python scripts often lack standard ARIA roles (`tablist`, `tab`, `tabpanel`) and native focus indicators, making them difficult to use for keyboard and screen reader users. Additionally, icon-only action buttons (like delete 'X') frequently miss `aria-label`s.
+**Action:** When inspecting statically generated or custom UI hubs, proactively check tab structures for proper ARIA roles and ensure all interactive elements (buttons, links, tabs) have a `:focus-visible` outline applied in the embedded CSS.

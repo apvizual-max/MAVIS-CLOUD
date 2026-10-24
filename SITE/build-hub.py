@@ -282,6 +282,7 @@ pre{{background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:15px
 .inp{{width:100%;background:#0f172a;border:1px solid #1e293b;border-radius:10px;color:#f8fafc;
      font:inherit;font-size:14px;padding:12px 14px;margin-top:8px;resize:vertical}}
 .inp:focus{{outline:none;border-color:#14b8a6}}
+.tab:focus-visible, .act:focus-visible, .qitem button:focus-visible, a:focus-visible {{ outline: 2px solid #14b8a6; outline-offset: 2px; border-radius: 4px; }}
 .lbl{{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
      color:#64748b;margin-top:16px;display:block}}
 .row{{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}}
@@ -305,19 +306,19 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
   ramura <code class="mono">{esc(branch)}</code> · {commits} commit-uri · {dirty} necomitate</p>
 </header></div>
 
-<nav><div class="wrap">
-  <button class="tab" aria-selected="true"  data-p="pano">Pano</button>
-  <button class="tab" aria-selected="false" data-p="cv">Site CV</button>
-  <button class="tab" aria-selected="false" data-p="punte">Punte · Bridge</button>
-  <button class="tab" aria-selected="false" data-p="jules">Jules · Git · GitHub</button>
-  <button class="tab" aria-selected="false" data-p="prompt">Prompt · Acțiuni</button>
-  <button class="tab" aria-selected="false" data-p="todo">TO DO</button>
+<nav><div class="wrap" role="tablist">
+  <button class="tab" role="tab" aria-selected="true"  data-p="pano">Pano</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="cv">Site CV</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="punte">Punte · Bridge</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="jules">Jules · Git · GitHub</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="prompt">Prompt · Acțiuni</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="todo">TO DO</button>
 </div></nav>
 
 <div class="wrap">
 
 <!-- ============ PANO ============ -->
-<section class="pane on" id="pano">
+<section class="pane on" role="tabpanel" id="pano">
   <div class="grid">
     <div class="card"><div class="n">{nskill}</div><div class="l">skill-uri</div></div>
     <div class="card {'bad' if (n_r and n_ok < n_r) else ''}"><div class="n">{n_ok}/{n_r}</div><div class="l">repo-uri MATCH</div></div>
@@ -358,7 +359,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
 </section>
 
 <!-- ============ SITE CV ============ -->
-<section class="pane" id="cv">
+<section class="pane" role="tabpanel" id="cv">
   <h2>Site de CV <span class="ct">{len(sites)} roluri, se construiește din date</span></h2>
   <div class="note"><b>Nu e o pagină goală.</b> Fiecare rol e un fișier JSON;
   interfața e aceeași pentru toate. Adăugarea unui rol nou nu înseamnă scriere de HTML.</div>
@@ -370,7 +371,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
 </section>
 
 <!-- ============ PUNTE ============ -->
-<section class="pane" id="punte">
+<section class="pane" role="tabpanel" id="punte">
   <h2>Punte · Bridge <span class="ct">cloud ↔ local, prin repo</span></h2>
   <div class="row">
     <div class="box">
@@ -417,7 +418,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
 </section>
 
 <!-- ============ JULES · GIT · GITHUB ============ -->
-<section class="pane" id="jules">
+<section class="pane" role="tabpanel" id="jules">
   <h2>Git <span class="ct">stare internă</span></h2>
   <div class="kv">
     <b>Remote</b><span>{esc(remote)}</span>
@@ -460,7 +461,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
 </section>
 
 <!-- ============ PROMPT · ACTIUNI ============ -->
-<section class="pane" id="prompt">
+<section class="pane" role="tabpanel" id="prompt">
   <h2>Acțiuni rapide <span class="ct">un clic → prompt gata de trimis</span></h2>
   <p style="color:#94a3b8;font-size:13.5px;margin-bottom:6px">
     Fiecare buton pune o cerință în coadă și îți dă prompt-ul. Trimite-mi promptul și lucrez.</p>
@@ -498,7 +499,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
 </section>
 
 <!-- ============ TO DO ============ -->
-<section class="pane" id="todo">
+<section class="pane" role="tabpanel" id="todo">
   <h2>TO DO <span class="ct">{len(todo.get('sarcini', []))} sarcini</span></h2>
   <table><thead><tr><th>Sarcină</th><th>Cine</th><th>Status</th><th>Stare acum</th><th>Mai rămâne</th></tr></thead>
   <tbody>{todo_rows}</tbody></table>
@@ -531,7 +532,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
     if (!c.length) {{ box.innerHTML = '<p style="color:#64748b;font-size:13.5px;margin-top:12px">Coada e goală. Apasă un buton de mai sus.</p>'; return; }}
     box.innerHTML = c.map(function(x,i){{
       return '<div class="qitem"><span>'+ (i+1) +'. '+ x.titlu +'</span>'+
-             '<button title="șterge" onclick="stergeAcțiune('+i+')">&times;</button></div>';
+             '<button title="șterge" aria-label="Șterge acțiunea" onclick="stergeAcțiune('+i+')">&times;</button></div>';
     }}).join('');
   }}
   window.stergeActțiune = function(i){{ var c = coada(); c.splice(i,1); salveaza(c); }};
