@@ -37,12 +37,12 @@ async function threadIds(query) {
     let done = 0;
     for (let i = 0; i < ids.length; i += 20) {
       const batch = ids.slice(i, i + 20);
-      for (const t of batch) {
-        await k.req('POST',
+      await Promise.all(batch.map(t =>
+        k.req('POST',
           'https://gmail.googleapis.com/gmail/v1/users/me/threads/' + t + '/modify',
-          { addLabelIds: [toId], removeLabelIds: [fromId] });
-        await new Promise(s2 => setTimeout(s2, 150));
-      }
+          { addLabelIds: [toId], removeLabelIds: [fromId] })
+      ));
+      await new Promise(r => setTimeout(r, 1000)); // safe delay between batches
       done += batch.length;
       if (i % 200 === 0) console.log('  ... ' + done + ' / ' + ids.length);
     }
