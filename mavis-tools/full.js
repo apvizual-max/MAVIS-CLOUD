@@ -47,6 +47,22 @@ async function fetchAll(q) {
 
   const counts = {}; const kept = [];
   let done = 0;
+
+  // Categorii pentru batchModify
+  const buckets = {};
+  for (const kk of Object.keys(LABELS)) {
+    buckets[kk] = {
+      add: [ids[kk]],
+      remove: [...allMavisIds, 'UNREAD'],
+      msgIds: []
+    };
+    if (kk === 'actiune' || kk === 'personal' || kk === 'facturi') {
+      buckets[kk].add.push('INBOX');
+    } else {
+      buckets[kk].remove.push('INBOX');
+    }
+  }
+
   for (let i = 0; i < list.length; i += 20) {
     const batch = list.slice(i, i + 20);
     const ds = await Promise.all(batch.map(m =>
@@ -58,17 +74,27 @@ async function fetchAll(q) {
       const m = { subj: h.Subject || '', from: h.From || '' };
       const p = classify(m);
       counts[p] = (counts[p] || 0) + 1;
-      await k.gmail.removeLabel(batch[j].id, allMavisIds);
-      await k.gmail.addLabel(batch[j].id, [ids[p]]);
-      await k.gmail.removeLabel(batch[j].id, ['UNREAD']);
+
+      buckets[p].msgIds.push(batch[j].id);
+
       if (p === 'actiune' || p === 'personal' || p === 'facturi') {
-        await k.gmail.addLabel(batch[j].id, ['INBOX']);
         kept.push({ eticheta: LABELS[p], subj: m.subj.slice(0, 70), from: m.from });
-      } else {
-        await k.gmail.removeLabel(batch[j].id, ['INBOX']);
       }
       done++;
       if (done % 100 === 0) console.log('  ...', done, '/', list.length);
+    }
+  }
+
+  // Aplicare batchModify pentru a reduce masiv numarul de cereri API
+  for (const p in buckets) {
+    const b = buckets[p];
+    if (b.msgIds.length === 0) continue;
+    for (let i = 0; i < b.msgIds.length; i += 1000) {
+      await k.req('POST', 'https://gmail.googleapis.com/gmail/v1/users/me/messages/batchModify', {
+        ids: b.msgIds.slice(i, i + 1000),
+        addLabelIds: b.add,
+        removeLabelIds: b.remove
+      });
     }
   }
 
