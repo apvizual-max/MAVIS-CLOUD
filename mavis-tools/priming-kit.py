@@ -25,9 +25,12 @@ CAPITOLE = {
  'ALEX-KIT':       ('ALEX-KIT',     'Motorul de CV-uri, scoring, sabloane',            None),
 }
 
+import shlex
+
 def git_state():
     def sh(c):
-        return subprocess.run(c, shell=True, cwd=REPO, capture_output=True,
+        args = shlex.split(c, posix=(os.name == 'posix'))
+        return subprocess.run(args, shell=False, cwd=REPO, capture_output=True,
                               text=True, timeout=20).stdout.strip()
     return sh('git rev-list --count HEAD'), sh('git log --oneline -1'), sh('git remote get-url origin')
 

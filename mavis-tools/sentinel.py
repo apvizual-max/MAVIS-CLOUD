@@ -13,9 +13,12 @@ DIR   = os.path.join(REPO, 'docs', 'SENTINEL')
 GH    = os.path.join(REPO, 'mavis-tools', 'bin', 'gh')
 TODAY = datetime.date.today().isoformat()
 
+import shlex
+
 def sh(c, cwd=REPO, t=25):
     try:
-        return subprocess.run(c, shell=True, cwd=cwd, capture_output=True,
+        args = shlex.split(c, posix=(os.name == 'posix'))
+        return subprocess.run(args, shell=False, cwd=cwd, capture_output=True,
                               text=True, timeout=t).stdout.strip()
     except Exception:
         return ''
