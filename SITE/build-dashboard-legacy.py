@@ -90,12 +90,19 @@ def main():
     vend = sorted(d for d in glob.glob(os.path.join(REPO, 'vendor', '*')) if os.path.isdir(d))
     vn   = [os.path.basename(v) for v in vend]
     srows = ''
-    for s in sorted(own):
-        n = os.path.basename(s); f = os.path.join(s, 'SKILL.md'); desc = ''
+    desc_map = {}
+    for s_path in own + vend:
+        f = os.path.join(s_path, 'SKILL.md')
         if os.path.exists(f):
-            for ln in open(f, encoding='utf-8'):
-                if ln.startswith('description:'):
-                    desc = ln.split(':', 1)[1].strip()[:110]; break
+            with open(f, encoding='utf-8') as file:
+                for ln in file:
+                    if ln.startswith('description:'):
+                        desc_map[os.path.basename(s_path)] = ln.split(':', 1)[1].strip()[:110]
+                        break
+
+    for s in sorted(own):
+        n = os.path.basename(s)
+        desc = desc_map.get(n, '')
         src = 'vendor' if n in vn else 'propriu'
         srows += '<tr><td class="mono">%s</td><td>%s</td><td><span class="tag %s">%s</span></td></tr>' % (
             n, esc(desc), 'v' if src == 'vendor' else '', src)
