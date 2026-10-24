@@ -141,7 +141,7 @@ async function fetchRetry(url, opts, tries = 6) {
   throw last;
 }
 
-(async () => {
+async function main() {
   console.log(C.b('\n=== GOOGLE LOCAL ===\n'));
   console.log(C.d('  Daca ai rulat asta fara "git pull", risti sa rulezi o versiune veche.'));
   console.log(C.d('  In repo:  git pull && node mavis-tools/google-local.js\n'));
@@ -269,4 +269,12 @@ async function fetchRetry(url, opts, tries = 6) {
       process.exit(0);
     } catch (e) { console.log(C.r('Eroare: ' + e.message)); process.exit(1); }
   }
-})();
+}
+
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  readJsonTolerant
+};
