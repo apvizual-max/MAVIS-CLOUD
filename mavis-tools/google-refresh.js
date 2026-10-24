@@ -28,7 +28,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { execFileSync } = require('child_process');
+const child_process = require('child_process');
 
 const ROOT = path.join(__dirname, '..');
 const CLIENT_JSON = path.join(__dirname, 'google-client.json');
@@ -68,7 +68,7 @@ function buildLink(cfg, prompt) {
 
 function git(args, quiet = true) {
   try {
-    return execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: quiet ? ['ignore', 'pipe', 'pipe'] : 'inherit' });
+    return child_process.execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: quiet ? ['ignore', 'pipe', 'pipe'] : 'inherit' });
   } catch (e) { return null; }
 }
 
@@ -131,6 +131,7 @@ async function exchange(code, cfg) {
   return { error: 'RETEA: ' + (last?.cause?.code || last?.message) + ' (codul NU s-a consumat, reia cu el)' };
 }
 
+if (require.main === module) {
 (async () => {
   const args = process.argv.slice(2);
   const cmd = args[0];
@@ -184,3 +185,6 @@ async function exchange(code, cfg) {
   console.log(C.d('  REGULĂ: o singură sesiune face re-autentificare la un moment dat.'));
   console.log(C.d('  `prompt=consent` revocă tokenul precedent → celelalte sesiuni mor.\n'));
 })();
+} else {
+  module.exports = { git };
+}
