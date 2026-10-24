@@ -55,16 +55,19 @@ async function countExact(query) {
       row.counts[w] = c.total;
       res.totals[w] = (res.totals[w] || 0) + c.total;
       if (w === '30z' && c.ids.length) {
-        // ultima etichetare: ia cea mai recentă din 30z
+        // ultima etichetare: ia cea mai recentă din 30z.
+        // QUOTA: messages.list intoarce ID-urile in ordine descrescatoare dupa data
+        // interna, deci c.ids[0] e DEJA cel mai nou. Fetcham doar 4 in loc de 25
+        // (25*8 etichete = 200 cereri, singure peste bugetul de 200/rulare).
         const det = [];
-        for (const id of c.ids.slice(0, 25)) {
+        for (const id of c.ids.slice(0, 4)) {
           const m = await k.req('GET', 'https://gmail.googleapis.com/gmail/v1/users/me/messages/' + id + '?format=metadata&metadataHeaders=Subject&metadataHeaders=Date&metadataHeaders=From');
           det.push({ id, subject: (m.payload && m.payload.headers || []).find(h => h.name === 'Subject')?.value, date: (m.payload && m.payload.headers || []).find(h => h.name === 'Date')?.value, from: (m.payload && m.payload.headers || []).find(h => h.name === 'From')?.value });
         }
         det.sort((a, b) => new Date(b.date) - new Date(a.date));
         row.newest = det[0] || null;
         row.newestDate = det[0] ? det[0].date : null;
-        row.samples = det.slice(0, 6);
+        row.samples = det.slice(0, 4);
       }
     }
     res.labels.push(row);
@@ -74,4 +77,5 @@ async function countExact(query) {
   fs.writeFileSync(OUT, JSON.stringify(res, null, 2));
   console.log('\nTOTALE: ' + JSON.stringify(res.totals));
   console.log('-> ' + OUT);
+  console.log('cereri: ' + k.CALL_STATE.calls);
 })();

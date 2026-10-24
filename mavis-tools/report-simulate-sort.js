@@ -9,6 +9,10 @@
 const k = require('./kit.js');
 const fs = require('fs');
 
+// data pentru fereastra "azi" (format Gmail: AAAA/LL/ZZ). Implicit: azi.
+const TODAY = process.argv[2] || new Date().toISOString().slice(0, 10).replace(/-/g, '/');
+const TODAY_ISO = TODAY.replace(/\//g, '-');
+
 const CATS = [
   ['MAVIS/Joburi',    { from: /jooble|bestjobs|hipo|indeed|jobleads|recruit|linkedin|iqads|designproject/i, subject: /job|angajare|vacanta|oportunitate/i }],
   ['MAVIS/AI si comunitati', { from: /substack|goatacademy|aiautomationsociety|sadhguru|beehiiv|twine|comfy|deepmind|openai|anthropic/i, subject: /\bAI\b|artificial intelligence/i }],
@@ -22,7 +26,7 @@ const CATS = [
   let page = null; const ms = [];
   do {
     const url = 'https://gmail.googleapis.com/gmail/v1/users/me/messages?q='
-      + encodeURIComponent('in:anywhere after:2026/10/23') + '&maxResults=500' + (page ? '&pageToken=' + encodeURIComponent(page) : '');
+      + encodeURIComponent(`in:anywhere after:${TODAY}`) + '&maxResults=500' + (page ? '&pageToken=' + encodeURIComponent(page) : '');
     const r = await k.req('GET', url);
     for (const m of r.messages || []) ms.push(m.id);
     page = r.nextPageToken || null;
@@ -31,9 +35,11 @@ const CATS = [
 
   const rows = [];
   for (const id of ms) {
-    const m = await k.req('GET', 'https://gmail.googleapis.com/gmail/v1/users/me/messages/' + id + '?format=metadata&metadataHeaders=Subject&metadataHeaders=From&metadataHeaders=Date');
+    // format=full (nu metadata) => vine si snippet, necesar ca sa judec
+    // care mesaje chiar cer raspuns. Costul e tot 1 cerere/mesaj.
+    const m = await k.req('GET', 'https://gmail.googleapis.com/gmail/v1/users/me/messages/' + id + '?format=full');
     const h = n => (m.payload && m.payload.headers || []).find(x => x.name === n)?.value || '';
-    rows.push({ id, from: h('From'), subject: h('Subject'), date: h('Date'), labels: m.labelIds || [] });
+    rows.push({ id, from: h('From'), subject: h('Subject'), date: h('Date'), labels: m.labelIds || [], snippet: (m.snippet || '').slice(0, 400) });
   }
   rows.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -59,6 +65,6 @@ const CATS = [
   unmatched.forEach(r => console.log('      ' + r.date.slice(5, 22) + ' | ' + r.from.replace(/<[^>]*>/g, '').slice(0, 32).padEnd(32) + ' | ' + r.subject.slice(0, 52)));
 
   fs.writeFileSync('/workspace/Mavis/mavis-tools/report-simulate-sort.json',
-    JSON.stringify({ date: '2026-10-23', total: rows.length, counts: Object.fromEntries(CATS.map(c => [c[0], buckets[c[0]].length])), unmatched: unmatched.length, rows, buckets }, null, 2));
+    JSON.stringify({ date: TODAY_ISO, total: rows.length, counts: Object.fromEntries(CATS.map(c => [c[0], buckets[c[0]].length])), unmatched: unmatched.length, rows, buckets }, null, 2));
   console.log('\ncereri: ' + k.CALL_STATE.calls);
 })();

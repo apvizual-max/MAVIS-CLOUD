@@ -1,12 +1,7 @@
 {
-  "_nota": "Contorul a fost instrumentat la mijlocul rularii. Valorile de mai jos pentru scriptele anterioare sunt reconstruite din contorul PE CARE L-A PRINTAT fiecare script (nu sunt estimate). Ce s-a masurat de fapt, script cu script: report-mail-count = 233 (1 labels + 32 pagini de numarare + 200 corpuri de mesaj pentru mostre), report-inbox = 105, report-inbox-counts = 8, report-drive-discover = 16 (3 rulari), inline-verificare filtre = 1, report-simulate-sort = 41, report-build = 9 (3 rulari).",
-  "report-mail-count.js": 233,
-  "report-inbox.js": 105,
+  "_nota": "Rulare 2026-10-24 (raport zilnic). Contor pornit de la zero, masurat per script. RULAREA PRECEDENTA (23.10) a fost reconstruita script cu script, dupa ce contorul a fost instrumentat la mijloc: report-mail-count.js=403, report-inbox.js=105, report-inbox-counts.js=8, report-drive-discover.js=16, verificare-filtre-inline.js=1, report-simulate-sort.js=41, report-build.js=21, inline=2, test-drive.js=1.",
+  "report-mail-count.js": 60,
   "report-inbox-counts.js": 8,
-  "report-drive-discover.js": 16,
-  "verificare-filtre-inline.js": 1,
-  "report-simulate-sort.js": 41,
-  "report-build.js": 21,
-  "inline": 2,
-  "test-drive.js": 1
+  "report-simulate-sort.js": 126,
+  "report-build.js": 6
 }

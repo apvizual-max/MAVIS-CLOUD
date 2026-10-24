@@ -6,6 +6,9 @@
  */
 const k = require('./kit.js');
 
+// data pentru ferestrele "azi" (format Gmail: AAAA/LL/ZZ). Implicit: azi.
+const TODAY = process.argv[2] || new Date().toISOString().slice(0, 10).replace(/-/g, '/');
+
 async function count(q) {
   let page = null, total = 0;
   do {
@@ -21,8 +24,8 @@ async function count(q) {
 
 (async () => {
   const out = {};
-  out.azi_inbox = await count('in:inbox after:2026/10/23');
-  out.azi_any = await count('in:anywhere after:2026/10/23');
+  out.azi_inbox = await count(`in:inbox after:${TODAY}`);
+  out.azi_any = await count(`in:anywhere after:${TODAY}`);
   out['24h_inbox'] = await count('in:inbox newer_than:1d');
   out['24h_any'] = await count('in:anywhere newer_than:1d');
   out['7d_inbox'] = await count('in:inbox newer_than:7d');

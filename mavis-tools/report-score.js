@@ -206,7 +206,8 @@ function computeGenuinelyNew(jobs, prev) {
   const maxPrev = prevIds.length ? Math.max(...prevIds) : 0;
   const iq = jobs.filter(j => j.src === 'IQads' && j.id && +j.id > maxPrev)
     .map(j => ({ company: j.company, role: j.role, id: j.id, url: j.url, expiry: j.expiry }));
-  const prevRunDate = new Date('2026-10-22T00:00:00Z');
+  // data ultimei rulari = data din numele fisierului PREV (jobs-AAAA-LL-ZZ.json)
+  const prevRunDate = new Date((path.basename(PREV).match(/(\d{4}-\d{2}-\d{2})/) || [, '2026-10-22'])[1] + 'T00:00:00Z');
   const dp = jobs.filter(j => j.src === 'designproject.io')
     .map(j => ({ j, d: parseDpDate(j.date) }))
     .filter(x => x.d && x.d > prevRunDate)
@@ -222,10 +223,23 @@ function computeGenuinelyNew(jobs, prev) {
 function main() {  const eng = loadEngine();
   const engFixed = loadEngine({ fixAi: true });
   const jobs = loadJobs();
+
+  // --save-set: salveaza setul NORMALIZAT (company/role/loc/eng/jd) pentru data
+  // curenta, ca sa poata fi folosit drept PREV la rularea urmatoare.
+  // Nu atinge scoring-result-ul. Aceeasi normalizare, nu o reimplementare.
+  if (process.argv.includes('--save-set')) {
+    const out = path.join(DIR, `jobs-${TODAY}.json`);
+    fs.writeFileSync(out, JSON.stringify({ _meta: { date: TODAY, count: jobs.length, note: 'set normalizat pentru comparatie zilnica' }, jobs }, null, 2));
+    console.log(`set normalizat salvat: ${out} (${jobs.length} joburi)`);
+    return;
+  }
+
   const prev = JSON.parse(fs.readFileSync(PREV, 'utf8'));
   const prevKeys = new Set(prev.jobs.map(key));
-  const prevRes = fs.existsSync(path.join(DIR, 'scoring-result-2026-10-22.json'))
-    ? JSON.parse(fs.readFileSync(path.join(DIR, 'scoring-result-2026-10-22.json'), 'utf8')) : null;
+  const PREV_DATE = (path.basename(PREV).match(/(\d{4}-\d{2}-\d{2})/) || [, '2026-10-22'])[1];
+  const prevResPath = path.join(DIR, `scoring-result-${PREV_DATE}.json`);
+  const prevRes = fs.existsSync(prevResPath)
+    ? JSON.parse(fs.readFileSync(prevResPath, 'utf8')) : null;
   const prevScored = new Set();
   if (prevRes) {
     for (const k of Object.keys(prevRes.sections)) prevRes.sections[k].forEach(x => prevScored.add((x.company + '|' + x.role).toLowerCase().trim()));
@@ -237,10 +251,14 @@ function main() {  const eng = loadEngine();
   for (const j of jobs) {
     const r = eng.scoreJob(j.company, j.role, j.loc, j.eng, j.jd, '');
     const rf = engFixed.scoreJob(j.company, j.role, j.loc, j.eng, j.jd, '');
-    const meta = { src: j.src, url: j.url, expiry: j.expiry || null, date: j.date || null, level: j.level || null,
-                   // IQads are data expirare reala; designproject.io are data de publicare
-                   // (validThrough lor e derivat si uneori in trecut, deci ar insala tabelul)
-                   expKind: j.src === 'IQads' ? 'expiră' : 'postat',
+    // data de expirare, normalizata la AAAA-LL-ZZ.
+    // MĂSURAT 2026-10-24: la designproject.io validThrough = datePosted + 30 zile
+    // pentru toate cele 26 de joburi (24 exacte, 2 cu o zi diferita de fus orar).
+    // Deci E o data de expirare reala, nu o derivatie inutila — se marcheaza.
+    const expDate = (j.expiry || '').slice(0, 10) || null;
+    const meta = { src: j.src, url: j.url, expiry: expDate, date: j.date || null, level: j.level || null,
+                   expKind: 'expiră',
+                   expired: !!(expDate && expDate < TODAY),
                    loc: j.loc, locWhy: j.locWhy, eng: j.eng, engWhy: j.engWhy || null, special: j.special || null, salary: j.salary || null,
                    inPrevSet: prevKeys.has(key(j)), inPrevScored: prevScored.has(key(j)), jd: j.jd };
     const fp = remoteFalsePositive(j.jd);
@@ -258,7 +276,7 @@ function main() {  const eng = loadEngine();
   for (const k of kept) { if (k.section === 0) amanzat.push(k); else sections[k.section].push(k); }
 
   const out = {
-    date: TODAY, stats: { total: jobs.length, kept: kept.length, dropped: dropped.length, amanzat: amanzat.length,
+    date: TODAY, prevDate: PREV_DATE, stats: { total: jobs.length, kept: kept.length, dropped: dropped.length, amanzat: amanzat.length,
       newJobs: kept.filter(k => k.isNew).length, newDropped: dropped.filter(k => !k.inPrevSet).length },
     sections, amanzat, dropped,
     remoteFalsePositives: kept.filter(k => k.remoteFalsePositive),
