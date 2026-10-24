@@ -54,7 +54,7 @@ def scrie(nivel, mesaj, rol='', detaliu=''):
 
 def _head():
     try:
-        return subprocess.run('git rev-parse --short HEAD', shell=True, cwd=REPO,
+        return subprocess.run(['git', 'rev-parse', '--short', 'HEAD'], shell=False, cwd=REPO,
                               capture_output=True, text=True, timeout=8).stdout.strip() or '-'
     except Exception:
         return '-'
