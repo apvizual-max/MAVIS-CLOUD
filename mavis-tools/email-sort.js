@@ -1,6 +1,6 @@
 /**
- * 0.8f — Sortarea thread-urilor 1-3 ani pe cele 8 categorii MAVIS
- * METODA IEFTINA: cautari cu filtre de expeditor -> thread-uri direct, fara messages.get
+ * 0.8f — Sortarea mesajelor 1-3 ani pe cele 8 categorii MAVIS
+ * METODA IEFTINA: cautari cu filtre de expeditor -> mesaje direct, fara messages.get
  * Cost: ~5 unitati per pagina de 500. Zero apeluri scumpe.
  */
 const k = require('./kit.js');
@@ -34,13 +34,13 @@ const CATS = [
   ['personal',  `{from:happyadv from:alexfiloti from:family from:parinti}`],
 ];
 
-async function threadIds(query) {
+async function messageIds(query) {
   const out = []; let page = null;
   do {
     const r = await k.req('GET',
-      'https://gmail.googleapis.com/gmail/v1/users/me/threads?q=' + encodeURIComponent(query) +
+      'https://gmail.googleapis.com/gmail/v1/users/me/messages?q=' + encodeURIComponent(query) +
       '&maxResults=500' + (page ? '&pageToken=' + page : ''));
-    out.push(...(r.threads || []).map(t => t.id));
+    out.push(...(r.messages || []).map(t => t.id));
     page = r.nextPageToken || null;
   } while (page);
   return out;
@@ -64,18 +64,17 @@ async function threadIds(query) {
     const inbox = (cat === 'actiune') ? '' : ' in:inbox';
     const query = w + flt + inbox + ' -label:"' + L[cat] + '"';
     let ids = [];
-    try { ids = await threadIds(query); } catch (e) { console.log('cautare blocata', cat, e.message.slice(0,40)); continue; }
-    console.log('\n' + cat.toUpperCase() + ': ' + ids.length + ' thread-uri  (cota ' + q.state.used + ')');
+    try { ids = await messageIds(query); } catch (e) { console.log('cautare blocata', cat, e.message.slice(0,40)); continue; }
+    console.log('\n' + cat.toUpperCase() + ': ' + ids.length + ' mesaje  (cota ' + q.state.used + ')');
     if (!ids.length) continue;
     // aplica eticheta + scoate din inbox + marcheaza citit
     const lab = M.get(L[cat]);
-    for (let i = 0; i < ids.length; i += 100) {
+    for (let i = 0; i < ids.length; i += 1000) {
       try {
-        const batch = ids.slice(i, i + 100);
-        await Promise.all(batch.map(t =>
-          k.req('POST', `https://gmail.googleapis.com/gmail/v1/users/me/threads/${t}/modify`,
-            { addLabelIds: [lab], removeLabelIds: ['INBOX', 'UNREAD'] })
-        ));
+        const batch = ids.slice(i, i + 1000);
+        await k.req('POST', `https://gmail.googleapis.com/gmail/v1/users/me/messages/batchModify`,
+          { ids: batch, addLabelIds: [lab], removeLabelIds: ['INBOX', 'UNREAD'] });
+        await new Promise(r => setTimeout(r, 1000)); // safe delay between batches to respect rate limits
       } catch (e) { console.log('  blocat la', i, e.message.slice(0, 50)); break; }
       if (i % 1000 === 0) console.log('   ...', i, '/', ids.length);
     }
