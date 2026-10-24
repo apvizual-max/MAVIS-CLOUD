@@ -17,7 +17,7 @@
 
 Populat din date reale: git, log, erori, skill-uri, site-uri, Gmail.
 """
-import os, json, glob, datetime, subprocess
+import os, json, glob, datetime, subprocess, shlex
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(BASE)
@@ -25,7 +25,7 @@ DIST = os.path.join(BASE, 'dist')
 
 def sh(c, cwd=REPO, t=25):
     try:
-        return subprocess.run(c, shell=True, cwd=cwd, capture_output=True,
+        return subprocess.run(shlex.split(c, posix=(os.name == 'posix')), cwd=cwd, capture_output=True,
                               text=True, timeout=t).stdout.strip()
     except Exception:
         return ''
