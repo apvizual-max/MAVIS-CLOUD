@@ -187,4 +187,4 @@ if (require.main === module) {
 })();
 }
 
-module.exports = { git };
+module.exports = { git, readClientConfig };
