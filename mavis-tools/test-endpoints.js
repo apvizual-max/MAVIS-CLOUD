@@ -11,7 +11,7 @@
  *   drive      -> www.googleapis.com/drive/v3
  *   gmail      -> gmail.googleapis.com/gmail/v1
  *   calendar   -> www.googleapis.com/calendar/v3
- *   docs       -> docs.googleapis.com/docs/v1
+ *   docs       -> docs.googleapis.com/document/v1
  *   sheets     -> sheets.googleapis.com/v4
  *   slides     -> slides.googleapis.com/v1
  *   photos     -> photoslibrary.googleapis.com/v1
@@ -30,9 +30,9 @@ const ENDPOINTS = [
   ['gmail:profile', 'GET', 'https://gmail.googleapis.com/gmail/v1/users/me/profile'],
   ['gmail:threads', 'GET', 'https://gmail.googleapis.com/gmail/v1/users/me/threads?q=in%3Ainbox&maxResults=1'],
   ['calendar:list', 'GET', 'https://www.googleapis.com/calendar/v3/users/me/calendarList'],
-  ['docs:get', 'GET', 'https://docs.googleapis.com/docs/v1/documents/xxx'],
-  ['sheets:values', 'GET', 'https://sheets.googleapis.com/v4/spreadsheets/xxx/values/A1%3AZ50'],
-  ['slides:get', 'GET', 'https://slides.googleapis.com/v1/presentations/xxx'],
+  ['docs:get', 'GET', 'https://docs.googleapis.com/document/v1/documents/invalid-id'],
+  ['sheets:values', 'GET', 'https://sheets.googleapis.com/v4/spreadsheets/invalid-id/values/A1%3AZ50'],
+  ['slides:get', 'GET', 'https://slides.googleapis.com/v1/presentations/invalid-id'],
   ['photos:albums', 'GET', 'https://photoslibrary.googleapis.com/v1/albums?pageSize=5'],
   ['tokeninfo', 'GET', 'https://oauth2.googleapis.com/tokeninfo?access_token=' + FAKE],
 ];
