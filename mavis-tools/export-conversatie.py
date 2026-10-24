@@ -6,7 +6,7 @@
 Apeleaza API-ul de sesiune si scrie docs/CONVERSATIE.md.
 Transcrierea este REALA, nu reconstruita din memorie.
 """
-import os, json, subprocess, datetime, urllib.request
+import os, json, subprocess, datetime
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT  = os.path.join(REPO, 'docs', 'CONVERSATIE.md')
