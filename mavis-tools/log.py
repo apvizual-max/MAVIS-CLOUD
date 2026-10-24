@@ -70,7 +70,7 @@ def raport_erori():
         return {'total': 0, 'raport': 'Nicio eroare inregistrata in ultimele %d de intrari.' % len(intr)}
 
     linii = []
-    for k, e in enumerate(eroi, 1):
+    for k, e in enumerate(erori, 1):
         linii.append(
             "### Eroarea %d — %s\n\n"
             "- **Timp:** %s\n- **Nivel:** %s\n- **Rol:** %s\n- **Mesaj:** %s\n"
@@ -102,7 +102,7 @@ if __name__ == '__main__':
         os.makedirs(os.path.join(REPO, 'docs'), exist_ok=True)
         md = ['# Ultima eroare — %s' % datetime.date.today(), '',
               '**Total: %d**' % r['total'], '', '---', '',
-              r.get('per_eroare', r['raport']), '', '---', '',
+              r.get('per_eroare', r.get('raport', '')), '', '---', '',
               '## Prompt de apel', '', '```', r.get('prompt_apel', ''), '```', '']
         open(os.path.join(REPO, 'docs', 'ULTIMA-EROARE.md'), 'w',
              encoding='utf-8').write('\n'.join(md))
