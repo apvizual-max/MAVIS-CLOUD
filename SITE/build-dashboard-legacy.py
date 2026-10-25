@@ -25,7 +25,7 @@ DIST = os.path.join(BASE, 'dist')
 
 def sh(c, cwd=REPO, t=25):
     try:
-        return subprocess.run(shlex.split(c, posix=(os.name == 'posix')), cwd=cwd, capture_output=True,
+        return subprocess.run(shlex.split(c, posix=(os.name == 'posix')), shell=False, cwd=cwd, capture_output=True,
                               text=True, timeout=t).stdout.strip()
     except Exception:
         return ''
