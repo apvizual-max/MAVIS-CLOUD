@@ -24,8 +24,8 @@ class TestBuildDashboardLegacy(unittest.TestCase):
 
         self.assertEqual(result, "output")
         mock_run.assert_called_once_with(
-            "echo 'output '",
-            shell=True,
+            ['echo', 'output '],
+
             cwd=build_dashboard_legacy.REPO,
             capture_output=True,
             text=True,
