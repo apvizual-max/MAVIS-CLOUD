@@ -13,3 +13,13 @@ test('readClientConfig should return null on fs.readFileSync error', (t) => {
   const config = readClientConfig();
   assert.strictEqual(config, null);
 });
+
+test('readClientConfig should return parsed JSON on success', (t) => {
+  const mockConfig = { client_id: 'test_client_id' };
+  t.mock.method(fs, 'readFileSync', () => {
+    return JSON.stringify(mockConfig);
+  });
+
+  const config = readClientConfig();
+  assert.deepStrictEqual(config, mockConfig);
+});
