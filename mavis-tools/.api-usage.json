@@ -1,8 +1,10 @@
 {
-  "_nota": "Rulare 2026-10-24 (raport zilnic). Contor pornit de la zero, masurat per script. RULAREA PRECEDENTA (23.10) a fost reconstruita script cu script, dupa ce contorul a fost instrumentat la mijloc: report-mail-count.js=403, report-inbox.js=105, report-inbox-counts.js=8, report-drive-discover.js=16, verificare-filtre-inline.js=1, report-simulate-sort.js=41, report-build.js=21, inline=2, test-drive.js=1.",
-  "report-mail-count.js": 60,
-  "report-inbox-counts.js": 8,
-  "report-simulate-sort.js": 126,
-  "report-build.js": 6,
-  "test-drive.js": 3
+  "_nota": "Rulare 2026-10-25 (raport zilnic). Contor pornit de la zero.",
+  "report-folder-discover.js": 4,
+  "report-inbox-counts.js": 9,
+  "report-mail-count.js": 59,
+  "report-simulate-sort.js": 89,
+  "report-filter-state.js": 20,
+  "inline": 11,
+  "report-build.js": 6
 }

@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-25",
+  "designproject": {
+    "count": 25,
+    "jdLenMin": 363,
+    "jdLenMax": 33550,
+    "employmentType": {
+      "FULL_TIME": 25
+    },
+    "jsonLdAllFullTime": true,
+    "badgeFullTime": 25,
+    "withJobTypeLine": 25,
+    "newestPostDate": "Sep 30, 2026",
+    "validThrough": {
+      "checked": 25,
+      "exact": 25,
+      "offByOne": 0,
+      "other": 0,
+      "rule": "datePosted + 30 zile"
+    },
+    "pagination": {
+      "page0Cards": 10,
+      "page1Cards": 10,
+      "sameBytes": true,
+      "page1EqualsPage0": true
+    }
+  },
+  "iqads": {
+    "catalogueLinks": 43,
+    "pagesTested": [
+      0,
+      2,
+      3
+    ],
+    "allPagesIdentical": true,
+    "status": [
+      "0:200",
+      "2:200",
+      "3:200"
+    ]
+  }
+}

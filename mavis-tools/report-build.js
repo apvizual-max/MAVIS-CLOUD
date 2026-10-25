@@ -29,6 +29,12 @@ const mailCount = R('report-mail-count.json');
 const inboxCounts = R('report-inbox-counts.json');
 const sim = R('report-simulate-sort.json');
 const sc = R(`scoring-result-${DATE}.json`);
+// sonda de surse: masoara AZI comportamentul iqads.ro / designproject.io,
+// ca sectiunea "Ce n-a mers, muraat" sa nu repete cifrele de ieri.
+let probe = null;
+try { probe = JSON.parse(fs.readFileSync(path.join(DIR, 'report-source-probe.json'), 'utf8')); } catch (e) {}
+let filterState = null;
+try { filterState = JSON.parse(fs.readFileSync(path.join(DIR, 'report-filter-state.json'), 'utf8')); } catch (e) {}
 const tri = triage(sim.rows || []);
 // consumul real de cereri Google, acumulat de kit.js la iesirea fiecarui script
 let usage = {};
@@ -145,6 +151,15 @@ const amanzatNew = sc.amanzat.filter(x => x.isNew);
 const newJobs = allSections.filter(x => x.isNew);
 const gn = sc.genuinelyNew || { newIqads: [], newDesignproject: [], maxPrevIqadsId: null, newestDesignprojectDate: null };
 
+// ---------- sonda de surse (totul masurat, nimic copiat de ieri) ----------
+const dpP = (probe && probe.designproject) || null;
+const iqP = (probe && probe.iqads) || null;
+const vt = dpP && dpP.validThrough ? dpP.validThrough : null;
+// regula de expirare la designproject.io: validThrough = datePosted + 30 zile
+const vtSentence = vt
+  ? `măsurat pe toate cele ${vt.checked} de joburi (${vt.exact} exacte, ${vt.offByOne} cu o zi de fus orar, ${vt.other} altfel)`
+  : 'măsurat pe setul de azi';
+
 // ---------------- etichete: de cand nu mai functioneaza ----------------
 const labelRows = mailCount.labels.map(l => ({ ...l, newest: parseGmailDate(l.newestDate) }));
 const dated = labelRows.filter(l => l.newest);
@@ -230,14 +245,44 @@ md += `> Zero pe o fereastră nu înseamnă "etichetă goală" — înseamnă "e
 
 ### 1.3 Defectul, măsurat azi
 
-Cele 5 filtre \`MAVIS/*\` există și au **criteriile corecte**, dar \`action.addLabelIds\` e **vid**:
+`;
+if (filterState) {
+  // doar filtrele MAVIS/*: filtrele de tip `list:` (lista de abonare) nu sunt categorii
+  const ft = (filterState.tests || []).filter(x => !/^list:/i.test(x.query || ''));
+  const joburi = ft.find(x => /jooble/.test(x.query)) || null;
+  const allDead = ft.length > 0 && ft.every(x => x.matchesAsIs === 0);
+  const totalFixed = ft.reduce((a, x) => a + x.matchesFixed, 0);
+  const mavisRows = (filterState.rows || []).filter(x => !/^list:/i.test(x.query || ''));
+  const withAdd = mavisRows.filter(x => (x.addLabelIds || []).length).length;
+  const withMavisAdd = mavisRows.filter(x => (x.addLabelIds || []).some(l => l.startsWith('MAVIS/'))).length;
+  md += `Filtrele \`MAVIS/*\` există: **${mavisRows.length}** filtre cu criteriu de interogare, din ${filterState.totalFilters} total pe cont. **${withAdd}** dintre ele are \`addLabelIds\`, iar **${withMavisAdd}** atinge o etichetă \`MAVIS/*\`.`;
+  if (joburi) md += ` Criteriul celui de joburi, citit live azi:\n\n\`\`\`\n${joburi.query}\n\`\`\`\n`;
+  if (allDead) {
+    md += `
+**Cauza reală, măsurată azi pe Gmail:** în căutarea Gmail, \`()\` înseamnă **ȘI**, iar \`{}\` înseamnă **SAU**. Cele ${ft.length} filtre folosesc \`from:(jooble bestjobs ...)\` — deci cer un expeditor care să conțină **toate** cuvintele simultan. Rezultat: **0 mesaje lovite în 30 de zile, din oricare categorie.**
 
-\`\`\`
-filtru "joburi"
-  criteria: from:(jooble bestjobs hipo indeed jobleads linkedin) OR subject:(job angajare vacanta oportunitate)
-  action:   { removeLabelIds: ["UNREAD","INBOX"] }     <-- fara addLabelIds
-\`\`\`
+| Filtru | cum e scris acum | cum ar trebui scris (\`{}\`) |
+|---|---|---|
+`;
+    for (const x of ft) {
+      md += `| \`${x.query.slice(0, 58)}${x.query.length > 58 ? '…' : ''}\` | **${x.matchesAsIs}** | **${x.matchesFixed}** |\n`;
+    }
+    md += `
+Cu acoladele, aceleași filtre ar fi prins **${totalFixed} mesaje în 30 de zile**. Diferența dintre 0 și ${totalFixed} e cauza pentru care etichetele sunt goale de două săptămâni.
 
+**Două defecte, în ordine:**
+1. **Criteriile nu pot lovi nimic** — paranteze în loc de acolade. (defect descoperit și măsurat azi)
+2. **\`addLabelIds\` e vid** — nici măcar cu criterii corecte n-ar eticheta ceva. (defect cunoscut din 11.10)
+
+**De ce nu le-am reparat azi:** tokenul din cloud are \`gmail.modify\`, dar **nu** \`gmail.settings.basic\` — fără acest scope, \`filters PATCH\` răspunde 403. Repararea e pregătită ca script (\`mavis-tools/fix-mavis-filters.js\`, cu \`--dry-run\` și cu salvarea stării de dinainte pentru rollback) și trebuie rulată de pe mașina ta, unde scope-ul există.
+`;
+  } else {
+    md += `\n\nDetaliul pe fiecare filtră, cu numărul de mesaje lovite, e în \`report-filter-state.json\` (vezi §7).\n`;
+  }
+} else {
+  md += `*(Sonda de filtre nu a rulat azi — starea filtrelor nu e măsurată în acest raport.)*\n`;
+}
+md += `
 **Și mai mult:** filtrul nici măcar nu arhivează. Deși \`removeLabelIds\` conține \`INBOX\`, mesajele de job intrate azi sunt **în continuare în INBOX și UNREAD**:
 
 | Fereastră | În inbox | În toate stările |
@@ -305,6 +350,11 @@ if (leads && leads.leads && leads.leads.length) {
     md += `##### ${l.resolvedTitle}\n\n`;
     md += `Din alerta **${l.from}** — *${l.subject}*\n\n`;
     md += `${l.summary}\n\n`;
+    if (l.requirements && l.requirements.length) {
+      md += `**Cerințe:**\n\n`;
+      for (const r of l.requirements) md += `- ${r}\n`;
+      md += `\n`;
+    }
     if (l.rates && l.rates.length) {
       md += `**Rate-uri publicate:**\n\n`;
       for (const r of l.rates) md += `- ${r}\n`;
@@ -323,7 +373,7 @@ md += `---
 
 Surse: **IQads** (tabloul AdJob activ, citit azi) + **designproject.io** (România + București).
 
-> ⛔ **Expirate marcate în tabele.** La IQads data de expirare vine direct din anunț. La designproject.io \`validThrough\` = data postării + 30 zile — **măsurat pe toate cele 26 de joburi** (24 exacte, 2 cu o zi de fus orar), deci e o expirare reală, nu o derivare inutilă. ${expiredInTables} joburi din tabele au expirat${expiredInAmanzat ? ` (+${expiredInAmanzat} în verdict amânat)` : ''} și nu se mai pot aplica.
+> ⛔ **Expirate marcate în tabele.** La IQads data de expirare vine direct din anunț. La designproject.io \`validThrough\` = data postării + 30 zile — ${vtSentence}, deci e o expirare reală, nu o derivare inutilă. ${expiredInTables} joburi din tabele au expirat${expiredInAmanzat ? ` (+${expiredInAmanzat} în verdict amânat)` : ''} și nu se mai pot aplica.
 
 | | S | D | L | E |
 |---|---|---|---|---|
@@ -417,10 +467,22 @@ md += `
 ## 5. Ce n-a mers, măsurat
 
 `;
-if (daysOff !== null) md += `1. **Etichetele MAVIS/* nu mai primesc nimic de ${daysOff} zile.** Filtrele au \`addLabelIds\` vid și nici măcar nu mai arhivează — ~${inboxCounts['7d_inbox']} mesaje/7 zile stau în inbox. Cauza: scriptul local \`email-sort-full.js\` (cel care punea etichetele) nu mai rulează.\n`;
-md += `2. **designproject.io servește descrieri rescrise de AI** (24.000–33.000 de caractere, față de 71–1484 pe 22.10, inclusiv "📝 Enhancement Note"). E mai bogat, dar injectează cuvinte-cheie care ridică axele — vezi §6.2.\n`;
-md += `3. **Celelalte două câmpuri de engagement ale designproject.io sunt inutilizabile.** \`employmentType\` din JSON-LD spune \`FULL_TIME\` pentru toate cele 26, iar badge-ul din listing spune "Full-time" pentru toate 26. Singura sură corectă e linia **"Job Type:"** din descriere (Trade Nation: "CONTRACTOR"; Mindrift: "PART_TIME" + freelance; Uvation: "Contractor"). Am folosit asta.\n`;
-md += `4. **Paginatia IQads nu funcționează.** \`?page=2\` și \`?page=3\` servesc exact pagina 0 (aceleași linkuri). Catalogul complet e pe pagina 0 — nu iterez pagini.\n`;
+if (daysOff !== null) {
+  const ft = filterState ? (filterState.tests || []) : [];
+  const totalFixed = ft.reduce((a, x) => a + x.matchesFixed, 0);
+  md += `1. **Etichetele MAVIS/* nu mai primesc nimic de ${daysOff} zile.** Două cauze, măsurate azi: filtrele folosesc \`from:(...)\` unde Gmail cere \`from:{...}\` (paranteze = ȘI, acolade = SAU), deci nu pot lovi niciun mesaj — ${ft.length ? `ar fi prins ${totalFixed} mesaje în 30 de zile` : 'ar fi prins mii'}; și \`addLabelIds\` e vid pe toate. ~${inboxCounts['7d_inbox']} mesaje/7 zile stau în inbox.\n`;
+}
+if (dpP && !dpP.error) {
+  md += `2. **designproject.io servește descrieri foarte inegale** (${dpP.jdLenMin}–${dpP.jdLenMax} de caractere pe cele ${dpP.count} de joburi, măsurat azi). Cele mai lungi sunt rescrise de AI și injectează cuvinte-cheie care ridică axele — vezi §6.2.\n`;
+  md += `3. **Celelalte două câmpuri de engagement ale designproject.io sunt inutilizabile.** \`employmentType\` din JSON-LD spune \`FULL_TIME\` pentru ${dpP.employmentType.FULL_TIME || 0} din ${dpP.count}, iar badge-ul din listing spune "Full-time" pentru ${dpP.badgeFullTime} din ${dpP.count}. Singura sură corectă e linia **"Job Type:"** din descriere — prezentă la ${dpP.withJobTypeLine} din ${dpP.count}. Am folosit asta.\n`;
+} else {
+  md += `2. *(Sonda de surse nu a rulat azi — cifrele despre designproject.io lipsesc.)*\n`;
+}
+if (iqP && !iqP.error) {
+  md += `4. **Paginatia IQads nu funcționează.** \`?page=${iqP.pagesTested.slice(1).join('\` și \`?page=')}\` servesc exact pagina 0 (aceleași ${iqP.catalogueLinks} de linkuri — verificat azi pe ${iqP.pagesTested.join(', ')}). Catalogul complet e pe pagina 0 — nu iterez pagini.\n`;
+} else {
+  md += `4. *(Sonda de surse nu a rulat azi — verificarea paginatiei IQads lipseste.)*\n`;
+}
 md += `5. **Cota Google: ${usageTotal} cereri pe 200**${usageTotal > 200 ? ` (**depășit cu ${usageTotal - 200}**)` : usageTotal === 200 ? ' (**exact pe plafon**)' : ' (în limita plafonului)'}. Consumul pe etape:\n\n`;
 md += '| Etapă | Cereri |\n|---|---|\n';
 // report-build.js apare in contor cu cererile deja facute; upload-ul de dupa
@@ -428,7 +490,11 @@ md += '| Etapă | Cereri |\n|---|---|\n';
 md += usageRows.map(([k, v]) => `| \`${k}\` | ${k === 'report-build.js' ? v + UPLOAD_COST : v} |`).join('\n') + '\n';
 md += `| **total** | **${usageTotal}** |\n\n`;
 md += `> ${usageNote || 'Contorul măsoară cererile efective făcute de fiecare script.'}\n\n`;
-md += `Ce a mers peste plafon: am descărcat corpurile complete ale mesajelor de azi (${tri.all.length}) ca să disting mesajele care chiar cer răspuns de alertele automate — fără corp, nu se poate. **Zero scrieri pe Gmail** — niciun mail trimis, marcat sau arhivat.\n`;
+if (usageTotal > 200) {
+  md += `Ce a mers peste plafon: am descărcat corpurile complete ale mesajelor de azi (${tri.all.length}) ca să disting mesajele care chiar cer răspuns de alertele automate — fără corp, nu se poate. **Zero scrieri pe Gmail** — niciun mail trimis, marcat sau arhivat.\n`;
+} else {
+  md += `Ce a consumat cel mai mult: corpurile complete ale mesajelor de azi (${tri.all.length}) — fără corp, nu se poate distinge un mesaj care cere răspuns de o alertă automată. **Zero scrieri pe Gmail** — niciun mail trimis, marcat sau arhivat, niciun filtru modificat.\n`;
+}
 
 md += `
 ---
@@ -468,6 +534,8 @@ const files = [
   ['mavis-tools/report-mail-count.json', 'numărătoare pe etichete MAVIS/*'],
   ['mavis-tools/report-inbox-counts.json', 'numărătoare exactă inbox'],
   ['mavis-tools/report-simulate-sort.json', 'simularea sortării + mesajele de azi'],
+  ['mavis-tools/report-source-probe.json', 'sonda de surse (comportamentul iqads.ro / designproject.io, măsurat azi)'],
+  ['mavis-tools/report-filter-state.json', 'starea filtrelor Gmail MAVIS/* + testul paranteze-vs-acolade (măsurat azi)'],
   ['mavis-tools/report-triage.js', 'clasificatorul mesajelor (needs-reply / needs-action / fyi / noise)'],
 ];
 for (const [f, dsc] of files) {
