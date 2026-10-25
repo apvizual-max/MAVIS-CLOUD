@@ -16,6 +16,7 @@ class TestBuild(unittest.TestCase):
         # Edge cases: empty names
         self.assertEqual(build.initials(''), '—')
         self.assertEqual(build.initials('   '), '—')
+        self.assertEqual(build.initials(None), '—')
 
 if __name__ == '__main__':
     unittest.main()

@@ -17,7 +17,7 @@ def esc(s):
     return html.escape(str(s), quote=True)
 
 def initials(name):
-    parts = [p for p in str(name).split() if p]
+    parts = [p for p in str(name or '').split() if p]
     return ''.join(p[0] for p in parts[:2]).upper() or '—'
 
 def load_data(slug):
