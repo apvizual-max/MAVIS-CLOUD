@@ -13,18 +13,15 @@ DIR   = os.path.join(REPO, 'docs', 'SENTINEL')
 GH    = os.path.join(REPO, 'mavis-tools', 'bin', 'gh')
 TODAY = datetime.date.today().isoformat()
 
-import shlex
-
-def sh(c, cwd=REPO, t=25):
+def sh(args, cwd=REPO, t=25):
     try:
-        args = shlex.split(c, posix=(os.name == 'posix'))
         return subprocess.run(args, shell=False, cwd=cwd, capture_output=True,
                               text=True, timeout=t).stdout.strip()
     except Exception:
         return ''
 
 def git(*a):
-    return sh('git ' + ' '.join(a))
+    return sh(['git'] + list(a))
 
 def count_paginiq(q):
     """Numara prin paginare reala - resultSizeEstimate e plafonat."""
@@ -37,7 +34,7 @@ def count_paginiq(q):
         "if(t>=%d)break;if(p)await new Promise(s=>setTimeout(s,280));}while(p);"
         "console.log(t);})();" % (json.dumps(q), 4000)
     )
-    r = sh('node -e "%s"' % script.replace('"', '\\"'),
+    r = sh(['node', '-e', script],
            cwd=os.path.join(REPO, 'mavis-tools'), t=180)
     try:
         return r.strip().splitlines()[-1] if r.strip() else 'necontorizat'
@@ -82,14 +79,13 @@ def gather_stats():
     trash = count_paginiq('in:trash')
 
     # ---- workflow ----
-    wf = sh('%s run list --repo apvizual-max/MAVIS-CLOUD --limit 1 '
-            '--json conclusion --jq ".[0].conclusion" 2>/dev/null' % GH) or 'necunoscut'
+    wf = sh([GH, 'run', 'list', '--repo', 'apvizual-max/MAVIS-CLOUD', '--limit', '1', '--json', 'conclusion', '--jq', '.[0].conclusion']) or 'necunoscut'
 
     g = '\n'.join('| `%s` | %s |' % (k, v) for k, v in gmail.items())
 
     log = json.load(open(os.path.join(REPO, 'docs', 'LOG-SISTEM.json'), encoding='utf-8')) \
         if os.path.exists(os.path.join(REPO, 'docs', 'LOG-SISTEM.json')) else {'intrari': [], 'nivel': {}}
-    prag = sh('git rev-list --count origin/main..HEAD') or '0'
+    prag = sh(['git', 'rev-list', '--count', 'origin/main..HEAD']) or '0'
     erori = [i for i in log.get('intrari', []) if i.get('nivel') in ('eroare', 'critic')]
 
     return {
