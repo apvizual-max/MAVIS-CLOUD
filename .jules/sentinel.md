@@ -12,3 +12,8 @@
 **Vulnerability:** Python `subprocess.run` calls were executing with `shell=True` using string arguments, leading to command injection vulnerabilities.
 **Learning:** `shlex.split()` combined with string commands for `subprocess.run` breaks when the string contains shell-specific syntax like `2>/dev/null`, and the `shell=True` risk remains if user inputs aren't escaped securely.
 **Prevention:** Pass command arguments directly as lists and set `shell=False` in `subprocess.run()`. Handle IO stream redirection natively using `capture_output=True` (or passing `subprocess.DEVNULL` to `stderr`) instead of relying on shell operators. Unit tests for these calls should assert against the list arguments properly.
+
+## 2026-10-26 - Command injection vulnerabilities via shell=True in SITE/build-dashboard-legacy.py
+**Vulnerability:** Python `subprocess.run` calls were executing with `shlex.split` parsing string commands, which still opens up risks if underlying implementation or caller assumptions change, or if a user refactors it back to `shell=True`. Furthermore, unit tests were mocked against string lists but failed when `shell=False` was explicitly added.
+**Learning:** Always explicitly set `shell=False` and pass list arguments natively, bypassing `shlex.split` entirely when possible. Ensure test assertions (`mock_run.assert_called_once_with`) explicitly verify `shell=False` and match the exact invocation signature.
+**Prevention:** Pass command arguments directly as lists and set `shell=False` in `subprocess.run()`. Update any mocks in unit tests to assert `shell=False`.

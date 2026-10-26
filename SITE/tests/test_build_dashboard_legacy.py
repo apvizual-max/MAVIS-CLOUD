@@ -17,7 +17,7 @@ class TestBuildDashboardLegacy(unittest.TestCase):
         mock_run.side_effect = Exception("Test Exception")
 
         # Call the function
-        result = bd.sh('some_command')
+        result = bd.sh(['some_command'])
 
         # Assert the result is an empty string
         self.assertEqual(result, '')
@@ -41,10 +41,10 @@ class TestBuildDashboardLegacy(unittest.TestCase):
         mock_process.stdout = "   hello world \n "
         mock_run.return_value = mock_process
 
-        result = bd.sh('echo hello')
+        result = bd.sh(['echo', 'hello'])
 
         self.assertEqual(result, 'hello world')
-        mock_run.assert_called_once_with(['echo', 'hello'], cwd=bd.REPO, capture_output=True, text=True, timeout=25)
+        mock_run.assert_called_once_with(['echo', 'hello'], shell=False, cwd=bd.REPO, capture_output=True, text=True, timeout=25)
 
     @patch('subprocess.run')
     def test_sh_custom_args(self, mock_run):
@@ -53,10 +53,10 @@ class TestBuildDashboardLegacy(unittest.TestCase):
         mock_process.stdout = "custom output"
         mock_run.return_value = mock_process
 
-        result = bd.sh('ls -la', cwd='/custom/dir', t=10)
+        result = bd.sh(['ls', '-la'], cwd='/custom/dir', t=10)
 
         self.assertEqual(result, 'custom output')
-        mock_run.assert_called_once_with(['ls', '-la'], cwd='/custom/dir', capture_output=True, text=True, timeout=10)
+        mock_run.assert_called_once_with(['ls', '-la'], shell=False, cwd='/custom/dir', capture_output=True, text=True, timeout=10)
 
 if __name__ == '__main__':
     unittest.main()
