@@ -187,4 +187,4 @@ if (require.main === module) {
 })();
 }
 
-module.exports = { git, readClientConfig };
+module.exports = { git, readClientConfig, hasLiveToken };
