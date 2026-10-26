@@ -29,3 +29,11 @@ test('extractCode should return null for invalid strings without code parameter'
   assert.strictEqual(extractCode('http://127.0.0.1:8976/callback?notcode=abc'), null);
   assert.strictEqual(extractCode('invalid code with spaces'), null);
 });
+
+test('extractCode should return null for empty code value', () => {
+  assert.strictEqual(extractCode('http://127.0.0.1:8976/callback?code='), null);
+});
+
+test('extractCode should return null for missing query parameters', () => {
+  assert.strictEqual(extractCode('http://127.0.0.1:8976/callback'), null);
+});
