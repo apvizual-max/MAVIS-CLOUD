@@ -39,5 +39,20 @@ class TestLog(unittest.TestCase):
             indent=1
         )
 
+
+    @patch('log.os.path.exists')
+    @patch('builtins.open', new_callable=mock_open, read_data='invalid json {')
+    def test_incarcare_invalid_json_returns_default(self, mock_file, mock_exists):
+        # 1. Arrange
+        mock_exists.return_value = True
+
+        # 2. Act
+        result = log.incarcare()
+
+        # 3. Assert
+        self.assertEqual(result, {'intrari': [], 'nivel': {}})
+        mock_exists.assert_called_once_with(log.FIS)
+        mock_file.assert_called_once_with(log.FIS, encoding='utf-8')
+
 if __name__ == '__main__':
     unittest.main()
