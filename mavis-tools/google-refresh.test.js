@@ -1,8 +1,9 @@
 const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('fs');
+const child_process = require('child_process');
 
-const { readClientConfig } = require('./google-refresh.js');
+const { readClientConfig, git } = require('./google-refresh.js');
 
 test('readClientConfig should return null on fs.readFileSync error', (t) => {
   // mock fs.readFileSync to throw an error
@@ -22,4 +23,13 @@ test('readClientConfig should return parsed JSON on success', (t) => {
 
   const config = readClientConfig();
   assert.deepStrictEqual(config, mockConfig);
+});
+
+test('git should return null on execFileSync error', (t) => {
+  t.mock.method(child_process, 'execFileSync', () => {
+    throw new Error('Mock error');
+  });
+
+  const result = git(['status']);
+  assert.strictEqual(result, null);
 });
