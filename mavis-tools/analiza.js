@@ -5,12 +5,45 @@ async function all(q, cap = 250) {
   const out = [];
   const first = await k.gmail.list(q, cap);
   const ids = (first.messages || []).map(m => m.id);
-  for (let i = 0; i < ids.length; i += 25) {
-    const batch = ids.slice(i, i + 25);
-    const res = await Promise.all(batch.map(id =>
-      k.req('GET', `https://gmail.googleapis.com/gmail/v1/users/me/messages/${id}?format=metadata&metadataHeaders=Subject&metadataHeaders=From&metadataHeaders=Date&metadataHeaders=List-Id`)
-        .catch(() => null)));
-    for (const d of res) {
+  for (let i = 0; i < ids.length; i += 100) {
+    const batch = ids.slice(i, i + 100);
+    const boundary = 'batch_' + Date.now() + '_' + Math.random().toString(36).substring(2);
+    let body = '';
+
+    for (const id of batch) {
+      body += `--${boundary}\r\n`;
+      body += 'Content-Type: application/http\r\n\r\n';
+      body += `GET /gmail/v1/users/me/messages/${id}?format=metadata&metadataHeaders=Subject&metadataHeaders=From&metadataHeaders=Date&metadataHeaders=List-Id HTTP/1.1\r\n\r\n`;
+    }
+    body += `--${boundary}--\r\n`;
+
+    const resp = await k.req('POST', 'https://www.googleapis.com/batch/gmail/v1',
+      { __raw: body, __contentType: `multipart/mixed; boundary="${boundary}"` })
+      .catch(() => ({ text: async () => '' }));
+
+    const text = typeof resp.text === 'function' ? await resp.text() : '';
+    const respBoundaryMatch = resp.headers?.get?.('content-type')?.match(/boundary="?([^"]+)"?/) || text.match(/--([^\r\n]+)/);
+    const respBoundary = respBoundaryMatch ? respBoundaryMatch[1] : boundary;
+
+    const parts = text.split(`--${respBoundary}`);
+    const res = [];
+
+    for (let j = 1; j < parts.length - 1; j++) {
+      const part = parts[j];
+      const bodyMatch = part.match(/\r?\n\r?\n(\{[\s\S]*)/);
+      if (bodyMatch) {
+        try {
+          res.push(JSON.parse(bodyMatch[1]));
+        } catch (e) {
+          res.push(null);
+        }
+      } else {
+        res.push(null);
+      }
+    }
+
+    for (let j = 0; j < batch.length; j++) {
+      const d = res[j];
       if (!d || !d.payload) continue;
       const h = {};
       (d.payload.headers || []).forEach(x => h[x.name] = x.value);
