@@ -72,5 +72,15 @@ class TestBuildDashboardLegacy(unittest.TestCase):
         self.assertEqual(result, "")
         mock_run.assert_called_once()
 
+
+    def test_esc(self):
+        self.assertEqual(build_dashboard.esc("plain text"), "plain text")
+        self.assertEqual(build_dashboard.esc("a & b"), "a &amp; b")
+        self.assertEqual(build_dashboard.esc("<tag>"), "&lt;tag&gt;")
+        self.assertEqual(build_dashboard.esc("1 < 2 & 2 > 1"), "1 &lt; 2 &amp; 2 &gt; 1")
+        self.assertEqual(build_dashboard.esc(123), "123")
+        self.assertEqual(build_dashboard.esc(None), "None")
+        self.assertEqual(build_dashboard.esc(""), "")
+
 if __name__ == '__main__':
     unittest.main()
