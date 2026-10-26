@@ -14,6 +14,7 @@ class TestBuild(unittest.TestCase):
         self.assertEqual(build.initials('john doe'), 'JD')
 
         # Edge cases: empty names
+        self.assertEqual(build.initials(None), '—')
         self.assertEqual(build.initials(''), '—')
         self.assertEqual(build.initials('   '), '—')
 
