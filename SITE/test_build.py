@@ -17,6 +17,7 @@ class TestBuild(unittest.TestCase):
         self.assertEqual(build.initials(None), '—')
         self.assertEqual(build.initials(''), '—')
         self.assertEqual(build.initials('   '), '—')
+        self.assertEqual(build.initials(None), '—')
 
 if __name__ == '__main__':
     unittest.main()
