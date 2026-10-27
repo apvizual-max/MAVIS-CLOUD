@@ -45,8 +45,11 @@ jobs:
         run: |
           echo "SECRET_LEN=${#S}"
           echo "SECRET_FOREIGN_CHARS=$(printf '%s' "$S" | tr -d 'A-Za-z0-9+/=' | wc -c)"
+          echo "SECRET_FOREIGN_HEX=$(printf '%s' "$S" | tr -d 'A-Za-z0-9+/=' | od -An -t x1 | tr -s ' ' | tr -d '\n')"
           echo "SECRET_PADDING=$(printf '%s' "$S" | tr -cd '=' | wc -c)"
-          echo "SECRET_LINES=$(printf '%s' "$S" | wc -l)"
+          echo "SECRET_EQ_POS=$(printf '%s' "$S" | awk '{print index($0,"=")}')"
+          echo "SECRET_LEN_MOD4=$(( ${#S} % 4 ))"
+          echo "SECRET_VALID_B64_CHARS=$(printf '%s' "$S" | tr -dc 'A-Za-z0-9+/=' | wc -c)"
 
       - name: Materialize the credential from the secret
         env:
