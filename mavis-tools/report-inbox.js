@@ -9,6 +9,7 @@
  * READ-ONLY. Nimic nu se modifică.
  */
 const k = require('./kit.js');
+const TAX = require('./taxonomy.js');
 const fs = require('fs');
 
 const TODAY = process.argv[2] || '2026/10/23';
@@ -61,7 +62,7 @@ function hdr(h, n) { return (h.payload && h.payload.headers || []).find(x => x.n
   console.log('\n--- primele 40 (subiect | de la | data | etichete) ---');
   det.slice(0, 40).forEach(d => {
     const short = d.from.replace(/<[^>]*>/g, '').slice(0, 34);
-    console.log(`  ${d.date.slice(5, 22)} | ${d.subject.slice(0, 52).padEnd(52)} | ${short} | ${d.labels.filter(x => x.startsWith('MAVIS/')).join(',') || '-'}`);
+    console.log(`  ${d.date.slice(5, 22)} | ${d.subject.slice(0, 52).padEnd(52)} | ${short} | ${(TAX.resolve(d.labels || []).resolved.map(r => r.title).join(',') || '-')}`);
   });
 
   function extract(m) {

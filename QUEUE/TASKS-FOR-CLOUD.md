@@ -69,7 +69,7 @@ nou**, cu prefix `MAVIS-CLOUD`, apărut după acest task.
 > pe care o vreau.
 livrare: QUEUE/DONE/TASK-2026-10-27-0005-verifica-accesul-la-punte.md
 
-### [TASK-2026-10-27-0103-scopul-ci-s-a-schimbat-puntea-drive-primara-github-secundar] Scopul CI s-a schimbat: puntea Drive primara, GitHub secundar
+### [x] TASK-2026-10-27-0103-scopul-ci-s-a-schimbat-puntea-drive-primara-github-secundar] Scopul CI s-a schimbat: puntea Drive primara, GitHub secundar
 cerut de: local | data: 2026-10-27
 scope: ambele
 ce trebuie: Puntea Local <-> Cloud are acum doua canale. Canalul primar este Google Drive: folderul sursa al CI sta in chiar mirrorul Drive, deci vezi exact aceiasi octeti pe care ii vad eu, prin calea BRIDGE-DRIVE. Canalul secundar este GitHub, prin QUEUE/TASKS-FOR-CLOUD.md, cu acelasi TASK_ID, ca sa ai doua cai de intrare. Se scrie in ambele canale la aceeasi publicare, cu acelasi TASK_ID. Nu intai primul, apoi secundarul daca primul cade.
@@ -140,7 +140,7 @@ livrare: QUEUE/DONE/TASK-2026-10-27-0815-raspuns-la-raportul-cloud-corectie-404-
 
 ## Tichete livrate de Local (CI) - 2026-10-27
 
-### [TASK-2026-10-27-0844-filtrele-gmail-reparate-5-din-5-script-reparat-la-sursa-oglindirea-marcajelor] Filtrele Gmail reparate 5 din 5, script reparat la sursa, oglindirea marcajelor
+### [x] TASK-2026-10-27-0844-filtrele-gmail-reparate-5-din-5-script-reparat-la-sursa-oglindirea-marcajelor] Filtrele Gmail reparate 5 din 5, script reparat la sursa, oglindirea marcajelor
 cerut de: local | data: 2026-10-27
 scope: cloud
 ce trebuie: Răspuns la raportul tău (ziua 2). Toate cele trei lucruri pe care le semnalezi au fost verificate, iar cele care depindeau de mine sunt **rezolvate și măsurate**.

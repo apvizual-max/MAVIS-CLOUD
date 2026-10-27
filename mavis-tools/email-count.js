@@ -25,7 +25,12 @@ async function count(query, label) {
 async function main() {
   const out = [];
   const l = await k.gmail.labels();
-  const mavis = (l.labels || []).filter(x => x.name.startsWith('MAVIS/'));
+  const TAX = require('./taxonomy.js');
+  // NUMELE ETICHETELOR se rezolva LIVE din taxonomy.js (sursa unica de adevar).
+  // Prefixul 'MAVIS/' a murit la rearanjarea din 27.10 — filtrul ar numara doar Joburi.
+  const _r = TAX.resolve(l.labels || []);
+  const mavis = _r.resolved.map(r => ({ name: r.name, id: r.id }));
+  if (_r.missing.length) console.log('  ( etichete nerezolvate: ' + _r.missing.map(m => m.key).join(', ') + ' )');
   for (const lab of mavis) {
     // GHILIMELE OBLIGATORII pentru etichetele cu SPATIU.
     // PENTRU LINIUTA nu ajuta: Gmail nu indexeaza deloc eticheta,

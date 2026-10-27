@@ -45,8 +45,11 @@ const k = require('./kit.js');
   filters.forEach(f => {
     const c = f.criteria || {}, a = f.action || {};
     const add = (a.addLabelIds || []).map(nm), rem = (a.removeLabelIds || []).map(nm);
-    const touched = add.concat(rem).filter(x => x.startsWith('MAVIS/'));
-    const mark = touched.length ? '  <<< MAVIS' : '';
+    const _TAX = require('./taxonomy.js');
+    const _r = _TAX.resolve(labs.labels || []);
+    const _mavisNames = new Set(_r.resolved.map(x => x.name));
+    const touched = add.concat(rem).filter(x => _mavisNames.has(x));
+    const mark = touched.length ? '  <<< TAXONOMIE' : '';
     console.log(`  id=${f.id} | from=${c.from || '-'} | query="${c.query || '-'}" | add=[${add.join(',')}] | remove=[${rem.join(',')}]${mark}`);
   });
 

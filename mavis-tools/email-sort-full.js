@@ -6,16 +6,19 @@
 const k = require('./kit.js');
 const q = require('./quota.js');
 
-const L = {
-  social:   'MAVIS/Social',
-  joburi:   'MAVIS/Joburi',
-  ai:       'MAVIS/AI si comunitati',
-  finante:  'MAVIS/Finante',
-  newsletter:'MAVIS/Newsletter',
-  personal: 'MAVIS/Personal',
-  facturi:  'MAVIS/Facturi si conturi',
-  actiune:  'MAVIS/De raspuns',
-};
+// NUMELE ETICHETELOR NU SE HARDCODEAZA. Se rezolva live din taxonomy.js
+// (sursa unica de adevar) - la 27.10 etichetele au fost rearanjate si
+// 'MAVIS/Social', 'MAVIS/AI si comunitati' etc. nu mai exista.
+const TAX = require('./taxonomy.js');
+let L = {};
+function rezolvaEtichete(liveLabels) {
+  const r = TAX.resolve(liveLabels || []);
+  L = {};
+  for (const row of r.resolved) L[row.key] = row.name;
+  if (r.missing.length)
+    console.log('  ( etichete nerezolvate: ' + r.missing.map(m => m.key).join(', ') + ' )');
+  return L;
+}
 
 const WINDOW = '';  // nefolosit: sortam tot inbox-ul
 // categoriile zilnice nu pot folosi fereastra de 1-3 ani
@@ -48,8 +51,14 @@ async function threadIds(query) {
 
 (async () => {
   const ex = await k.gmail.labels();
+  rezolvaEtichete(ex.labels);                       // numele vii, din taxonomy.js
   const byName = new Map(ex.labels.map(l => [l.name, l.id]));
-  for (const [k2, n] of Object.entries(L)) if (!byName.has(n)) await k.gmail.createLabel(n);
+  // NU se creeaza etichete inexistente: daca o categorie n-a fost rezolvata,
+  // eticheta ei nu se inventeaza. Se sare peste ea, cu raport.
+  for (const [k2, n] of Object.entries(L)) {
+    if (!n) { console.log('  ( eticheta pentru "' + k2 + '" nu exista - categorie rezolvata? sarit )'); continue; }
+    if (!byName.has(n)) await k.gmail.createLabel(n);
+  }
   const labels = await k.gmail.labels();
   const M = new Map((labels.labels||[]).map(l => [l.name, l.id]));
 
