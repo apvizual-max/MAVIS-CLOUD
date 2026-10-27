@@ -56,6 +56,11 @@ jobs:
           node --test ALEX-KIT/cv-mutator.test.js
           echo "✅ teste cv-mutator trecute"
 
+      - name: Teste automate memory snapshot
+        run: |
+          node --test mavis-tools/memory-snapshot.test.js
+          echo "✅ teste memory-snapshot trecute"
+
       - name: Python fără erori de sintaxă
         run: |
           python3 - <<'PY'

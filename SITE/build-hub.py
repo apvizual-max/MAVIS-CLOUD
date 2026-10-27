@@ -7,7 +7,7 @@ Tab-uri: PANO · SITE CV · PUNTE · JULES/GIT/GITHUB · PROMPT
 Actiunile se salveaza local si se exporta ca fisier, pe care POPY il trimite.
 Site-ul e static: nu poate scrie in repo. Asta e limita lui, spusa deschis.
 """
-import os, json, glob, datetime, subprocess, shutil
+import os, json, glob, datetime, subprocess, shutil, shlex
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(BASE)
@@ -26,7 +26,8 @@ CALE_REPO = {
 
 def sh(c, cwd=REPO, t=25):
     try:
-        return subprocess.run(c, shell=True, cwd=cwd, capture_output=True,
+        args = shlex.split(c, posix=(os.name == 'posix'))
+        return subprocess.run(args, shell=False, cwd=cwd, capture_output=True,
                               text=True, timeout=t).stdout.strip()
     except Exception:
         return ''
@@ -114,6 +115,13 @@ def copiaza_docs():
         n += 1
     return n
 
+def badge(m):
+    if m is True:
+        return '<span class="tag ok">MATCH</span>'
+    if m is False:
+        return '<span class="tag" style="background:rgba(248,113,113,.12);color:#f87171;border-color:rgba(248,113,113,.3)">NESINCRON</span>'
+    return '<span class="tag" style="color:#64748b">NECUNOSCUT</span>'
+
 def main():
     os.makedirs(DIST, exist_ok=True)
     ndocs = copiaza_docs()
@@ -127,13 +135,6 @@ def main():
     repos = citeste_repo()
     n_ok = sum(1 for r in repos if r['match'] is True)
     n_r = len(repos)
-
-    def badge(m):
-        if m is True:
-            return '<span class="tag ok">MATCH</span>'
-        if m is False:
-            return '<span class="tag" style="background:rgba(248,113,113,.12);color:#f87171;border-color:rgba(248,113,113,.3)">NESINCRON</span>'
-        return '<span class="tag" style="color:#64748b">NECUNOSCUT</span>'
 
     repo_rows = ''.join(
         '<tr><td class="mono"><b>%s</b><div style="color:#64748b;font-size:11.5px">%s</div></td>'
@@ -181,12 +182,19 @@ def main():
     vend = sorted(d for d in glob.glob(os.path.join(REPO, 'vendor', '*')) if os.path.isdir(d))
     vn   = [os.path.basename(v) for v in vend]
     srows = ''
-    for s in sorted(own):
-        n = os.path.basename(s); f = os.path.join(s, 'SKILL.md'); desc = ''
+    desc_map = {}
+    for s_path in own + vend:
+        f = os.path.join(s_path, 'SKILL.md')
         if os.path.exists(f):
-            for ln in open(f, encoding='utf-8'):
-                if ln.startswith('description:'):
-                    desc = ln.split(':', 1)[1].strip()[:100]; break
+            with open(f, encoding='utf-8') as file:
+                for ln in file:
+                    if ln.startswith('description:'):
+                        desc_map[os.path.basename(s_path)] = ln.split(':', 1)[1].strip()[:100]
+                        break
+
+    for s in sorted(own):
+        n = os.path.basename(s)
+        desc = desc_map.get(n, '')
         srows += '<tr><td class="mono">%s</td><td>%s</td><td><span class="tag %s">%s</span></td></tr>' % (
             n, esc(desc), 'v' if n in vn else '', 'vendor' if n in vn else 'propriu')
 
@@ -281,6 +289,7 @@ pre{{background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:15px
 .inp{{width:100%;background:#0f172a;border:1px solid #1e293b;border-radius:10px;color:#f8fafc;
      font:inherit;font-size:14px;padding:12px 14px;margin-top:8px;resize:vertical}}
 .inp:focus{{outline:none;border-color:#14b8a6}}
+.tab:focus-visible, .act:focus-visible, .qitem button:focus-visible, a:focus-visible {{ outline: 2px solid #14b8a6; outline-offset: 2px; border-radius: 4px; }}
 .lbl{{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
      color:#64748b;margin-top:16px;display:block}}
 .row{{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}}
@@ -304,19 +313,19 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
   ramura <code class="mono">{esc(branch)}</code> · {commits} commit-uri · {dirty} necomitate</p>
 </header></div>
 
-<nav><div class="wrap">
-  <button class="tab" aria-selected="true"  data-p="pano">Pano</button>
-  <button class="tab" aria-selected="false" data-p="cv">Site CV</button>
-  <button class="tab" aria-selected="false" data-p="punte">Punte · Bridge</button>
-  <button class="tab" aria-selected="false" data-p="jules">Jules · Git · GitHub</button>
-  <button class="tab" aria-selected="false" data-p="prompt">Prompt · Acțiuni</button>
-  <button class="tab" aria-selected="false" data-p="todo">TO DO</button>
+<nav><div class="wrap" role="tablist">
+  <button class="tab" role="tab" aria-selected="true"  data-p="pano">Pano</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="cv">Site CV</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="punte">Punte · Bridge</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="jules">Jules · Git · GitHub</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="prompt">Prompt · Acțiuni</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="todo">TO DO</button>
 </div></nav>
 
 <div class="wrap">
 
 <!-- ============ PANO ============ -->
-<section class="pane on" id="pano">
+<section class="pane on" role="tabpanel" id="pano">
   <div class="grid">
     <div class="card"><div class="n">{nskill}</div><div class="l">skill-uri</div></div>
     <div class="card {'bad' if (n_r and n_ok < n_r) else ''}"><div class="n">{n_ok}/{n_r}</div><div class="l">repo-uri MATCH</div></div>
@@ -357,7 +366,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
 </section>
 
 <!-- ============ SITE CV ============ -->
-<section class="pane" id="cv">
+<section class="pane" role="tabpanel" id="cv">
   <h2>Site de CV <span class="ct">{len(sites)} roluri, se construiește din date</span></h2>
   <div class="note"><b>Nu e o pagină goală.</b> Fiecare rol e un fișier JSON;
   interfața e aceeași pentru toate. Adăugarea unui rol nou nu înseamnă scriere de HTML.</div>
@@ -369,7 +378,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
 </section>
 
 <!-- ============ PUNTE ============ -->
-<section class="pane" id="punte">
+<section class="pane" role="tabpanel" id="punte">
   <h2>Punte · Bridge <span class="ct">cloud ↔ local, prin repo</span></h2>
   <div class="row">
     <div class="box">
@@ -416,7 +425,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
 </section>
 
 <!-- ============ JULES · GIT · GITHUB ============ -->
-<section class="pane" id="jules">
+<section class="pane" role="tabpanel" id="jules">
   <h2>Git <span class="ct">stare internă</span></h2>
   <div class="kv">
     <b>Remote</b><span>{esc(remote)}</span>
@@ -459,7 +468,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
 </section>
 
 <!-- ============ PROMPT · ACTIUNI ============ -->
-<section class="pane" id="prompt">
+<section class="pane" role="tabpanel" id="prompt">
   <h2>Acțiuni rapide <span class="ct">un clic → prompt gata de trimis</span></h2>
   <p style="color:#94a3b8;font-size:13.5px;margin-bottom:6px">
     Fiecare buton pune o cerință în coadă și îți dă prompt-ul. Trimite-mi promptul și lucrez.</p>
@@ -475,15 +484,15 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
   <div class="note"><b>Scrie problema în cuvintele tale.</b> Generatorul o transformă în prompt
   structurat pe care îl trimiți aici. Nu trebuie să știi să scrii prompturi.</div>
 
-  <label class="lbl">Ce vrei — în cuvintele tale</label>
+  <label class="lbl" for="dureri">Ce vrei — în cuvintele tale</label>
   <textarea class="inp" id="dureri" rows="4"
     placeholder="Ex: nu mai văd emailurile vechi, vreau să fie ordonate, și vreau să știu care cer răspuns"></textarea>
 
-  <label class="lbl">Criterii — cum știi că e rezolvat</label>
+  <label class="lbl" for="criterii">Criterii — cum știi că e rezolvat</label>
   <textarea class="inp" id="criterii" rows="2"
     placeholder="Ex: vreau să văd un raport, și să nu se piardă nimic"></textarea>
 
-  <label class="lbl">Ce NU ai voie să faci</label>
+  <label class="lbl" for="restrictii">Ce NU ai voie să faci</label>
   <textarea class="inp" id="restrictii" rows="2"
     placeholder="Ex: nu șterge nimic definitiv, nu trimite nimic în numele meu"></textarea>
 
@@ -497,7 +506,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
 </section>
 
 <!-- ============ TO DO ============ -->
-<section class="pane" id="todo">
+<section class="pane" role="tabpanel" id="todo">
   <h2>TO DO <span class="ct">{len(todo.get('sarcini', []))} sarcini</span></h2>
   <table><thead><tr><th>Sarcină</th><th>Cine</th><th>Status</th><th>Stare acum</th><th>Mai rămâne</th></tr></thead>
   <tbody>{todo_rows}</tbody></table>
@@ -526,14 +535,15 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
   function salveaza(c){{ localStorage.setItem(CHEIE, JSON.stringify(c)); rand(); }}
 
   function rand(){{
+    function escHtml(s){{ return (s||'').replace(/[&<>]/g, function(c){{return {{'&':'&amp;','<':'&lt;','>':'&gt;'}}[c];}}); }};
     var c = coada(), box = document.getElementById('coada');
     if (!c.length) {{ box.innerHTML = '<p style="color:#64748b;font-size:13.5px;margin-top:12px">Coada e goală. Apasă un buton de mai sus.</p>'; return; }}
     box.innerHTML = c.map(function(x,i){{
-      return '<div class="qitem"><span>'+ (i+1) +'. '+ x.titlu +'</span>'+
-             '<button title="șterge" onclick="stergeAcțiune('+i+')">&times;</button></div>';
+      return '<div class="qitem"><span>'+ (i+1) +'. '+ escHtml(x.titlu) +'</span>'+
+             '<button title="șterge" aria-label="Șterge acțiunea" onclick="stergeAcțiune('+i+')">&times;</button></div>';
     }}).join('');
   }}
-  window.stergeActțiune = function(i){{ var c = coada(); c.splice(i,1); salveaza(c); }};
+  window.stergeAcțiune = function(i){{ var c = coada(); c.splice(i,1); salveaza(c); }};
 
   document.querySelectorAll('.act[data-t]').forEach(function(b){{
     b.addEventListener('click', function(){{

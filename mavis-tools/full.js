@@ -47,28 +47,87 @@ async function fetchAll(q) {
 
   const counts = {}; const kept = [];
   let done = 0;
-  for (let i = 0; i < list.length; i += 20) {
-    const batch = list.slice(i, i + 20);
-    const ds = await Promise.all(batch.map(m =>
-      k.req('GET', `https://gmail.googleapis.com/gmail/v1/users/me/messages/${m.id}?format=metadata&metadataHeaders=Subject&metadataHeaders=From`)
-        .catch(() => null)));
+
+  // Categorii pentru batchModify
+  const buckets = {};
+  for (const kk of Object.keys(LABELS)) {
+    buckets[kk] = {
+      add: [ids[kk]],
+      remove: [...allMavisIds, 'UNREAD'],
+      msgIds: []
+    };
+    if (kk === 'actiune' || kk === 'personal' || kk === 'facturi') {
+      buckets[kk].add.push('INBOX');
+    } else {
+      buckets[kk].remove.push('INBOX');
+    }
+  }
+
+  for (let i = 0; i < list.length; i += 100) {
+    const batch = list.slice(i, i + 100);
+    const boundary = 'batch_' + Date.now() + '_' + Math.random().toString(36).substring(2);
+    let body = '';
+
+    for (const m of batch) {
+      body += `--${boundary}\r\n`;
+      body += 'Content-Type: application/http\r\n\r\n';
+      body += `GET /gmail/v1/users/me/messages/${m.id}?format=metadata&metadataHeaders=Subject&metadataHeaders=From HTTP/1.1\r\n\r\n`;
+    }
+    body += `--${boundary}--\r\n`;
+
+    const resp = await k.req('POST', 'https://www.googleapis.com/batch/gmail/v1',
+      { __raw: body, __contentType: `multipart/mixed; boundary="${boundary}"` })
+      .catch(() => ({ text: async () => '' }));
+
+    const text = typeof resp.text === 'function' ? await resp.text() : '';
+    // Use the actual response boundary
+    const respBoundaryMatch = resp.headers?.get?.('content-type')?.match(/boundary="?([^"]+)"?/) || text.match(/--([^\r\n]+)/);
+    const respBoundary = respBoundaryMatch ? respBoundaryMatch[1] : boundary;
+
+    const parts = text.split(`--${respBoundary}`);
+    const ds = [];
+
+    for (let j = 1; j < parts.length - 1; j++) {
+      const part = parts[j];
+      const bodyMatch = part.match(/\r?\n\r?\n(\{[\s\S]*)/);
+      if (bodyMatch) {
+        try {
+          ds.push(JSON.parse(bodyMatch[1]));
+        } catch (e) {
+          ds.push(null);
+        }
+      } else {
+        ds.push(null);
+      }
+    }
+
     for (let j = 0; j < batch.length; j++) {
       const d = ds[j]; if (!d || !d.payload) continue;
       const h = {}; (d.payload.headers || []).forEach(x => h[x.name] = x.value);
-      const m = { subj: h.Subject || '', from: h.From || '' };
-      const p = classify(m);
+      const msg = { subj: h.Subject || '', from: h.From || '' };
+      const p = classify(msg);
       counts[p] = (counts[p] || 0) + 1;
-      await k.gmail.removeLabel(batch[j].id, allMavisIds);
-      await k.gmail.addLabel(batch[j].id, [ids[p]]);
-      await k.gmail.removeLabel(batch[j].id, ['UNREAD']);
+
+      buckets[p].msgIds.push(batch[j].id);
+
       if (p === 'actiune' || p === 'personal' || p === 'facturi') {
-        await k.gmail.addLabel(batch[j].id, ['INBOX']);
-        kept.push({ eticheta: LABELS[p], subj: m.subj.slice(0, 70), from: m.from });
-      } else {
-        await k.gmail.removeLabel(batch[j].id, ['INBOX']);
+        kept.push({ eticheta: LABELS[p], subj: msg.subj.slice(0, 70), from: msg.from });
       }
       done++;
       if (done % 100 === 0) console.log('  ...', done, '/', list.length);
+    }
+  }
+
+  // Aplicare batchModify pentru a reduce masiv numarul de cereri API
+  for (const p in buckets) {
+    const b = buckets[p];
+    if (b.msgIds.length === 0) continue;
+    for (let i = 0; i < b.msgIds.length; i += 1000) {
+      await k.req('POST', 'https://gmail.googleapis.com/gmail/v1/users/me/messages/batchModify', {
+        ids: b.msgIds.slice(i, i + 1000),
+        addLabelIds: b.add,
+        removeLabelIds: b.remove
+      });
     }
   }
 

@@ -22,7 +22,7 @@
 const fs = require('fs');
 const path = require('path');
 const http = require('http');
-const { exec } = require('child_process');
+const { execFile } = require('child_process');
 const AUTH = require('./google-auth.js');
 
 const HOME = process.env.HOME || require('os').homedir();
@@ -94,11 +94,18 @@ async function check() {
 }
 
 function openBrowser(url) {
-  const cmd = process.platform === 'darwin' ? 'open' : process.platform === 'win32' ? 'start' : 'xdg-open';
-  try { exec(`${cmd} "${url}"`, () => {}); } catch { /* merge fara browser, POPY deschide linkul manual */ }
+  try {
+    if (process.platform === 'win32') {
+      execFile('rundll32.exe', ['url.dll,FileProtocolHandler', url], { stdio: 'ignore', detached: true }).unref();
+    } else if (process.platform === 'darwin') {
+      execFile('open', [url], { stdio: 'ignore', detached: true }).unref();
+    } else {
+      execFile('xdg-open', [url], { stdio: 'ignore', detached: true }).unref();
+    }
+  } catch { /* merge fara browser, POPY deschide linkul manual */ }
 }
 
-(async () => {
+async function main() {
   if (CHECK) return check();
 
   console.log(C.b('\n=== GOOGLE SETUP ===\n'));
@@ -283,4 +290,10 @@ function openBrowser(url) {
       process.exit(0);
     } catch (e) { console.log(C.r('Eroare: ' + e.message)); process.exit(1); }
   }
-})();
+}
+
+if (require.main === module) {
+  main().catch(e => { console.error(e); process.exit(1); });
+}
+
+module.exports = { credsFromDisk, credsFromEnv, main };

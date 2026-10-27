@@ -6,7 +6,7 @@
 Apeleaza API-ul de sesiune si scrie docs/CONVERSATIE.md.
 Transcrierea este REALA, nu reconstruita din memorie.
 """
-import os, json, subprocess, datetime, urllib.request
+import os, json, subprocess, datetime
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT  = os.path.join(REPO, 'docs', 'CONVERSATIE.md')
@@ -14,7 +14,9 @@ API  = 'http://localhost:8080'   # se inlocuieste mai jos daca e nevoie
 
 def apeleaza_api(comanda):
     """Ruleaza mavis CLI ca sa ia mesajele de sesiune."""
-    r = subprocess.run(['mavis', command], capture_output=True, text=True, timeout=90)
+    import shlex
+    args = shlex.split(comanda, posix=(os.name == 'posix'))
+    r = subprocess.run(['mavis'] + args, shell=False, capture_output=True, text=True, timeout=90)
     return r.stdout
 
 def main():

@@ -118,6 +118,33 @@ git push origin main              # fără întrebare
 
 Ce decide singur
 
+## Regula 4 — nu se negociază: arhivezi înainte să tai din memorie
+
+**POPY, 2026-10-24:** optimizarea memoriei fără arhivarea a ce ai tăiat se
+cheamă **EROARE**, nu optimizare. Cât timp versiunea precedentă e păstrată
+în **repo, în secțiunea de arhivă**, atunci e optimizare. Altfel e trunchiere
+de memorie și pierdere de context — și așa se pierd detalii care uneori contează.
+
+**Fluxul, în ordine:**
+
+```
+SNAPSHOT → MANIFEST → COMMIT → PUSH → APOI tai din memorie → COMMIT → PUSH
+```
+
+**Push-ul arhivei se întâmplă ÎNAINTE de tăiere.** Dacă push-ul pică, nu tai
+nimic. Un topic șters se arhivează **înainte** de `memory_topic_delete`.
+
+```bash
+node mavis-tools/memory-snapshot.js --from <dir> --label <etichetă>   # snapshot
+node mavis-tools/memory-snapshot.js --verify <etichetă>               # R0: există?
+```
+
+Arhiva: `docs/arhiva/memorie/` · procedura: `docs/PROCEDURA-OPTIMIZARE-MEMORIE.md`
+· snapshot săptămânal: task cloud, duminica 23:00 (doar arhivează, nu taie).
+
+**Secretele se elimină din memorie ÎNAINTE de arhivare** — repo-ul e public,
+arhiva nu poate conține chei.
+
 ## REGULI DE PLATFORMĂ — citește asta la fiecare pornire
 
 Fișierul complet: `docs/REGULI-PLATFORMA.md`

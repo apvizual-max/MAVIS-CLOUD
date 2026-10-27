@@ -35,16 +35,24 @@ function budgetLeft() {
   return QUOTA.perMinutePerUser - state.used;
 }
 
+let promiseQueue = Promise.resolve();
+
 /** Asteapta pana cand bugetul permite apelul. Returneaza cand se poate. */
 async function reserve(method) {
   const cost = costOf(method);
-  while (budgetLeft() < cost) {
-    const waitMs = 60000 - (Date.now() - state.windowStart) + 250;
-    state.waited += waitMs;
-    await new Promise(r => setTimeout(r, waitMs));
-  }
-  state.used += cost;
-  state.requests++;
+
+  const p = promiseQueue.then(async () => {
+    while (budgetLeft() < cost) {
+      const waitMs = 60000 - (Date.now() - state.windowStart) + 250;
+      state.waited += waitMs;
+      await new Promise(r => setTimeout(r, waitMs));
+    }
+    state.used += cost;
+    state.requests++;
+  });
+
+  promiseQueue = p.catch(() => {});
+  return p;
 }
 
 /** Backoff exponenial pentru 429 / rateLimitExceeded */

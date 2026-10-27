@@ -17,16 +17,14 @@ def esc(s):
     return html.escape(str(s), quote=True)
 
 def initials(name):
-    parts = [p for p in str(name).split() if p]
+    parts = [p for p in str(name or '').split() if p]
     return ''.join(p[0] for p in parts[:2]).upper() or '—'
 
-def build(slug):
+def load_data(slug):
     src = os.path.join(DATE, slug + '.json')
-    d = json.load(open(src, encoding='utf-8'))
-    r, cv, port, scr, con = d['rol'], d['cv'], d['portofolio'], d['scrisoare'], d['contact']
-    css = open(CSS, encoding='utf-8').read()
+    return json.load(open(src, encoding='utf-8'))
 
-    # ---- tab CV ----
+def render_cv(cv):
     skills = '\n'.join(
         '        <li class="skill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
@@ -45,8 +43,10 @@ def build(slug):
     edu = '\n'.join('        <li class="skill"><span aria-hidden="true">—</span>%s</li>' % esc(e)
                     for e in cv.get('educatie', []))
 
-    # ---- tab portofolio ----
-    cards = '\n'.join(
+    return skills, ach, tl, edu
+
+def render_portfolio(port):
+    return '\n'.join(
         '      <article class="pf" data-tilt>\n'
         '        <div class="pf-top"><div class="pf-ico" aria-hidden="true">%s</div>'
         '<div><div class="pf-client">%s</div><div class="pf-cat">%s</div></div></div>\n'
@@ -56,10 +56,10 @@ def build(slug):
                            esc(p['titlu']), esc(p['note']), esc(p.get('status', '')), esc(p.get('status', '')))
         for p in port)
 
-    # ---- scrisoare ----
-    body = '\n'.join('        <p>%s</p>' % esc(p) for p in scr['paragrafe'])
+def render_letter(scr):
+    return '\n'.join('        <p>%s</p>' % esc(p) for p in scr['paragrafe'])
 
-    # ---- contact ----
+def render_contact(con):
     cboxes = [
         ('Email', con.get('email', '[EMAIL]')),
         ('Telefon', con.get('telefon', '[TELEFON]')),
@@ -74,6 +74,9 @@ def build(slug):
         '        <a href="%s" rel="noopener">%s</a>' % (esc(l['url']), esc(l['eticheta']))
         for l in con.get('linkuri', []))
 
+    return contact, links
+
+def render_template(r, cv, port, scr, con, css, skills, ach, tl, edu, cards, body, contact, links):
     head_title = '%s | %s' % (r['titluSite'], r['website'])
 
     out = f"""<!DOCTYPE html>
@@ -267,6 +270,20 @@ def build(slug):
 </body>
 </html>
 """
+    return out
+
+def build(slug):
+    d = load_data(slug)
+    r, cv, port, scr, con = d['rol'], d['cv'], d['portofolio'], d['scrisoare'], d['contact']
+    css = open(CSS, encoding='utf-8').read()
+
+    skills, ach, tl, edu = render_cv(cv)
+    cards = render_portfolio(port)
+    body = render_letter(scr)
+    contact, links = render_contact(con)
+
+    out = render_template(r, cv, port, scr, con, css, skills, ach, tl, edu, cards, body, contact, links)
+
     os.makedirs(DIST, exist_ok=True)
     path = os.path.join(DIST, slug + '.index.html')
     open(path, 'w', encoding='utf-8').write(out)

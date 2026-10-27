@@ -1,0 +1,365 @@
+{
+  "today": "2026/10/27",
+  "labels": [
+    {
+      "key": "joburi",
+      "title": "Joburi",
+      "name": "MAVIS/Joburi",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 333
+      },
+      "newest": {
+        "id": "1a12bfc46840fb31",
+        "subject": "New jobs similar to Brand Designer,  Product Launches at Figma",
+        "date": "Sun, 11 Oct 2026 17:21:54 +0000 (UTC)",
+        "from": "LinkedIn <jobs-noreply@linkedin.com>"
+      },
+      "newestDate": "Sun, 11 Oct 2026 17:21:54 +0000 (UTC)",
+      "samples": [
+        {
+          "id": "1a12bfc46840fb31",
+          "subject": "New jobs similar to Brand Designer,  Product Launches at Figma",
+          "date": "Sun, 11 Oct 2026 17:21:54 +0000 (UTC)",
+          "from": "LinkedIn <jobs-noreply@linkedin.com>"
+        },
+        {
+          "id": "1a12ba8fa78f6a5d",
+          "subject": "Starting at €154K/year: Ashby Staff Design Engineer - EU",
+          "date": "Sun, 11 Oct 2026 15:50:56 +0000 (UTC)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+        },
+        {
+          "id": "1a12b521ab115f3b",
+          "subject": "🔥 Pergole retractabile, copertine retractabile - Prestige Art Design caută Personal productie  și 100 mai multe oferte noi de muncă",
+          "date": "Sun, 11 Oct 2026 14:16:03 +0000",
+          "from": "Jooble <subscribe@ro.jooble.org>"
+        },
+        {
+          "id": "1a12b46d116d9860",
+          "subject": "Onchain transfer agents",
+          "date": "Sun, 11 Oct 2026 14:03:43 +0000 (UTC)",
+          "from": "MoonPay via LinkedIn <newsletters-noreply@linkedin.com>"
+        }
+      ]
+    },
+    {
+      "key": "ai",
+      "title": "AI si comunitati",
+      "name": "AI Folder/AI si Comunitati",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 115
+      },
+      "newest": {
+        "id": "1a12bb3958a41822",
+        "subject": "Executive Briefing: Which Limits in Your 2027 Plan Are Real, and Which Are From the Last Time You Tried?",
+        "date": "Sun, 11 Oct 2026 15:00:41 +0000",
+        "from": "\"Nate from Nate’s Substack\" <natesnewsletter@substack.com>"
+      },
+      "newestDate": "Sun, 11 Oct 2026 15:00:41 +0000",
+      "samples": [
+        {
+          "id": "1a12bb3958a41822",
+          "subject": "Executive Briefing: Which Limits in Your 2027 Plan Are Real, and Which Are From the Last Time You Tried?",
+          "date": "Sun, 11 Oct 2026 15:00:41 +0000",
+          "from": "\"Nate from Nate’s Substack\" <natesnewsletter@substack.com>"
+        },
+        {
+          "id": "1a129b87ae5bd47a",
+          "subject": "💼 12 new job opportunities posted in the past 24 hours",
+          "date": "Sun, 11 Oct 2026 06:48:38 +0000",
+          "from": "Twine Team <no-reply@twinehq.com>"
+        },
+        {
+          "id": "1a1298cf812427eb",
+          "subject": "9 NEW Claude Mods that can truly change how you work",
+          "date": "Sun, 11 Oct 2026 06:01:06 +0000 (UTC)",
+          "from": "Jay E <robonuggets@mail.beehiiv.com>"
+        },
+        {
+          "id": "1a1263f52dbb423b",
+          "subject": "903 European Seed Funds📬, How to Evaluate Talent🧪, AI-Era Fraud Prevention🛡️",
+          "date": "Sat, 10 Oct 2026 14:34:57 +0000",
+          "from": "The Founders Corner <thefoundercorner@substack.com>"
+        }
+      ]
+    },
+    {
+      "key": "social",
+      "title": "Social",
+      "name": "Socials",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 216
+      },
+      "newest": {
+        "id": "1a129d66139b278d",
+        "subject": "1 event happening tomorrow",
+        "date": "Sun, 11 Oct 2026 07:21:16 +0000 (UTC)",
+        "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
+      },
+      "newestDate": "Sun, 11 Oct 2026 07:21:16 +0000 (UTC)",
+      "samples": [
+        {
+          "id": "1a129d66139b278d",
+          "subject": "1 event happening tomorrow",
+          "date": "Sun, 11 Oct 2026 07:21:16 +0000 (UTC)",
+          "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a129c4c764ccabe",
+          "subject": "1 event happening tomorrow",
+          "date": "Sun, 11 Oct 2026 07:02:03 +0000 (UTC)",
+          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a12544147044749",
+          "subject": "10 new notifications since 1:02 pm (Oct 9, 2026)",
+          "date": "Sat, 10 Oct 2026 10:03:00 +0000 (UTC)",
+          "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a124b4cc62abd24",
+          "subject": "1 event happening tomorrow",
+          "date": "Sat, 10 Oct 2026 07:26:30 +0000 (UTC)",
+          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
+        }
+      ]
+    },
+    {
+      "key": "newsletter",
+      "title": "Newsletter",
+      "name": "Newsletter",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 235
+      },
+      "newest": {
+        "id": "1a12c5f5b5566c0f",
+        "subject": "The Robinhood Big 3 Basket Is +46.59% in 1 year",
+        "date": "Sun, 11 Oct 2026 19:10:07 +0000 (UTC)",
+        "from": "\"Crypto.com\" <no-reply@news.crypto.com>"
+      },
+      "newestDate": "Sun, 11 Oct 2026 19:10:07 +0000 (UTC)",
+      "samples": [
+        {
+          "id": "1a12c5f5b5566c0f",
+          "subject": "The Robinhood Big 3 Basket Is +46.59% in 1 year",
+          "date": "Sun, 11 Oct 2026 19:10:07 +0000 (UTC)",
+          "from": "\"Crypto.com\" <no-reply@news.crypto.com>"
+        },
+        {
+          "id": "1a12bee290d46f2e",
+          "subject": "You sent RON160 to Alexandru Popescu 💸",
+          "date": "Sun, 11 Oct 2026 17:06:29 +0000",
+          "from": "Revolut <no-reply@revolut.com>"
+        },
+        {
+          "id": "1a12ae7ce1fff1be",
+          "subject": "[GitHub] A personal access token (classic) has been added to your account",
+          "date": "Sun, 11 Oct 2026 05:19:57 -0700",
+          "from": "GitHub <noreply@github.com>"
+        },
+        {
+          "id": "1a129b6649070348",
+          "subject": "Lichidam tot STOCUL -80% Reducere !",
+          "date": "Sun, 11 Oct 2026 06:46:21 +0000",
+          "from": "\"BricoMAG™\" <newsletter@magazin-autoaparare.eu>"
+        }
+      ]
+    },
+    {
+      "key": "finante",
+      "title": "Finante",
+      "name": "Finante",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 5
+      },
+      "newest": {
+        "id": "1a112cd10810c41d",
+        "subject": "Ether.fi Partners with MoonPay to Power Full Stack Payments for Crypto Neobanking",
+        "date": "Tue, 6 Oct 2026 19:59:51 +0000 (UTC)",
+        "from": "MoonPay via LinkedIn <newsletters-noreply@linkedin.com>"
+      },
+      "newestDate": "Tue, 6 Oct 2026 19:59:51 +0000 (UTC)",
+      "samples": [
+        {
+          "id": "1a112cd10810c41d",
+          "subject": "Ether.fi Partners with MoonPay to Power Full Stack Payments for Crypto Neobanking",
+          "date": "Tue, 6 Oct 2026 19:59:51 +0000 (UTC)",
+          "from": "MoonPay via LinkedIn <newsletters-noreply@linkedin.com>"
+        },
+        {
+          "id": "1a1128207fa4419a",
+          "subject": "Factura Digi a fost emisa",
+          "date": "Tue, 06 Oct 2026 21:37:53 +0300",
+          "from": "DIGI <support@info.digi.ro>"
+        },
+        {
+          "id": "1a10cb2d4f4fe076",
+          "subject": "The NYSE’s owner wants a stock market that never closes",
+          "date": "Mon, 5 Oct 2026 15:31:17 +0000",
+          "from": "The Token Trenches <tokentrenches@substack.com>"
+        },
+        {
+          "id": "1a1032c69d6018a6",
+          "subject": "The Robinhood Big 3 Basket Is +1396.85% in 3 months",
+          "date": "Sat, 03 Oct 2026 19:10:03 +0000 (UTC)",
+          "from": "\"Crypto.com\" <no-reply@news.crypto.com>"
+        }
+      ]
+    },
+    {
+      "key": "personal",
+      "title": "Personal",
+      "name": "Personal",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 0
+      },
+      "newest": null,
+      "newestDate": null
+    },
+    {
+      "key": "actiune",
+      "title": "De raspuns",
+      "name": "De raspuns",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 30
+      },
+      "newest": {
+        "id": "1a120e8558d6b485",
+        "subject": "Re: Follow-up aplicare job Happy Advertising",
+        "date": "Fri, 9 Oct 2026 16:44:22 +0300",
+        "from": "Alexandru Popescu <apvizual@gmail.com>"
+      },
+      "newestDate": "Fri, 9 Oct 2026 16:44:22 +0300",
+      "samples": [
+        {
+          "id": "1a120e8558d6b485",
+          "subject": "Re: Follow-up aplicare job Happy Advertising",
+          "date": "Fri, 9 Oct 2026 16:44:22 +0300",
+          "from": "Alexandru Popescu <apvizual@gmail.com>"
+        },
+        {
+          "id": "1a120df95086ff94",
+          "subject": "Re: Follow-up aplicare job Happy Advertising",
+          "date": "Fri, 9 Oct 2026 16:34:33 +0300",
+          "from": "Alex Filoti <alex@happyadv.ro>"
+        },
+        {
+          "id": "1a120dd75d412b7e",
+          "subject": "Re: Follow-up aplicare job Happy Advertising",
+          "date": "Fri, 9 Oct 2026 16:32:29 +0300",
+          "from": "Alexandru Popescu <apvizual@gmail.com>"
+        },
+        {
+          "id": "1a120c2749efaee8",
+          "subject": "Re: Follow-up aplicare job Happy Advertising",
+          "date": "Fri, 9 Oct 2026 16:02:44 +0300",
+          "from": "Alex Filoti <alex@happyadv.ro>"
+        }
+      ]
+    },
+    {
+      "key": "facturi",
+      "title": "Facturi si conturi",
+      "name": "Facturi si Conturi",
+      "counts": {
+        "azi": 0,
+        "24h": 0,
+        "7z": 0,
+        "30z": 2
+      },
+      "newest": {
+        "id": "1a120593ede9884b",
+        "subject": "Confirmare plată facturi prin Pago",
+        "date": "Fri, 09 Oct 2026 11:08:01 +0000 (UTC)",
+        "from": "\"Plăți Pago\" <plati@pagoplateste.ro>"
+      },
+      "newestDate": "Fri, 09 Oct 2026 11:08:01 +0000 (UTC)",
+      "samples": [
+        {
+          "id": "1a120593ede9884b",
+          "subject": "Confirmare plată facturi prin Pago",
+          "date": "Fri, 09 Oct 2026 11:08:01 +0000 (UTC)",
+          "from": "\"Plăți Pago\" <plati@pagoplateste.ro>"
+        },
+        {
+          "id": "1a0e23d3cd22bb4c",
+          "subject": "Factură scadentă Pago",
+          "date": "Sun, 27 Sep 2026 09:40:59 +0000 (UTC)",
+          "from": "Ajutor Pago <ajutor@pagoplateste.ro>"
+        }
+      ]
+    },
+    {
+      "key": "agenti",
+      "title": "Agenti (pipeline propriu)",
+      "name": "Optimus CD",
+      "counts": {
+        "azi": 8,
+        "24h": 201,
+        "7z": 582,
+        "30z": 638
+      },
+      "newest": {
+        "id": "1a17ad2223dcb58a",
+        "subject": "Re: [apvizual-max/Optimus-Mavis-Skills] 🧹 [code health improvement] add explanatory comment to except block (PR #59)",
+        "date": "Mon, 26 Oct 2026 17:45:53 -0700",
+        "from": "\"google-labs-jules[bot]\" <notifications@github.com>"
+      },
+      "newestDate": "Mon, 26 Oct 2026 17:45:53 -0700",
+      "samples": [
+        {
+          "id": "1a17ad2223dcb58a",
+          "subject": "Re: [apvizual-max/Optimus-Mavis-Skills] 🧹 [code health improvement] add explanatory comment to except block (PR #59)",
+          "date": "Mon, 26 Oct 2026 17:45:53 -0700",
+          "from": "\"google-labs-jules[bot]\" <notifications@github.com>"
+        },
+        {
+          "id": "1a17ad21e5b60143",
+          "subject": "[apvizual-max/Optimus-Mavis-Skills] 🧹 [code health improvement] add explanatory comment to except block (PR #59)",
+          "date": "Mon, 26 Oct 2026 17:45:53 -0700",
+          "from": "\"google-labs-jules[bot]\" <notifications@github.com>"
+        },
+        {
+          "id": "1a17ad156c3ffa84",
+          "subject": "Re: [apvizual-max/SENTINEL_PRIME] 🧹 [code health improvement] Verify build_program_matrix.py code health (PR #59)",
+          "date": "Mon, 26 Oct 2026 17:45:02 -0700",
+          "from": "\"google-labs-jules[bot]\" <notifications@github.com>"
+        },
+        {
+          "id": "1a17ad155e560120",
+          "subject": "[apvizual-max/SENTINEL_PRIME] 🧹 [code health improvement] Verify build_program_matrix.py code health (PR #59)",
+          "date": "Mon, 26 Oct 2026 17:45:01 -0700",
+          "from": "\"google-labs-jules[bot]\" <notifications@github.com>"
+        }
+      ]
+    }
+  ],
+  "missing": [],
+  "totals": {
+    "azi": 8,
+    "24h": 201,
+    "7z": 582,
+    "30z": 1574
+  }
+}

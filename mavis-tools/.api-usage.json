@@ -1,0 +1,12 @@
+{
+  "_nota": "Rulare 2026-10-27 (raport zilnic). Contor pornit de la zero.",
+  "report-folder-discover.js": 4,
+  "report-inbox-counts.js": 9,
+  "report-mail-count.js": 78,
+  "inline": 91,
+  "report-filter-state.js": 20,
+  "report-simulate-sort.js": 24,
+  "report-build.js": 3,
+  "fix-mavis-filters.js": 24,
+  "probe-gmail-filter-404.cjs": 3
+}

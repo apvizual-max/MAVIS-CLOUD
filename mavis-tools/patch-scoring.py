@@ -14,7 +14,7 @@ function hasAny(text, list) { for (var i=0;i<list.length;i++) if (hasWord(text, 
 
 var JUNIOR_KW   =""", 1)
 
-# 2) buget de cuvinte pentru eticheta J
+# 2) buget de cuvinte pentru eticheta S
 s = s.replace("var SENIOR_KW   = ['senior','sr.','sr ','snr',",
               "var SENIOR_KW   = ['senior','sr.','sr ','snr','art director','art mid','creatives',")
 

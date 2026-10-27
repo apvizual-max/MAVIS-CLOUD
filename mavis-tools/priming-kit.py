@@ -26,17 +26,12 @@ CAPITOLE = {
 }
 
 def git_state():
-    def sh(c):
-        return subprocess.run(c, shell=True, cwd=REPO, capture_output=True,
+    def sh(args):
+        return subprocess.run(args, shell=False, cwd=REPO, capture_output=True,
                               text=True, timeout=20).stdout.strip()
-    return sh('git rev-list --count HEAD'), sh('git log --oneline -1'), sh('git remote get-url origin')
+    return sh(['git', 'rev-list', '--count', 'HEAD']), sh(['git', 'log', '--oneline', '-1']), sh(['git', 'remote', 'get-url', 'origin'])
 
-def scrie(folder, titlu, subiect, notebook, commits, last, remote):
-    d = os.path.join(REPO, folder, folder.split('-')[-1] + ' Priming KIT'
-                     if False else folder.split('-', 1)[-1].replace('SITEURI-', '').title() + ' Priming KIT')
-    os.makedirs(d, exist_ok=True)
-
-    # 1. README - ce e capitolul
+def _write_readme(d, titlu, subiect, notebook, commits, last, remote, AZI):
     open(os.path.join(d, 'README.md'), 'w', encoding='utf-8').write(f"""# {titlu} — Priming KIT
 
 **Creat:** {AZI} · **Repo:** `{remote}` · **{commits} commituri**
@@ -63,7 +58,7 @@ def scrie(folder, titlu, subiect, notebook, commits, last, remote):
 {'**Notebook:** `' + notebook + '`' if notebook else '**Fără notebook** — capitol fără componentă NotebookLM.'}
 """)
 
-    # 2. SKILL
+def _write_skill(d, folder, titlu, subiect):
     open(os.path.join(d, 'SKILL.md'), 'w', encoding='utf-8').write(f"""---
 name: {folder.lower()}-priming-kit
 description: Priming KIT pentru capitolul {titlu}. Îl citești primul, înainte de orice lucru la acest subiect.
@@ -90,7 +85,7 @@ description: Priming KIT pentru capitolul {titlu}. Îl citești primul, înainte
 - **Totul în repo**, automat.
 """)
 
-    # 3. HANDOFF
+def _write_handoff(d, folder, titlu, subiect, remote):
     open(os.path.join(d, 'HANDOFF.md'), 'w', encoding='utf-8').write(f"""# HANDOFF — {titlu}
 
 ## 1. Cine ești
@@ -144,7 +139,7 @@ cat {folder}/*Priming*/README.md {folder}/*Priming*/STATUS.md {folder}/*Priming*
 **Apoi întreabă ce nu e clar.** Nu presupune.
 """)
 
-    # 4. PROMPT START
+def _write_prompt_start(d, folder, titlu, last, remote):
     open(os.path.join(d, 'PROMPT-START.txt'), 'w', encoding='utf-8').write(
 f"""PROMPT DE START — trimite asta într-o sesiție nouă, pe capitolul {titlu}:
 
@@ -172,7 +167,7 @@ Reguli care nu se încalcă:
 Voi completa după ce îmi spui ce vreau.
 """)
 
-    # 5. STATUS
+def _write_status(d, folder, titlu, notebook, commits, remote, AZI):
     open(os.path.join(d, 'STATUS.md'), 'w', encoding='utf-8').write(f"""# STATUS — {titlu}
 
 **Creat:** {AZI} · **Repo:** `{remote}` · **{commits} commituri**
@@ -198,6 +193,18 @@ capitolului: ce am discutat, ce am stabilit, ce am implementat.
 Notebook-urile create de Mavis Cloud se numesc obligatoriu
 `MavisCloud-(subiect)`.
 """)
+
+def scrie(folder, titlu, subiect, notebook, commits, last, remote):
+    d = os.path.join(REPO, folder, folder.split('-')[-1] + ' Priming KIT'
+                     if False else folder.split('-', 1)[-1].replace('SITEURI-', '').title() + ' Priming KIT')
+    os.makedirs(d, exist_ok=True)
+
+    _write_readme(d, titlu, subiect, notebook, commits, last, remote, AZI)
+    _write_skill(d, folder, titlu, subiect)
+    _write_handoff(d, folder, titlu, subiect, remote)
+    _write_prompt_start(d, folder, titlu, last, remote)
+    _write_status(d, folder, titlu, notebook, commits, remote, AZI)
+
     return d
 
 if __name__ == '__main__':

@@ -44,3 +44,9 @@ actionlint_*.tar.gz
 *.exe
 *.tar.gz
 SESIUNI/
+
+# DATE PERSONALE — dumpuri de mail cu corpuri complete. Repo-ul e PUBLIC.
+# Se citesc in timpul raportului, dar nu se versioneaza.
+mavis-tools/report-inbox.json
+mavis-tools/report-simulate-sort.json
+mavis-tools/*-inbox-dump.json

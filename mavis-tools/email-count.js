@@ -22,10 +22,15 @@ async function count(query, label) {
   return { total, pages, capped };
 }
 
-(async () => {
+async function main() {
   const out = [];
   const l = await k.gmail.labels();
-  const mavis = (l.labels || []).filter(x => x.name.startsWith('MAVIS/'));
+  const TAX = require('./taxonomy.js');
+  // NUMELE ETICHETELOR se rezolva LIVE din taxonomy.js (sursa unica de adevar).
+  // Prefixul 'MAVIS/' a murit la rearanjarea din 27.10 — filtrul ar numara doar Joburi.
+  const _r = TAX.resolve(l.labels || []);
+  const mavis = _r.resolved.map(r => ({ name: r.name, id: r.id }));
+  if (_r.missing.length) console.log('  ( etichete nerezolvate: ' + _r.missing.map(m => m.key).join(', ') + ' )');
   for (const lab of mavis) {
     // GHILIMELE OBLIGATORII pentru etichetele cu SPATIU.
     // PENTRU LINIUTA nu ajuta: Gmail nu indexeaza deloc eticheta,
@@ -39,6 +44,12 @@ async function count(query, label) {
   console.log(pad('GUNOI (total)', 30) + String(t.total).padStart(7) + (t.capped ? '  (plafon)' : ''));
   require('fs').writeFileSync('/workspace/mavis-tools/email-counts.json', JSON.stringify(out, null, 2));
   console.log('\n-> email-counts.json');
-})();
+}
+
+if (require.main === module) {
+  main().catch(console.error);
+}
 
 function pad(s, n) { while (s.length < n) s += ' '; return s; }
+
+module.exports = { pad };

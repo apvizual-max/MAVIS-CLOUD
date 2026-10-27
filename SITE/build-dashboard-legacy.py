@@ -17,15 +17,15 @@
 
 Populat din date reale: git, log, erori, skill-uri, site-uri, Gmail.
 """
-import os, json, glob, datetime, subprocess
+import os, json, glob, datetime, subprocess, shlex
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(BASE)
 DIST = os.path.join(BASE, 'dist')
 
-def sh(c, cwd=REPO, t=25):
+def sh(cmd_args, cwd=REPO, t=25):
     try:
-        return subprocess.run(c, shell=True, cwd=cwd, capture_output=True,
+        return subprocess.run(cmd_args, shell=False, cwd=cwd, capture_output=True,
                               text=True, timeout=t).stdout.strip()
     except Exception:
         return ''
@@ -42,12 +42,12 @@ def main():
     azi = datetime.date.today().isoformat()
 
     # ---- git ----
-    branch  = sh('git rev-parse --abbrev-ref HEAD') or 'main'
-    commits = sh('git rev-list --count HEAD') or '0'
-    dirty   = len(sh('git status --porcelain').splitlines())
-    last    = sh('git log --oneline -1')
-    remote  = sh('git remote get-url origin')
-    neimpush = sh('git log origin/main..HEAD --oneline') if remote else ''
+    branch  = sh(['git', 'rev-parse', '--abbrev-ref', 'HEAD']) or 'main'
+    commits = sh(['git', 'rev-list', '--count', 'HEAD']) or '0'
+    dirty   = len(sh(['git', 'status', '--porcelain']).splitlines())
+    last    = sh(['git', 'log', '--oneline', '-1'])
+    remote  = sh(['git', 'remote', 'get-url', 'origin'])
+    neimpush = sh(['git', 'log', 'origin/main..HEAD', '--oneline']) if remote else ''
 
     # ---- log ----
     log = {'intrari': [], 'nivel': {}}
@@ -90,12 +90,19 @@ def main():
     vend = sorted(d for d in glob.glob(os.path.join(REPO, 'vendor', '*')) if os.path.isdir(d))
     vn   = [os.path.basename(v) for v in vend]
     srows = ''
-    for s in sorted(own):
-        n = os.path.basename(s); f = os.path.join(s, 'SKILL.md'); desc = ''
+    desc_map = {}
+    for s_path in own + vend:
+        f = os.path.join(s_path, 'SKILL.md')
         if os.path.exists(f):
-            for ln in open(f, encoding='utf-8'):
-                if ln.startswith('description:'):
-                    desc = ln.split(':', 1)[1].strip()[:110]; break
+            with open(f, encoding='utf-8') as file:
+                for ln in file:
+                    if ln.startswith('description:'):
+                        desc_map[os.path.basename(s_path)] = ln.split(':', 1)[1].strip()[:110]
+                        break
+
+    for s in sorted(own):
+        n = os.path.basename(s)
+        desc = desc_map.get(n, '')
         src = 'vendor' if n in vn else 'propriu'
         srows += '<tr><td class="mono">%s</td><td>%s</td><td><span class="tag %s">%s</span></td></tr>' % (
             n, esc(desc), 'v' if src == 'vendor' else '', src)

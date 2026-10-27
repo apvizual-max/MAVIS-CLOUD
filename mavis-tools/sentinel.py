@@ -13,15 +13,15 @@ DIR   = os.path.join(REPO, 'docs', 'SENTINEL')
 GH    = os.path.join(REPO, 'mavis-tools', 'bin', 'gh')
 TODAY = datetime.date.today().isoformat()
 
-def sh(c, cwd=REPO, t=25):
+def sh(args, cwd=REPO, t=25):
     try:
-        return subprocess.run(c, shell=True, cwd=cwd, capture_output=True,
+        return subprocess.run(args, shell=False, cwd=cwd, capture_output=True,
                               text=True, timeout=t).stdout.strip()
     except Exception:
         return ''
 
 def git(*a):
-    return sh('git ' + ' '.join(a))
+    return sh(['git'] + list(a))
 
 def count_paginiq(q):
     """Numara prin paginare reala - resultSizeEstimate e plafonat."""
@@ -34,14 +34,15 @@ def count_paginiq(q):
         "if(t>=%d)break;if(p)await new Promise(s=>setTimeout(s,280));}while(p);"
         "console.log(t);})();" % (json.dumps(q), 4000)
     )
-    r = sh('node -e "%s"' % script.replace('"', '\\"'),
+    r = sh(['node', '-e', script],
            cwd=os.path.join(REPO, 'mavis-tools'), t=180)
     try:
         return r.strip().splitlines()[-1] if r.strip() else 'necontorizat'
     except Exception:
         return 'necontorizat'
 
-def main():
+
+def gather_stats():
     os.makedirs(DIR, exist_ok=True)
 
     # ---- git ----
@@ -78,16 +79,57 @@ def main():
     trash = count_paginiq('in:trash')
 
     # ---- workflow ----
-    wf = sh('%s run list --repo apvizual-max/MAVIS-CLOUD --limit 1 '
-            '--json conclusion --jq ".[0].conclusion" 2>/dev/null' % GH) or 'necunoscut'
+    wf = sh([GH, 'run', 'list', '--repo', 'apvizual-max/MAVIS-CLOUD', '--limit', '1', '--json', 'conclusion', '--jq', '.[0].conclusion']) or 'necunoscut'
 
     g = '\n'.join('| `%s` | %s |' % (k, v) for k, v in gmail.items())
 
     log = json.load(open(os.path.join(REPO, 'docs', 'LOG-SISTEM.json'), encoding='utf-8')) \
         if os.path.exists(os.path.join(REPO, 'docs', 'LOG-SISTEM.json')) else {'intrari': [], 'nivel': {}}
-    prag = sh('git rev-list --count origin/main..HEAD') or '0'
+    prag = sh(['git', 'rev-list', '--count', 'origin/main..HEAD']) or '0'
     erori = [i for i in log.get('intrari', []) if i.get('nivel') in ('eroare', 'critic')]
 
+    return {
+        'branch': branch,
+        'commits': commits,
+        'dirty': dirty,
+        'last': last,
+        'remote': remote,
+        'own': own,
+        'vend': vend,
+        'names': names,
+        'vnames': vnames,
+        'sites': sites,
+        'sab': sab,
+        'cvs': cvs,
+        'gmail': gmail,
+        'inbox': inbox,
+        'trash': trash,
+        'wf': wf,
+        'g': g,
+        'prag': prag,
+        'erori': erori
+    }
+
+def build_markdown(stats):
+    branch = stats['branch']
+    commits = stats['commits']
+    dirty = stats['dirty']
+    last = stats['last']
+    remote = stats['remote']
+    own = stats['own']
+    vend = stats['vend']
+    names = stats['names']
+    vnames = stats['vnames']
+    sites = stats['sites']
+    sab = stats['sab']
+    cvs = stats['cvs']
+    gmail = stats['gmail']
+    inbox = stats['inbox']
+    trash = stats['trash']
+    wf = stats['wf']
+    g = stats['g']
+    prag = stats['prag']
+    erori = stats['erori']
     md = f"""================================================================================
 RAPORT DE STARE PROIECT: MAVIS-CLOUD
 DATA & ORA: {TODAY} {datetime.datetime.now():%H:%M} | INSTANȚĂ: CLOUD
@@ -230,6 +272,14 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există {len(own)} skill-uri pro
 *Raport generat {TODAY} · {commits} commit-uri · {len(own) + len(vend)} skill-uri*
 """
 
+    return md
+
+def write_reports(md, stats):
+    own = stats['own']
+    vend = stats['vend']
+    sites = stats['sites']
+    inbox = stats['inbox']
+    trash = stats['trash']
     path = os.path.join(DIR, TODAY + '-sentinel.md')
     open(path, 'w', encoding='utf-8').write(md)
     open(os.path.join(REPO, 'docs', 'SENTINEL-LATEST.md'), 'w', encoding='utf-8').write(md)
@@ -247,6 +297,12 @@ Gmail-ul e sortat pe 8 etichete, gunoiul e gol. Există {len(own)} skill-uri pro
     print('OK  %s' % path)
     print('    inbox=%s trash=%s skilluri=%d siteuri=%d' % (inbox, trash, len(own) + len(vend), len(sites)))
     return path
+
+
+def main():
+    stats = gather_stats()
+    md = build_markdown(stats)
+    return write_reports(md, stats)
 
 if __name__ == '__main__':
     main()

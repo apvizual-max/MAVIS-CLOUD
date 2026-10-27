@@ -1,21 +1,24 @@
 /**
- * 0.8f — Sortarea thread-urilor 1-3 ani pe cele 8 categorii MAVIS
- * METODA IEFTINA: cautari cu filtre de expeditor -> thread-uri direct, fara messages.get
+ * 0.8f — Sortarea mesajelor 1-3 ani pe cele 8 categorii MAVIS
+ * METODA IEFTINA: cautari cu filtre de expeditor -> mesaje direct, fara messages.get
  * Cost: ~5 unitati per pagina de 500. Zero apeluri scumpe.
  */
 const k = require('./kit.js');
 const q = require('./quota.js');
 
-const L = {
-  social:   'MAVIS/Social',
-  joburi:   'MAVIS/Joburi',
-  ai:       'MAVIS/AI si comunitati',
-  finante:  'MAVIS/Finante',
-  newsletter:'MAVIS/Newsletter',
-  personal: 'MAVIS/Personal',
-  facturi:  'MAVIS/Facturi si conturi',
-  actiune:  'MAVIS/De raspuns',
-};
+// NUMELE ETICHETELOR NU SE HARDCODEAZA. Se rezolva live din taxonomy.js
+// (sursa unica de adevar) - la 27.10 etichetele au fost rearanjate si
+// 'MAVIS/Social', 'MAVIS/AI si comunitati' etc. nu mai exista.
+const TAX = require('./taxonomy.js');
+let L = {};
+function rezolvaEtichete(liveLabels) {
+  const r = TAX.resolve(liveLabels || []);
+  L = {};
+  for (const row of r.resolved) L[row.key] = row.name;
+  if (r.missing.length)
+    console.log('  ( etichete nerezolvate: ' + r.missing.map(m => m.key).join(', ') + ' )');
+  return L;
+}
 
 const WINDOW = 'older_than:1y newer_than:3y';
 // categoriile zilnice nu pot folosi fereastra de 1-3 ani
@@ -34,13 +37,13 @@ const CATS = [
   ['personal',  `{from:happyadv from:alexfiloti from:family from:parinti}`],
 ];
 
-async function threadIds(query) {
+async function messageIds(query) {
   const out = []; let page = null;
   do {
     const r = await k.req('GET',
-      'https://gmail.googleapis.com/gmail/v1/users/me/threads?q=' + encodeURIComponent(query) +
+      'https://gmail.googleapis.com/gmail/v1/users/me/messages?q=' + encodeURIComponent(query) +
       '&maxResults=500' + (page ? '&pageToken=' + page : ''));
-    out.push(...(r.threads || []).map(t => t.id));
+    out.push(...(r.messages || []).map(t => t.id));
     page = r.nextPageToken || null;
   } while (page);
   return out;
@@ -48,8 +51,14 @@ async function threadIds(query) {
 
 (async () => {
   const ex = await k.gmail.labels();
+  rezolvaEtichete(ex.labels);                       // numele vii, din taxonomy.js
   const byName = new Map(ex.labels.map(l => [l.name, l.id]));
-  for (const [k2, n] of Object.entries(L)) if (!byName.has(n)) await k.gmail.createLabel(n);
+  // NU se creeaza etichete inexistente: daca o categorie n-a fost rezolvata,
+  // eticheta ei nu se inventeaza. Se sare peste ea, cu raport.
+  for (const [k2, n] of Object.entries(L)) {
+    if (!n) { console.log('  ( eticheta pentru "' + k2 + '" nu exista - categorie rezolvata? sarit )'); continue; }
+    if (!byName.has(n)) await k.gmail.createLabel(n);
+  }
   const labels = await k.gmail.labels();
   const M = new Map((labels.labels||[]).map(l => [l.name, l.id]));
 
@@ -64,21 +73,17 @@ async function threadIds(query) {
     const inbox = (cat === 'actiune') ? '' : ' in:inbox';
     const query = w + flt + inbox + ' -label:"' + L[cat] + '"';
     let ids = [];
-    try { ids = await threadIds(query); } catch (e) { console.log('cautare blocata', cat, e.message.slice(0,40)); continue; }
-    console.log('\n' + cat.toUpperCase() + ': ' + ids.length + ' thread-uri  (cota ' + q.state.used + ')');
+    try { ids = await messageIds(query); } catch (e) { console.log('cautare blocata', cat, e.message.slice(0,40)); continue; }
+    console.log('\n' + cat.toUpperCase() + ': ' + ids.length + ' mesaje  (cota ' + q.state.used + ')');
     if (!ids.length) continue;
     // aplica eticheta + scoate din inbox + marcheaza citit
     const lab = M.get(L[cat]);
-    for (let i = 0; i < ids.length; i += 100) {
+    for (let i = 0; i < ids.length; i += 1000) {
       try {
-        await k.req('POST',
-          `https://gmail.googleapis.com/gmail/v1/users/me/threads/${ids[i]}/modify`,
-          { addLabelIds: [lab], removeLabelIds: ['INBOX', 'UNREAD'] });
-        const rest = ids.slice(i + 1, i + 101);
-        for (const t of rest) {
-          await k.req('POST', `https://gmail.googleapis.com/gmail/v1/users/me/threads/${t}/modify`,
-            { addLabelIds: [lab], removeLabelIds: ['INBOX', 'UNREAD'] });
-        }
+        const batch = ids.slice(i, i + 1000);
+        await k.req('POST', `https://gmail.googleapis.com/gmail/v1/users/me/messages/batchModify`,
+          { ids: batch, addLabelIds: [lab], removeLabelIds: ['INBOX', 'UNREAD'] });
+        await new Promise(r => setTimeout(r, 1000)); // safe delay between batches to respect rate limits
       } catch (e) { console.log('  blocat la', i, e.message.slice(0, 50)); break; }
       if (i % 1000 === 0) console.log('   ...', i, '/', ids.length);
     }
