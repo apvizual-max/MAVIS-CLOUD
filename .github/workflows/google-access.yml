@@ -44,7 +44,7 @@ jobs:
           GOOGLE_ACCESS_CREDENTIAL_B64: ${{ secrets.GOOGLE_ACCESS_CREDENTIAL_B64 }}
         run: |
           mkdir -p _src/data
-          printf '%s' "$GOOGLE_ACCESS_CREDENTIAL_B64" | base64 -d > _src/data/credentials.json
+          printf '%s' "$GOOGLE_ACCESS_CREDENTIAL_B64" | tr -d '\r\n' | base64 -d > _src/data/credentials.json
           if [ ! -s _src/data/credentials.json ]; then
             echo "FATAL=credential secret missing or empty"
             exit 1
