@@ -20,11 +20,12 @@ class TestBuildDashboardLegacy(unittest.TestCase):
         mock_result.stdout = "output \n"
         mock_run.return_value = mock_result
 
-        result = build_dashboard_legacy.sh("echo 'output '")
+        result = build_dashboard_legacy.sh(['echo', 'output '])
 
         self.assertEqual(result, "output")
         mock_run.assert_called_once_with(
             ['echo', 'output '],
+            shell=False,
             cwd=build_dashboard_legacy.REPO,
             capture_output=True,
             text=True,
@@ -35,7 +36,7 @@ class TestBuildDashboardLegacy(unittest.TestCase):
     def test_sh_exception(self, mock_run):
         mock_run.side_effect = Exception("Command failed")
 
-        result = build_dashboard_legacy.sh("failing_command")
+        result = build_dashboard_legacy.sh(["failing_command"])
 
         self.assertEqual(result, "")
 
@@ -43,7 +44,7 @@ class TestBuildDashboardLegacy(unittest.TestCase):
     def test_sh_timeout(self, mock_run):
         mock_run.side_effect = subprocess.TimeoutExpired(cmd="sleep 10", timeout=25)
 
-        result = build_dashboard_legacy.sh("sleep 10")
+        result = build_dashboard_legacy.sh(["sleep", "10"])
 
         self.assertEqual(result, "")
 

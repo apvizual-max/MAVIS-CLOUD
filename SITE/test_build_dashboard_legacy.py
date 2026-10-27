@@ -20,7 +20,7 @@ class TestBuildDashboardLegacy(unittest.TestCase):
         mock_run.return_value = mock_result
 
         # Call function
-        result = build_dashboard.sh("echo hello")
+        result = build_dashboard.sh(["echo", "hello"])
 
         # Verify
         self.assertEqual(result, "hello world")
@@ -38,7 +38,7 @@ class TestBuildDashboardLegacy(unittest.TestCase):
         mock_run.return_value = mock_result
 
         # Call function
-        result = build_dashboard.sh("ls -l", cwd="/tmp", t=10)
+        result = build_dashboard.sh(["ls", "-l"], cwd="/tmp", t=10)
 
         # Verify
         self.assertEqual(result, "test")
@@ -54,7 +54,7 @@ class TestBuildDashboardLegacy(unittest.TestCase):
         mock_run.side_effect = Exception("Command failed")
 
         # Call function
-        result = build_dashboard.sh("echo hello")
+        result = build_dashboard.sh(["echo", "hello"])
 
         # Verify
         self.assertEqual(result, "")
@@ -66,7 +66,7 @@ class TestBuildDashboardLegacy(unittest.TestCase):
         mock_run.side_effect = subprocess.TimeoutExpired(cmd="echo hello", timeout=25)
 
         # Call function
-        result = build_dashboard.sh("echo hello")
+        result = build_dashboard.sh(["echo", "hello"])
 
         # Verify
         self.assertEqual(result, "")
