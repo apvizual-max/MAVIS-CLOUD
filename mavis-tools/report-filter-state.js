@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * RAPORT ZILNIC — starea filtrelor Gmail MAVIS/*, măsurată AZI.
+ * RAPORT ZILNIC — starea filtrelor Gmail, măsurată AZI.
  *
  * Nu copiem filtrul de ieri: îl citim live din Gmail și îl TESTĂM.
  *
@@ -16,17 +16,14 @@
 const fs = require('fs');
 const path = require('path');
 const k = require('./kit.js');
+const TAX = require('./taxonomy.js');
 
 const OUT = path.join(__dirname, 'report-filter-state.json');
 
-/** Cele 5 criterii MAVIS/*, cum sunt scrise în Gmail (măsurate, nu ghicite). */
-const MAVIS_CRITERIA = [
-  'from:(jooble bestjobs hipo indeed jobleads linkedin) OR subject:(job angajare vacanta oportunitate)',
-  'from:(substack goatacademy aiautomationsociety sadhguru beehiiv twine) OR subject:(AI artificial intelligence)',
-  'from:(skool facebook instagram pinterest tiktok polibrawl) OR subject:()',
-  'from:(noreply no-reply newsletter digest mail@ info@ news@ updates@) OR subject:()',
-  'from:(kraken tradingview bitunix coinbase binance) OR subject:(factura investitie trading)',
-];
+// NOTA: filtrele NU sunt enumerate aici. Scriptul itereaza peste TOATE filtrele
+// vii cu criteriu de interogare, deci o lista fixa ar deveni rearanjarea
+// etichetelor o sursa de cifre false. (2026-10-27: lista fixa eliminata, dupa
+// ce etichetele MAVIS/* au fost rearanjate peste noapte.)
 
 const listCount = async (q) => {
   let page = null, total = 0;
@@ -62,13 +59,24 @@ function toOrGroups(query) {
   const mavis = all.filter(f => (f.criteria && f.criteria.query) && !f.criteria.from
     && !/^list:/i.test(f.criteria.query));
 
+  // taxonomia rezolvata pe etichetele vii -> ce categorie alimenteaza fiecare filtru
+  const { byKey } = TAX.resolve(labs.labels || []);
+  const keyByLabelName = {};
+  for (const c of Object.values(byKey)) keyByLabelName[TAX.normalize(c.name)] = c.key;
+
   const rows = mavis.map(f => {
     const a = f.action || {};
+    const adds = (a.addLabelIds || []).map(nm);
+    // categoriile pe care filtrul le eticheteaza (excluzand etichetele de sistem)
+    const cats = adds.map(x => keyByLabelName[TAX.normalize(x)]).filter(Boolean);
     return {
       id: f.id,
       query: f.criteria.query,
-      addLabelIds: (a.addLabelIds || []).map(nm),
+      addLabelIds: adds,
       removeLabelIds: (a.removeLabelIds || []).map(nm),
+      categories: cats,
+      // un filtru "functioneaza" daca loveste mesaje SI pune o eticheta de categorie
+      functional: false,
     };
   });
 
@@ -85,25 +93,33 @@ function toOrGroups(query) {
       fixedQuery: toOrGroups(r.query),
       matchesAsIs: asIs,
       matchesFixed: fixed,
+      categories: r.categories,
     });
+  }
+  // functional = loveste mesaje acum + pune eticheta de categorie
+  for (const t of tests) {
+    const row = rows.find(x => x.id === t.id);
+    if (row) row.functional = t.matchesAsIs > 0 && row.categories.length > 0;
   }
 
   const out = {
     totalFilters: all.length,
     mavisFilters: rows.length,
     withAddLabelIds: rows.filter(r => r.addLabelIds.length).length,
-    withMavisAdd: rows.filter(r => r.addLabelIds.some(x => x.startsWith('MAVIS/'))).length,
+    withCategoryAdd: rows.filter(r => r.categories.length).length,
+    functionalFilters: rows.filter(r => r.functional).length,
     withRemoveInbox: rows.filter(r => r.removeLabelIds.includes('INBOX')).length,
     rows,
     tests,
     verdict: {
       parenthesisIsAnd: tests.length > 0 && tests.every(t => t.matchesAsIs === 0 && t.matchesFixed > 0),
       note: 'Gmail: () = SI, {} = SAU. Filtrele cu from:(...) nu pot lovi niciun mesaj.',
+      working: tests.filter(t => t.matchesAsIs > 0).map(t => ({ id: t.id, categories: t.categories, matches: t.matchesAsIs })),
     },
   };
   fs.writeFileSync(OUT, JSON.stringify(out, null, 2));
   console.log('filtre totale: ' + out.totalFilters + ' | filtre cu criteriu: ' + out.mavisFilters);
-  console.log('cu addLabelIds: ' + out.withAddLabelIds + ' | care ating etichete MAVIS/*: ' + out.withMavisAdd);
+  console.log('cu addLabelIds: ' + out.withAddLabelIds + ' | care ating etichete de CATEGORIE: ' + out.withCategoryAdd + ' | filtre FUNCTIONALE: ' + out.functionalFilters);
   console.log('\nTEST 30 zile — cum e scris acum  vs  cum ar trebui scris:');
   for (const t of tests) console.log(`  acum=${String(t.matchesAsIs).padStart(3)} | cu acolade=${String(t.matchesFixed).padStart(3)} | ${t.query.slice(0, 72)}`);
   console.log('\nverdict: ' + JSON.stringify(out.verdict));

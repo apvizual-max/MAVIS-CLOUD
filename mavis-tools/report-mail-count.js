@@ -1,16 +1,20 @@
 #!/usr/bin/env node
 /**
- * RAPORT ZILNIC — MĂSURĂTOARE ETAICHETE MAVIS/*
+ * RAPORT ZILNIC — MĂSURĂTOARE ETAICHETELOR DE CATEGORIE
  *
  * Numără EXACT (paginare reală, nu resultSizeEstimate) mesajele pe fiecare
- * etichetă MAVIS/*, pe mai multe ferestre de timp. Regula: zero-ul pe o
+ * etichetă de categorie, pe mai multe ferestre de timp. Regula: zero-ul pe o
  * fereastră nu înseamnă "eticheta e goală" — înseamnă "eticheta nu mai primește
  * nimic în acea fereastră". De aceea măsurăm 4 ferestre + ultima dată.
+ *
+ * 2026-10-27: etichetele MAVIS/* au fost rearanjate (Mavis Local). Niciun nume
+ * de etichetă nu mai e scris aici — se rezolvă din taxonomy.js, la runtime.
  *
  * READ-ONLY. Nu trimite, nu șterge, nu modifică nimic.
  */
 const k = require('./kit.js');
 const fs = require('fs');
+const TAX = require('./taxonomy.js');
 
 const TODAY = process.argv[2] || new Date().toISOString().slice(0, 10).replace(/-/g, '/');
 const OUT = process.argv[3] || '/workspace/Mavis/mavis-tools/report-mail-count.json';
@@ -42,14 +46,20 @@ async function countExact(query) {
 
 (async () => {
   const l = await k.gmail.labels();
-  const mavis = (l.labels || []).filter(x => x.name.startsWith('MAVIS/'));
-  console.log('Etichete MAVIS/*: ' + mavis.length + ' -> ' + mavis.map(x => x.name).join(' | '));
+  const { resolved, missing, byKey } = TAX.resolve(l.labels || []);
+  console.log('Etichete de categorie rezolvate: ' + resolved.length + ' -> ' + resolved.map(x => x.name).join(' | '));
+  if (missing.length) {
+    console.log('!! CATEGORII NE-REZOLVATE (eticheta nu exista in Gmail): ' + missing.map(m => m.title).join(' | '));
+  }
+  // etichete care NU apartin taxonomiei, dar contin "MAVIS/" — semnal de rearanjare
+  const stray = (l.labels || []).filter(x => x.name.startsWith('MAVIS/') && !resolved.some(r => r.name === x.name));
+  if (stray.length) console.log('!! Etichete MAVIS/* necunoscute pentru taxonomie: ' + stray.map(x => x.name).join(' | '));
 
-  const res = { today: TODAY, labels: [], totals: { azi: 0, '24h': 0, '7z': 0, '30z': 0 } };
+  const res = { today: TODAY, labels: [], missing, totals: { azi: 0, '24h': 0, '7z': 0, '30z': 0 } };
 
-  for (const lab of mavis) {
-    const q = `label:"${lab.name}"`;
-    const row = { name: lab.name, counts: {}, newest: null, newestDate: null };
+  for (const cat of resolved) {
+    const q = `label:"${cat.name}"`;
+    const row = { key: cat.key, title: cat.title, name: cat.name, counts: {}, newest: null, newestDate: null };
     for (const [w, mk] of WINDOWS) {
       const c = await countExact(mk(q));
       row.counts[w] = c.total;
@@ -71,7 +81,7 @@ async function countExact(query) {
       }
     }
     res.labels.push(row);
-    console.log(`  ${row.name.padEnd(26)} azi=${String(row.counts.azi).padStart(4)}  24h=${String(row.counts['24h']).padStart(4)}  7z=${String(row.counts['7z']).padStart(5)}  30z=${String(row.counts['30z']).padStart(5)}  ultima=${row.newestDate || 'n/a'}`);
+    console.log(`  ${row.name.padEnd(28)} azi=${String(row.counts.azi).padStart(4)}  24h=${String(row.counts['24h']).padStart(4)}  7z=${String(row.counts['7z']).padStart(5)}  30z=${String(row.counts['30z']).padStart(5)}  ultima=${row.newestDate || 'n/a'}`);
   }
 
   fs.writeFileSync(OUT, JSON.stringify(res, null, 2));

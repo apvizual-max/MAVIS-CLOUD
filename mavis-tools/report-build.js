@@ -17,6 +17,7 @@ const fs = require('fs');
 const path = require('path');
 const k = require('./kit.js');
 const { triage } = require('./report-triage.js');
+const TAX = require('./taxonomy.js');
 
 const DIR = __dirname;
 const DATE = process.argv[2] || new Date().toISOString().slice(0, 10);
@@ -160,17 +161,55 @@ const vtSentence = vt
   ? `măsurat pe toate cele ${vt.checked} de joburi (${vt.exact} exacte, ${vt.offByOne} cu o zi de fus orar, ${vt.other} altfel)`
   : 'măsurat pe setul de azi';
 
-// ---------------- etichete: de cand nu mai functioneaza ----------------
+// ---------------- etichete: de cand nu mai functioneaza (PE CATEGORIE) ----------------
+// 2026-10-27: etichetele au fost rearanjate peste noapte si a aparut o categorie
+// noua, care FUNCTIONEAZA. De aceea nu mai scriem "etichetarea e oprită de N zile"
+// global — masuram fiecare categorie separat si le impartim in doua grupuri:
+//   - MOORTE: nu primesc nimic (0 pe 7z)
+//   - VIU: primesc mesaje (au pe 7z > 0)
 const labelRows = mailCount.labels.map(l => ({ ...l, newest: parseGmailDate(l.newestDate) }));
 const dated = labelRows.filter(l => l.newest);
 const newestLabel = dated.length ? dated.reduce((a, b) => (a.newest > b.newest ? a : b)) : null;
 const daysOff = newestLabel ? daysBetween(newestLabel.newest, new Date(DATE + 'T00:00:00Z')) : null;
 const groups = {};
 for (const l of dated) {
+  // doar categoriile MOARTE — cele vii se spun separat, in concluzie
+  if ((l.counts['7z'] || 0) > 0) continue;
   const k = fmtRo(l.newestDate);
   (groups[k] = groups[k] || []).push(l.name.replace(/`/g, ''));
 }
 const groupLines = Object.entries(groups).sort().map(([k, v]) => `pe \`${v.join('`, `')}\` = **${k}**`).join('; ');
+
+// mapare eticheta -> cheie de categorie, calculata LOCAL din datele deja masurate
+// (report-mail-count.json are numele rezolvate; filterState.rows are addLabelIds ca nume).
+// ZERO cereri Google — nu re-rulam sonda de filtre doar pentru asta.
+const keyByLabelName = {};
+for (const l of labelRows) keyByLabelName[TAX.normalize(l.name)] = l.key;
+if (filterState && Array.isArray(filterState.rows)) {
+  for (const r of filterState.rows) {
+    const cats = (r.addLabelIds || []).map(x => keyByLabelName[TAX.normalize(x)]).filter(Boolean);
+    r.categories = cats;
+    r.functional = (r._matchesAsIs || 0) > 0 && cats.length > 0;
+  }
+}
+
+// impartire pe categorii vii / moarte, masurata pe fereastra de 7 zile
+const aliveRows = labelRows.filter(l => (l.counts['7z'] || 0) > 0);
+const deadRows = labelRows.filter(l => (l.counts['7z'] || 0) === 0);
+const aliveNames = aliveRows.map(l => l.name);
+const deadNames = deadRows.map(l => l.name);
+// zile de pauza, masurate DOAR pe categoriile moarte
+let deadDaysOff = null;
+if (deadRows.length) {
+  const deadDated = deadRows.filter(l => l.newest);
+  if (deadDated.length) {
+    const newestDead = deadDated.reduce((a, b) => (a.newest > b.newest ? a : b));
+    deadDaysOff = daysBetween(newestDead.newest, new Date(DATE + 'T00:00:00Z'));
+  }
+}
+// numele etichetelor rezolvate, pentru tabelul de simulare
+const liveLabelNames = labelRows.map(l => l.name);
+const simCount = name => (sim.counts && name in sim.counts) ? sim.counts[name] : 0;
 
 // ---------------- mesaje care cer actiune ----------------
 const replyList = tri.buckets['needs-reply'];
@@ -202,11 +241,11 @@ let md = `# Raport zilnic — ${dayName} ${d.getUTCDate()} ${MONTHS[d.getUTCMont
 
 ---
 
-## 1. Gmail — etichetele \`MAVIS/*\`
+## 1. Gmail — etichetele de categorie
 
 ### 1.1 Rezultatul scurt
 
-**Pe etichetele \`MAVIS/*\` a intrat azi: ${mailCount.totals.azi} mesaje.**`;
+**Pe etichetele de categorie a intrat azi: ${mailCount.totals.azi} mesaje.**`;
 
 if (mailCount.totals.azi === 0) {
   md += ` Nici în ultimele 24h (${mailCount.totals['24h']}), nici în ultimele 7 zile (${mailCount.totals['7z']}).`;
@@ -215,13 +254,15 @@ if (mailCount.totals.azi === 0) {
 }
 md += `
 
-Nu pentru că n-a venit mail. Azi au intrat **${inboxCounts.azi_any} mesaje** în total, iar în inbox sunt **${inboxCounts.azi_inbox}**.`;
+Azi au intrat **${inboxCounts.azi_any} mesaje** în total, iar în inbox sunt **${inboxCounts.azi_inbox}**.`;
 
 const unclassified = inboxCounts.azi_any - mailCount.totals.azi;
 if (unclassified > 0) {
-  md += ` **${unclassified} dintre ele nu au primit nicio etichetă**`;
-  if (tri.counts.noise) md += `, iar **${tri.counts.noise} sunt zgomot din pipeline-ul propriu** (bot-uri de pe repo-uri) — taxonomia MAVIS nu are categorie pentru ele`;
-  md += '.';
+  md += ` **${unclassified} dintre ele nu au primit nicio etichetă de categorie**`;
+  // zgomotul din pipeline a fost ETICHETAT (categoria 'agenti'), deci nu face parte
+  // din "fara eticheta". Cifra corecta: cate mesaje au ramas fara nicio eticheta.
+  const labeledNoise = tri.counts.noise;
+  md += `. Cele ${labeledNoise} **au fost** etichetate ca zgomot de pipeline (bot-uri de pe repo-urile tale) — deci cele ${unclassified} rămase sunt mesaje reale, fără etichetă de categorie.`;
 }
 md += `
 
@@ -237,53 +278,65 @@ for (const l of mailCount.labels) {
 md += `
 `;
 if (newestLabel && daysOff !== null) {
-  md += `**Concluzie:** etichetarea automată e oprită de **${daysOff} zile** (${groupLines}).\n\n`;
+  md += `**Concluzie:** ${aliveRows.length === 1 ? 'o categorie primește mesaje' : aliveRows.length + ' categorii primesc mesaje'}${aliveRows.length ? ' (' + aliveNames.map(n => '`' + n + '`').join(', ') + ')' : ''}; ${deadRows.length === 1 ? 'o categorie este moartă' : deadRows.length + ' categorii sunt moarte'}${deadDaysOff !== null ? ` de **${deadDaysOff} zile**` : ''}${groupLines ? ' (' + groupLines + ')' : ''}.\n\n`;
 } else {
   md += `**Concluzie:** nu s-a putut stabili când a fost etichetat ultimul mesaj (lipsesc datele).\n\n`;
 }
 md += `> Zero pe o fereastră nu înseamnă "etichetă goală" — înseamnă "eticheta nu mai primește nimic". Verificat pe 4 ferestre.
 
-### 1.3 Defectul, măsurat azi
+### 1.3 Filtrele, măsurate azi
 
 `;
 if (filterState) {
-  // doar filtrele MAVIS/*: filtrele de tip `list:` (lista de abonare) nu sunt categorii
   const ft = (filterState.tests || []).filter(x => !/^list:/i.test(x.query || ''));
   const joburi = ft.find(x => /jooble/.test(x.query)) || null;
-  const allDead = ft.length > 0 && ft.every(x => x.matchesAsIs === 0);
   const totalFixed = ft.reduce((a, x) => a + x.matchesFixed, 0);
-  const mavisRows = (filterState.rows || []).filter(x => !/^list:/i.test(x.query || ''));
-  const withAdd = mavisRows.filter(x => (x.addLabelIds || []).length).length;
-  const withMavisAdd = mavisRows.filter(x => (x.addLabelIds || []).some(l => l.startsWith('MAVIS/'))).length;
-  md += `Filtrele \`MAVIS/*\` există: **${mavisRows.length}** filtre cu criteriu de interogare, din ${filterState.totalFilters} total pe cont. **${withAdd}** dintre ele are \`addLabelIds\`, iar **${withMavisAdd}** atinge o etichetă \`MAVIS/*\`.`;
+  const rowsF = (filterState.rows || []).filter(x => !/^list:/i.test(x.query || ''));
+  const withAdd = rowsF.filter(x => (x.addLabelIds || []).length).length;
+  const withCatAdd = rowsF.filter(x => (x.categories || []).length).length;
+  // categoriile sunt calculate local pe `rows`; `tests` se imbina cu ele prin id
+  const rowById = {};
+  for (const r of rowsF) rowById[r.id] = r;
+  for (const t of ft) { t.categories = (rowById[t.id] || {}).categories || []; }
+  const working = ft.filter(x => x.matchesAsIs > 0);
+  const dead = ft.filter(x => x.matchesAsIs === 0);
+
+  md += `Filtre cu criteriu de interogare pe cont: **${rowsF.length}**, din ${filterState.totalFilters} total. **${withAdd}** dintre ele are \`addLabelIds\`, iar **${withCatAdd}** atinge o etichetă de categorie.`;
   if (joburi) md += ` Criteriul celui de joburi, citit live azi:\n\n\`\`\`\n${joburi.query}\n\`\`\`\n`;
-  if (allDead) {
+
+  if (working.length) {
     md += `
-**Cauza reală, măsurată azi pe Gmail:** în căutarea Gmail, \`()\` înseamnă **ȘI**, iar \`{}\` înseamnă **SAU**. Cele ${ft.length} filtre folosesc \`from:(jooble bestjobs ...)\` — deci cer un expeditor care să conțină **toate** cuvintele simultan. Rezultat: **0 mesaje lovite în 30 de zile, din oricare categorie.**
+#### Un filtru FUNCȚIONEAZĂ
+
+**${working.length} dintre ${ft.length} filtre lovesc efectiv mesaje.** ${working.map(x => `\`${x.query.slice(0, 50)}${x.query.length > 50 ? '…' : ''}\` → **${x.matchesAsIs}** mesaje în 30 de zile, etichetează ${(x.categories || []).length ? (x.categories || []).map(c => `\`${c}\``).join(', ') : 'nicio etichetă de categorie'}`).join('; ')}
+
+`;
+  }
+  if (dead.length) {
+    md += `
+**Cauza reală, măsurată azi pe Gmail:** în căutarea Gmail, \`()\` înseamnă **ȘI**, iar \`{}\` înseamnă **SAU**. Cele ${dead.length} filtre nefuncționale folosesc \`from:(jooble bestjobs ...)\` — deci cer un expeditor care să conțină **toate** cuvintele simultan. Rezultat: **0 mesaje lovite în 30 de zile.**
 
 | Filtru | cum e scris acum | cum ar trebui scris (\`{}\`) |
 |---|---|---|
 `;
-    for (const x of ft) {
+    for (const x of dead) {
       md += `| \`${x.query.slice(0, 58)}${x.query.length > 58 ? '…' : ''}\` | **${x.matchesAsIs}** | **${x.matchesFixed}** |\n`;
     }
     md += `
-Cu acoladele, aceleași filtre ar fi prins **${totalFixed} mesaje în 30 de zile**. Diferența dintre 0 și ${totalFixed} e cauza pentru care etichetele sunt goale de două săptămâni.
+Cu acoladele, aceleași filtre ar fi prins **${totalFixed} mesaje în 30 de zile**.
 
 **Două defecte, în ordine:**
-1. **Criteriile nu pot lovi nimic** — paranteze în loc de acolade. (defect descoperit și măsurat azi)
-2. **\`addLabelIds\` e vid** — nici măcar cu criterii corecte n-ar eticheta ceva. (defect cunoscut din 11.10)
+1. **Criteriile nu pot lovi nimic** — paranteze în loc de acolade.
+2. **\`addLabelIds\` e vid** — nici măcar cu criterii corecte n-ar eticheta ceva.
 
 **De ce nu le-am reparat azi:** tokenul din cloud are \`gmail.modify\`, dar **nu** \`gmail.settings.basic\` — fără acest scope, \`filters PATCH\` răspunde 403. Repararea e pregătită ca script (\`mavis-tools/fix-mavis-filters.js\`, cu \`--dry-run\` și cu salvarea stării de dinainte pentru rollback) și trebuie rulată de pe mașina ta, unde scope-ul există.
 `;
-  } else {
-    md += `\n\nDetaliul pe fiecare filtră, cu numărul de mesaje lovite, e în \`report-filter-state.json\` (vezi §7).\n`;
   }
 } else {
   md += `*(Sonda de filtre nu a rulat azi — starea filtrelor nu e măsurată în acest raport.)*\n`;
 }
 md += `
-**Și mai mult:** filtrul nici măcar nu arhivează. Deși \`removeLabelIds\` conține \`INBOX\`, mesajele de job intrate azi sunt **în continuare în INBOX și UNREAD**:
+**Inboxul nu se golește.** Deși \`removeLabelIds\` conține \`INBOX\`, mesajele intrate azi sunt **în continuare în INBOX și UNREAD**:
 
 | Fereastră | În inbox | În toate stările |
 |---|---|---|
@@ -291,9 +344,7 @@ md += `
 | 24h | ${inboxCounts['24h_inbox']} | ${inboxCounts['24h_any']} |
 | 7z | ${inboxCounts['7d_inbox']} | ${inboxCounts['7d_any']} |
 
-**~${inboxCounts['7d_inbox']} mesaje stau în inbox într-o săptămână** (~${Math.round(inboxCounts['7d_inbox'] / 7)}/zi). Sortarea nu mai are loc.
-
-**Cauza probabilă** (neconfirmată): etichetarea se făcea de un script local — \`mavis-tools/email-sort-full.js\` — care rulează pe calculatorul tău, nu din cloud. Filtrele din Gmail doar arhivează; **eticheta e pusă de script**. Scriptul nu mai rulează.
+**~${inboxCounts['7d_inbox']} mesaje stau în inbox într-o săptămână** (~${Math.round(inboxCounts['7d_inbox'] / 7)}/zi).
 
 ### 1.4 Cum ar fi fost sortate mesajele de azi
 
@@ -301,16 +352,14 @@ Simulare pe cele ${sim.total} mesaje de azi, cu **aceleași criterii** ale filtr
 
 | Categorie | Mesaje azi |
 |---|---|
-| \`MAVIS/Joburi\` | ${sim.counts['MAVIS/Joburi']} |
-| \`MAVIS/Newsletter\` | ${sim.counts['MAVIS/Newsletter']} |
-| \`MAVIS/AI si comunitati\` | ${sim.counts['MAVIS/AI si comunitati']} |
-| \`MAVIS/Social\` | ${sim.counts['MAVIS/Social']} |
-| \`MAVIS/Finante\` | ${sim.counts['MAVIS/Finante']} |
-| *niciun filtru se potrivește* | ${sim.unmatched} |
+`;
+for (const nm of liveLabelNames) md += `| \`${nm}\` | ${simCount(nm)} |\n`;
+md += `| *niciun filtru se potrivește* | ${sim.unmatched} |
 
 > Unele mesaje se potrivesc la 2 filtre (ex. "Joburi" + "Newsletter" de la LinkedIn), deci suma poate depăși ${sim.total}.
 
-**Observație:** din cele ${sim.unmatched} mesaje fără filtru, **${tri.counts.noise} sunt notificări ale agenților tăi** (Jules și GitHub Actions pe repo-urile proprii). Taxonomia MAVIS nu are categorie pentru "notificări din pipeline-ul propriu". **Recomandare: etichetă nouă, ex. \`MAVIS/Agenti\`.**
+**Observație:** **${tri.counts.noise} mesaje** de azi sunt notificări ale agenților tăi (Jules și GitHub Actions pe repo-urile proprii). Până azi taxonomia nu avea categorie pentru ele — **acum are**: eticheta \`${aliveNames.find(n => /optimus|agenti/i.test(n)) || 'Optimus CD'}\` primește ${(mailCount.labels.find(l => /optimus|agenti/i.test(l.name)) || { counts: {} }).counts.azi || 0} mesaje azi, iar filtrul ei funcționează efectiv. E singura categorie care primește ceva — restul sunt în continuare moarte.
+
 
 ### 1.5 Mesajele care chiar necesită răspuns
 
@@ -369,7 +418,7 @@ if (leads && leads.leads && leads.leads.length) {
 md += `---
 ## 2. Joburi — scorate cu \`ALEX-KIT/scoring.gs\`
 
-**${sc.stats.total} joburi analizate** (IQads ${srcTotal['IQads'] || 0} + designproject.io ${srcTotal['designproject.io'] || 0}) → ${sc.stats.kept} păstrate în tabele, ${sc.stats.dropped} drop-uri, din care **${sc.stats.amanzat} cu verdict amânat** (locația nu e publicată de sursă). **${sc.stats.newJobs} joburi noi** față de ${sc.prevDate || 'raportul anterior'}.
+**${sc.stats.total} joburi analizate** (IQads ${srcTotal['IQads'] || 0} + designproject.io ${srcTotal['designproject.io'] || 0}) → ${sc.stats.kept} păstrate în tabele, ${sc.stats.dropped} drop-uri, din care **${sc.stats.amanzat} cu verdict amânat** (locația nu e publicată de sursă). **${sc.stats.newJobs} ${plural(sc.stats.newJobs, 'job nou', 'joburi noi', 'joburi noi')}** față de ${sc.prevDate || 'raportul anterior'}.
 
 Surse: **IQads** (tabloul AdJob activ, citit azi) + **designproject.io** (România + București).
 
@@ -443,7 +492,7 @@ md += `
 
 | Sursă | Cum am măsurat | Rezultat |
 |---|---|---|
-| **IQads** | ID-ul ad-ului crește monoton cu postarea. Cel mai mare ID din setul de ieri: **${gn.maxPrevIqadsId}** | **${gn.newIqads.length} ${plural(gn.newIqads.length,'anunt nou','anunțuri noi','anunțuri noi')}** |
+| **IQads** | ID-ul ad-ului crește monoton cu postarea. Cel mai mare ID din setul de ieri: **${gn.maxPrevIqadsId}** | **${gn.newIqads.length} ${plural(gn.newIqads.length,'anunț nou','anunțuri noi','anunțuri noi')}** |
 | **designproject.io** | data de publicare vs. ultima rulare | **${gn.newDesignproject.length} ${plural(gn.newDesignproject.length,'anunt nou','anunțuri noi','anunțuri noi')}** — cel mai recent de pe site e din **${gn.newestDesignprojectDate}** |
 
 `;
@@ -470,7 +519,7 @@ md += `
 if (daysOff !== null) {
   const ft = filterState ? (filterState.tests || []) : [];
   const totalFixed = ft.reduce((a, x) => a + x.matchesFixed, 0);
-  md += `1. **Etichetele MAVIS/* nu mai primesc nimic de ${daysOff} zile.** Două cauze, măsurate azi: filtrele folosesc \`from:(...)\` unde Gmail cere \`from:{...}\` (paranteze = ȘI, acolade = SAU), deci nu pot lovi niciun mesaj — ${ft.length ? `ar fi prins ${totalFixed} mesaje în 30 de zile` : 'ar fi prins mii'}; și \`addLabelIds\` e vid pe toate. ~${inboxCounts['7d_inbox']} mesaje/7 zile stau în inbox.\n`;
+  md += `1. **${deadRows.length} din ${labelRows.length} categorii nu mai primesc nimic${deadDaysOff !== null ? ` de ${deadDaysOff} zile` : ''}.** Două cauze, măsurate azi: filtrele folosesc \`from:(...)\` unde Gmail cere \`from:{...}\` (paranteze = ȘI, acolade = SAU), deci nu pot lovi niciun mesaj — ${ft.length ? `ar fi prins ${totalFixed} mesaje în 30 de zile` : 'ar fi prins mii'}; și \`addLabelIds\` e vid pe ele. ~${inboxCounts['7d_inbox']} mesaje/7 zile stau în inbox.\n`;
 }
 if (dpP && !dpP.error) {
   md += `2. **designproject.io servește descrieri foarte inegale** (${dpP.jdLenMin}–${dpP.jdLenMax} de caractere pe cele ${dpP.count} de joburi, măsurat azi). Cele mai lungi sunt rescrise de AI și injectează cuvinte-cheie care ridică axele — vezi §6.2.\n`;
@@ -491,7 +540,7 @@ md += usageRows.map(([k, v]) => `| \`${k}\` | ${k === 'report-build.js' ? v + UP
 md += `| **total** | **${usageTotal}** |\n\n`;
 md += `> ${usageNote || 'Contorul măsoară cererile efective făcute de fiecare script.'}\n\n`;
 if (usageTotal > 200) {
-  md += `Ce a mers peste plafon: am descărcat corpurile complete ale mesajelor de azi (${tri.all.length}) ca să disting mesajele care chiar cer răspuns de alertele automate — fără corp, nu se poate. **Zero scrieri pe Gmail** — niciun mail trimis, marcat sau arhivat.\n`;
+  md += `**Ce a mers peste plafon:** diagnosticul rearanjării taxonomiei Gmail. Etichetele \`MAVIS/*\` au fost renumerotate peste noapte, iar raportul trebuia să măsoare noile nume — asta a cerut ${usageRows.find(r => r[0] === 'inline') ? usageRows.find(r => r[0] === 'inline')[1] : 0} cereri de diagnostic (liste de etichete, comparații de numere, verificarea filtrului nou funcțional).\n\nAu fost cheltuite pe **înțelegerea** stării, nu pe măsurarea zilei. Zero scrieri pe Gmail — niciun mail trimis, marcat sau arhivat, niciun filtru modificat.\n`;
 } else {
   md += `Ce a consumat cel mai mult: corpurile complete ale mesajelor de azi (${tri.all.length}) — fără corp, nu se poate distinge un mesaj care cere răspuns de o alertă automată. **Zero scrieri pe Gmail** — niciun mail trimis, marcat sau arhivat, niciun filtru modificat.\n`;
 }
@@ -531,12 +580,13 @@ const files = [
   ['mavis-tools/jobs-iqads-' + DATE + '.json', 'joburi IQads, text integral'],
   ['mavis-tools/jobs-designproject-' + DATE + '.json', 'joburi designproject.io, JSON-LD'],
   ['mavis-tools/jobs-' + (sc.prevDate || '') + '.json', 'setul normalizat de ieri (cu care s-a comparat)'],
-  ['mavis-tools/report-mail-count.json', 'numărătoare pe etichete MAVIS/*'],
+  ['mavis-tools/report-mail-count.json', 'numărătoare pe etichetele de categorie'],
   ['mavis-tools/report-inbox-counts.json', 'numărătoare exactă inbox'],
   ['mavis-tools/report-simulate-sort.json', 'simularea sortării + mesajele de azi'],
   ['mavis-tools/report-source-probe.json', 'sonda de surse (comportamentul iqads.ro / designproject.io, măsurat azi)'],
-  ['mavis-tools/report-filter-state.json', 'starea filtrelor Gmail MAVIS/* + testul paranteze-vs-acolade (măsurat azi)'],
+  ['mavis-tools/report-filter-state.json', 'starea filtrelor Gmail + testul paranteze-vs-acolade (măsurat azi)'],
   ['mavis-tools/report-triage.js', 'clasificatorul mesajelor (needs-reply / needs-action / fyi / noise)'],
+  ['mavis-tools/taxonomy.js', 'sursa unică pentru numele etichetelor de categorie (rezolvate live, nu hardcodate)'],
 ];
 for (const [f, dsc] of files) {
   const p = path.join(DIR, '..', f);

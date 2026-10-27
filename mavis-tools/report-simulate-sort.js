@@ -1,27 +1,39 @@
 #!/usr/bin/env node
 /**
  * SIMULARE: cum ar fi fost sortate mesajele de azi, daca filtrele ar functiona.
- * Aplica EXACT criteriile celor 5 filtre MAVIS (masurate live, filtrul "joburi"
- * are query-ul de mai jos; restul vin din email-sort-full.js, care le oglindeste).
+ * Aplica EXACT criteriile filtrelor de categorie (masurate live de
+ * report-filter-state.js; restul vin din email-sort-full.js, care le oglindeste).
+ *
+ * 2026-10-27: etichetele au fost rearanjate. CATEGORIES tine cheia stabila
+ * ("joburi", "ai", ...); numele etichetei se rezolva la runtime din taxonomy.js.
  *
  * Nu scrie NIMIC. Doar calculeaza.
  */
 const k = require('./kit.js');
 const fs = require('fs');
+const TAX = require('./taxonomy.js');
 
 // data pentru fereastra "azi" (format Gmail: AAAA/LL/ZZ). Implicit: azi.
 const TODAY = process.argv[2] || new Date().toISOString().slice(0, 10).replace(/-/g, '/');
 const TODAY_ISO = TODAY.replace(/\//g, '-');
 
-const CATS = [
-  ['MAVIS/Joburi',    { from: /jooble|bestjobs|hipo|indeed|jobleads|recruit|linkedin|iqads|designproject/i, subject: /job|angajare|vacanta|oportunitate/i }],
-  ['MAVIS/AI si comunitati', { from: /substack|goatacademy|aiautomationsociety|sadhguru|beehiiv|twine|comfy|deepmind|openai|anthropic/i, subject: /\bAI\b|artificial intelligence/i }],
-  ['MAVIS/Social',    { from: /skool|facebook|instagram|tiktok|pinterest|polibrawl|youtube/i, subject: null }],
-  ['MAVIS/Newsletter',{ from: /noreply|no-reply|newsletter|digest|promotions|offers|deals|notificari|notificări/i, subject: null }],
-  ['MAVIS/Finante',   { from: /kraken|tradingview|bitunix|coinbase|binance/i, subject: /factura|investitie/i }],
+// [key, criteriu] — cheia e stabila, nu numele etichetei.
+const CATEGORIES = [
+  ['joburi',     { from: /jooble|bestjobs|hipo|indeed|jobleads|recruit|linkedin|iqads|designproject/i, subject: /job|angajare|vacanta|oportunitate/i }],
+  ['ai',         { from: /substack|goatacademy|aiautomationsociety|sadhguru|beehiiv|twine|comfy|deepmind|openai|anthropic/i, subject: /\bAI\b|artificial intelligence/i }],
+  ['social',     { from: /skool|facebook|instagram|tiktok|pinterest|polibrawl|youtube/i, subject: null }],
+  ['newsletter', { from: /noreply|no-reply|newsletter|digest|promotions|offers|deals|notificari|notificări/i, subject: null }],
+  ['finante',    { from: /kraken|tradingview|bitunix|coinbase|binance/i, subject: /factura|investitie/i }],
+  ['agenti',     { from: /notifications@github\.com|jules/i, subject: /jules|github/i }],
 ];
 
 (async () => {
+  // etichetele vii -> nume reale per categorie
+  const labs = await k.gmail.labels();
+  const { byKey, missing } = TAX.resolve(labs.labels || []);
+  if (missing.length) console.log('!! categorii ne-rezolvate: ' + missing.map(m => m.title).join(' | '));
+  const CATS = CATEGORIES.map(([key, c]) => [TAX.labelName(byKey, key) || key, c]);
+
   // toate mesajele de azi (in orice stare, nu doar inbox)
   let page = null; const ms = [];
   do {
