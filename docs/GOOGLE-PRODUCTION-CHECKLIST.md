@@ -41,6 +41,29 @@ Sursa oficială: https://support.google.com/cloud/answer/15549945
 
 ---
 
+## Cum verifici din cloud dacă appul e publicat — cu o singură comandă
+
+Nu trebuie să te bazezi pe o presupunere. Răspunsul la
+`POST oauth2.googleapis.com/token` conține `refresh_token_expires_in` **doar
+cât timp consent screen-ul e în Testing**. După publicare, câmpul dispare.
+
+```bash
+node mavis-tools/google-preflight.js
+```
+
+```
+  [5] expirare         fara limita de 7 zile  (appul e IN PRODUCTION)   ← publicat
+  [5] expirare         35.0 ore  (2026-10-29T01:39:36Z)                ← încă Testing
+```
+
+Starea curentă, măsurată la 27 oct 2026: **încă în Testing**, tokenul expiră
+**2026-10-29 01:39 UTC**.
+
+**De ce contează:** în Testing, orice re-consimțământ mută termenul cu încă
+7 zile — nu rezolvă nimic. Doar publicarea rezolvă.
+
+---
+
 ## Pasul 2 — de ce „Publish app" poate fi refuzat
 
 Google cere **„Setup branding"** și **„Audience"** completate. Dacă lipsesc

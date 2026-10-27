@@ -34,17 +34,26 @@ Alex Work/
 3. **`04-ARHIVA` nu se șterge** — se mută
 4. **CV-urile de trimis stau în `02-CERERI`** — nu în `04-ARHIVA`
 
-## Etichetele Gmail — 8
+## Etichetele Gmail — 36 (nu mai sunt 8)
+
+**Taxonomia s-a schimbat pe 27 oct 2026.** Prefixul `MAVIS/` a căzut de pe 7 din
+8 etichete, și au apărut 4 hierarhii noi. Lista curentă, cu numere măsurate:
+`10-GMAIL/TAXONOMIE-2026-10-27.md`.
 
 ```
-MAVIS/Joburi            MAVIS/AI si comunitati
-MAVIS/Social            MAVIS/Newsletter
-MAVIS/Finante           MAVIS/Personal
-MAVIS/Facturi si conturi MAVIS/Actiune - de raspuns
+MAVIS/Joburi            Newsletter              Socials
+AI Folder/AI si Comunitati                     De raspuns
+Facturi si Conturi     Personal                Finante
+WORK | AP-ID/*          Knowledge/*             Crypto | Trade | News/*
+Home | Car | Shopping/* JOBS-Interview/*       Optimus CD    SCAMS
 ```
 
-**Cinci filtre server-side** prind mailul nou, ca să nu fie nevoie de cereri API
-la fiecare rulare. Costă `messages.list` 5 unități, nu 100.
+**19 filtre server-side** prind mailul nou, ca să nu fie nevoie de cereri API
+la fiecare rulare. Costă `messages.list` 5 unități, nu 100. Toate validate
+27 oct: **0 sparte**.
+
+**Regulă:** când rearanjezi etichete, mută filtrele în aceeași zi — altfel
+mailul nou dispare din sistem.
 
 ## Curățenie
 

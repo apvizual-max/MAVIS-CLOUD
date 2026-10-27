@@ -18,6 +18,9 @@
 | 11 iul | Redenumire etichetă cu liniuță | `MAVIS/Actiune - de raspuns` → `MAVIS/De raspuns` |
 | 12 iul | Spam → inbox, flaguri scoase | 106 mesaje |
 | 12 iul | **Sortare completă, fără fereastră de vârstă** | tot inbox-ul |
+| 27 oct | **Rearanjare taxonomie** — 7 din 8 etichete `MAVIS/*` redenumite (prefixul căzut), 4 hierarhii noi: `WORK \| AP-ID/`, `Knowledge/`, `Crypto \| Trade \| News/`, `JOBS-Interview/` | ✅ filtre mutate împreună, 0 sparte |
+| 27 oct | **Verificare filtre** — 19 filtre, toate țintele valide | ✅ 0 sparte |
+| 27 oct | **Δ cont** — 84.316 → 83.505 mesaje (−811), Trash 626, Spam 2 | ⏳ de confirmat cu POPY |
 
 ## 1b. Numere LIVE, contorizate la sortarea completă
 
@@ -122,6 +125,22 @@ Diferența la 3.000 de mesaje: 15.000 vs. 300.000 de unități.
 - **trimitere** — POPY apasă butonul
 - **pornirea sortării de gunoi** după ce POPY l-a golit
 - **raportarea unui număr** fără numărare reală
+
+---
+
+## 9. Taxonomia curentă (27 oct 2026)
+
+Nu mai sunt 8 etichete `MAVIS/*` — sunt **36 etichete de utilizator** în 7
+familii. Detalii complete, cu numere măsurate și cu corespondența
+veche→nouă: **`10-GMAIL/TAXONOMIE-2026-10-27.md`**.
+
+Familii: `MAVIS/Joburi` · `Newsletter` · `Socials` · `AI Folder/` ·
+`De raspuns` · `Facturi si Conturi` · `Personal` · `Finante` ·
+`WORK | AP-ID/` · `Knowledge/` · `Crypto | Trade | News/` ·
+`Home | Car | Shopping/` · `JOBS-Interview/` · `Optimus CD` · `SCAMS`
+
+**IMPORTANT pentru orice workflow nou:** citește etichetele noi, nu vechile
+`MAVIS/*`. Doar `MAVIS/Joburi` a supraviețuit.
 
 ---
 

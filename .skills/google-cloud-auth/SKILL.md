@@ -200,17 +200,33 @@ cand exista un token viu; cand tokenul e deja mort, `consent` e corect
 
 Detalii: skill `mavis-secure-delivery` · doc `docs/PROCEDURA-LIVRARE-SECRETE.md`
 
-## Ce merge din cloud, măsurat 2026-10-22 04:40 (CONECTAT)
+## Cum vezi dacă appul e publicat — `refresh_token_expires_in`
 
-✅ **Gmail** — 84.313 mesaje · 78.519 thread-uri · 50 etichete (8 MAVIS/*)
-✅ **Drive** — 104,07 GB / 5498 GB
+Răspunsul la `POST oauth2.googleapis.com/token` conține `refresh_token_expires_in`
+**doar cât timp consent screen-ul e în „Testing"** (limita de 7 zile). După
+publicare, câmpul **dispare**. Deci starea appului e **măsurabilă**, nu se
+ghicește:
+
+```js
+// câmp prezent  => appul e INCA IN "Testing", tokenul expiră la +refresh_token_expires_in
+// câmp absent   => appul e IN PRODUCTION, tokenul nu mai are limită de 7 zile
+```
+
+`node mavis-tools/google-preflight.js` → pasul `[5] expirare` spune direct.
+
+## Ce merge din cloud, măsurat 2026-10-27 14:40 (CONECTAT)
+
+✅ **Gmail** — 83.505 mesaje · 77.701 thread-uri · 51 etichete (36 de utilizator)
+✅ **Drive** — 107,80 GB / 5498 GB · 3 foldere la rădăcină
 ✅ **Calendar** — 4 calendare
-✅ **Sheets** — "Design_Jobs_Community_Board" → 23 rânduri
+✅ **Sheets** — "Design_Jobs_Community_Board" → 27 rânduri
 ✅ **Slides** — "441DPH-Brief slides…" → 7 slide-uri
 ⚠️ **Docs** — `docs.googleapis.com` BLOCAT din cloud (HTTP 400, pagină anti-bot
 reCAPTCHA, nu JSON). **Contentul se citește prin Drive export**:
 `kit.docs.text(id)` → `drive/v3/files/{id}/export?mimeType=text/plain`. Merge.
-⛔ **Photos** — `photoslibrary.googleapis.com` — conexiune blocată din cloud
+⚠️ **Photos** — `photoslibrary.googleapis.com` — API-ul e ACESIBIL din cloud, dar
+tokenul n-are scope `phot library` → HTTP 403 «insufficient authentication scopes».
+(S-a schimbat din «conexiune blocată».)
 ⛔ **Maps** — cere `GOOGLE_MAPS_API_KEY` + proiect Cloud cu billing
 ⛔ **Workspace MCP** — `*mcp.googleapis.com` — 0/6 conexiuni din cloud
 

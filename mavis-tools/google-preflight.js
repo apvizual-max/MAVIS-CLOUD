@@ -144,6 +144,7 @@ async function fr(url, opts = {}, tries = 5) {
     process.exit(2);
   }
   let ok4 = false, e4 = '';
+  let expiresIn;
   try {
     const r = await fr('https://oauth2.googleapis.com/token', {
       method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -151,14 +152,31 @@ async function fr(url, opts = {}, tries = 5) {
     });
     const j = await r.json().catch(() => ({}));
     ok4 = !!j.access_token;
+    expiresIn = j.refresh_token_expires_in;
     e4 = j.error ? `${j.error} — ${j.error_description || ''}` : '';
   } catch (e) { e4 = 'RETEA: ' + (e.cause?.code || e.message); }
   console.log(ok4 ? G('  [4] refresh token    OK') : R(`  [4] refresh token    FAIL  ${e4}`));
   if (!ok4) {
     console.log(Y('\n  VERDICT: clientul e corect, dar tokenul nu mai e viu.'));
-    console.log(Y('  -> trebuie un consimtamant nou: node mavis-tools/google-link.js'));
-    console.log(Y('  -> dupa aceea: node mavis-tools/google-connect.js "<url>"\n'));
+    console.log(Y('  -> trebuie un consimtamant nou: node mavis-tools/google-refresh.js link'));
+    console.log(Y('  -> apoi: node mavis-tools/google-refresh.js code "<url>"\n'));
     process.exit(2);
+  }
+
+  // 5. CAT TIMP MAI AI TOKENUL? + appul e publicat sau nu?
+  //    refresh_token_expires_in e prezent DOAR cand consent screen-ul e in
+  //    "Testing" (limita de 7 zile). Daca ABSENT -> appul e In production
+  //    si tokenul nu mai expira in 7 zile.
+  if (expiresIn === undefined) {
+    console.log(G('  [5] expirare         fara limita de 7 zile') + C.d('  (appul e IN PRODUCTION)'));
+  } else {
+    const h = expiresIn / 3600;
+    const exp = new Date(Date.now() + expiresIn * 1000).toISOString().replace('.000Z', 'Z');
+    const paint = h < 48 ? R : Y;
+    console.log(paint(`  [5] expirare         ${h.toFixed(1)} ore  (${exp})`));
+    console.log(Y('      appul e INCA IN "Testing" -> tokenul moare in 7 zile de la consimtamant.'));
+    console.log(D('      Fix: Cloud Console -> OAuth consent screen -> Publish app -> In production.'));
+    console.log(D('      Dupa publicare: node mavis-tools/google-refresh.js link'));
   }
 
   console.log(G(B('\n  VERDICT: Google e conectat. Poate rula google-verify.js.\n')));

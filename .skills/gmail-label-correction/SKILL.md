@@ -5,6 +5,12 @@ description: Cum se repara o clasificare gresita in Gmail cand exista suprapuner
 
 # Repararea clasificărilor greșite
 
+> ⚠️ **Exemplele de mai jos folosesc numele VECHI de etichete** (`MAVIS/Social`,
+> `MAVIS/Personal`, `MAVIS/Actiune - de raspuns`). Din **27 oct 2026** taxonomia
+> e alta: `Socials`, `Personal`, `De raspuns`. Lista curentă:
+> `10-GMAIL/TAXONOMIE-2026-10-27.md`. **Verifică numele înainte să aplici o
+> reparație** — o etichetă care nu există dă 404 la `batchModify`.
+
 ## Problema de bază: suprapuneri
 
 Am construit 6 categorii cu filtre `from:`. Două dintre ele se intersectau:

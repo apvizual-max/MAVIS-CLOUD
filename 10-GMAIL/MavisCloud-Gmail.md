@@ -1,17 +1,24 @@
 # MavisCloud-Gmail
 
 **Document pentru încărcare în notebookul `MavisCloud-Gmail`**
-Pregătit de Mavis Cloud · 2026-10-12 · gata de încărcare
+Pregătit de Mavis Cloud · 2026-10-12 · **actualizat 2026-10-27 (măsurat live)**
 
 Gmail-ul lui POPY: sortare, etichete, flux de joburi, spam
 
 ---
 
-**Stare** — 19.070 de mesaje etichetate, spam 0, Trash 0.
+**Stare (27 oct 2026, măsurată live)** — 83.505 mesaje în cont · 20.780 etichetate · Trash 626 · Spam 2.
 
-**Cele 8 etichete MAVIS** — Joburi 8.062 · Newsletter 4.103 · Social 2.818 · AI si comunitati 2.398 · De raspuns 1.345 · Facturi 97 · Personal 176 · Finante 71
+**Taxonomia s-a schimbat** — nu mai sunt 8 etichete `MAVIS/*`, sunt 36 în 7 familii.
+Doar `MAVIS/Joburi` a supraviețuit; restul au pierdut prefixul sau au fost mutate.
+Detalii + corespondența veche→nouă: `10-GMAIL/TAXONOMIE-2026-10-27.md`.
 
-**Reguli** — Toate au filtru server-side, nu doar etichete.
+**Cele mai mari** — MAVIS/Joburi 8.125 · Newsletter 4.558 · Socials 2.864 ·
+AI Folder/AI si Comunitati 2.499 · De raspuns 1.750 · Optimus CD 687
+
+**Reguli** — 19 filtre server-side, toate validate la 27 oct: 0 sparte.
+Etichetele fără filtră automat: `De raspuns`, `Personal`, `Facturi si Conturi`
+(triaj manual).
 
 **Cum se sortează** — mavis-tools/email-sort-full.js — parcurge tot inbox-ul, fără fereastră de vârstă.
 
@@ -29,4 +36,4 @@ Gmail-ul lui POPY: sortare, etichete, flux de joburi, spam
 
 ---
 
-*2026-10-12 · Mavis Cloud · fișier gata de încărcare în notebookul `MavisCloud-Gmail`*
+*2026-10-27 · Mavis Cloud · fișier gata de încărcare în notebookul `MavisCloud-Gmail`*
