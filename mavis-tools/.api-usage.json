@@ -3,8 +3,10 @@
   "report-folder-discover.js": 4,
   "report-inbox-counts.js": 9,
   "report-mail-count.js": 78,
-  "inline": 88,
+  "inline": 90,
   "report-filter-state.js": 20,
   "report-simulate-sort.js": 24,
-  "report-build.js": 3
+  "report-build.js": 3,
+  "fix-mavis-filters.js": 24,
+  "probe-gmail-filter-404.cjs": 3
 }
