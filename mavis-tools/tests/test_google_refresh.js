@@ -39,4 +39,26 @@ describe('google-refresh.js readClientConfig tests', () => {
 
     mock.reset();
   });
+
+  test('readClientConfig returns parsed object when fs.readFileSync returns valid JSON', () => {
+    mock.method(fs, 'readFileSync', () => {
+      return '{"valid": "json"}';
+    });
+
+    const result = readClientConfig();
+    assert.deepEqual(result, { valid: 'json' });
+
+    mock.reset();
+  });
+
+  test('readClientConfig returns null when fs.readFileSync returns invalid JSON', () => {
+    mock.method(fs, 'readFileSync', () => {
+      return 'invalid json string';
+    });
+
+    const result = readClientConfig();
+    assert.equal(result, null);
+
+    mock.reset();
+  });
 });
