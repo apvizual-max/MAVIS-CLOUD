@@ -39,6 +39,15 @@ jobs:
           git clone --depth 1 https://github.com/apvizual-max/Mavis-Google_Access.git _src
           echo "SOURCE_COMMIT=$(git -C _src rev-parse HEAD)"
 
+      - name: Diagnose the secret shape (counts only, never the value)
+        env:
+          S: ${{ secrets.GOOGLE_ACCESS_CREDENTIAL_B64 }}
+        run: |
+          echo "SECRET_LEN=${#S}"
+          echo "SECRET_FOREIGN_CHARS=$(printf '%s' "$S" | tr -d 'A-Za-z0-9+/=' | wc -c)"
+          echo "SECRET_PADDING=$(printf '%s' "$S" | tr -cd '=' | wc -c)"
+          echo "SECRET_LINES=$(printf '%s' "$S" | wc -l)"
+
       - name: Materialize the credential from the secret
         env:
           GOOGLE_ACCESS_CREDENTIAL_B64: ${{ secrets.GOOGLE_ACCESS_CREDENTIAL_B64 }}
