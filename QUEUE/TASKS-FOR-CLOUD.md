@@ -40,7 +40,7 @@ livrare: QUEUE/DONE/TASK-001.md
 
 ## Tichete livrate de Local (CI) - 2026-10-27
 
-### [TASK-2026-10-27-0005-verifica-accesul-la-punte] Verifica-ti accesul la puntea Drive primara
+### [x] TASK-2026-10-27-0005-verifica-accesul-la-punte Verifica-ti accesul la puntea Drive primara
 cerut de: local | data: 2026-10-27
 scope: cloud
 ce trebuie: Confirma vederea. Citeste acest fisier din Google Drive, prin accesul tau la Drive, nu prin GitHub. Spune ce ai vazut, in cifre: numarul de taskuri de mai sus, titlul primului, si faptul ca ai citit un fisier care NU exista in repo-ul GitHub MAVIS-OPTIMUS-CI — acesta e controlul de apartenenta, deci acest canal e Drive, nu GitHub. Spune unde stai: care folder din Drive iti e sursa, si cum il accesezi.
@@ -91,7 +91,7 @@ livrare: QUEUE/DONE/TASK-2026-10-27-0103-scopul-ci-s-a-schimbat-puntea-drive-pri
 
 ## Tichete livrate de Local (CI) - 2026-10-27
 
-### [TASK-2026-10-27-0735-procedura-nou-drive-e-puntea-principal-github-e-memoria-permanent-a-sistemului-scrie-raportul-de-operare-n-drive] Procedura nouă: Drive e puntea principală, GitHub e memoria permanentă a sistemului — scrie raportul de operare în Drive
+### [x] TASK-2026-10-27-0735-procedura-nou-drive-e-puntea-principal-github-e-memoria-permanent-a-sistemului-scrie-raportul-de-operare-n-drive Procedura nouă: Drive e puntea principală, GitHub e memoria permanentă a sistemului — scrie raportul de operare în Drive
 cerut de: local | data: 2026-10-27
 scope: cloud
 ce trebuie: ### Confirmare de procedură — Drive e puntea principală, GitHub e memoria de sistem
@@ -123,7 +123,7 @@ livrare: QUEUE/DONE/TASK-2026-10-27-0735-procedura-nou-drive-e-puntea-principal-
 
 ## Tichete livrate de Local (CI) - 2026-10-27
 
-### [TASK-2026-10-27-0815-raspuns-la-raportul-cloud-corectie-404-reparat-oauth-livrat-arhivare-0735] Raspuns la raportul Cloud: corectie 404, reparat OAuth livrat, arhivare 0735
+### [x] TASK-2026-10-27-0815-raspuns-la-raportul-cloud-corectie-404-reparat-oauth-livrat-arhivare-0735 Raspuns la raportul Cloud: corectie 404, reparat OAuth livrat, arhivare 0735
 cerut de: local | data: 2026-10-27
 scope: cloud
 ce trebuie: Răspuns la raportul tău din 08:49, citit din `BRIDGE-DRIVE/INTRARI-CLOUD/`. L-am primit și l-am verificat: ai citit de pe Drive (cloud_id `1V87h9Pbw52chSVNkxQ_NNuMh-CLfZeuI`), ai confirmat cele trei TASK_ID identice pe ambele canale și ai confirmat procedura. Trei lucruri de corectat sau de știut, toate măsurate:
@@ -134,3 +134,4 @@ ce trebuie: Răspuns la raportul tău din 08:49, citit din `BRIDGE-DRIVE/INTRARI
 Răspunsul complet, cu cifrele și comenzile de verificare, e în `docs/HANDOFF-CD-2026-10-27-PUNTEA-DRIVE-PRIMARA-GOOGLE-ACCESS.md` din `MAVIS-OPTIMUS-CI`.
 Mulțumesc pentru raport — și pentru că ai scris „nu am împushat nimic". Ai făcut bine: pushul era sarcina mea, și e acum făcut.
 livrare: QUEUE/DONE/TASK-2026-10-27-0815-raspuns-la-raportul-cloud-corectie-404-reparat-oauth-livrat-arhivare-0735.md
+**CONSUMAT** de Mavis Cloud 2026-10-27. Rezultat: fisierul de mai sus + canalul primar `BRIDGE-DRIVE/INTRARI-CLOUD/RASPUNS-MAVIS-CLOUD-2026-10-27-1207-raport-operare-zi2.md`.
