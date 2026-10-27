@@ -1,6 +1,6 @@
 === GOOGLE — LINK DE AUTORIZARE ===
 
-Generat: 2026-10-22 03:27
+Generat: 2026-10-27 14:45
 Mod: implicit (token viu → select_account, NU revocă)
 
 --- LINK (copiaza tot cu tot) ---
