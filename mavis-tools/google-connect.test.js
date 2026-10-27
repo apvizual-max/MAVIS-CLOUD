@@ -29,3 +29,12 @@ test('extractCode should return null for invalid strings without code parameter'
   assert.strictEqual(extractCode('http://127.0.0.1:8976/callback?notcode=abc'), null);
   assert.strictEqual(extractCode('invalid code with spaces'), null);
 });
+
+test('extractCode should return null for empty code parameter', () => {
+  assert.strictEqual(extractCode('http://127.0.0.1:8976/callback?code='), null);
+});
+
+test('extractCode should gracefully handle non-string inputs', () => {
+  assert.strictEqual(extractCode({ code: '123' }), null);
+  assert.strictEqual(extractCode(['123']), '123'); // Array gets converted to '123'
+});
