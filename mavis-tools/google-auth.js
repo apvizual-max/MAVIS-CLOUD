@@ -72,17 +72,53 @@ function readJsonTolerant(p) {
 }
 
 function fromEnv() {
+  // REGULA (masurat 2026-10-27): client_id, client_secret si refresh_token
+  // trebuie sa vina din ACEEASI familie de variabile. Amestecarea (client din
+  // GOOGLE_CLIENT_ID + token din GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD) trimite
+  // catre Google o pereche care nu poate exista: tokenul apartine altui
+  // client OAuth -> invalid_grant / unauthorized_client.
+  const groups = [
+    { suffix: '_MAVIS_CLOUD', label: 'env(_MAVIS_CLOUD)' },
+    { suffix: '', label: 'env' },
+  ];
+  for (const g of groups) {
+    const id = process.env['GOOGLE_CLIENT_ID' + g.suffix];
+    const sec = process.env['GOOGLE_CLIENT_SECRET' + g.suffix];
+    const tok = process.env['GOOGLE_REFRESH_TOKEN' + g.suffix];
+    if (id && sec && tok) {
+      return {
+        client_id: id,
+        client_secret: sec,
+        refresh_token: tok,
+        source: 'env',
+        source_detail: [
+          'GOOGLE_CLIENT_ID' + g.suffix,
+          'GOOGLE_CLIENT_SECRET' + g.suffix,
+          'GOOGLE_REFRESH_TOKEN' + g.suffix,
+        ],
+        client_source: g.label,
+        mixed_sources: false,
+      };
+    }
+  }
+  // Variabile amestecate: un client dintr-o familie + un token din alta
+  // familie = invalid_grant. NU se asambleaza o pereche care nu poate
+  // exista — se refuza, iar describe() arata exact ce s-a gasit, ca
+  // remedierea sa fie un pas, nu o vanatoare.
+  return null;
+}
+
+/** Diagnostic al amestecului de familii de variabile env. Fara secrete. */
+function mixedEnvNames() {
   const id = envVal('client_id');
   const sec = envVal('client_secret');
   const tok = envVal('refresh_token');
   if (!id || !sec || !tok) return null;
-  return {
-    client_id: id.value,
-    client_secret: sec.value,
-    refresh_token: tok.value,
-    source: 'env',
-    source_detail: [id.name, sec.name, tok.name],
-  };
+  const families = new Set(
+    [id.name, sec.name, tok.name].map((n) => (n.endsWith('_MAVIS_CLOUD') ? '_MAVIS_CLOUD' : ''))
+  );
+  if (families.size <= 1) return null;
+  return [id.name, sec.name, tok.name];
 }
 
 function fromFiles() {
@@ -90,16 +126,44 @@ function fromFiles() {
   const t = readJsonTolerant(TOKENS_FILE);
   if (!c || !t) return null;
   const inst = c.installed || c.web || c; // desktop client = installed, web = web
-  const client_id = inst.client_id;
-  const client_secret = inst.client_secret;
   const refresh_token = t.refresh_token;
-  if (!client_id || !client_secret || !refresh_token) return null;
+  if (!refresh_token) return null;
+
+  // REGULA (masurat 2026-10-27): tokenul apartine UNUI client. Daca fisierul
+  // de token isi poarta propriul client_id + client_secret, acelea se folosesc
+  // — nu cele din credentials.json, care pot apartine altui client.
+  // Cazul masurat in cloud: tokenul era al clientului ...u773, iar
+  // credentials.json tinea clientul ...5b7h17gt1c5hc4 -> invalid_grant.
+  // NU se amesteca niciodata: fie perechea completa din fisierul de token,
+  // fie perechea completa din credentials.json.
+  const tokenHasClient = Boolean(t.client_id && t.client_secret);
+  const credClientId = inst.client_id;
+  if (tokenHasClient) {
+    return {
+      client_id: t.client_id,
+      client_secret: t.client_secret,
+      refresh_token,
+      source: 'files',
+      source_detail: [TOKENS_FILE],
+      client_source: 'token-file',
+      mixed_sources: false,
+    };
+  }
+  // Tokenul nu are pereche completa. Daca are un client_id care DIFERA de
+  // cel din credentials.json, atunci tokenul apartine altui client, iar
+  // asamblarea secretului din credentials.json ar da invalid_grant. Se refuza.
+  if (t.client_id && credClientId && t.client_id !== credClientId) return null;
+  const client_id = credClientId;
+  const client_secret = inst.client_secret;
+  if (!client_id || !client_secret) return null;
   return {
     client_id,
     client_secret,
     refresh_token,
     source: 'files',
     source_detail: [CREDS_FILE, TOKENS_FILE],
+    client_source: 'credentials-file',
+    mixed_sources: false,
   };
 }
 
@@ -126,10 +190,34 @@ function describe() {
   if (!env.client_id && !files.credentials_json) missing.push('GOOGLE_CLIENT_ID');
   if (!env.client_secret && !files.credentials_json) missing.push('GOOGLE_CLIENT_SECRET');
   if (!env.refresh_token && !files.tokens_mavis_json) missing.push('GOOGLE_REFRESH_TOKEN');
+
+  // Diagnostic al perechii client-token, fara secrete.
+  // Daca fisierul de token are un client propriu, iar credentials.json are
+  // ALT client, atunci perechea (credentials.json, token) ar da invalid_grant.
+  // Se raporteaza explicit, nu se presupune ca e bine.
+  let client_pairing = null;
+  try {
+    const c = readJsonTolerant(CREDS_FILE);
+    const t = readJsonTolerant(TOKENS_FILE);
+    const credClient = c ? (c.installed || c.web || c).client_id : null;
+    const tokenClient = t ? t.client_id : null;
+    if (tokenClient && credClient) {
+      client_pairing = tokenClient === credClient ? 'same-client' : 'different-clients';
+    } else if (tokenClient) {
+      client_pairing = 'token-only';
+    } else if (credClient) {
+      client_pairing = 'credentials-only';
+    }
+  } catch { client_pairing = 'unreadable'; }
+
   return {
     resolved: !!r,
     source: r ? r.source : null,
     source_detail: r ? r.source_detail : null,
+    client_source: r ? (r.client_source || null) : null,
+    mixed_sources: r ? (r.mixed_sources === true) : false,
+    mixed_env: mixedEnvNames(),
+    client_pairing,
     env,
     files,
     missing,
@@ -184,6 +272,7 @@ module.exports = {
   describe,
   fromEnv,
   fromFiles,
+  mixedEnvNames,
   readJson,
   readJsonTolerant,
   SCOPES,
