@@ -60,10 +60,34 @@ continuat, în plus față de rearanjare.
 
 ---
 
-## 2. Filtrele server-side — toate intacte
+## 2. Filtrele server-side — reparate azi, verificate de Mavis Cloud
 
-**19 filtre, 0 sparte.** Am verificat fiecare: eticheta țintă există și încă
-poartă numele nou.
+**19 filtre, 0 sparte — măsurat la 14:40 UTC, după reparație.**
+
+**Cronologia, pentru că e importantă:**
+
+| Când | Ce |
+|---|---|
+| ~11 oct | Filtrele se **opresc** să mai lovească ceva. 8 categorii rămân fără mesaje. |
+| 25 oct 06:11 | Raport zilnic: **cauza reală identificată** |
+| 27 oct 06:16 | Raport zilnic + taxonomia rezolvată live |
+| 27 oct 08:42 | **Reparația aplicată**: DELETE + CREATE, etichetele rezolvate live |
+| 27 oct 14:40 | **Verificare independentă Mavis Cloud: 19/19 filtre sănătoase** |
+
+**Cauza era dublă, și niciuna n-ar fi fost suficientă singură:**
+
+1. **Criteriile:** în căutarea Gmail, `()` înseamnă **ȘI**, `{}` înseamnă **SAU**.
+   Cele 5 filtre scriau `from:(jooble bestjobs hipo indeed jobleads linkedin)` —
+   cereau un expeditor care să conțină **toate** cuvintele simultan. → **0 mesaje.**
+   Cu `{}` ar fi prins ~3.700 în 30 de zile.
+2. **Acțiunea:** `addLabelIds` era **vid**. Chiar dacă filtrul ar fi lovit ceva,
+   nu ar fi pus eticheta.
+
+**Concluzia:** rearanjarea etichetelor de azi **nu a fost cosmeticală** — a fost
+repararea unui sistem care era mort de 16 zile. Cele 8 categorii primeau
+câte **0** mesaje; acum au criterii care chiar lovesc.
+
+Am verificat fiecare filtru: eticheta țintă există și încă poartă numele nou.
 
 | Filtre | Etichetă țintă | Status |
 |---|---|---|
@@ -130,19 +154,26 @@ ele codifică exact cele 2 trasee active decise pe 22 octombrie:
 | în Spam | (necontorizat) | 2 | — |
 
 **811 mesaje au dispărut din cont** între 22 și 27 octombrie, în timp ce
-mesajele *etichetate* au **crescut** cu ~1.000. Deci:
+mesajele *etichetate* au **crescut** cu ~1.000 (sortarea a continuat).
 
-- **626 de mesaje sunt în Trash** → recuperabile.
-- Restul de **~185 au fost șterse definitiv** (golirea Trash-ului).
+**Ce am verificat, ca să nu inventez o alarmă falsă:**
 
-**Măsurătorile anterioare nu au contorizat Trash**, deci nu pot separa
-"sortare + golire" de "ștergere accidentală". **Întrebarea pentru POPY:** ai
-golit Trash-ul între 22 și 27 octombrie? Dacă da — totul e în regulă. Dacă
-**nu**, atunci ceva a șters mesaje din contul tău fără să știi, și asta
-trebuie aflat.
+- **Trash-ul are 626 mesaje** — și **conține mesaje din august**, deci NU e o
+  golire recentă de masă. E un amestec vechi.
+- **Nu am contorizat Trash-ul pe 22 oct**, deci nu pot separa „golit de POPY"
+  de „șters automat".
+- **Cea mai probabilă cauză a diferenței: măsurătoarea veche a fost luată în
+  timp ce rulau sortările locale.** Skill-ul `gmail-exact-counting` spune
+  exact asta: *„Nu număra niciodată cât rulează altă operațiune Gmail"* —
+  cererile se ciocnesc și contorul raportează greșit. Pe 22 oct erau rapoarte
+  zilnice active.
 
-*(Notă: 185 e o estimare — diferența dintre 811 și 626. Nu am contorizat
-Trash-ul pe 22 oct, deci n-am o confirmare exactă.)*
+**Răspuns onest: nu pot afirma că s-a șters ceva. Pot afirma că diferența
+e reală ca număr, dar cauza nu e determinată de date.** Singurul lucru care
+o poate lămuri: **ai golit Trash-ul sau ai șters ceva manual între 22 și 27
+octombrie?** Dacă da — totul e în regulă și închidem subiectul. Dacă nu, e
+un lucru de aflat, și atunci merită o căutare în activitatea agentului local
+din acea fereastră.
 
 ---
 
@@ -159,4 +190,40 @@ Trash-ul pe 22 oct, deci n-am o confirmare exactă.)*
 
 ---
 
-*2026-10-27 · Mavis Cloud · măsurat live din cloud*
+## 6. Reconciliere cu raportul zilnic din 27 oct
+
+Raportul zilnic (`rapoarte/RAPORT-ZILNIC-202610-27.md`) documentează **starea
+de dinainte de reparație**: 8 categorii moarte de 15 zile, filtre cu `()` în
+loc de `{}`, `addLabelIds` vid, 635 mesaje în inbox într-o săptămână.
+
+**Acel raport și măsurătoarea mea nu se contrazic — măsoară momente diferite:**
+
+| | Raport zilnic (fereastră 00:00–09:15 EEST) | Măsurătoarea mea (14:40 UTC = 16:40 EEST) |
+|---|---|---|
+| Filtre | 5 cu `()`, `addLabelIds` vid | 19/19 cu `{}` și `addLabelIds` pline |
+| Etichete | 8 categorii moarte de 15 zile | toate active, noile nume |
+| Inbox | 635 mesaje în 7 zile | (re-verificat) |
+
+**Reparația a fost aplicată la 08:42 EEST**, în mijlocul ferestrei de
+măsurare a raportului. Deci raportul a prins-o pe cea veche, iar eu am prins-o
+pe cea nouă.
+
+**Ce am adăugat peste raport:**
+1. **Verificarea independentă de la cloud** a celor 19 filtre, după reparație.
+2. **Numărul exact al etichetelor noi** (36 de utilizator, cu mesaje și
+   thread-uri fiecare) — raportul le are ca moarte, nu ca populate.
+3. **Harta etichetă → traseu de venit** (§3) — etichetele noi codifică exact
+   cele 2 trasee active.
+4. **Analiza Δ-ului de cont**, cu ce am putut și ce n-am putut verifica.
+5. **Cele 5 filtre de Trash verificate** — criterii complete, strânse, zero
+   risc de pierdere de date.
+
+**Ce am greșit:** am scris inițial în acest document că filtrele erau
+„intacte". Nu erau — erau **moarte de 16 zile**. Cândva între 11 și 25 oct
+filtrele au încetat să lovească. Repararea a fost făcută de partea locală
+azi la 08:42, iar eu am verificat-o de la cloud la 14:40. **Sistemul a funcționat:
+cineva a reparat, cineva a verificat.**
+
+---
+
+*2026-10-27 · Mavis Cloud · măsurat live din cloud, la 14:40 UTC*
