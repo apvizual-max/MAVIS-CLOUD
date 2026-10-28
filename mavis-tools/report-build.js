@@ -140,7 +140,17 @@ function hasWord(text, w) {
   }
   return rx.test(text);
 }
-const isDesignRole = role => DESIGN_KW.some(k => hasWord(role || '', k));
+const DESIGN_KW_RX = DESIGN_KW.map(w => {
+  const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i');
+});
+const isDesignRole = role => {
+  if (!role) return false;
+  for (let i = 0; i < DESIGN_KW_RX.length; i++) {
+    if (DESIGN_KW_RX[i].test(role)) return true;
+  }
+  return false;
+};
 // motivul real din spatele scorului
 function why(j, flags) {
   const p = (flags || []).find(f => f.axis === 'D' && f.from !== 'titlu');
@@ -667,39 +677,43 @@ md += `
 fs.writeFileSync(REPO_OUT, md);
 console.log('raport scris local: ' + REPO_OUT + ' (' + md.length + ' caractere)');
 
-// --dry: scrie raportul local, NU atinge Drive (pentru validare fara cereri)
-if (process.argv.includes('--dry')) {
-  console.log('--dry: nu se atinge Drive. 0 cereri Google.');
-  process.exit(0);
-}
+module.exports = { isDesignRole, hasWord, DESIGN_KW };
 
-(async () => {
-  const name = 'RAPORT-ZILNIC-' + COMPACT.slice(0, 6) + '-' + COMPACT.slice(6) + '.md';
-  // --file-id=<ID>: actualizam un raport deja creat, fara cautare.
-  // 1 cerere in loc de 3 (search + upload + verificare) — contorul ramane exact.
-  const fileIdArg = (process.argv.find(a => a.startsWith('--file-id=')) || '').replace('--file-id=', '').trim();
-  if (fileIdArg) {
-    // 1 cerere: PATCH cu uploadType=media. Raspunsul include deja
-    // id/name/mimeType/size/parents -> e si verificarea, nu mai trebuie un GET.
-    const up = await k.drive.replaceContent(fileIdArg, md, 'text/markdown');
-    console.log('raport ACTUALIZAT in place: ' + fileIdArg);
-    console.log('verificare (din raspuns): ' + up.name + ' | ' + up.mimeType + ' | ' + up.size + ' bytes | parents=' + (up.parents || []).join(','));
+if (require.main === module) {
+  // --dry: scrie raportul local, NU atinge Drive (pentru validare fara cereri)
+  if (process.argv.includes('--dry')) {
+    console.log('--dry: nu se atinge Drive. 0 cereri Google.');
+    process.exit(0);
+  }
+
+  (async () => {
+    const name = 'RAPORT-ZILNIC-' + COMPACT.slice(0, 6) + '-' + COMPACT.slice(6) + '.md';
+    // --file-id=<ID>: actualizam un raport deja creat, fara cautare.
+    // 1 cerere in loc de 3 (search + upload + verificare) — contorul ramane exact.
+    const fileIdArg = (process.argv.find(a => a.startsWith('--file-id=')) || '').replace('--file-id=', '').trim();
+    if (fileIdArg) {
+      // 1 cerere: PATCH cu uploadType=media. Raspunsul include deja
+      // id/name/mimeType/size/parents -> e si verificarea, nu mai trebuie un GET.
+      const up = await k.drive.replaceContent(fileIdArg, md, 'text/markdown');
+      console.log('raport ACTUALIZAT in place: ' + fileIdArg);
+      console.log('verificare (din raspuns): ' + up.name + ' | ' + up.mimeType + ' | ' + up.size + ' bytes | parents=' + (up.parents || []).join(','));
+      console.log('cereri Google in acest pas: ' + k.CALL_STATE.calls);
+      return;
+    }
+    // daca exista deja, il actualizam in place (nu cream duplicat)
+    const exist = await k.drive.search("name = '" + name + "' and '" + FOLDER_ID + "' in parents and trashed=false");
+    let id;
+    if (exist.files && exist.files.length) {
+      id = exist.files[0].id;
+      await k.drive.replaceContent(id, md, 'text/markdown');
+      console.log('raport ACTUALIZAT in place: ' + id);
+    } else {
+      const up = await k.drive.upload(name, md, 'text/markdown', FOLDER_ID);
+      id = up.id;
+      console.log('raport CREAT: ' + id + ' | ' + up.name);
+    }
+    const check = await k.drive.get(id);
+    console.log('verificare: ' + check.name + ' | ' + check.mimeType + ' | ' + check.size + ' bytes | parents=' + (check.parents || []).join(','));
     console.log('cereri Google in acest pas: ' + k.CALL_STATE.calls);
-    return;
-  }
-  // daca exista deja, il actualizam in place (nu cream duplicat)
-  const exist = await k.drive.search("name = '" + name + "' and '" + FOLDER_ID + "' in parents and trashed=false");
-  let id;
-  if (exist.files && exist.files.length) {
-    id = exist.files[0].id;
-    await k.drive.replaceContent(id, md, 'text/markdown');
-    console.log('raport ACTUALIZAT in place: ' + id);
-  } else {
-    const up = await k.drive.upload(name, md, 'text/markdown', FOLDER_ID);
-    id = up.id;
-    console.log('raport CREAT: ' + id + ' | ' + up.name);
-  }
-  const check = await k.drive.get(id);
-  console.log('verificare: ' + check.name + ' | ' + check.mimeType + ' | ' + check.size + ' bytes | parents=' + (check.parents || []).join(','));
-  console.log('cereri Google in acest pas: ' + k.CALL_STATE.calls);
-})();
+  })();
+}
