@@ -1,3 +1,4 @@
+<!-- Design Rationale: Standardized Markdown header hierarchy and structural sectioning consistent with OPERATIONAL_INPUT-OUTPUT_BLUEPRINT.md and GEMINI PLAN -->
 I need help in my job application process. Please grill me with questions to best understand the subject, as I need you to help me figure out the best quality and most automated way I can do this. here is my idea of the process so far: PREPARATIONS:
 
 UPDATES DONE:
