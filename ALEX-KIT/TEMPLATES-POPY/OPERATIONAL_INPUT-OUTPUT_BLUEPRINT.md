@@ -1,3 +1,4 @@
+<!-- Actualizat pentru a reflecta arhitectura reală a motoarelor JS/GS implementate în repo, trecând de la formatele .json conceptuale la cele executabile. -->
 ---
 aliases:
   - Operational Input/Output Blueprint
@@ -35,11 +36,11 @@ When you scrape or extract a job, format it in `JD's_SOT_Report.md` using the ex
     
 2. **The Target Role** determines which link array is pulled from `ALEX_LINK_MATRIX.json` (e.g., UI-UX, Design, Photo, Video).
     
-3. **The User Specific Notes** act as the ultimate strategic "hook" for `LETTER_ENGINE.json`. If you paste a phone-screen note mentioning that the company is dealing with "energy trading and grid visualization," the letter will immediately pivot on that precise stress point, ensuring the output reads as a highly tailored, custom pitch rather than a generic template.
+3. **The User Specific Notes** act as the ultimate strategic "hook" for `letter-engine.js`. If you paste a phone-screen note mentioning that the company is dealing with "energy trading and grid visualization," the letter will immediately pivot on that precise stress point, ensuring the output reads as a highly tailored, custom pitch rather than a generic template.
 
 ## 2. Step 1 Staging Output: `JD's_SOT_Report.md`
 
-After you feed the raw list of $50+$ JDs into your daily chat session, the local AI executes `jd_scoring.json` and completely overwrites `JD's_SOT_Report.md`.
+After you feed the raw list of $50+$ JDs into your daily chat session, the local AI executes `scoring.gs` and completely overwrites `JD's_SOT_Report.md`.
 
 - **Storage Path**: `D:\Alex - KV Obsidian\- ALEX - KV\ALEX-Folder\1 - Alex - CV and Person\JOB Aplications\JD's_SOT_Report.md`
     
