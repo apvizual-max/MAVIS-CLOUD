@@ -145,7 +145,8 @@ async function asNativeDoc(localPath, name, parentId) {
     const local = path.join(skillDir, n, 'SKILL.md');
     if (!fs.existsSync(local)) continue;
     try {
-      const clean = n.replace(/^mavis-cloud-/, '');
+      // mavis-cloud-skill-drive -> drive ; mavis-cloud-google-access-bot -> google-access-bot
+      const clean = n.replace(/^mavis-cloud-skill-/, '').replace(/^mavis-cloud-/, '');
       await replaceExisting(`MavisCloud-Skill-${clean}.md`, folders['03-Skills']);
       const f = await uploadMd(local, `MavisCloud-Skill-${clean}.md`, folders['03-Skills']);
       manifest.push({ sub: '03-Skills', nume: `MavisCloud-Skill-${clean}.md`, id: f.id, tip: 'skill' });
