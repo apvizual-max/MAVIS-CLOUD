@@ -1,0 +1,258 @@
+{
+  "stamp": "2026-10-28-01-13",
+  "proofFolder": "1NrkHRRSo1OFvVaueFT8AAiD53nR5nlg1",
+  "results": [
+    {
+      "nume": "drive: listare (children)",
+      "serviciu": "Drive",
+      "status": "OK",
+      "detail": "0 elemente",
+      "ms": 578
+    },
+    {
+      "nume": "drive: about (cota)",
+      "serviciu": "Drive",
+      "status": "OK",
+      "detail": "107.78 GB folositi",
+      "ms": 159
+    },
+    {
+      "nume": "drive: search (q pe nume)",
+      "serviciu": "Drive",
+      "status": "OK",
+      "detail": "5 rezultate",
+      "ms": 743
+    },
+    {
+      "nume": "drive: create folder",
+      "serviciu": "Drive",
+      "status": "OK",
+      "detail": "id 1NrkHRRSo1OFvVaueFT8AAiD53nR5nlg1",
+      "ms": 836
+    },
+    {
+      "nume": "drive: upload fisier text",
+      "serviciu": "Drive",
+      "status": "OK",
+      "detail": "id 1mNTZa8fC-RYe8HMXHAh_ewajLTAR_YCm · 104B",
+      "ms": 1462
+    },
+    {
+      "nume": "drive: read back continut",
+      "serviciu": "Drive",
+      "status": "OK",
+      "detail": "15 caractere citite",
+      "ms": 771
+    },
+    {
+      "nume": "drive: rename",
+      "serviciu": "Drive",
+      "status": "OK",
+      "detail": "nume nou: PROBE-RENUMIT-2026-10-28-01-13.md",
+      "ms": 1117
+    },
+    {
+      "nume": "drive: move intre foldere",
+      "serviciu": "Drive",
+      "status": "OK",
+      "detail": "parinte nou: corect",
+      "ms": 2454
+    },
+    {
+      "nume": "drive: create Google Doc NATIV (workaround)",
+      "serviciu": "Drive",
+      "status": "OK",
+      "detail": "id 18ibn0e7RzK_4Xg-ttgYq4hbYgvkfgpEhUArQoEzXmUk · export: 0 caractere",
+      "ms": 2332
+    },
+    {
+      "nume": "drive: write in Google Doc (batchUpdate)",
+      "serviciu": "Drive",
+      "status": "FAIL",
+      "detail": "HTTP 400: {\"raw\":\"<!DOCTYPE html><html lang=\\\"en\\\"><head><script nonce=\\\"9QlqPFSZZHZHB301Y2LTbQ\\\">window['ppConfig'] = {productName: '26981ed0d57bbad3",
+      "ms": 3652
+    },
+    {
+      "nume": "drive: permissions.list",
+      "serviciu": "Drive",
+      "status": "OK",
+      "detail": "1 permisiuni",
+      "ms": 129
+    },
+    {
+      "nume": "drive: share (create permission)",
+      "serviciu": "Drive",
+      "status": "OK",
+      "detail": "permission id anyoneWithLink",
+      "ms": 932
+    },
+    {
+      "nume": "drive: trash + untrash (reversibil)",
+      "serviciu": "Drive",
+      "status": "OK",
+      "detail": "trashed=undefined -> recuperat=true",
+      "ms": 2223
+    },
+    {
+      "nume": "drive: copy",
+      "serviciu": "Drive",
+      "status": "OK",
+      "detail": "copie id 1ePNFkTajtD2qf5TnKrj9OXilR0nqFFBt",
+      "ms": 1636
+    },
+    {
+      "nume": "gmail: profile",
+      "serviciu": "Gmail",
+      "status": "OK",
+      "detail": "apvizual@gmail.com · 82877 mesaje",
+      "ms": 203
+    },
+    {
+      "nume": "gmail: list mesaje",
+      "serviciu": "Gmail",
+      "status": "OK",
+      "detail": "5 returnate",
+      "ms": 183
+    },
+    {
+      "nume": "gmail: read mesaj",
+      "serviciu": "Gmail",
+      "status": "OK",
+      "detail": "id 1a17fef68e539d2c · You allowed Sentinel Hermes Google Acces",
+      "ms": 382
+    },
+    {
+      "nume": "gmail: labels (read)",
+      "serviciu": "Gmail",
+      "status": "OK",
+      "detail": "51 etichete",
+      "ms": 169
+    },
+    {
+      "nume": "gmail: create DRAFT (nu trimite)",
+      "serviciu": "Gmail",
+      "status": "OK",
+      "detail": "draft id r7044324496926873561",
+      "ms": 416
+    },
+    {
+      "nume": "gmail: modify draft (add label + mark read)",
+      "serviciu": "Gmail",
+      "status": "FAIL",
+      "detail": "HTTP 404: {\"raw\":\"<!DOCTYPE html>\\n<html lang=en>\\n <meta charset=utf-8>\\n <meta name=viewport content=\\\"initial-scale=1, minimum-scale=1, width=devic",
+      "ms": 18
+    },
+    {
+      "nume": "gmail: filters.list (read)",
+      "serviciu": "Gmail",
+      "status": "OK",
+      "detail": "19 filtre",
+      "ms": 267
+    },
+    {
+      "nume": "gmail: filter CREATE (throwaway) → dovedeste write",
+      "serviciu": "Gmail",
+      "status": "FAIL",
+      "detail": "HTTP 400: {\"error\":{\"code\":400,\"message\":\"Filter doesn't have any actions\",\"errors\":[{\"message\":\"Filter doesn't have any actions\",\"domain\":\"global\",\"r",
+      "ms": 1255
+    },
+    {
+      "nume": "calendar: list calendars",
+      "serviciu": "Calendar",
+      "status": "OK",
+      "detail": "4 calendare · tinta: apvizual@gmail.com",
+      "ms": 355
+    },
+    {
+      "nume": "calendar: list events",
+      "serviciu": "Calendar",
+      "status": "OK",
+      "detail": "5 evenimente",
+      "ms": 262
+    },
+    {
+      "nume": "calendar: create event",
+      "serviciu": "Calendar",
+      "status": "OK",
+      "detail": "event id 3ijgcci9gg786pv0uvvhsnpt1s",
+      "ms": 313
+    },
+    {
+      "nume": "calendar: read event back",
+      "serviciu": "Calendar",
+      "status": "OK",
+      "detail": "[PROBE Mavis Cloud] test 2026-10-28-01-13",
+      "ms": 195
+    },
+    {
+      "nume": "calendar: update event",
+      "serviciu": "Calendar",
+      "status": "OK",
+      "detail": "[PROBE Mavis Cloud] EDITAT 2026-10-28-01-13",
+      "ms": 475
+    },
+    {
+      "nume": "sheets: create spreadsheet",
+      "serviciu": "Sheets",
+      "status": "OK",
+      "detail": "id 1futnMicHWUhjUVm1N-MZ6P01T8j7XZSIru0EA0nAsPI",
+      "ms": 774
+    },
+    {
+      "nume": "sheets: write values",
+      "serviciu": "Sheets",
+      "status": "OK",
+      "detail": "updatedRange: Probe!A1:C2",
+      "ms": 800
+    },
+    {
+      "nume": "sheets: read values",
+      "serviciu": "Sheets",
+      "status": "OK",
+      "detail": "2 randuri · A1=Mavis Cloud",
+      "ms": 190
+    },
+    {
+      "nume": "sheets: append",
+      "serviciu": "Sheets",
+      "status": "OK",
+      "detail": "updatedRange: undefined",
+      "ms": 162
+    },
+    {
+      "nume": "sheets: move spreadsheet in proof folder",
+      "serviciu": "Sheets",
+      "status": "OK",
+      "detail": "corect",
+      "ms": 1208
+    },
+    {
+      "nume": "slides: create presentation",
+      "serviciu": "Slides",
+      "status": "OK",
+      "detail": "id 1__AVuXqAy3Wr8iiNKmhWQr41PAm5i1L2BGdaLydG8cI · 1 slide-uri",
+      "ms": 1132
+    },
+    {
+      "nume": "slides: read presentation",
+      "serviciu": "Slides",
+      "status": "OK",
+      "detail": "1 slide-uri · titlu: PROBE-Slides-2026-10-28-01-13",
+      "ms": 380
+    },
+    {
+      "nume": "slides: batchUpdate (add slide cu text)",
+      "serviciu": "Slides",
+      "status": "FAIL",
+      "detail": "HTTP 400: {\"error\":{\"code\":400,\"message\":\"Invalid requests[1].insertText: The object (probeSlide1) does not allow text editing.\",\"status\":\"INVALID_ARG",
+      "ms": 1100
+    },
+    {
+      "nume": "docs: API direct (fara workaround)",
+      "serviciu": "Docs",
+      "status": "FAIL",
+      "detail": "HTTP 400: {\"raw\":\"<!DOCTYPE html><html lang=\\\"en\\\"><head><script nonce=\\\"hrUYFFk1cO6L1WkhmpEkDw\\\">window['ppConfig'] = {productName: '26981ed0d57bbad3",
+      "ms": 1071
+    }
+  ]
+}
