@@ -339,8 +339,11 @@ const cleanup = async () => {
     });
     const g2 = await kit.slides.get(presId);
     const sl2 = g2.slides.find((s) => s.objectId === 'probeSlide2');
-    const tx = sl2.pageElements.filter((e) => e.shape && e.shape.text).map((e) => e.shape.text.text?.textElements?.[1]?.textRun?.content).filter(Boolean);
-    return `${g2.slides.length} slide-uri · text: ${JSON.stringify(tx)}`;
+    // Textul real e la textElements[].textRun.content — NU la index fix 1.
+    const tx = sl2.pageElements
+      .filter((e) => e.shape && e.shape.text && e.shape.text.textElements)
+      .flatMap((e) => e.shape.text.textElements.map((te) => te.textRun && te.textRun.content).filter(Boolean));
+    return `${g2.slides.length} slide-uri · text scris: ${JSON.stringify(tx)}`;
   });
 
   // ---------- DOCS (API direct — se stie ca e blocat, se testeaza oricum) ----------

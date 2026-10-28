@@ -1,5 +1,5 @@
 {
-  "stamp": "2026-10-28-01-20",
+  "stamp": "2026-10-28-01-32",
   "bot": "1UQIxhctyJxBXIIFnpxSc5Jd0wvFxEylu",
   "folders": {
     "01-Transcript": "1F8_sSUfa3M37yh9BPk9Oe3s9Plf84yVL",
@@ -12,136 +12,142 @@
     {
       "sub": "01-Transcript",
       "nume": "MavisCloud-TRANSCRIPT-SESIUNE-2026-10-28.md",
-      "id": "1d5NKGKfja5FyvNLwkpSY3e8QNZXIPg1o",
+      "id": "1OxiDZwr_NVs3AXezJBA1Qy4D0mrt53pQ",
       "tip": "markdown"
     },
     {
       "sub": "02-Deliverables",
       "nume": "MavisCloud-README-GOOGLE-ACCESS-BOT.md",
-      "id": "1fEDwNRzGSL6XlPnkjLXw6aJZFc8Ltkj8",
+      "id": "17uwMkd7pcTHBow7u8rYHyk5FSfK3vLEk",
       "tip": "markdown"
     },
     {
       "sub": "02-Deliverables",
       "nume": "MavisCloud-GHID-WORKFLOW.md",
-      "id": "17eDmvjgY_E-FdqYVavB3WfVtSrZp-TLs",
+      "id": "1N_4rwaqzd57ye0_JVWJBtqyO5mIa6bT7",
       "tip": "markdown"
     },
     {
       "sub": "02-Deliverables",
       "nume": "MavisCloud-CAPABILITATI-GOOGLE.md",
-      "id": "1XPD4nkXudv5HhfFeeqeSi85zeP6ssB-f",
+      "id": "1ONllV2uEcnXsTCOhuVTq_cVawjFQPBB1",
+      "tip": "markdown"
+    },
+    {
+      "sub": "02-Deliverables",
+      "nume": "MavisCloud-EVAL-SKILL-VS-BASELINE.md",
+      "id": "1DSXumAaaotSzLfRgJ9_eQcto5sxNxcDN",
       "tip": "markdown"
     },
     {
       "sub": "05-Comunicare",
       "nume": "MavisCloud-CANAL.md",
-      "id": "1pl-3AP1hCBUflT1tuItm5NdQfXmBjMZ3",
+      "id": "1WEH7T_gk0cG4-JT4aDd7N-SZ5QY3ptfF",
       "tip": "markdown"
     },
     {
       "sub": "05-Comunicare",
       "nume": "MavisCloud-2026-10-28-001-FINALIZARE-INTEGRARE.md",
-      "id": "1AZDjbOCR4Pgsk5WmTjdUZjcJlpHzobr5",
+      "id": "104FwzOwPGhrVcIp6L5Hvkf6Km2Z-II46",
       "tip": "markdown"
     },
     {
       "sub": "04-Capabilitati",
-      "nume": "MavisCloud-Probe-Capabilitati-2026-10-28-01-20.json",
-      "id": "15geEna4X77NZHNsCxvtu2fRkHwU-olxX",
+      "nume": "MavisCloud-Probe-Capabilitati-2026-10-28-01-32.json",
+      "id": "1rAp0tK-qJ0z0HksTbEEkVCFsu6XNpjav",
       "tip": "json"
     },
     {
       "sub": "03-Skills",
-      "nume": "MavisCloud-Skill-mavis-cloud-google-access-bot.md",
-      "id": "1TMF150vlH-OHSfC3iZ1NzpldnxzoEsNP",
+      "nume": "MavisCloud-Skill-google-access-bot.md",
+      "id": "1LgB5HPckZ4eCiEU6LPWUe0JA_2uPujsP",
       "tip": "skill"
     },
     {
       "sub": "03-Skills",
-      "nume": "MavisCloud-Skill-mavis-cloud-skill-auth-lifecycle.md",
-      "id": "1c03Nh1vrn8gzEWPJAsZc6__HgLoHaM-L",
+      "nume": "MavisCloud-Skill-skill-auth-lifecycle.md",
+      "id": "1_36tm-vynbrDjyAIiIOFrzvTsy1jPweD",
       "tip": "skill"
     },
     {
       "sub": "03-Skills",
-      "nume": "MavisCloud-Skill-mavis-cloud-skill-calendar.md",
-      "id": "19YsKDMoiOJL-oIqWlUf_LZ6MohcBVnbe",
+      "nume": "MavisCloud-Skill-skill-calendar.md",
+      "id": "1xQ-tVXWJ9OyxB22GFZqul-DgivqGA6ze",
       "tip": "skill"
     },
     {
       "sub": "03-Skills",
-      "nume": "MavisCloud-Skill-mavis-cloud-skill-drive.md",
-      "id": "1NKonfIWK5vJQs73ZTdKfTo7CGHYJ14mf",
+      "nume": "MavisCloud-Skill-skill-drive.md",
+      "id": "1oOt4eLMyXs0AwmaqQ2QrYHcfqOuNVuSj",
       "tip": "skill"
     },
     {
       "sub": "03-Skills",
-      "nume": "MavisCloud-Skill-mavis-cloud-skill-gmail.md",
-      "id": "1fNewke8cGe4MgjngAS6cTkPfx49sywpT",
+      "nume": "MavisCloud-Skill-skill-gmail.md",
+      "id": "1giPnnbx5Sp0Q4ZUVQg_UDucBHXrp2Ahu",
       "tip": "skill"
     },
     {
       "sub": "03-Skills",
-      "nume": "MavisCloud-Skill-mavis-cloud-skill-notebooklm.md",
-      "id": "1Fg_RFmvYW-O9zbZ8cS0DdlqOSLC8pfQX",
+      "nume": "MavisCloud-Skill-skill-notebooklm.md",
+      "id": "1drJd_E8WBXpAW3jIuMT-301MSHZTuRKa",
       "tip": "skill"
     },
     {
       "sub": "03-Skills",
-      "nume": "MavisCloud-Skill-mavis-cloud-skill-security.md",
-      "id": "11U_FAQ3NM64eSy_eEmhqNRei1u2mlWuH",
+      "nume": "MavisCloud-Skill-skill-security.md",
+      "id": "1pJqeRsDIQINKPbN-pSOhbpttg5Whfj6a",
       "tip": "skill"
     },
     {
       "sub": "03-Skills",
-      "nume": "MavisCloud-Skill-mavis-cloud-skill-sheets.md",
-      "id": "1F64oqmOaXy0j3JHRTPIotYU8CdFlQG7U",
+      "nume": "MavisCloud-Skill-skill-sheets.md",
+      "id": "1ZyzMtfn1hFphXuu3L1r6E3XDS_WdQRyq",
       "tip": "skill"
     },
     {
       "sub": "03-Skills",
-      "nume": "MavisCloud-Skill-mavis-cloud-skill-slides-docs.md",
-      "id": "1CelMTR91_hT_X31UkwUzC3PyZmj-caGi",
+      "nume": "MavisCloud-Skill-skill-slides-docs.md",
+      "id": "13Q-VhSDuRFeHbqbelKOzMPVHd3htFTD1",
       "tip": "skill"
     },
     {
       "sub": "03-Skills",
-      "nume": "MavisCloud-Skill-mavis-cloud-skill-sync-bridge.md",
-      "id": "1LkDTPKkdXY2Myyki6e_lImF3gCxjVZwA",
+      "nume": "MavisCloud-Skill-skill-sync-bridge.md",
+      "id": "1CI9kFRpsuVDYjS8c_he9palcgwaiNoDq",
       "tip": "skill"
     },
     {
       "sub": "03-Skills",
-      "nume": "MavisCloud-Skill-mavis-cloud-skill-verification.md",
-      "id": "1g4APIevb0LhCMU2brY4sxi4KM-h7Mvbj",
+      "nume": "MavisCloud-Skill-skill-verification.md",
+      "id": "1PIW0u3PyWfesIxj95mgmA_ViNORXh0oI",
       "tip": "skill"
     },
     {
       "sub": "02-Deliverables",
-      "nume": "README",
-      "id": "1-qGn0hVbgUq94bZ6UlV3eSeR0-5eYx1NpPGbmnRcgHI",
+      "nume": "MavisCloud-Google-Access-Bot",
+      "id": "188-o8zsffSAbPVU1D8fCIsonmZES9xpu9_t-DVBeec4",
       "tip": "gdoc",
-      "caractere": 2276
+      "caractere": 2485
     },
     {
       "sub": "02-Deliverables",
-      "nume": "CAPABILITATI-GOOGLE",
-      "id": "1lroyUXTlZR3I4FmE1z7YttjBjBlbRO2OixXhxfKu8U4",
+      "nume": "MavisCloud-CAPABILITATI-GOOGLE",
+      "id": "1FCTcMUJYVA_fd6-S-KdZWY-YRPao5eDBRcxDSggqOSk",
       "tip": "gdoc",
-      "caractere": 5469
+      "caractere": 5749
     },
     {
       "sub": "02-Deliverables",
-      "nume": "GHID-WORKFLOW",
-      "id": "1ZUqJfBVjkUShxqW-vz_AhQGNjyrYP2JI5lFkDetY4vU",
+      "nume": "MavisCloud-GHID-WORKFLOW",
+      "id": "1PBGK8VvhQkOV2fmXjj2qAxDSTLRd4DY10EutkpnYTbU",
       "tip": "gdoc",
       "caractere": 4685
     },
     {
       "sub": "01-Transcript",
-      "nume": "TRANSCRIPT-SESIUNE-2026-10-28",
-      "id": "1XwE-xgSvTZ_uPVCgDgajdaEkXiLu8Ze_0cu1CM5KJXA",
+      "nume": "MavisCloud-TRANSCRIPT-SESIUNE-2026-10-28",
+      "id": "1kL8U_5rC1i9WS7-8cve1rTkA6Og76wxr45ruNFTe3Mc",
       "tip": "gdoc",
       "caractere": 11655
     }

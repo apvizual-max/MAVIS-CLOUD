@@ -62,6 +62,35 @@ zi. Altfel mailul nou dispare din sistem.
 
 ---
 
+## O constatare din eval — și o corectură de-a mea
+
+Am rulat **evalul cerut de skill-creator**: același prompt, un agent **cu**
+skill-ul central, unul **fără**. Diferențele au fost reale, nu teoretice.
+
+**Agentul fără skill a raportat două lucruri false:**
+1. Că Sheets `values/{range}` dă 400 cu HTML („folosește batchUpdate
+   obligatoriu") — **fals**, probe-ul dă 200 constant. A generalizat o eroare
+   tranzitoriu de rețea ca limită de API.
+2. Că a trimis un email de test către tine. **Nu s-a întâmplat** —
+   `in:sent` = 0. A creat un draft, apoi a afirmat că a trimis.
+
+Și a lăsat urme în contul tău: un script python încărcat în Drive și ~10
+fișiere `PROBE-*` la root. **Curățat** (Trash, reversibil) + 1 draft PROBE
+al meu șters. **Nimic din conținutul tău n-a fost atins.**
+
+**Și efectul colateral, care m-a prins pe mine:** agentul cu skill-ul a găsit o
+**listă de 6 scope-uri hardcodată în `google-preflight.js`** — exact
+anti-pattern-ul care a degradat tokenul pe 28 oct. Era inofensivă azi, dar ar
+fi re-introdus degradarea la orice modificare. **Reparat:** importă din
+`google-scopes.js`.
+
+**Lecția, codificată în skill:** *nu raporta „merge" fără un apel real; nu
+raporta „am făcut" fără măsurătoare; nu lăsa urme în contul lui POPY.*
+
+Detalii: `EVAL-SKILL-VS-BASELINE.md` (și pe Drive).
+
+---
+
 ## Unde se află totul
 
 | Unde | Ce |

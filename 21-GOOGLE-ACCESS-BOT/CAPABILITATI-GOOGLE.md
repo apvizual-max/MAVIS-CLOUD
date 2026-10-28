@@ -8,15 +8,21 @@
 
 ## 1. Rezumat
 
-**31 de 36 de teste au trecut la prima rulare.** 5 au picat — dintre care 3 erau
-**bug-uri ale probe-ului**, nu limite reale. După corectare, capability reală
-verificată: **Drive 100%**, Gmail complet (cu filtre), Calendar complet, Sheets
-complet, Slides cu scriere, Docs **prin workaround**.
+**Rezultatul final: 36 OK · 0 blocate · 2 eșuate (din 38 de teste).**
+
+Cele 2 eșecuri sunt **ambele aceeași limită reală**: Docs API direct e blocat de
+anti-bot din cloud (pagină HTML la HTTP 400). **Workaround-ul trece** — deci
+scrierea de Google Docs native e posibilă, doar pe altă rută.
+
+La prima rulare au picat 5; **3 erau bug-uri ale probe-ului** (nu limite
+reale) și au fost reparate + retestate. Restul, 2, erau limită reală.
 
 ```
-9 OK · 1 blocat · 1 eșuat   (google-verify.js, verificare de servicii)
-31→36 OK                    (google-capabilities.js, probe de scriere)
+9 OK · 1 blocat · 1 eșuat      (google-verify.js — verificare de servicii)
+36 OK · 0 blocate · 2 eșuate   (google-capabilities.js — probe de scriere)
 ```
+
+**Doveza curentă:** `mavis-tools/.capabilities.json` · folderul `_PROOF` pe Drive.
 
 ---
 
@@ -85,7 +91,7 @@ complet, Slides cu scriere, Docs **prin workaround**.
 | **create prezentare** | ✅ | 1 slide |
 | read | ✅ | slide-uri, titlu, pageElements |
 | **batchUpdate: add slide** | ✅ | 2 slide-uri |
-| **batchUpdate: insert text** | ✅ | text în placeholder-uri, citit înapoi |
+| **batchUpdate: insert text** | ✅ | text citit înapoi: `["Titlu scris de Mavis Cloud.","Corp scris de Mavis Cloud."]` |
 
 ### DOCS — prin workaround
 

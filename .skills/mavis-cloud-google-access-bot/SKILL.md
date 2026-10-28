@@ -46,6 +46,12 @@ Un app OAuth e în „In production" — **tokenul nu mai expiră în 7 zile.**
    script nu are listă proprie. Altfel, un re-consimțământ degradează tokenul.
 8. **Nu șterg niciodată fără să las urmă în repo.** Un deliverable care stă doar
    în conversație e un deliverable pierdut.
+9. **Nu las urme în contul lui POPY.** Artefactele de probe se curăță; conținutul
+   lui nu se atinge. *(Evaluat: agentul fără skill a creat fișiere în Drive-ul
+   lui și a scris 21 de celule într-un tabel preexistent. Cu skill: curat.)*
+10. **Nu generalizez dintr-un eșec tranzitoriu.** 403 cu JSON = scope lipsă;
+    400 cu pagină HTML = blocare de rețea. Un eșec unic **nu** e o limită de
+    serviciu — se verifică din nou.
 
 ---
 
@@ -65,8 +71,11 @@ node mavis-tools/google-preflight.js
 - **27 scope-uri**, lista canonică în `mavis-tools/google-scopes.js`.
 - **Appul OAuth e în „In production".** Se probează prin absența câmpului
   `refresh_token_expires_in` din răspunsul la `POST oauth2.googleapis.com/token`.
-- **Verificare completă de capabilitate:** `node mavis-tools/google-verify.js`
+- **Verificare de servicii:** `node mavis-tools/google-verify.js`
   (9 OK · 1 blocat · 1 eșuat la 28 oct).
+- **Probe de capabilitate:** `node mavis-tools/google-capabilities.js`
+  (**36 OK · 0 blocate · 2 eșuate din 38** — cele 2 eșecuri = Docs API direct
+  blocat de anti-bot; workaround-ul trece). Dovezile rămân pe Drive în `_PROOF`.
 
 ---
 

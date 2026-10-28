@@ -28,7 +28,7 @@ const B = (s) => `\x1b[1m${s}\x1b[0m`, R = (s) => `\x1b[31m${s}\x1b[0m`;
 
 const SUB = {
   '01-Transcript': ['TRANSCRIPT-SESIUNE-2026-10-28.md'],
-  '02-Deliverables': ['README.md', 'GHID-WORKFLOW.md', 'CAPABILITATI-GOOGLE.md'],
+  '02-Deliverables': ['README.md', 'GHID-WORKFLOW.md', 'CAPABILITATI-GOOGLE.md', 'EVAL-SKILL-VS-BASELINE.md'],
   '04-Capabilitati': ['probe/capabilities.json'],
   '05-Comunicare': ['COMUNICARE/CANAL.md', 'COMUNICARE/2026-10-28-001-FINALIZARE-INTEGRARE.md'],
 };
@@ -55,6 +55,18 @@ async function uploadMd(localPath, remoteName, parentId) {
   return f;
 }
 
+/** Idempotenta: daca exista deja un fisier cu numele asta, il trashuiește
+ *  (reversibil) inainte de a crea versiunea noua. Fara asta, fiecare rulare
+ *  lasa duplicate. */
+async function replaceExisting(remoteName, parentId) {
+  const q = `name='${remoteName}' and '${parentId}' in parents and trashed=false`;
+  const found = await kit.req('GET', `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(q)}&fields=files(id,name)`);
+  for (const f of (found.files || [])) {
+    await kit.drive.trashed(f.id, true);
+    console.log(D(`    inlocuit (trash): ${remoteName}`));
+  }
+}
+
 async function uploadRaw(localPath, remoteName, parentId, mime) {
   const content = fs.readFileSync(localPath, 'utf8');
   const f = await kit.drive.upload(remoteName, content, mime, parentId);
@@ -67,7 +79,9 @@ async function asNativeDoc(localPath, name, parentId) {
   const conv = await kit.req('POST', `https://www.googleapis.com/drive/v3/files/${tmp.id}/copy`, {
     name: name.replace(/\.md$/, ''), mimeType: 'application/vnd.google-apps.document',
   });
-  // sursa ramane: e "master"-ul in format text
+  // sursa temporara: se trueste imediat (reversibil). Master-ul text e deja
+  // uploadat separat ca `MavisCloud-<nume>.md`.
+  await kit.drive.trashed(tmp.id, true);
   return { doc: conv, tmp };
 }
 
@@ -92,6 +106,7 @@ async function asNativeDoc(localPath, name, parentId) {
       if (!fs.existsSync(local)) { console.log(R(`  LIPSA: ${rel}`)); continue; }
       const remoteName = 'MavisCloud-' + path.basename(rel).replace(/^README\.md$/, 'README-GOOGLE-ACCESS-BOT.md');
       try {
+        await replaceExisting(remoteName, folders[sub]);
         const f = await uploadMd(local, remoteName, folders[sub]);
         manifest.push({ sub, nume: remoteName, id: f.id, tip: 'markdown' });
         console.log(G(`  OK  ${sub}/${remoteName}`) + D(`  ${f.id}`));
@@ -105,7 +120,8 @@ async function asNativeDoc(localPath, name, parentId) {
   try {
     const p = path.join(REPO, 'mavis-tools', '.capabilities.json');
     if (fs.existsSync(p)) {
-      const f = await uploadRaw(p, `MavisCloud-Probe-Capabilitati-${STAMP}.json`, folders['04-Capabilitati'], 'application/json');
+      await replaceExisting(`MavisCloud-Probe-Capabilitati-${STAMP}.json`, folders['04-Capabilitati']);
+    const f = await uploadRaw(p, `MavisCloud-Probe-Capabilitati-${STAMP}.json`, folders['04-Capabilitati'], 'application/json');
       manifest.push({ sub: '04-Capabilitati', nume: `MavisCloud-Probe-Capabilitati-${STAMP}.json`, id: f.id, tip: 'json' });
       console.log(G(`  OK  04-Capabilitati/probe.json`));
     }
@@ -119,6 +135,7 @@ async function asNativeDoc(localPath, name, parentId) {
     if (!fs.existsSync(local)) continue;
     try {
       const clean = n.replace(/^mavis-cloud-/, '');
+      await replaceExisting(`MavisCloud-Skill-${clean}.md`, folders['03-Skills']);
       const f = await uploadMd(local, `MavisCloud-Skill-${clean}.md`, folders['03-Skills']);
       manifest.push({ sub: '03-Skills', nume: `MavisCloud-Skill-${clean}.md`, id: f.id, tip: 'skill' });
       console.log(G(`  OK  03-Skills/${n}.md`));
@@ -133,6 +150,7 @@ async function asNativeDoc(localPath, name, parentId) {
     const sub = rel === 'TRANSCRIPT-SESIUNE-2026-10-28.md' ? '01-Transcript' : '02-Deliverables';
     try {
       const docName = 'MavisCloud-' + path.basename(rel, '.md').replace(/^README$/, 'Google-Access-Bot');
+      await replaceExisting(docName, folders[sub]);
       const { doc } = await asNativeDoc(local, docName, folders[sub]);
       const t = String(await kit.docs.text(doc.id));
       manifest.push({ sub, nume: docName, id: doc.id, tip: 'gdoc', caractere: t.length });

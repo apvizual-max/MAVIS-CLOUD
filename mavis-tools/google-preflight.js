@@ -27,14 +27,10 @@ const REDIRECT = process.env.GOOGLE_REDIRECT_URI || 'http://127.0.0.1:8976';
 const fs = require('fs');
 const path = require('path');
 const REPO_CLIENT_JSON = path.join(__dirname, 'google-client.json');
-const SCOPES = [
-  'https://www.googleapis.com/auth/drive',
-  'https://www.googleapis.com/auth/gmail.modify',
-  'https://www.googleapis.com/auth/calendar',
-  'https://www.googleapis.com/auth/documents',
-  'https://www.googleapis.com/auth/spreadsheets',
-  'https://www.googleapis.com/auth/presentations',
-];
+// Sursa unica de adevar: mavis-tools/google-scopes.js
+// (a existat o lista hardcodata aici — exact anti-pattern-ul care a degradat
+//  tokenul pe 28 oct 2026. Flag-at de evalul skill-ului central.)
+const SCOPES = require('./google-scopes.js').ALL;
 
 const G = s => `\x1b[32m${s}\x1b[0m`, R = s => `\x1b[31m${s}\x1b[0m`;
 const Y = s => `\x1b[33m${s}\x1b[0m`, D = s => `\x1b[2m${s}\x1b[0m`, B = s => `\x1b[1m${s}\x1b[0m`;

@@ -18,6 +18,7 @@ măsurate, transcriptul sesiunii și ghidul de workflow.
 | `GHID-WORKFLOW.md` | ce se poate construi ACUM, pe ce fundație |
 | `TRANSCRIPT-SESIUNE-2026-10-28.md` | conținutul discuției + jurnalul deciziilor |
 | `COMUNICARE/CANAL.md` | protocolul canalului cu agentul local |
+| `EVAL-SKILL-VS-BASELINE.md` | evalul skill central vs baseline + ce a scos la iveală |
 | `COMUNICARE/2026-10-28-001-*.md` | mesajele din canal |
 | `probe/` | rezultatul brut al probe-ului (JSON) |
 
@@ -43,6 +44,8 @@ mavis-cloud-skill-security         mavis-cloud-skill-sync-bridge
 - **27 scope-uri**, listă canonică unică: `mavis-tools/google-scopes.js`.
 - Drive **100%** · Gmail **complet** (cu filtre) · Calendar **complet** ·
   Sheets **complet** · Slides **cu scriere** · Docs **prin conversie Drive**.
+- **Probe: 36 OK · 0 blocate · 2 eșuate (din 38)** — cele 2 eșecuri = Docs API
+  direct blocat de anti-bot; workaround-ul trece.
 - NotebookLM: **fără API oficial** pentru cont normal → 3 căi, decizie la POPY.
 
 ## Comenzi

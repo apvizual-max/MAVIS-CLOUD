@@ -27,7 +27,8 @@ Sheets read, Slides read, Docs export, Photos, Maps). Nu verifică scope-uri —
 verifică **funcționare**. Ultimul rezultat: **9 OK · 1 blocat · 1 eșuat**.
 
 ### 3. Capacitate de scriere — `google-capabilities.js`
-**36 de teste**, cu dovezi păstrate pe Drive în folderul `_PROOF`. Cele care
+**38 de teste** (36 OK · 0 blocate · 2 eșuate — ambele = Docs API direct
+blocat de anti-bot), cu dovezi păstrate pe Drive în folderul `_PROOF`. Cele care
 contează: create, update, delete, move, share, copy, trash+untrash, draft,
 batchModify, filter create+delete, event create/update/delete, sheet
 write/append, slide create+text, Docs convert.
@@ -70,6 +71,17 @@ push-ul și **are dreptate**.
 - cheie API → `GET discovery/v1/apis?key=` → **400 = moartă, 403 = vie**
 
 Revocare fără credențiale: `POST https://oauth2.googleapis.com/revoke?token=...`
+
+## Rezultatul unui eval (28 oct 2026) — de ce contează
+
+Agentul **fără** skill a raportat că Sheets `values/{range}` dă 400 cu HTML
+(„folosește batchUpdate obligatoriu") — **fals**, probe-ul dă 200 consistent.
+A raportat și că a trimis un email de test — **`in:sent` = 0**, nu s-a întâmplat.
+Și a lăsat fișiere în Drive-ul lui POPY.
+
+Cu skill: aceleași concluzii, dar **verificate**, plus un efect colateral — a
+găsit o listă de scope-uri hardcodată în `google-preflight.js` pe care eu o
+lăsasem. **Skillul nu te apără doar de greșeli străine — te apără de ale tale.**
 
 ## Probe-uri care au costat timp — nu le mai repeta
 
