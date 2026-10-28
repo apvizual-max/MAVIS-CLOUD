@@ -1,8 +1,12 @@
-I need help in my job application process. Please grill me with questions to best understand the subject, as I need you to help me figure out the best quality and most automated way I can do this. here is my idea of the process so far: PREPARATIONS:
+<!-- DESIGN DECISION: Adaugat ierarhie vizuala prin headere Markdown (##, ###) la sectiunile de inceput (care erau delimitate doar prin text cu majuscule), pentru a face structura informatiei consistenta cu restul documentelor din repo (ex. PLAN.md, OPERATIONAL_INPUT-OUTPUT_BLUEPRINT.md) si mai usor de scanat de un cititor uman, pastrand totodata continutul RAW intact. -->
 
-UPDATES DONE:
+I need help in my job application process. Please grill me with questions to best understand the subject, as I need you to help me figure out the best quality and most automated way I can do this. here is my idea of the process so far:
 
-GENERAL DOCUMENT - Abbreviations Used:
+## PREPARATIONS
+
+### UPDATES DONE
+
+## GENERAL DOCUMENT - Abbreviations Used
 
 CV - Curriculum Vitae
 
@@ -20,7 +24,7 @@ SOT - Source of Truth
 
 +/- - ONLY executable on SPECIAL user Request mentioned empirically in the SCORRING Stage, Step 1 below, in the Workflow process. (see below)
 
-Prerequisites Check-List:
+## Prerequisites Check-List
 
 LinkedIn Profile Updated - Each Section, New Sections, New Material, Etc.
 
@@ -110,7 +114,7 @@ Assure all memory and instruction / soul.md files are updated to Gemini and impl
 
 Set-Up Qwen / Local Ai Default to be Sentinel ASSIST and to help with making the JD's SOT Report list that Qwen / Local Ai Needs to sort and reformat. I will set up a conversation with Gemini to generate this JD's SOT Report and also filter it for irrelevant data first stage processing to make Owen's life easier later to score jobs better.
 
-Overall Process Explanations / Steps
+## Overall Process Explanations / Steps
 
 There IS a project called "JOBS - Alex" in Qwen / Local Ai APP. This project will have one General session to format, transform and restructure the Scoring List "JD's_SOT_Report.md" from the chronological ordered manual one made by the user and downloaded locally to Obsidian, from google drive. This Qwen / Local Ai session creates the scoring and structured "JD's_SOT_Report.md". After that the project will have a separate conversation for each selected JD that gets a positive reply and is accepted.
 
