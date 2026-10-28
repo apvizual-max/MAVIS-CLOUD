@@ -126,16 +126,17 @@
     </div>
 
     <!-- Navigation Links (condensed, clear labels) -->
-    <div class="nav-scroll flex space-x-3 lg:space-x-5 text-sm font-medium">
-      <div class="nav-link active" onclick="switchTab('thesis')" data-target="thesis">Thesis</div>
-      <div class="nav-link" onclick="switchTab('workflow')" data-target="workflow">Workflow</div>
-      <div class="nav-link" onclick="switchTab('evidence')" data-target="evidence">Evidence</div>
-      <div class="nav-link" onclick="switchTab('roadmap')" data-target="roadmap">Roadmap</div>
-      <div class="nav-link" onclick="switchTab('operator')" data-target="operator">Operator</div>
-      <div class="nav-link" onclick="switchTab('hr')" data-target="hr">HR</div>
-      <div class="nav-link" onclick="switchTab('ai-partner')" data-target="ai-partner">AI Partner</div>
-      <div class="nav-link" onclick="switchTab('for-client')" data-target="for-client">For Client</div>
-      <div class="nav-link" onclick="switchTab('simulation')" data-target="simulation">Simulation</div>
+    <!-- ARIA tablist structure aligned with WCAG 2.1 AA accessibility standards in neighboring repo files -->
+    <div class="nav-scroll flex space-x-3 lg:space-x-5 text-sm font-medium" role="tablist" aria-label="Main Navigation">
+      <div class="nav-link active" role="tab" tabindex="0" aria-selected="true" aria-controls="thesis" onclick="switchTab('thesis')" data-target="thesis">Thesis</div>
+      <div class="nav-link" role="tab" tabindex="-1" aria-selected="false" aria-controls="workflow" onclick="switchTab('workflow')" data-target="workflow">Workflow</div>
+      <div class="nav-link" role="tab" tabindex="-1" aria-selected="false" aria-controls="evidence" onclick="switchTab('evidence')" data-target="evidence">Evidence</div>
+      <div class="nav-link" role="tab" tabindex="-1" aria-selected="false" aria-controls="roadmap" onclick="switchTab('roadmap')" data-target="roadmap">Roadmap</div>
+      <div class="nav-link" role="tab" tabindex="-1" aria-selected="false" aria-controls="operator" onclick="switchTab('operator')" data-target="operator">Operator</div>
+      <div class="nav-link" role="tab" tabindex="-1" aria-selected="false" aria-controls="hr" onclick="switchTab('hr')" data-target="hr">HR</div>
+      <div class="nav-link" role="tab" tabindex="-1" aria-selected="false" aria-controls="ai-partner" onclick="switchTab('ai-partner')" data-target="ai-partner">AI Partner</div>
+      <div class="nav-link" role="tab" tabindex="-1" aria-selected="false" aria-controls="for-client" onclick="switchTab('for-client')" data-target="for-client">For Client</div>
+      <div class="nav-link" role="tab" tabindex="-1" aria-selected="false" aria-controls="simulation" onclick="switchTab('simulation')" data-target="simulation">Simulation</div>
     </div>
 
     <!-- Contact: plain mailto link (works with any email client) -->
@@ -2922,6 +2923,8 @@
     document.querySelectorAll('.nav-link').forEach(l => {
       l.classList.remove('active');
       l.classList.remove('client-active');
+      l.setAttribute('aria-selected', 'false');
+      l.setAttribute('tabindex', '-1');
     });
     document.getElementById(tabId).classList.add('active');
     const link = document.querySelector('.nav-link[data-target="' + tabId + '"]');
@@ -2931,6 +2934,8 @@
       } else {
         link.classList.add('active');
       }
+      link.setAttribute('aria-selected', 'true');
+      link.setAttribute('tabindex', '0');
       link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
