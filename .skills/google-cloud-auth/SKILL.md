@@ -214,7 +214,22 @@ ghicește:
 
 `node mavis-tools/google-preflight.js` → pasul `[5] expirare` spune direct.
 
-## Ce merge din cloud, măsurat 2026-10-27 14:40 (CONECTAT)
+## Scope-urile: O SINGURA SURSA DE ADEVAR
+
+`mavis-tools/google-scopes.js` — 27 scope-uri, fiecare cu motivul pentru care
+e cerut. **Niciun script nu mai are propria listă.** Până la 28 oct 2026,
+cinci scripturi aveau fiecare lista lui de 6 — deci orice re-consimțământ
+generat de ele ar fi adus un token **degradat** (fără
+`gmail.settings.basic` → filtrele Gmail n-ar mai fi reparabile din cloud).
+
+**Regulă:** nu adăuga un scope într-un script. Se adaugă în
+`mavis-tools/google-scopes.js` și se propagă.
+
+**Verificare:** `node mavis-tools/google-preflight.js` → pasul **[6]** compară
+scope-urile tokenului cu lista canonică și raportează `DRIFT` + ce lipsește.
+Deci un downgrade se vede **înainte** să te treacă, nu după.
+
+## Cum vezi dacă appul e publicat — `refresh_token_expires_in`
 
 ✅ **Gmail** — 83.505 mesaje · 77.701 thread-uri · 51 etichete (36 de utilizator)
 ✅ **Drive** — 107,80 GB / 5498 GB · 3 foldere la rădăcină

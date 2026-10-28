@@ -36,14 +36,7 @@ function readClientConfig() {
 function buildLink(cfg) {
   const clientId = process.env.GOOGLE_CLIENT_ID_MAVIS_CLOUD || process.env.GOOGLE_CLIENT_ID || cfg.client_id;
   const redirect = process.env.GOOGLE_REDIRECT_URI || cfg.redirect_uri || 'http://127.0.0.1:8976';
-  const scopes = cfg.scope_uri || [
-    'https://www.googleapis.com/auth/drive',
-    'https://www.googleapis.com/auth/gmail.modify',
-    'https://www.googleapis.com/auth/calendar',
-    'https://www.googleapis.com/auth/documents',
-    'https://www.googleapis.com/auth/spreadsheets',
-    'https://www.googleapis.com/auth/presentations',
-  ];
+  const scopes = cfg.scope_uri && cfg.scope_uri.length ? cfg.scope_uri : require('./google-scopes.js').ALL;
   const p = new URLSearchParams({
     client_id: clientId,
     redirect_uri: redirect,

@@ -8,5 +8,6 @@
   "report-simulate-sort.js": 24,
   "report-build.js": 3,
   "fix-mavis-filters.js": 24,
-  "probe-gmail-filter-404.cjs": 3
+  "probe-gmail-filter-404.cjs": 3,
+  "google-verify.js": 14
 }

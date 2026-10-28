@@ -36,14 +36,8 @@ const ENV_OUT = path.join(HOME, '.google-mcp', 'cloud-secret.env');
 const PORT = 8976;
 const REDIRECT_URI = `http://127.0.0.1:${PORT}`;
 
-const SCOPES = [
-  'https://www.googleapis.com/auth/drive',
-  'https://www.googleapis.com/auth/gmail.modify',
-  'https://www.googleapis.com/auth/calendar',
-  'https://www.googleapis.com/auth/documents',
-  'https://www.googleapis.com/auth/spreadsheets',
-  'https://www.googleapis.com/auth/presentations',
-];
+// Sursa unica de adevar: mavis-tools/google-scopes.js (vezi _nota_scope in google-client.json)
+const SCOPES = require('./google-scopes.js').ALL;
 
 const C = {
   b: (s) => `\x1b[1m${s}\x1b[0m`, g: (s) => `\x1b[32m${s}\x1b[0m`,

@@ -1,5 +1,11 @@
 # GOOGLE — checklist: din Testing în In production
 
+> ✅ **REZOLVAT 2026-10-28** — appul e în Production, token nou obținut după
+> publicare, 27 scope-uri, fără limită de 7 zile. Checklistul rămâne ca
+> procedură de urmat dacă se schimbă vreodată clientul. Confirmare
+> programatică: `node mavis-tools/google-preflight.js` → pasul [5] spune
+> „fără limită de 7 zile" și pasul [6] verifică drift-ul de scope-uri.
+
 **De ce contează:** cu consent screen-ul în **Testing**, Google omoară refresh
 token-ul în **7 zile de la consimțământ**. Fără asta, oricât de bine arată
 setup-ul, într-o săptămână trebuie reluat tot fluxul. Cu **In production**,

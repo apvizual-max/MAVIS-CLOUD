@@ -2,7 +2,28 @@
 
 **Data:** 2026-10-22 · **Tip:** configurări în Google Cloud Console
 **Perspectivă lipsă:** niciuna — dar **accesul** e doar la tine (contul tău, cu 2FA)
-**Stare:** ⏳ așteaptă pe tine
+**Stare:** ✅ **REZOLVAT — 2026-10-28**
+
+---
+
+## ✅ REZOLVAT — 2026-10-28
+
+**Appul a fost publicat în „In production".** Confirmat programatic, nu vizual:
+
+- Răspunsul la `POST oauth2.googleapis.com/token` **nu mai conține**
+  `refresh_token_expires_in` → câmpul există **doar** în „Testing".
+  → appul e în Production → **tokenul nu mai are limita de 7 zile.**
+- Re-consimțământ efectuat, token nou scris în secret manager
+  (`GOOGLE_REFRESH_TOKEN_MAVIS_CLOUD`), **27 scope-uri**.
+- `node mavis-tools/google-preflight.js` → toate cele **6** verificări OK.
+
+**Ciclu de 7 zile: încheiat.** Nu mai e nevoie de re-autentificare săptămânală.
+
+**Ce a rămas în urmă:** după publicare, un consimțământ nou e necesar **o singură
+dată** — tokenul obținut *înainte* de publicare păstra limita de 7 zile. Acesta
+e tokenul nou, de după publicare. **Gata.**
+
+Detalii: `docs/GOOGLE-STATUS-2026-10-28.md`
 
 ---
 
