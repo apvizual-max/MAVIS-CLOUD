@@ -25,6 +25,18 @@ const COMPACT = DATE.replace(/-/g, '');
 const FOLDER_ID = process.argv[3] || '1sAs2ktJhGanKeGv87LIxkTD34S7P5XvT';
 const REPO_OUT = path.join(DIR, '..', 'rapoarte', `RAPORT-ZILNIC-${COMPACT.slice(0, 6)}-${COMPACT.slice(6)}.md`);
 
+// rolul chiar de design? (titlul contine o cheie de tier 1 sau 2)
+const DESIGN_KW = ['art director','creative director','creative lead','head of creative','brand director','advertising lead','campaign art director','ad conceptor','creative systems','art mid','senior creatives','creatives','art team',
+  'graphic designer','visual designer','senior graphic','ui/ux','ux/ui','ux designer','ui designer','product designer','interaction designer','web designer','dtp designer','brand designer','identity designer','graphic design','visual design','content designer','content specialist','creative designer'];
+const escKw = DESIGN_KW.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+const DESIGN_RX = new RegExp('(?:^|[^a-z0-9])(?:' + escKw + ')(?:$|[^a-z0-9])', 'i');
+const isDesignRole = role => role ? DESIGN_RX.test(role) : false;
+
+if (require.main !== module) {
+  module.exports = { isDesignRole, DESIGN_KW };
+  return;
+}
+
 const R = f => JSON.parse(fs.readFileSync(path.join(DIR, f), 'utf8'));
 const mailCount = R('report-mail-count.json');
 const inboxCounts = R('report-inbox-counts.json');
@@ -127,20 +139,6 @@ function linkList(list) {
 }
 function expiredCount(list) { return list.filter(j => j.expired).length; }
 
-// rolul chiar de design? (titlul contine o cheie de tier 1 sau 2)
-const DESIGN_KW = ['art director','creative director','creative lead','head of creative','brand director','advertising lead','campaign art director','ad conceptor','creative systems','art mid','senior creatives','creatives','art team',
-  'graphic designer','visual designer','senior graphic','ui/ux','ux/ui','ux designer','ui designer','product designer','interaction designer','web designer','dtp designer','brand designer','identity designer','graphic design','visual design','content designer','content specialist','creative designer'];
-const _rxCache = new Map();
-function hasWord(text, w) {
-  let rx = _rxCache.get(w);
-  if (!rx) {
-    const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    rx = new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i');
-    _rxCache.set(w, rx);
-  }
-  return rx.test(text);
-}
-const isDesignRole = role => DESIGN_KW.some(k => hasWord(role || '', k));
 // motivul real din spatele scorului
 function why(j, flags) {
   const p = (flags || []).find(f => f.axis === 'D' && f.from !== 'titlu');
