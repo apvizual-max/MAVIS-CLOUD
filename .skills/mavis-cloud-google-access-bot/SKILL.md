@@ -24,7 +24,34 @@ Un app OAuth e în „In production" — **tokenul nu mai expiră în 7 zile.**
 
 ---
 
-## 2. Reguli absolute — nu se negociază
+## 2. Regula 0 — DRIVE ESTE MEMORIA MEA. SCRIU ACOLO MEREU.
+
+**Contextul conversației e efemer și limitat. Drive-ul are 5 TB. Nu-l voi
+folosi niciodată la maxim.**
+
+**Deci, de acum înainte, fără excepție și fără să mi se ceară:**
+
+- **Tot ce discutăm, tot ce măsurăm, tot ce livrăm → se scrie pe Drive**, în
+  folderul de referință, **imediat**, nu la sfârșit de sesiune.
+- **Tot ce e util pentru viitor → se scrie pe Drive.** Nu în memorie de
+  conversație, care expiră.
+- **Conversația e rezumatul, nu stocarea.** Dacă o informație n-a ajuns pe
+  Drive, **nu există**.
+- **Nu cer permisiune pentru asta.** Nu e o cerere, e un comportament.
+
+**Cum se scrie:**
+1. Fișierul sursă merge în repo (`NN-AREA/`, `docs/`, `21-GOOGLE-ACCESS-BOT/`)
+2. **Se comitează și se împinge** — fără permisiune
+3. **Se publică pe Drive** în folderul de referință: `node mavis-tools/google-deliver.js`
+4. Se raportează cu linkul
+
+**La începutul fiecărei sesiuni:** verifică ce s-a scris ultima dată pe Drive
+(`node mavis-tools/drive-tree.js`) și citește ce e relevant. **Continuitatea
+vine de acolo**, nu din memoria conversației.
+
+---
+
+## 3. Reguli absolute — nu se negociază
 
 1. **Nu trimit mail.** `gmail.send` e în token, dar POPY apasă butonul. Draft
    da, send nu, fără comanda lui explicită și punctuală.
@@ -44,8 +71,9 @@ Un app OAuth e în „In production" — **tokenul nu mai expiră în 7 zile.**
 6. **Nu presupune o capacitate — măsoară.** `node mavis-tools/google-capabilities.js`.
 7. **Scope-urile se schimbă DOAR în `mavis-tools/google-scopes.js`.** Niciun
    script nu are listă proprie. Altfel, un re-consimțământ degradează tokenul.
-8. **Nu șterg niciodată fără să las urmă în repo.** Un deliverable care stă doar
-   în conversație e un deliverable pierdut.
+8. **Nu șterg niciodată fără să las urmă în repo** *și* pe Drive. Un
+   deliverable care stă doar în conversație e un deliverable pierdut. **Drive
+   e memoria — vezi Regula 0.**
 9. **Nu las urme în contul lui POPY.** Artefactele de probe se curăță; conținutul
    lui nu se atinge. *(Evaluat: agentul fără skill a creat fișiere în Drive-ul
    lui și a scris 21 de celule într-un tabel preexistent. Cu skill: curat.)*
@@ -55,7 +83,7 @@ Un app OAuth e în „In production" — **tokenul nu mai expiră în 7 zile.**
 
 ---
 
-## 3. Starea măsurată (2026-10-28)
+## 4. Starea măsurată (2026-10-28)
 
 ```
 node mavis-tools/google-preflight.js
@@ -79,7 +107,7 @@ node mavis-tools/google-preflight.js
 
 ---
 
-## 4. Stack-ul de conectare
+## 5. Stack-ul de conectare
 
 | Piesa | Unde | Ce face |
 |---|---|---|
@@ -91,6 +119,10 @@ node mavis-tools/google-preflight.js
 | Probe complet | `mavis-tools/google-capabilities.js` | 36 de teste, cu dovezi păstrate pe Drive |
 | Client HTTP | `mavis-tools/kit.js` | fetch + retry + fallback TLS + contor de cotă |
 | Re-autentificare | `mavis-tools/google-refresh.js` | `link` → `code "<url>"` → scriere token |
+| **Probe de capabilitate** | `mavis-tools/google-capabilities.js` | 38 de teste, dovezi pe Drive |
+| **Livrare pe Drive** | `mavis-tools/google-deliver.js` | scrie totul în folderul de referință, idempotent |
+| **Arbore Drive** | `mavis-tools/drive-tree.js` | structura folderului, la fiecare început de sesiune |
+| **RAG cu citare** | `mavis-tools/gemini-filestore.js` | store + ingestie + întrebări cu surse |
 
 **Flux nou de sesiune:**
 ```bash
@@ -99,7 +131,7 @@ bash mavis-tools/bootstrap.sh          # proxy + clone + verdict de preflight
 
 ---
 
-## 5. Index de capacități — skill-urile secundare
+## 6. Index de capacități — skill-urile secundare
 
 Fiecare skill secundar e o **capabilitate** a acestui bot. Se încarcă când
 trebuie folosită; toate sunt indexate aici.
@@ -112,6 +144,7 @@ trebuie folosită; toate sunt indexate aici.
 | `mavis-cloud-skill-sheets` | create spreadsheet, write, read, append, batchUpdate | `spreadsheets` |
 | `mavis-cloud-skill-slides-docs` | create prezentare, add slide, insert text; **workaround-ul Docs** | `presentations`, `documents` |
 | `mavis-cloud-skill-notebooklm` | Gemini Notebook: ce e accesibil, ce nu, cele 3 căi reale | `drive` (surse) + cheie API separată |
+| `mavis-cloud-skill-gemini` | **RAG cu citare**: store, ingestie din Drive, întrebări cu surse | cheie `GOOGLE_AI_STUDIO_FREE_TIER_KEY` |
 | `mavis-cloud-skill-auth-lifecycle` | re-autentificare, publicare app, expirare, drift | — |
 | `mavis-cloud-skill-verification` | cum măsoar înainte să afirm | — |
 | `mavis-cloud-skill-security` | livrare de secrete, audit de vizibilitate, quarantine | — |
@@ -123,7 +156,7 @@ sesiune în care e creat. Altfel e un skill orfan.
 
 ---
 
-## 6. Folderele Drive — reperul permanent
+## 7. Folderele Drive — reperul permanent
 
 | Folder | ID | Rol |
 |---|---|---|
@@ -142,7 +175,7 @@ Regula asta e valabilă și pentru fișierele create din cloud.
 
 ---
 
-## 7. Workflow-uri de bază
+## 8. Workflow-uri de bază
 
 **Citește și livrează:**
 ```bash
@@ -171,7 +204,7 @@ node mavis-tools/google-verify.js                    # ce merge acum
 
 ---
 
-## 8. Ce NU e treaba mea din cloud
+## 9. Ce NU e treaba mea din cloud
 
 Decis explicit de POPY pe 28 oct 2026:
 
@@ -183,7 +216,7 @@ Decis explicit de POPY pe 28 oct 2026:
 
 ---
 
-## 9. Cum se extinde
+## 10. Cum se extinde
 
 1. Noul skill se numește `mavis-cloud-skill-{subiect}`.
 2. Se scrie în `.skills/mavis-cloud-skill-{subiect}/SKILL.md` (frontmatter cu
@@ -191,6 +224,8 @@ Decis explicit de POPY pe 28 oct 2026:
 3. **Se adaugă în tabelul din §5** în aceeași sesiune.
 4. Se rulează un eval: skill vs baseline, cu 2 subagente paraleli.
 5. Commit + push în repo. **Fără permisiune — e implicit.**
+6. **Livrare pe Drive** (`google-deliver.js`). **Fără permisiune — e implicit.**
+7. **Regula 0:** dacă nu e pe Drive, nu există.
 
 **Fișierul de adevăr al scope-urilor** rămâne `mavis-tools/google-scopes.js`.
 Dacă un workflow nou cere un scope, se adaugă ACOLO, cu motiv, și se

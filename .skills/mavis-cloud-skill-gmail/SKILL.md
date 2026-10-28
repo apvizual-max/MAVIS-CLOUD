@@ -23,7 +23,7 @@ Scope-uri: `gmail.modify` · `gmail.readonly` · `gmail.compose` · `gmail.setti
 | **modify** | `POST .../messages/{id}/modify` `{addLabelIds, removeLabelIds}` |
 | **batchModify** | `POST .../messages/batchModify` `{ids:[], addLabelIds}` |
 | draft | `POST .../drafts` · `GET/DELETE .../drafts/{id}` |
-| **filtre** | `GET/POST/DELETE .../settings/filters` |
+| **filtre** | `GET/POST/DELETE .../settings/filters` — **UPDATE NU EXISTĂ** |
 | trash mesaj | `POST .../messages/{id}/trash` (**reversibil**) |
 
 ## Numărarea corectă
@@ -64,8 +64,27 @@ const f = await kit.req('POST', 'https://gmail.googleapis.com/gmail/v1/users/me/
 ```
 
 **Test sigur de write:** creează un filtru cu un criteriu care **nu poate
-potrivi** (`subject:"maviscloud-proof-9x8y7z-never-matches-anything"`) și o
+potrivi** (`subject:"maviscloud-write-probe-9x8y7z-never-matches-anything"`) și o
 acțiune inofensivă, verifică 200, apoi îl ștergi. Efect zero, dovadă reală.
+
+**MĂSURAT 28 oct 2026 — ciclul complet de write e CONFIRMAT:**
+`CREATE` (200) → `LIST` (apare, 20 filtre) → `GET` single (200) →
+`DELETE` (200, 19 filtre). **Scrierea pe filtre e reală.**
+
+### ⚠️ LIMITARE REALĂ: filtrele **nu se pot modifica** — `filters.update` nu există
+
+| Metodă | Rezultat |
+|---|---|
+| `POST /settings/filters` (create) | ✅ 200 |
+| `GET /settings/filters` (list) | ✅ 200 |
+| `GET /settings/filters/{id}` | ✅ 200 |
+| `DELETE /settings/filters/{id}` | ✅ 200 |
+| **`PUT /settings/filters/{id}`** | ❌ **404** (pagină HTML de la UploadServer) |
+| **`PATCH /settings/filters/{id}`** | ❌ **404** JSON „Method not found" |
+
+**Deci: pentru a modifica un filtru → `DELETE` + `CREATE`.** Exact asta face
+`mavis-tools/fix-mavis-filters.js` din partea locală. **Salvează starea
+curentă înainte** (`filters-state-before-repair.json`) ca să poți rollback.
 
 ## Capcane măsurate
 

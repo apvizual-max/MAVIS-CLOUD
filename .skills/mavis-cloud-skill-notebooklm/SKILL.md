@@ -72,16 +72,30 @@ cercetare · pregătire interviu · cercetare client · design schema. Toate cer
 - **Nu cer scope-uri Google care nu există** pentru consumator. `notebooklm` nu e
   un scope OAuth Google.
 
-## Primul pas, concret
+## ✅ DECIZIE: calea (a) — implementată 2026-10-28
 
-**Întrebarea pentru POPY:** vrei
-**(a)** Gemini API + File Search — oficial, permanent, alt produs, cheie de la
-`ai.google.dev`; sau
-**(b)** useapi.net — chiar NotebookLM, token de la useapi.net, ~15 USD/lună; sau
-**(c)** rămâne local, iar cloud-ul doar furnizează documentele pe Drive.
+POPY a ales **(a) Gemini API + File Search**. **Implementat și măsurat:**
+`mavis-tools/gemini-filestore.js` + skillul `mavis-cloud-skill-gemini`.
 
-Până la răspuns, rămâne calea **(a)**, pentru că e singura care nu depinde de
-un API nedocumentat sau de un serviciu terț plătit.
+**Cheie:** `GOOGLE_AI_STUDIO_FREE_TIER_KEY` (free tier AI Studio) — **există și
+funcționează** (37 modele disponibile).
+
+**Măsurat:**
+- store creat: `fileSearchStores/maviscloudknowledge-ca5rla3w4dnz`
+- ingestie din Drive: ✅ (Google Doc nativ → text → chunk → embedding)
+- întrebare cu citări: ✅ **4 surse citate**, răspuns corect și verificabil
+- model folosit: `gemini-3-flash-preview` (`gemini-3.8-flash` dă hit de cotă
+  pe free tier; `gemini-2.5-flash` nu mai e disponibil)
+
+**Ce rămâne din (b) și (c):**
+- **(b) useapi.net** — nefolosit. Se păstrează ca opțiune dacă POPY vrea
+  *NotebookLM-ul propriu* (Deep Research, audio overview, slide-deck, quiz).
+- **(c) automatizare locală** — neafectată, rămâne în `13-NOTEBOOKLM/`.
+
+**Notă de onestitudine:** (a) dă *același rezultat funcțional*
+(întrebări cu citare peste surse), dar **nu dă output-urile Studio** ale
+NotebookLM (audio overview, video overview, slide-deck, quiz, flashcards,
+mind maps) și nu e interfața pe care POPY o folosește acum.
 
 ## Legături
 

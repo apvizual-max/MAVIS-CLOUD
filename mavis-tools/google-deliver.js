@@ -31,10 +31,14 @@ const SUB = {
   '02-Deliverables': ['README.md', 'GHID-WORKFLOW.md', 'CAPABILITATI-GOOGLE.md', 'EVAL-SKILL-VS-BASELINE.md'],
   '04-Capabilitati': ['probe/capabilities.json'],
   '05-Comunicare': ['COMUNICARE/CANAL.md', 'COMUNICARE/2026-10-28-001-FINALIZARE-INTEGRARE.md'],
+  '06-Handoff': ['HANDOFF/HANDOFF-COMPLET-2026-10-28.md', 'HANDOFF/ENV-INVENTORY.json'],
 };
 
 /** Fișierele care merită și versiune Google Doc NATIVĂ (citite/editate în UI). */
-const AS_NATIVE_DOC = ['README.md', 'CAPABILITATI-GOOGLE.md', 'GHID-WORKFLOW.md', 'TRANSCRIPT-SESIUNE-2026-10-28.md'];
+const AS_NATIVE_DOC = [
+  'README.md', 'CAPABILITATI-GOOGLE.md', 'GHID-WORKFLOW.md', 'TRANSCRIPT-SESIUNE-2026-10-28.md',
+  'HANDOFF/HANDOFF-COMPLET-2026-10-28.md', 'EVAL-SKILL-VS-BASELINE.md',
+];
 
 const folderCache = {};
 async function ensureFolder(name, parent) {
@@ -94,7 +98,14 @@ async function asNativeDoc(localPath, name, parentId) {
   // 1. structura de foldere
   const folders = {};
   for (const s of Object.keys(SUB)) {
-    folders[s] = await ensureFolder(s, BOT);
+    // 06-Handoff exista deja ca subfolder al botului (creat de POPY)
+    if (s === '06-Handoff') {
+      const q = `name='06-Handoff' and '${BOT}' in parents and trashed=false`;
+      const found = await kit.req('GET', `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(q)}&fields=files(id,name)`);
+      folders[s] = (found.files || [])[0] ? found.files[0].id : await ensureFolder(s, BOT);
+    } else {
+      folders[s] = await ensureFolder(s, BOT);
+    }
     console.log(D(`  folder: ${s} → ${folders[s]}`));
   }
   folders['03-Skills'] = await ensureFolder('03-Skills', BOT);
@@ -147,7 +158,10 @@ async function asNativeDoc(localPath, name, parentId) {
   for (const rel of AS_NATIVE_DOC) {
     const local = path.join(REPO, '21-GOOGLE-ACCESS-BOT', rel);
     if (!fs.existsSync(local)) continue;
-    const sub = rel === 'TRANSCRIPT-SESIUNE-2026-10-28.md' ? '01-Transcript' : '02-Deliverables';
+    const sub = rel.startsWith('HANDOFF/') ? '06-Handoff'
+      : rel === 'TRANSCRIPT-SESIUNE-2026-10-28.md' ? '01-Transcript'
+      : rel === 'EVAL-SKILL-VS-BASELINE.md' ? '02-Deliverables'
+      : '02-Deliverables';
     try {
       const docName = 'MavisCloud-' + path.basename(rel, '.md').replace(/^README$/, 'Google-Access-Bot');
       await replaceExisting(docName, folders[sub]);

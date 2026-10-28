@@ -13,8 +13,23 @@ conversație e **un deliverable pierdut**.
 | Suprafață | Rol | Regula |
 |---|---|---|
 | **Repo** `apvizual-max/MAVIS-CLOUD` (main, public) | configurație, cod, documentație, puntea | **totul se comitează și împinge, fără permisiune** |
-| **Drive** | suprafața de execuție + arhivă | nume `MavisCloud-(subiect)` |
+| **Drive** | **MEMORIA MEA +** suprafața de execuție + arhivă | **scriu ACOLO mereu, fără să mi se ceară** |
 | **Conversație** | rezumat + decizii | **nu e loc de stocare** |
+
+## REGULA 0 — Drive e memoria. Scriu acolo mereu.
+
+**Contextul conversației e efemer și limitat. Drive-ul are 5 TB.**
+
+**Deci, de acum înainte, fără excepție și fără să mi se ceară:**
+- tot ce discutăm, măsurăm sau livrăm → **se scrie pe Drive imediat**
+- informația care nu a ajuns pe Drive **nu există**
+- **nu cer permisiune** pentru asta
+
+**La începutul fiecărei sesiuni:**
+```bash
+node mavis-tools/drive-tree.js     # ce s-a scris ultima dată
+```
+Continuitatea se reconstruiește **de acolo**, nu din memoria conversației.
 
 ## Foldere Drive — reperul permanent
 

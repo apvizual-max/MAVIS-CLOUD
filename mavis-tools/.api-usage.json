@@ -3,7 +3,7 @@
   "report-folder-discover.js": 4,
   "report-inbox-counts.js": 9,
   "report-mail-count.js": 78,
-  "inline": 194,
+  "inline": 215,
   "report-filter-state.js": 20,
   "report-simulate-sort.js": 24,
   "report-build.js": 3,
@@ -11,12 +11,13 @@
   "probe-gmail-filter-404.cjs": 3,
   "google-verify.js": 14,
   "google-capabilities.js": 184,
-  "google-deliver.js": 155,
+  "google-deliver.js": 339,
   "fixnames.js": 19,
   "drive-tree.js": 36,
   "cleanup.js": 14,
   "trashold.js": 3,
   "dedup.js": 18,
   "cleantmp.js": 15,
-  "finalclean.js": 19
+  "finalclean.js": 19,
+  "gemini-filestore.js": 106
 }
