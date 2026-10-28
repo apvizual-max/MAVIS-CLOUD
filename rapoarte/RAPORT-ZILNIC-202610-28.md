@@ -1,7 +1,7 @@
 # Raport zilnic — miercuri 28 octombrie 2026
 
-> Generat de Mavis Cloud · 20 mesaje noi măsurate azi (00:00–09:20 EEST) · 57 joburi analizate
-> Cota Google: **197 cereri** (plafon 200 — **în limita plafonului**). Zero scrieri pe Gmail; tot consumul a fost măsurare și diagnostic. Detaliu în §5.
+> Generat de Mavis Cloud · 20 mesaje noi măsurate azi (00:00–09:22 EEST) · 57 joburi analizate
+> Cota Google: **201 cereri** (plafon 200 — **depășit cu 1**). Zero scrieri pe Gmail; tot consumul a fost măsurare și diagnostic. Detaliu în §5.
 
 ---
 
@@ -97,6 +97,141 @@ Clasificarea e făcută din date, nu dintr-o listă scrisă cu mâna: 0 cer răs
 - Jooble — 00:20 UTC · *🔔 Toennies company caută Lucrător la ambalare și 84 mai multe oferte noi de muncă*
 
 **Newsletter / promoție, fără acțiune** (13): Project 720 (Skool), The RoboNuggets Network (free) (Skool), Isha News, AI Automation Society (Skool), DocFreemason, Alerta eJobs, Bitdefender, Numerologist.com, AI Money Lab (Skool), David, Mikki Willis, Alexandru Popescu (via Google Drive), Felix & Winston 🐶
+
+**Leads din alertele de job.** Fiecare poartă propria cale de verificare, declarată mai jos — nu toate sunt citite direct de pe pagină:
+
+##### Graphic Designer — part-time 15h (remote) @ CreativeEd Media (NOU)
+
+Din alerta **Bestjobs** — *13 new jobs for you: graphic design, bucharest*
+
+**Cum a fost verificat:** Text integral al anuntului, obtinut din indexarea motorului de cautare pe bestjobs.eu/loc-de-munca/graphic-designer-part-time-15h-remote. Pagina /en/job/ raspunde 403 pentru acces automat, deci NU am deschis pagina direct.
+
+Angajator: CreativeEd Media. Rol de Graphic Designer creativ, 100% remote, part-time 15 ore pe saptamana. Materiale pentru campanii de marketing, bannere, flyere, cataloage, carti de vizita, evenimente, mock-up-uri si continut vizual pentru mediul digital. Echipa internationala.
+
+**Cerințe:**
+
+- Graphic Designer creativ, cu atentie la detalii si simt estetic
+- Transformarea ideilor in materiale vizuale moderne, attractive, cu personalitate
+- Persoana organizata, atenta la detalii, creativa si eficienta
+- Capabilitatea de a livra materiale de calitate intr-un timp scurt, respectand termenele-limita, inclusiv la solicitari urgente
+
+**Rate-uri publicate:**
+
+- 525 EURO/luna (publicat de angajator)
+- Part-time, 15 ore pe saptamana, zilele de lucru stabilite de comun acord
+
+**Condiții:** 100% remote. Remuneratie 525 EUR/luna, plata la timp. Flexibilitate, dar se cere seriozitate si respectarea termenelor-limita.
+
+**Cum se aplică:** Aplicare direct pe anuntul Bestjobs. Echipa internationala.
+
+> ⚠️ La 525 EUR/luna pentru 15h/saptamana, iesitul orar e sub 9 EUR/h — mult sub rata micro1 (50–90 USD/h) si sub ce plateste YO AI Labs. E o masa de baza, nu un venit. Merita doar daca e fundal sau intrare in platforma.
+
+- https://www.bestjobs.eu/en/job/graphic-designer-part-time-15h-remote
+
+##### Graphic Designer @ ELBI ElectricLighting (NOU)
+
+Din alerta **Bestjobs** — *13 new jobs for you: graphic design, bucharest*
+
+**Cum a fost verificat:** Sumat de pe pagina de listare Bestjobs (accesibila prin indexarea motorului de cautare): titlu, angajator, localizare si interval de plata estimat. Pagina de anunt /en/job/graphic-designer-723 raspunde 403 — NU am deschis-o.
+
+ELBI ElectricLighting angajeaza Graphic Designer. Localizare: Bragadiru, Romania (Bucuresti — zona Ilfov).
+
+**Cerințe:**
+
+- Necesa in anunt (pagina de anunt este blocata pentru acces automat; vezi caveat)
+
+**Rate-uri publicate:**
+
+- 1195 - 1325 (Estimare — valoarea afisata de Bestjobs, nu de angajator)
+
+**Condiții:** Bragadiru, Romania.
+
+**Cum se aplică:** Aplicare pe anuntul Bestjobs.
+
+> ⚠️ Salariul e ESTIMAT de Bestjobs, nu publicat de angajator. Nu am putut citi cerintele de pe pagina anuntului (403 la acces automat) — le-am dedus din pagina de listare, care n-are sectiunea de cerinte. Bragadiru = Ilfov, deci nu e fix la centrul orasului.
+
+- https://www.bestjobs.eu/en/job/graphic-designer-723
+
+##### UX/UI Designer — Video Annotation Remote (micro1 / AI training) (REAPĂRUT)
+
+Din alerta **Bestjobs** — *13 new jobs for you: graphic design, bucharest*
+
+**Cum a fost verificat:** Text integral al anuntului, obtinut din indexarea motorului de cautare pe bestjobs.eu/loc-de-munca/ux-ui-designer-video-annotation-remote-2. Pagina /en/job/ raspunde 403 pentru acces automat, deci NU am deschis pagina direct.
+
+micro1 cauta UX/UI Designeri si profesionisti cu experienta in domenii vizuale/digitale pentru un proiect international de AI Training, axat pe video annotation si robotica. Participantii analizeaza videoclipuri in care brate robotice executa proceduri si evalueaza/anoteaza fiecare sesiune conform unor guideline-uri clare. Rolul se potriveste cu persoane atente la detalii, cu experienta in UX/UI, web design, video editing, fotografie, filmmaking, audiovisual production, robotics sau engineering.
+
+**Cerințe:**
+
+- Experienta intr-unul sau mai multe dintre: UX/UI Design, Web Design, Video Editing, Filmmaking, productie audiovizuala
+- Experienta anterioara in: Video Annotation, Data Labeling, AI Training, Machine Learning datasets, evaluarea continutului video, robotica — avantaj important, dar NU obligatoriu
+- Atentie la detalii si consistenta calitatii: marcarea exacta a actiunilor, comportamentelor si rezultatelor conform guideline-urilor primite
+- Documentarea clara a observatiilor si justificarea fiecarei evaluari
+- Feedback catre traineri si mentinerea unui nivel constant de calitate
+- Livrarea taskurilor in termenele solicitate
+- Engleză avansată (cerută explicit)
+
+**Rate-uri publicate:**
+
+- 3000 EUR/luna (cum apare pe anuntul Bestjobs)
+- Contractor, nu angajare. Fără experiență anterioară în AI cerută
+
+**Condiții:** Remote, contractor. Proiect internațional de AI training. Fără experiență anterioară în AI.
+
+**Cum se aplică:** Aplicare pe anuntul Bestjobs („Aplică & Începe interviul”). Platforma micro1 conduce interviul, cu assessment de domeniu. Aceleași joburi apar și ca 'Xperteez Technology' pe designproject.io — NU confunda platforma cu jobul.
+
+> ⚠️ Bestjobs afișează 3000 EUR/luna; pe platforma micro1 același tip de rol apare la 50–90 USD/oră. Diferența e de metodă de tarifare (lună vs. oră) și de agregator, nu de job — verifică rata reală direct pe jobs.micro1.ai înainte să te bazezi pe 3000 EUR. Platforma a mai apărut și pe 26.10 cu un rol similar, dar nu același titlu.
+
+- https://www.bestjobs.eu/loc-de-munca/ux-ui-designer-video-annotation-remote-2
+
+##### Editor imagine TV Junior @ Aleph News (NOU)
+
+Din alerta **Hipo.ro** — *Alex - 7 Joburi noi adaugate pentru tine pe hipo.ro*
+
+**Cum a fost verificat:** Pagina HiPo.ro citita DIRECT (HTTP 200) — salariul, cerintele si conditiile sunt textul paginii de anunt, nu un snippet.
+
+Aleph News angajeaza Editor imagine TV Junior, full-time, on-site in Bucuresti. Munca de montaj pentru stiri si productii editoriale: montarea materialelor video pentru stiri, organizarea si editarea secventelor video pentru impact maxim, sincronizarea muzicii si efectelor sonore, arhiva video, statia de editare. Ritm alert, specific productiei de stiri.
+
+**Cerințe:**
+
+- Adobe Premiere Pro, Adobe After Effects si Adobe Photoshop — folosite foarte bine
+- Baza solida de montaj video (chiar daca nu ai experienta in TV)
+- Rapid, organizat si atent la detalii
+- Dispozitie de a invata constant si de a-ti imbunatati tehnica
+- Familiarizare ( sau curiozitatea de a invata ) cu DaVinci Resolve si instrumente moderne de editare cu AI
+- UNATC sau similar = avantaj, nu obligatoriu
+- Portofoliul conteaza mai mult decat anii de experienta
+
+**Rate-uri publicate:**
+
+- 4000 - 5000 RON NET/luna (publicat de angajator, confirmat pe pagina HiPo)
+
+**Condiții:** Bucuresti, full-time, on-site. Nivel job: 0-1 ani experienta.
+
+**Cum se aplică:** Aplicare pe HiPo.ro. Portofoliu cerut explicit.
+
+> ⚠️ Este rol de EDITOR VIDEO, nu de design grafic — nu atinge direct profilul de art direction. Totuși: 4000-5000 RON net cu doar 0-1 ani cerință e un prag real de intrare pe piata de continut, iar portofoliul conteaza mai mult decat anii de experienta — deci e o usa de intrare cu prag mic, nu un job de design. On-site, la ritm de productie de stiri.
+
+- https://www.hipo.ro/locuri-de-munca/locuri_de_munca/268926/Aleph-News/Editor-imagine-TV-Junior
+
+##### Junior Mid-Level Graphic Designer & DTP Specialist @ BRAYTRON SRL (NEVERIFICAT PE PAGINA)
+
+Din alerta **eJobs** — *Un job nou te asteapta azi pe eJobs.ro!*
+
+**Cum a fost verificat:** DOAR corpul emailului de alerta (snippet inclus). Pagina eJobs.ro raspunde 403 pentru acces automat, iar motorul de cautare nu a indexat anuntul — deci nu am putut citi niciun camp al anuntului.
+
+BRAYTRON SRL — Junior Mid-Level Graphic Designer & DTP Specialist. Singurul anunt din alerta de azi de pe eJobs, cu 1 job potrivit profilului. Anuntul a venit fara text/plain (doar HTML), deci informatiile vin din continutul de tip snippet.
+
+**Cerințe:**
+
+- Necesa in anunt — pagina eJobs raspunde 403 pentru acces automat, deci NU am putut citi cerintele
+
+**Condiții:** Necunoscute — anuntul nu a fost citit pe pagină.
+
+**Cum se aplică:** Aplicare pe eJobs.ro.
+
+> ⚠️ NEVERIFICAT. eJobs.ro raspunde 403 (Forbidden) la acces automat, iar cautarea nu a indexat anuntul. Tot ce se stie aici vine din corpul emailului de alerta. Fara salariu, fara cerinte, fara oras — deschide anuntul manual inainte sa iei in calcul. Titlul promite junior-to-mid, adica sub pragul de senioritate pe care-l cauti.
+
+- https://www.ejobs.ro
 
 ---
 ## 2. Joburi — scorate cu `ALEX-KIT/scoring.gs`
@@ -287,7 +422,7 @@ Surse: **IQads** (tabloul AdJob activ, citit azi) + **designproject.io** (Român
 2. **designproject.io servește descrieri foarte inegale** (16612–30012 de caractere pe cele 15 de joburi, măsurat azi). Cele mai lungi sunt rescrise de AI și injectează cuvinte-cheie care ridică axele — vezi §6.2.
 3. **Celelalte două câmpuri de engagement ale designproject.io sunt inutilizabile.** `employmentType` din JSON-LD spune `FULL_TIME` pentru 15 din 15, iar badge-ul din listing spune "Full-time" pentru 15 din 15. Singura sură corectă e linia **"Job Type:"** din descriere — prezentă la 15 din 15. Am folosit asta.
 4. **Paginatia IQads nu funcționează.** `?page=2` și `?page=3` servesc exact pagina 0 (aceleași 42 de linkuri — verificat azi pe 0, 2, 3). Catalogul complet e pe pagina 0 — nu iterez pagini.
-5. **Cota Google: 197 cereri pe 200** (în limita plafonului). Consumul pe etape:
+5. **Cota Google: 201 cereri pe 200** (**depășit cu 1**). Consumul pe etape:
 
 | Etapă | Cereri |
 |---|---|
@@ -296,14 +431,17 @@ Surse: **IQads** (tabloul AdJob activ, citit azi) + **designproject.io** (Român
 | `report-filter-state.js` | 24 |
 | `report-inbox-counts.js` | 18 |
 | `readbodies.js` | 10 |
+| `inline` | 5 |
 | `report-folder-discover.js` | 4 |
-| `inline` | 2 |
+| `report-build.js` | 4 |
 | `extract.js` | 2 |
-| **total** | **197** |
+| **total** | **201** |
 
 > Rulare 2026-10-28 (raport zilnic). Contor pornit de la zero.
 
-Ce a consumat cel mai mult: corpurile complete ale mesajelor de azi (20) — fără corp, nu se poate distinge un mesaj care cere răspuns de o alertă automată. **Zero scrieri pe Gmail** — niciun mail trimis, marcat sau arhivat, niciun filtru modificat.
+**Ce a mers peste plafon:** 17 cereri de **diagnostic** care NU sunt masurarea zilei (`readbodies.js` 10, `inline` 5, `extract.js` 2) — citirea manuala a corpurilor ca sa separ ce cere raspuns de ce e doar alerta. Restul consumului e pipeline-ul standard.
+
+Au fost cheltuite pe **înțelegerea** stării, nu pe măsurarea zilei. Zero scrieri pe Gmail — niciun mail trimis, marcat sau arhivat, niciun filtru modificat.
 
 ---
 

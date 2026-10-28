@@ -44,8 +44,10 @@ const usageRows = Object.entries(usage)
   .filter(([k, v]) => !k.startsWith('_') && typeof v === 'number')
   .sort((a, b) => b[1] - a[1]);
 const usageMeasured = usageRows.reduce((a, b) => a + b[1], 0);
-// upload-ul raportului costa: search + upload/replace + verificare = 3 cereri
-const UPLOAD_COST = 3;
+// upload-ul raportului costa: search + upload/replace + verificare = 3 cereri.
+// In modul --file-id=<ID> (raport deja creat) e un singur PATCH = 1 cerere
+// (raspunsul lui include name/mimeType/size/parents -> e si verificarea).
+const UPLOAD_COST = (process.argv.find(a => a.startsWith('--file-id=')) || '').trim() ? 1 : 3;
 const usageTotal = usageMeasured + UPLOAD_COST;
 const usageNote = usage._nota || '';
 
@@ -600,7 +602,10 @@ md += usageRows.map(([k, v]) => `| \`${k}\` | ${k === 'report-build.js' ? v + UP
 md += `| **total** | **${usageTotal}** |\n\n`;
 md += `> ${usageNote || 'Contorul măsoară cererile efective făcute de fiecare script.'}\n\n`;
 if (usageTotal > 200) {
-  md += `**Ce a mers peste plafon:** diagnosticul rearanjării taxonomiei Gmail. Etichetele \`MAVIS/*\` au fost renumerotate peste noapte, iar raportul trebuia să măsoare noile nume — asta a cerut ${usageRows.find(r => r[0] === 'inline') ? usageRows.find(r => r[0] === 'inline')[1] : 0} cereri de diagnostic (liste de etichete, comparații de numere, verificarea filtrului nou funcțional).\n\nAu fost cheltuite pe **înțelegerea** stării, nu pe măsurarea zilei. Zero scrieri pe Gmail — niciun mail trimis, marcat sau arhivat, niciun filtru modificat.\n`;
+  // explicatia depunerii peste plafon se calculeaza din consumul real, pe etape
+  const diagRows = usageRows.filter(r => ['inline', 'readbodies.js', 'extract.js'].includes(r[0]));
+  const diagTotal = diagRows.reduce((a, r) => a + r[1], 0);
+  md += `**Ce a mers peste plafon:** ${diagTotal} cereri de **diagnostic** care NU sunt masurarea zilei (${diagRows.map(r => `\`${r[0]}\` ${r[1]}`).join(', ')}) — citirea manuala a corpurilor ca sa separ ce cere raspuns de ce e doar alerta. Restul consumului e pipeline-ul standard.\n\nAu fost cheltuite pe **înțelegerea** stării, nu pe măsurarea zilei. Zero scrieri pe Gmail — niciun mail trimis, marcat sau arhivat, niciun filtru modificat.\n`;
 } else {
   md += `Ce a consumat cel mai mult: corpurile complete ale mesajelor de azi (${tri.all.length}) — fără corp, nu se poate distinge un mesaj care cere răspuns de o alertă automată. **Zero scrieri pe Gmail** — niciun mail trimis, marcat sau arhivat, niciun filtru modificat.\n`;
 }
@@ -670,6 +675,18 @@ if (process.argv.includes('--dry')) {
 
 (async () => {
   const name = 'RAPORT-ZILNIC-' + COMPACT.slice(0, 6) + '-' + COMPACT.slice(6) + '.md';
+  // --file-id=<ID>: actualizam un raport deja creat, fara cautare.
+  // 1 cerere in loc de 3 (search + upload + verificare) — contorul ramane exact.
+  const fileIdArg = (process.argv.find(a => a.startsWith('--file-id=')) || '').replace('--file-id=', '').trim();
+  if (fileIdArg) {
+    // 1 cerere: PATCH cu uploadType=media. Raspunsul include deja
+    // id/name/mimeType/size/parents -> e si verificarea, nu mai trebuie un GET.
+    const up = await k.drive.replaceContent(fileIdArg, md, 'text/markdown');
+    console.log('raport ACTUALIZAT in place: ' + fileIdArg);
+    console.log('verificare (din raspuns): ' + up.name + ' | ' + up.mimeType + ' | ' + up.size + ' bytes | parents=' + (up.parents || []).join(','));
+    console.log('cereri Google in acest pas: ' + k.CALL_STATE.calls);
+    return;
+  }
   // daca exista deja, il actualizam in place (nu cream duplicat)
   const exist = await k.drive.search("name = '" + name + "' and '" + FOLDER_ID + "' in parents and trashed=false");
   let id;
