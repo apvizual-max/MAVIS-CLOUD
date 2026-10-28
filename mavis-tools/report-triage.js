@@ -34,6 +34,14 @@ const NEWS_FROM = /newsletter|substack|news@|digest|mailchimp|beehiiv|twine|medi
 const NEWS_TEXT = /weekly|newsletter|edition|ed\.\s*$|dumitrascu|smart city/i;
 // ---- robot: local-part de tip no-reply ----
 const ROBOT_LOCAL = /^(no-?reply|do-?not-?reply|donotreply|noreply|notify|notifications?|alerts?|automated|mailer|newsletter|newsletters|news|bounce|postmaster)/i;
+// ---- ALERTA DE SECURITATE: cere verificare umana, chiar daca vine de la robot ----
+const SECURITY_FROM = /accounts\.google\.com|@google\.com|security|alert@/i;
+const SECURITY_TEXT = /security alert|alerta de securitate|new sign-in|new device|dispozitiv nou|someone may be trying|acces neautorizat|verifica.*activit|check activity|secure your account/i;
+// ---- CI / workflow esuat: cere actiune, chiar daca e "zgomot de pipeline" ----
+const CI_FAIL_SUBJECT = /\brun failed\b|workflow.*fail|\bfailed\b|\bfailure\b|build failed|eroare/i;
+const CI_FROM = /notifications@github\.com|githubactions|@github\.com/i;
+// ---- CONTUL CERE O ACTIUNE (parola noua, confirmare, reset) ----
+const ACCOUNT_TEXT = /trebuie sa (aleg|schimb|confirm|setez|verific)|aleg(e|eti) o parola|schimb(a|i) parola|parola noua|new password|reset your password|confirm(a|ati) (contul|adresa|email)|verifica(i) adresa|completeaz(a) profilul|verificati adresa/i;
 // ---- semnale ca un mesaj sa ceara raspuns ----
 const REPLY_TEXT = /action requested|opportunity|interview|invitatie|invitație|raspuns|răspuns|your application|aplicatia ta|aplicatia ta a fost|reply to|confirm|accept|offer|contract|negotiat|trebuie sa|urgent|deadline|scadenta/i;
 // ---- semnale ca un mesaj sa ceara o decizie legata de joburi ----
@@ -78,7 +86,18 @@ function triage(rows) {
     const from = r.from || '';
     const subj = r.subject || '';
     const snip = r.snippet || '';
-    const text = subj + ' ' + snip;
+    // CORPUL intra in decizie. Fragmentul de text e trunchiat la ~200 de
+    // caractere si contine doar antetul; corpul e cel care arata ca un email
+    // de alerta cere de fapt confirmare/verificare. (Cost: 0 cereri in plus —
+    // corpul vine deja in raspunsul format=full al simulate-sort.)
+    //
+    // DAR: semnalul "acum cere raspuns" se citeste DOAR din antet+fragment.
+    // Un disclaimer legal ("does not constitute an offer to purchase") contine
+    // cuvintele-cheie si transforma o reclamatie comerciala intr-un mesaj
+    // care "cere raspuns". Antetul + fragmentul spun intentia reala.
+    const body = r.body || '';
+    const headText = subj + ' ' + snip;              // intentia mesajului
+    const text = headText + ' ' + body;              // intentia + continutul
     const dn = displayName(from);
     const lp = localPart(from);
     const isRobot = ROBOT_LOCAL.test(lp);
@@ -87,7 +106,13 @@ function triage(rows) {
     const isJobAlert = JOB_ALERT.test(from) || JOB_ALERT.test(subj);
 
     let cls, why;
-    if (NOISE_FROM.test(from)) {
+    if (SECURITY_FROM.test(from) && SECURITY_TEXT.test(text)) {
+      cls = 'needs-action'; why = 'alerta de securitate — cere verificare umana';
+    } else if (CI_FROM.test(from) && CI_FAIL_SUBJECT.test(subj)) {
+      cls = 'needs-action'; why = 'workflow CI esuat — cere actiune';
+    } else if (ACCOUNT_TEXT.test(text)) {
+      cls = 'needs-action'; why = 'contul cere o actiune (parola / confirmare)';
+    } else if (NOISE_FROM.test(from)) {
       cls = 'noise'; why = 'zgomot din pipeline-ul propriu';
     } else if (isJobAlert && isDesign) {
       cls = 'needs-action'; why = 'alerta de job cu rol de design';
@@ -97,10 +122,12 @@ function triage(rows) {
       // newsletter INAINTE de semnalul de raspuns: un digest poate conține
       // cuvinte ca "interview" fara sa ceara nimic (ex. "Interview with ...")
       cls = 'fyi'; why = 'newsletter';
-    } else if (REPLY_TEXT.test(text) && !isRobot && looksLikePerson(dn)) {
-      cls = 'needs-reply'; why = 'cere raspuns explicit, de la o persoana';
     } else if (PROMO_FROM.test(from) || PROMO_TEXT.test(text)) {
+      // promo INAINTE de semnalul de raspuns: o casa de newslettere/promotii
+      // scrie cu numele omului, dar nu cere raspuns de la om.
       cls = 'fyi'; why = 'promotie / oferta';
+    } else if (REPLY_TEXT.test(headText) && !isRobot && looksLikePerson(dn)) {
+      cls = 'needs-reply'; why = 'cere raspuns explicit, de la o persoana';
     } else if (isRobot) {
       cls = 'fyi'; why = 'robot, fara cerere de actiune';
     } else {

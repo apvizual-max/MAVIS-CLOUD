@@ -79,7 +79,15 @@ const decodeHtml = s => String(s || '')
   .replace(/&#39;|&#x27;/g, "'").replace(/&quot;|&#34;/g, '"')
   .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
   .replace(/&nbsp;/g, ' ');
-const clean = s => decodeHtml(s).replace(/\s+/g, ' ').trim();
+// curata un citat de corp: fara bare de separare "=====", fara URL-uri
+// de tracking, fara spatii multiple — sa ramana informatia, nu zgomotul.
+const clean = s => decodeHtml(s)
+  .replace(/\s*={5,}\s*/g, ' | ')
+  .replace(/https?:\/\/\S+/g, '')
+  .replace(/\s*\|\s*\|\s*/g, ' | ')
+  .replace(/\s+/g, ' ')
+  .replace(/(\s\|)+\s*$/, '')
+  .trim();
 
 // ---------------- joburi ----------------
 // data de publicare la designproject.io vine ca "Oct 2, 2026" -> o normalizam
@@ -236,7 +244,7 @@ const plural = (n, one, few, many) => n === 1 ? one : (n >= 2 && n <= 19 ? few :
 // ---------------- raport ----------------
 let md = `# Raport zilnic — ${dayName} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}
 
-> Generat de Mavis Cloud · ${inboxCounts.azi_any} mesaje noi măsurate azi (00:00–${windowEnd} EEST) · ${sc.stats.total} joburi analizate
+> Generat de Mavis Cloud · ${sim.total} mesaje noi măsurate azi (00:00–${windowEnd} EEST) · ${sc.stats.total} joburi analizate
 > Cota Google: **${usageTotal} cereri** (plafon 200${usageTotal > 200 ? ` — **depășit cu ${usageTotal - 200}**` : usageTotal === 200 ? ` — **exact pe plafon**` : ` — **în limita plafonului**`}). Zero scrieri pe Gmail; tot consumul a fost măsurare și diagnostic. Detaliu în §5.
 
 ---
@@ -244,8 +252,16 @@ let md = `# Raport zilnic — ${dayName} ${d.getUTCDate()} ${MONTHS[d.getUTCMont
 ## 1. Gmail — etichetele de categorie
 
 ### 1.1 Rezultatul scurt
+`;
 
-**Pe etichetele de categorie a intrat azi: ${mailCount.totals.azi} mesaje.**`;
+// Sursa pentru "azi" = simularea (cea mai recenta masuratoare, mesaje distincte).
+// mailCount.totals.azi e SUMA HITURILOR PE ETICHETE: un mesaj cu 2 etichete
+// se numara de 2 ori. Deci nu poate fi comparat direct cu numarul de mesaje.
+// Iata de ce cele doua cifre pot difera fara ca cineva sa greseasca.
+const labeledDistinct = sim.total - sim.unmatched;
+const doubleLabeled = Math.max(0, mailCount.totals.azi - labeledDistinct);
+
+md += `**Pe etichetele de categorie a intrat azi: ${mailCount.totals.azi} ${doubleLabeled > 0 ? 'etichete' : 'mesaje'}.**`;
 
 if (mailCount.totals.azi === 0) {
   md += ` Nici în ultimele 24h (${mailCount.totals['24h']}), nici în ultimele 7 zile (${mailCount.totals['7z']}).`;
@@ -254,15 +270,15 @@ if (mailCount.totals.azi === 0) {
 }
 md += `
 
-Azi au intrat **${inboxCounts.azi_any} mesaje** în total, iar în inbox sunt **${inboxCounts.azi_inbox}**.`;
+Azi au intrat **${sim.total} mesaje** în total, iar în inbox sunt **${inboxCounts.azi_inbox}**.`;
 
-const unclassified = inboxCounts.azi_any - mailCount.totals.azi;
+const unclassified = sim.unmatched;
 if (unclassified > 0) {
   md += ` **${unclassified} dintre ele nu au primit nicio etichetă de categorie**`;
-  // zgomotul din pipeline a fost ETICHETAT (categoria 'agenti'), deci nu face parte
-  // din "fara eticheta". Cifra corecta: cate mesaje au ramas fara nicio eticheta.
-  const labeledNoise = tri.counts.noise;
-  md += `. Cele ${labeledNoise} **au fost** etichetate ca zgomot de pipeline (bot-uri de pe repo-urile tale) — deci cele ${unclassified} rămase sunt mesaje reale, fără etichetă de categorie.`;
+  md += ` (nu se potrivesc niciunui filtru de categorie — deci rămân în inbox, neetichetate).`;
+}
+if (doubleLabeled > 0) {
+  md += `\n\n> **${mailCount.totals.azi} etichete pe ${labeledDistinct} mesaje** — ${doubleLabeled} mesaj${doubleLabeled === 1 ? ' primește' : 'e primesc'} două etichete de categorie (ex. o alertă de job care intră și la „Joburi" și la „Newsletter"). De aceea suma pe etichete e mai mare decât numărul de mesaje distincte.`;
 }
 md += `
 
@@ -278,7 +294,19 @@ for (const l of mailCount.labels) {
 md += `
 `;
 if (newestLabel && daysOff !== null) {
-  md += `**Concluzie:** ${aliveRows.length === 1 ? 'o categorie primește mesaje' : aliveRows.length + ' categorii primesc mesaje'}${aliveRows.length ? ' (' + aliveNames.map(n => '`' + n + '`').join(', ') + ')' : ''}; ${deadRows.length === 1 ? 'o categorie este moartă' : deadRows.length + ' categorii sunt moarte'}${deadDaysOff !== null ? ` de **${deadDaysOff} zile**` : ''}${groupLines ? ' (' + groupLines + ')' : ''}.\n\n`;
+  // "moarta" (a primit mesaje, acum nu mai primeste) != "nefolosita niciodata".
+  // A doua nu are o zi de oprire — nu are cum sa aiba.
+  const deadNever = deadRows.filter(l => !l.newest);
+  const deadStale = deadRows.filter(l => l.newest);
+  let deadPart = '';
+  if (deadStale.length) {
+    deadPart += `${deadStale.length === 1 ? 'o categorie primește nimic de' : deadStale.length + ' categorii nu primesc nimic de'} **${deadDaysOff} zile**`;
+    if (groupLines) deadPart += ` (${groupLines})`;
+  }
+  if (deadNever.length) {
+    deadPart += (deadPart ? '; ' : '') + `${deadNever.length === 1 ? 'o categorie' : deadNever.length + ' categorii'} n-a fost folosită niciodată (0 pe 30 de zile, fără istoric)` + (deadNever.length === 1 ? ` (\`${deadNever[0].name}\`)` : ` (${deadNever.map(l => '`' + l.name + '`').join(', ')})`);
+  }
+  md += `**Concluzie:** ${aliveRows.length === 1 ? 'o categorie primește mesaje' : aliveRows.length + ' categorii primesc mesaje'}${aliveRows.length ? ' (' + aliveNames.map(n => '`' + n + '`').join(', ') + ')' : ''}` + (deadPart ? `; ${deadPart}` : '') + `.\n\n`;
 } else {
   md += `**Concluzie:** nu s-a putut stabili când a fost etichetat ultimul mesaj (lipsesc datele).\n\n`;
 }
@@ -306,7 +334,7 @@ if (filterState) {
 
   if (working.length) {
     md += `
-#### Un filtru FUNCȚIONEAZĂ
+#### ${working.length === 1 ? 'Un filtru FUNCȚIONEAZĂ' : working.length + ' filtre FUNCȚIONEAZĂ'}
 
 **${working.length} dintre ${ft.length} filtre lovesc efectiv mesaje.** ${working.map(x => `\`${x.query.slice(0, 50)}${x.query.length > 50 ? '…' : ''}\` → **${x.matchesAsIs}** mesaje în 30 de zile, etichetează ${(x.categories || []).length ? (x.categories || []).map(c => `\`${c}\``).join(', ') : 'nicio etichetă de categorie'}`).join('; ')}
 
@@ -329,14 +357,22 @@ Cu acoladele, aceleași filtre ar fi prins **${totalFixed} mesaje în 30 de zile
 1. **Criteriile nu pot lovi nimic** — paranteze în loc de acolade.
 2. **\`addLabelIds\` e vid** — nici măcar cu criterii corecte n-ar eticheta ceva.
 
-**De ce nu le-am reparat azi:** tokenul din cloud are \`gmail.modify\`, dar **nu** \`gmail.settings.basic\` — fără acest scope, \`filters PATCH\` răspunde 403. Repararea e pregătită ca script (\`mavis-tools/fix-mavis-filters.js\`, cu \`--dry-run\` și cu salvarea stării de dinainte pentru rollback) și trebuie rulată de pe mașina ta, unde scope-ul există.
+**De ce nu le-am reparat azi:** repararea de filtre cere scope-ul \`gmail.settings.basic\` — fără el, \`filters PATCH\` răspunde 403. Starea scope-urilor din cloud se **măsoară**, nu se presupune: \`node mavis-tools/google-preflight.js\` (pasul [6] — control de drift). Repararea se face prin **DELETE + CREATE** (\`filters.update\`/PUT → 404, \`filters.patch\`/PATCH → 404 „Method not found"). Scriptul e pregătit cu \`--dry-run\` și cu salvarea stării de dinainte pentru rollback: \`mavis-tools/fix-mavis-filters.js\`.
 `;
   }
 } else {
   md += `*(Sonda de filtre nu a rulat azi — starea filtrelor nu e măsurată în acest raport.)*\n`;
 }
+// masuratori pentru observatia de la 1.4 — toate din date, niciuna scrisa cu mana
+const agentsLabel = aliveNames.find(n => /optimus|agenti/i.test(n)) || null;
+const agentsAzi = (mailCount.labels.find(l => /optimus|agenti/i.test(l.name)) || { counts: {} }).counts.azi || 0;
+const totalCats = aliveRows.length + deadRows.length;
+// masurat din SIMULARE (etichetele reale ale mesajelor de azi), nu presupus
+const simRows = sim.rows || [];
+const simInbox = simRows.filter(r => (r.labels || []).includes('INBOX')).length;
+const simUnread = simRows.filter(r => (r.labels || []).includes('UNREAD')).length;
 md += `
-**Inboxul nu se golește.** Deși \`removeLabelIds\` conține \`INBOX\`, mesajele intrate azi sunt **în continuare în INBOX și UNREAD**:
+**Inboxul nu se golește.** Măsurat pe cele ${simRows.length} mesaje de azi, etichetele lor reale: **${simInbox} sunt încă în INBOX**, dar **doar ${simUnread} au rămas UNREAD**. Deci filtrele **curăță „necitit"**, dar **nu scoate mesajele din inbox**:
 
 | Fereastră | În inbox | În toate stările |
 |---|---|---|
@@ -358,7 +394,7 @@ md += `| *niciun filtru se potrivește* | ${sim.unmatched} |
 
 > Unele mesaje se potrivesc la 2 filtre (ex. "Joburi" + "Newsletter" de la LinkedIn), deci suma poate depăși ${sim.total}.
 
-**Observație:** **${tri.counts.noise} mesaje** de azi sunt notificări ale agenților tăi (Jules și GitHub Actions pe repo-urile proprii). Până azi taxonomia nu avea categorie pentru ele — **acum are**: eticheta \`${aliveNames.find(n => /optimus|agenti/i.test(n)) || 'Optimus CD'}\` primește ${(mailCount.labels.find(l => /optimus|agenti/i.test(l.name)) || { counts: {} }).counts.azi || 0} mesaje azi, iar filtrul ei funcționează efectiv. E singura categorie care primește ceva — restul sunt în continuare moarte.
+**Observație:** **${tri.counts.noise} mesaje** de azi sunt notificări ale agenților tăi (Jules și GitHub Actions pe repo-urile proprii). Categoria dedicata lor e \`${agentsLabel || 'nerezolvata'}\`${agentsLabel ? `, care a primit ${agentsAzi} mesaj${agentsAzi === 1 ? '' : 'e'} azi, iar filtrul ei functioneaza efectiv` : ''}. In rest, **${aliveRows.length} din ${totalCats} categorii** primesc mesaje${deadRows.length ? `, iar ${deadRows.length} nu primesc` : ''}.
 
 
 ### 1.5 Mesajele care chiar necesită răspuns
@@ -376,9 +412,13 @@ if (replyList.length) {
   md += `**Niciun mesaj nu cere explicit un răspuns.**\n\n`;
 }
 if (actionList.length) {
-  md += `**Ceres o decizie (alerte de job care bat cu profilul tău):**\n\n`;
+  md += `**Ceres o decizie sau o acțiune:**\n\n`;
   for (const r of actionList) {
-    md += `- **${r.displayName}** — ${msgTime(r)}. *${r.subject}* — ${clean(r.snippet).slice(0, 160)}\n`;
+    // motivul (why) e cel mai util — snippet-ul e trunchiat la ~200 de caractere
+    // si de multe ori nu spune nimic. Corpul vine in raspuns, cu 0 cereri in plus.
+    const why = r.why ? ` _(${r.why})_` : '';
+    const detail = clean(r.body && r.body.length > (r.snippet || '').length ? r.body : (r.snippet || '')).slice(0, 200);
+    md += `- **${r.displayName}** — ${msgTime(r)}. *${r.subject}*${why}${detail ? ` — ${detail}` : ''}\n`;
   }
   md += `\n`;
 }
@@ -394,10 +434,11 @@ if (fyiList.length) {
 let leads = null;
 try { leads = JSON.parse(fs.readFileSync(path.join(DIR, `email-leads-${DATE}.json`), 'utf8')); } catch (e) {}
 if (leads && leads.leads && leads.leads.length) {
-  md += `**Leads verificate din alertele de job** (pagina sursă citită direct, nu din snippet de motor de căutare):\n\n`;
+  md += `**Leads din alertele de job.** Fiecare poartă propria cale de verificare, declarată mai jos — nu toate sunt citite direct de pe pagină:\n\n`;
   for (const l of leads.leads) {
     md += `##### ${l.resolvedTitle}\n\n`;
     md += `Din alerta **${l.from}** — *${l.subject}*\n\n`;
+    if (l.verifiedVia) md += `**Cum a fost verificat:** ${l.verifiedVia}\n\n`;
     md += `${l.summary}\n\n`;
     if (l.requirements && l.requirements.length) {
       md += `**Cerințe:**\n\n`;
@@ -519,7 +560,26 @@ md += `
 if (daysOff !== null) {
   const ft = filterState ? (filterState.tests || []) : [];
   const totalFixed = ft.reduce((a, x) => a + x.matchesFixed, 0);
-  md += `1. **${deadRows.length} din ${labelRows.length} categorii nu mai primesc nimic${deadDaysOff !== null ? ` de ${deadDaysOff} zile` : ''}.** Două cauze, măsurate azi: filtrele folosesc \`from:(...)\` unde Gmail cere \`from:{...}\` (paranteze = ȘI, acolade = SAU), deci nu pot lovi niciun mesaj — ${ft.length ? `ar fi prins ${totalFixed} mesaje în 30 de zile` : 'ar fi prins mii'}; și \`addLabelIds\` e vid pe ele. ~${inboxCounts['7d_inbox']} mesaje/7 zile stau în inbox.\n`;
+  // CAUZA, masurata per categorie: exista filtru pentru ea? (nu hardcodat —
+  // se compara filtrul viu cu eticheta categoriei)
+  const deadNoFilter = [], deadBrokenFilter = [];
+  for (const l of deadRows) {
+    const hasFilter = (filterState && (filterState.rows || []).some(r => (r.addLabelIds || []).some(x => TAX.normalize(x) === TAX.normalize(l.name)))) || false;
+    (hasFilter ? deadBrokenFilter : deadNoFilter).push(l.name);
+  }
+  const brokenCount = filterState ? (filterState.tests || []).filter(x => !/^list:/i.test(x.query || '') && x.matchesAsIs === 0).length : 0;
+  const workingCount = filterState ? (filterState.tests || []).filter(x => !/^list:/i.test(x.query || '') && x.matchesAsIs > 0).length : 0;
+
+  const deadStaleN = deadRows.filter(l => l.newest).length;
+  const deadNeverN = deadRows.length - deadStaleN;
+  md += `1. **${deadRows.length} din ${labelRows.length} categorii nu mai primesc nimic**${deadStaleN ? ` (${deadStaleN} de ${deadDaysOff} zile` : ''}${deadStaleN && deadNeverN ? ', ' : ''}${deadNeverN ? `${deadNeverN} n-a fost folosită niciodată` : ''}).`;
+  if (deadNoFilter.length) {
+    md += ` Cauza pentru ${deadNoFilter.length === 1 ? 'una' : deadNoFilter.length + ' dintre ele'}: **nu au filtru creat** (${deadNoFilter.map(n => `\`${n}\``).join(', ')}) — deci nimic nu le poate eticheta, oricare ar fi criteriul.`;
+  }
+  if (deadBrokenFilter.length) {
+    md += ` Pentru ${deadBrokenFilter.length === 1 ? 'cea ramasa' : 'celelalte'} (${deadBrokenFilter.map(n => `\`${n}\``).join(', ')}) exista filtru, dar el loveste 0 mesaje.`;
+  }
+  md += ` Starea filtrelor, masurata azi: **${workingCount} functioneaza, ${brokenCount} sunt nefunctionale**${brokenCount ? ` — cele nefunctionale folosesc \`from:(...)\` unde Gmail cere \`from:{...}\` (paranteze = ȘI, acolade = SAU), deci nu pot lovi niciun mesaj; cu acoladele ar fi prins ${totalFixed} mesaje in 30 de zile` : ''}. ~${inboxCounts['7d_inbox']} mesaje/7 zile stau in inbox.\n`;
 }
 if (dpP && !dpP.error) {
   md += `2. **designproject.io servește descrieri foarte inegale** (${dpP.jdLenMin}–${dpP.jdLenMax} de caractere pe cele ${dpP.count} de joburi, măsurat azi). Cele mai lungi sunt rescrise de AI și injectează cuvinte-cheie care ridică axele — vezi §6.2.\n`;

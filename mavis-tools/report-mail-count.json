@@ -1,47 +1,47 @@
 {
-  "today": "2026/10/27",
+  "today": "2026/10/28",
   "labels": [
     {
       "key": "joburi",
       "title": "Joburi",
       "name": "MAVIS/Joburi",
       "counts": {
-        "azi": 0,
-        "24h": 0,
-        "7z": 0,
-        "30z": 333
+        "azi": 5,
+        "24h": 39,
+        "7z": 39,
+        "30z": 350
       },
       "newest": {
-        "id": "1a12bfc46840fb31",
-        "subject": "New jobs similar to Brand Designer,  Product Launches at Figma",
-        "date": "Sun, 11 Oct 2026 17:21:54 +0000 (UTC)",
-        "from": "LinkedIn <jobs-noreply@linkedin.com>"
+        "id": "1a180e70c885994c",
+        "subject": "13 new jobs for you: graphic design, bucharest",
+        "date": "Wed, 28 Oct 2026 07:06:10 +0200",
+        "from": "Bestjobs <contact@bestjobs.eu>"
       },
-      "newestDate": "Sun, 11 Oct 2026 17:21:54 +0000 (UTC)",
+      "newestDate": "Wed, 28 Oct 2026 07:06:10 +0200",
       "samples": [
         {
-          "id": "1a12bfc46840fb31",
-          "subject": "New jobs similar to Brand Designer,  Product Launches at Figma",
-          "date": "Sun, 11 Oct 2026 17:21:54 +0000 (UTC)",
-          "from": "LinkedIn <jobs-noreply@linkedin.com>"
+          "id": "1a180e70c885994c",
+          "subject": "13 new jobs for you: graphic design, bucharest",
+          "date": "Wed, 28 Oct 2026 07:06:10 +0200",
+          "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a12ba8fa78f6a5d",
-          "subject": "Starting at €154K/year: Ashby Staff Design Engineer - EU",
-          "date": "Sun, 11 Oct 2026 15:50:56 +0000 (UTC)",
-          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+          "id": "1a180ea91e4c7e9a",
+          "subject": "Un job nou te asteapta azi pe eJobs.ro!",
+          "date": "Wed, 28 Oct 2026 05:04:34 +0000",
+          "from": "Alerta eJobs <contact@mta.ejobs.ro>"
         },
         {
-          "id": "1a12b521ab115f3b",
-          "subject": "🔥 Pergole retractabile, copertine retractabile - Prestige Art Design caută Personal productie  și 100 mai multe oferte noi de muncă",
-          "date": "Sun, 11 Oct 2026 14:16:03 +0000",
+          "id": "1a180d9ce7d3e20f",
+          "subject": "Travel Planner caută Full-Stack Engineer (Laravel + Vue.js), UX-focused, Customer-Facing Web și 100 mai multe oferte noi de muncă",
+          "date": "Wed, 28 Oct 2026 04:52:00 +0000",
           "from": "Jooble <subscribe@ro.jooble.org>"
         },
         {
-          "id": "1a12b46d116d9860",
-          "subject": "Onchain transfer agents",
-          "date": "Sun, 11 Oct 2026 14:03:43 +0000 (UTC)",
-          "from": "MoonPay via LinkedIn <newsletters-noreply@linkedin.com>"
+          "id": "1a180c8bcc37e7b5",
+          "subject": "Alex - 7 Joburi noi adaugate pentru tine pe hipo.ro",
+          "date": "Wed, 28 Oct 2026 06:33:20 +0200",
+          "from": "\"Joburi Hipo.ro\" <joburi@alertele.hipo.ro>"
         }
       ]
     },
@@ -50,42 +50,42 @@
       "title": "AI si comunitati",
       "name": "AI Folder/AI si Comunitati",
       "counts": {
-        "azi": 0,
-        "24h": 0,
-        "7z": 0,
-        "30z": 115
+        "azi": 3,
+        "24h": 18,
+        "7z": 18,
+        "30z": 128
       },
       "newest": {
-        "id": "1a12bb3958a41822",
-        "subject": "Executive Briefing: Which Limits in Your 2027 Plan Are Real, and Which Are From the Last Time You Tried?",
-        "date": "Sun, 11 Oct 2026 15:00:41 +0000",
-        "from": "\"Nate from Nate’s Substack\" <natesnewsletter@substack.com>"
+        "id": "1a181072100875d1",
+        "subject": "Death and Dissolution: The Role of a Master",
+        "date": "Wed, 28 Oct 2026 05:41:30 +0000",
+        "from": "Isha News <isha.offerings@sadhguru.org>"
       },
-      "newestDate": "Sun, 11 Oct 2026 15:00:41 +0000",
+      "newestDate": "Wed, 28 Oct 2026 05:41:30 +0000",
       "samples": [
         {
-          "id": "1a12bb3958a41822",
-          "subject": "Executive Briefing: Which Limits in Your 2027 Plan Are Real, and Which Are From the Last Time You Tried?",
-          "date": "Sun, 11 Oct 2026 15:00:41 +0000",
-          "from": "\"Nate from Nate’s Substack\" <natesnewsletter@substack.com>"
+          "id": "1a181072100875d1",
+          "subject": "Death and Dissolution: The Role of a Master",
+          "date": "Wed, 28 Oct 2026 05:41:30 +0000",
+          "from": "Isha News <isha.offerings@sadhguru.org>"
         },
         {
-          "id": "1a129b87ae5bd47a",
-          "subject": "💼 12 new job opportunities posted in the past 24 hours",
-          "date": "Sun, 11 Oct 2026 06:48:38 +0000",
-          "from": "Twine Team <no-reply@twinehq.com>"
+          "id": "1a180ecdaa07388d",
+          "subject": "HOW MANY WOMEN DOES A MAN NEED",
+          "date": "Wed, 28 Oct 2026 05:12:39 +0000",
+          "from": "DocFreemason <docfreemason@substack.com>"
         },
         {
-          "id": "1a1298cf812427eb",
-          "subject": "9 NEW Claude Mods that can truly change how you work",
-          "date": "Sun, 11 Oct 2026 06:01:06 +0000 (UTC)",
-          "from": "Jay E <robonuggets@mail.beehiiv.com>"
+          "id": "1a18013b326c76ae",
+          "subject": "Fwd: Mentoring Application",
+          "date": "Wed, 28 Oct 2026 01:00:45 +0000",
+          "from": "\"Felix & Winston 🐶\" <felix@goatacademy.org>"
         },
         {
-          "id": "1a1263f52dbb423b",
-          "subject": "903 European Seed Funds📬, How to Evaluate Talent🧪, AI-Era Fraud Prevention🛡️",
-          "date": "Sat, 10 Oct 2026 14:34:57 +0000",
-          "from": "The Founders Corner <thefoundercorner@substack.com>"
+          "id": "1a17fc62cb321e36",
+          "subject": "Mid-Level Thumbnail Designer job at There's An AI For That - 1 connection",
+          "date": "Tue, 27 Oct 2026 23:50:56 +0000 (UTC)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
         }
       ]
     },
@@ -94,41 +94,41 @@
       "title": "Social",
       "name": "Socials",
       "counts": {
-        "azi": 0,
-        "24h": 0,
-        "7z": 0,
-        "30z": 216
+        "azi": 3,
+        "24h": 4,
+        "7z": 4,
+        "30z": 212
       },
       "newest": {
-        "id": "1a129d66139b278d",
-        "subject": "1 event happening tomorrow",
-        "date": "Sun, 11 Oct 2026 07:21:16 +0000 (UTC)",
-        "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
+        "id": "1a1810fda288de35",
+        "subject": "Weekly digest for Wed, Oct 21 2026",
+        "date": "Wed, 28 Oct 2026 05:51:02 +0000 (UTC)",
+        "from": "\"The RoboNuggets Network (free) (Skool)\" <noreply@skool.com>"
       },
-      "newestDate": "Sun, 11 Oct 2026 07:21:16 +0000 (UTC)",
+      "newestDate": "Wed, 28 Oct 2026 05:51:02 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a129d66139b278d",
-          "subject": "1 event happening tomorrow",
-          "date": "Sun, 11 Oct 2026 07:21:16 +0000 (UTC)",
+          "id": "1a1810fda288de35",
+          "subject": "Weekly digest for Wed, Oct 21 2026",
+          "date": "Wed, 28 Oct 2026 05:51:02 +0000 (UTC)",
+          "from": "\"The RoboNuggets Network (free) (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a180efe3b97dc9c",
+          "subject": "Weekly digest for Wed, Oct 21 2026",
+          "date": "Wed, 28 Oct 2026 05:16:06 +0000 (UTC)",
           "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a129c4c764ccabe",
-          "subject": "1 event happening tomorrow",
-          "date": "Sun, 11 Oct 2026 07:02:03 +0000 (UTC)",
-          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a12544147044749",
-          "subject": "10 new notifications since 1:02 pm (Oct 9, 2026)",
-          "date": "Sat, 10 Oct 2026 10:03:00 +0000 (UTC)",
+          "id": "1a18047fff8fe026",
+          "subject": "51 new notifications since 4:12 am (Oct 27, 2026)",
+          "date": "Wed, 28 Oct 2026 02:12:43 +0000 (UTC)",
           "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a124b4cc62abd24",
+          "id": "1a17c6669aab5e9e",
           "subject": "1 event happening tomorrow",
-          "date": "Sat, 10 Oct 2026 07:26:30 +0000 (UTC)",
+          "date": "Tue, 27 Oct 2026 08:07:28 +0000 (UTC)",
           "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
         }
       ]
@@ -138,42 +138,42 @@
       "title": "Newsletter",
       "name": "Newsletter",
       "counts": {
-        "azi": 0,
-        "24h": 0,
-        "7z": 0,
-        "30z": 235
+        "azi": 6,
+        "24h": 50,
+        "7z": 50,
+        "30z": 271
       },
       "newest": {
-        "id": "1a12c5f5b5566c0f",
-        "subject": "The Robinhood Big 3 Basket Is +46.59% in 1 year",
-        "date": "Sun, 11 Oct 2026 19:10:07 +0000 (UTC)",
-        "from": "\"Crypto.com\" <no-reply@news.crypto.com>"
+        "id": "1a1810fda288de35",
+        "subject": "Weekly digest for Wed, Oct 21 2026",
+        "date": "Wed, 28 Oct 2026 05:51:02 +0000 (UTC)",
+        "from": "\"The RoboNuggets Network (free) (Skool)\" <noreply@skool.com>"
       },
-      "newestDate": "Sun, 11 Oct 2026 19:10:07 +0000 (UTC)",
+      "newestDate": "Wed, 28 Oct 2026 05:51:02 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a12c5f5b5566c0f",
-          "subject": "The Robinhood Big 3 Basket Is +46.59% in 1 year",
-          "date": "Sun, 11 Oct 2026 19:10:07 +0000 (UTC)",
-          "from": "\"Crypto.com\" <no-reply@news.crypto.com>"
+          "id": "1a1810fda288de35",
+          "subject": "Weekly digest for Wed, Oct 21 2026",
+          "date": "Wed, 28 Oct 2026 05:51:02 +0000 (UTC)",
+          "from": "\"The RoboNuggets Network (free) (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a12bee290d46f2e",
-          "subject": "You sent RON160 to Alexandru Popescu 💸",
-          "date": "Sun, 11 Oct 2026 17:06:29 +0000",
-          "from": "Revolut <no-reply@revolut.com>"
+          "id": "1a181072100875d1",
+          "subject": "Death and Dissolution: The Role of a Master",
+          "date": "Wed, 28 Oct 2026 05:41:30 +0000",
+          "from": "Isha News <isha.offerings@sadhguru.org>"
         },
         {
-          "id": "1a12ae7ce1fff1be",
-          "subject": "[GitHub] A personal access token (classic) has been added to your account",
-          "date": "Sun, 11 Oct 2026 05:19:57 -0700",
-          "from": "GitHub <noreply@github.com>"
+          "id": "1a180efe3b97dc9c",
+          "subject": "Weekly digest for Wed, Oct 21 2026",
+          "date": "Wed, 28 Oct 2026 05:16:06 +0000 (UTC)",
+          "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a129b6649070348",
-          "subject": "Lichidam tot STOCUL -80% Reducere !",
-          "date": "Sun, 11 Oct 2026 06:46:21 +0000",
-          "from": "\"BricoMAG™\" <newsletter@magazin-autoaparare.eu>"
+          "id": "1a18047fff8fe026",
+          "subject": "51 new notifications since 4:12 am (Oct 27, 2026)",
+          "date": "Wed, 28 Oct 2026 02:12:43 +0000 (UTC)",
+          "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
         }
       ]
     },
@@ -183,41 +183,41 @@
       "name": "Finante",
       "counts": {
         "azi": 0,
-        "24h": 0,
-        "7z": 0,
-        "30z": 5
+        "24h": 3,
+        "7z": 3,
+        "30z": 8
       },
       "newest": {
-        "id": "1a112cd10810c41d",
-        "subject": "Ether.fi Partners with MoonPay to Power Full Stack Payments for Crypto Neobanking",
-        "date": "Tue, 6 Oct 2026 19:59:51 +0000 (UTC)",
-        "from": "MoonPay via LinkedIn <newsletters-noreply@linkedin.com>"
+        "id": "1a17dc482342f6b9",
+        "subject": "New idea by Cryptollica — check it out",
+        "date": "Tue, 27 Oct 2026 14:29:51 -0000",
+        "from": "TradingView <noreply@tradingview.com>"
       },
-      "newestDate": "Tue, 6 Oct 2026 19:59:51 +0000 (UTC)",
+      "newestDate": "Tue, 27 Oct 2026 14:29:51 -0000",
       "samples": [
+        {
+          "id": "1a17dc482342f6b9",
+          "subject": "New idea by Cryptollica — check it out",
+          "date": "Tue, 27 Oct 2026 14:29:51 -0000",
+          "from": "TradingView <noreply@tradingview.com>"
+        },
+        {
+          "id": "1a17d422fa02742e",
+          "subject": "A new mind by TradingView, check it out",
+          "date": "Tue, 27 Oct 2026 12:07:30 +0000",
+          "from": "TradingView <noreply@tradingview.com>"
+        },
+        {
+          "id": "1a17c49a45562efc",
+          "subject": "New idea by Cryptollica — check it out",
+          "date": "Tue, 27 Oct 2026 07:36:01 -0000",
+          "from": "TradingView <noreply@tradingview.com>"
+        },
         {
           "id": "1a112cd10810c41d",
           "subject": "Ether.fi Partners with MoonPay to Power Full Stack Payments for Crypto Neobanking",
           "date": "Tue, 6 Oct 2026 19:59:51 +0000 (UTC)",
           "from": "MoonPay via LinkedIn <newsletters-noreply@linkedin.com>"
-        },
-        {
-          "id": "1a1128207fa4419a",
-          "subject": "Factura Digi a fost emisa",
-          "date": "Tue, 06 Oct 2026 21:37:53 +0300",
-          "from": "DIGI <support@info.digi.ro>"
-        },
-        {
-          "id": "1a10cb2d4f4fe076",
-          "subject": "The NYSE’s owner wants a stock market that never closes",
-          "date": "Mon, 5 Oct 2026 15:31:17 +0000",
-          "from": "The Token Trenches <tokentrenches@substack.com>"
-        },
-        {
-          "id": "1a1032c69d6018a6",
-          "subject": "The Robinhood Big 3 Basket Is +1396.85% in 3 months",
-          "date": "Sat, 03 Oct 2026 19:10:03 +0000 (UTC)",
-          "from": "\"Crypto.com\" <no-reply@news.crypto.com>"
         }
       ]
     },
@@ -242,7 +242,7 @@
         "azi": 0,
         "24h": 0,
         "7z": 0,
-        "30z": 30
+        "30z": 28
       },
       "newest": {
         "id": "1a120e8558d6b485",
@@ -286,7 +286,7 @@
         "azi": 0,
         "24h": 0,
         "7z": 0,
-        "30z": 2
+        "30z": 1
       },
       "newest": {
         "id": "1a120593ede9884b",
@@ -301,12 +301,6 @@
           "subject": "Confirmare plată facturi prin Pago",
           "date": "Fri, 09 Oct 2026 11:08:01 +0000 (UTC)",
           "from": "\"Plăți Pago\" <plati@pagoplateste.ro>"
-        },
-        {
-          "id": "1a0e23d3cd22bb4c",
-          "subject": "Factură scadentă Pago",
-          "date": "Sun, 27 Sep 2026 09:40:59 +0000 (UTC)",
-          "from": "Ajutor Pago <ajutor@pagoplateste.ro>"
         }
       ]
     },
@@ -315,51 +309,51 @@
       "title": "Agenti (pipeline propriu)",
       "name": "Optimus CD",
       "counts": {
-        "azi": 8,
-        "24h": 201,
-        "7z": 582,
-        "30z": 638
+        "azi": 1,
+        "24h": 14,
+        "7z": 596,
+        "30z": 650
       },
       "newest": {
-        "id": "1a17ad2223dcb58a",
-        "subject": "Re: [apvizual-max/Optimus-Mavis-Skills] 🧹 [code health improvement] add explanatory comment to except block (PR #59)",
-        "date": "Mon, 26 Oct 2026 17:45:53 -0700",
-        "from": "\"google-labs-jules[bot]\" <notifications@github.com>"
+        "id": "1a17feca52df51a4",
+        "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (1c5ec27)",
+        "date": "Tue, 27 Oct 2026 17:32:56 -0700",
+        "from": "apvizual-max <notifications@github.com>"
       },
-      "newestDate": "Mon, 26 Oct 2026 17:45:53 -0700",
+      "newestDate": "Tue, 27 Oct 2026 17:32:56 -0700",
       "samples": [
         {
-          "id": "1a17ad2223dcb58a",
-          "subject": "Re: [apvizual-max/Optimus-Mavis-Skills] 🧹 [code health improvement] add explanatory comment to except block (PR #59)",
-          "date": "Mon, 26 Oct 2026 17:45:53 -0700",
-          "from": "\"google-labs-jules[bot]\" <notifications@github.com>"
+          "id": "1a17feca52df51a4",
+          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (1c5ec27)",
+          "date": "Tue, 27 Oct 2026 17:32:56 -0700",
+          "from": "apvizual-max <notifications@github.com>"
         },
         {
-          "id": "1a17ad21e5b60143",
-          "subject": "[apvizual-max/Optimus-Mavis-Skills] 🧹 [code health improvement] add explanatory comment to except block (PR #59)",
-          "date": "Mon, 26 Oct 2026 17:45:53 -0700",
-          "from": "\"google-labs-jules[bot]\" <notifications@github.com>"
+          "id": "1a17d21cbd411862",
+          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (0404154)",
+          "date": "Tue, 27 Oct 2026 04:32:07 -0700",
+          "from": "apvizual-max <notifications@github.com>"
         },
         {
-          "id": "1a17ad156c3ffa84",
-          "subject": "Re: [apvizual-max/SENTINEL_PRIME] 🧹 [code health improvement] Verify build_program_matrix.py code health (PR #59)",
-          "date": "Mon, 26 Oct 2026 17:45:02 -0700",
-          "from": "\"google-labs-jules[bot]\" <notifications@github.com>"
+          "id": "1a17d20eee79c873",
+          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (e108a24)",
+          "date": "Tue, 27 Oct 2026 04:31:11 -0700",
+          "from": "apvizual-max <notifications@github.com>"
         },
         {
-          "id": "1a17ad155e560120",
-          "subject": "[apvizual-max/SENTINEL_PRIME] 🧹 [code health improvement] Verify build_program_matrix.py code health (PR #59)",
-          "date": "Mon, 26 Oct 2026 17:45:01 -0700",
-          "from": "\"google-labs-jules[bot]\" <notifications@github.com>"
+          "id": "1a17d20a76da3025",
+          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (e108a24)",
+          "date": "Tue, 27 Oct 2026 04:30:53 -0700",
+          "from": "apvizual-max <notifications@github.com>"
         }
       ]
     }
   ],
   "missing": [],
   "totals": {
-    "azi": 8,
-    "24h": 201,
-    "7z": 582,
-    "30z": 1574
+    "azi": 18,
+    "24h": 128,
+    "7z": 710,
+    "30z": 1648
   }
 }
