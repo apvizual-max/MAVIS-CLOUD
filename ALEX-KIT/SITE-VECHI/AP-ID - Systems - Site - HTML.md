@@ -1043,9 +1043,14 @@
 <!-- ==================== TAB 3: EVIDENCE MATRIX (MASSIVELY EXPANDED – quantifiable impact, visual metrics, case study grids, client categories, performance lifts, skill radar) ==================== -->
 <section id="evidence" class="tab-content">
   <div class="mb-16">
-    <span class="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full">02 / Validation</span>
+    <div class="flex flex-wrap justify-between items-end border-b border-border/40 pb-6 mb-8">
+      <!-- Modified to unify visual hierarchy with the rest of the document -->
+      <div>
+        <span class="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full">02 / Validation</span>
     <h2 class="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">Evidence‑Based Case Studies</h2>
     <p class="text-textMuted max-w-3xl text-lg">Anchoring claims in quantifiable achievements from enterprise and DTC & Corporateenvironments.</p>
+      </div>
+    </div>
   </div>
 
   <!-- HEADLINE METRICS (expanded with icons and hover detail) -->
@@ -1245,9 +1250,14 @@
 <!-- ==================== TAB 4: ROADMAP (MASSIVELY EXPANDED – full timeline, sub‑phases, risk mitigation, deliverables, success metrics, visual flow) ==================== -->
 <section id="roadmap" class="tab-content">
   <div class="mb-16 text-center">
-    <span class="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full">03 / Execution</span>
+    <div class="flex flex-wrap justify-between items-end border-b border-border/40 pb-6 mb-8">
+      <!-- Modified to unify visual hierarchy with the rest of the document -->
+      <div class="mx-auto">
+        <span class="text-accent text-xs font-bold uppercase tracking-widest bg-accent/10 px-3 py-1 rounded-full">03 / Execution</span>
     <h2 class="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">Implementation Roadmap</h2>
     <p class="text-textMuted max-w-2xl mx-auto text-lg">From Day 1 Sandbox to Long‑Term Symbiosis. A de‑risked, phased path to proprietary creative infrastructure.</p>
+      </div>
+    </div>
   </div>
 
   <!-- PHASE CARDS (enhanced with icons and sub‑metrics) -->
@@ -1741,7 +1751,10 @@
 <!-- ==================== TAB 6: FOR The Company · HR (ENHANCED with new visuals, radar, retention gauge, skills matrix, and expanded data) ==================== -->
 <section id="hr" class="tab-content">
   <div class="mb-16 text-center">
-    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-client/30 bg-client/5 text-client text-xs font-mono mb-6" data-popup data-title="HR Validation Layer" data-depth="TIER 2 · DATA · HR PERSPECTIVE" data-content="This section synthesizes HR-relevant validation: risk mitigation, cultural fit, retention signals, compliance readiness, and cross-functional collaboration proof. All data points are indexed from verified sources: CV, LinkedIn Profile PDF, Microsoft Achievements, indexed testimonials, and live web research on the Company's market position.">
+    <div class="flex flex-wrap justify-between items-end border-b border-border/40 pb-6 mb-8">
+      <!-- Modified to unify visual hierarchy with the rest of the document -->
+      <div class="mx-auto">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-client/30 bg-client/5 text-client text-xs font-mono mb-6" data-popup data-title="HR Validation Layer" data-depth="TIER 2 · DATA · HR PERSPECTIVE" data-content="This section synthesizes HR-relevant validation: risk mitigation, cultural fit, retention signals, compliance readiness, and cross-functional collaboration proof. All data points are indexed from verified sources: CV, LinkedIn Profile PDF, Microsoft Achievements, indexed testimonials, and live web research on the Company's market position.">
       <span class="w-2 h-2 rounded-full bg-client animate-pulse"></span>
       HR VALIDATION · RISK MITIGATION & CULTURAL FIT
     </div>
@@ -1753,6 +1766,8 @@
     </div>
     <h1 class="font-display text-5xl md:text-7xl font-bold leading-[0.95] mb-6">HR <span class="client-gradient">Validation</span></h1>
     <p class="text-xl text-textMuted max-w-3xl mx-auto leading-relaxed">Risk mitigation, cultural fit, and retention signals for the <span class="text-client font-semibold">Senior Graphic Designer</span> role.</p>
+      </div>
+    </div>
   </div>
 
   <!-- Dual-Axis Competency Matrix (enhanced with radar chart) -->
