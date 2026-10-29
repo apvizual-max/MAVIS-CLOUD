@@ -1,7 +1,38 @@
 # PROGRES — MAVIS-CLOUD
 
-**Ultima actualizare:** 12 iulie 2026 · **Instanță:** Mavis Cloud
+**Ultima actualizare:** 29 octombrie 2026 · **Instanță:** Mavis Cloud
 **Repo:** `github.com/apvizual-max/MAVIS-CLOUD` · `main`
+
+---
+
+## 2026-10-29 — PANOUL ȘI SITE-URILE CV AU FOST SEPARATE
+
+**Cerință (POPY):** „split this site into 2 sites" — panoul rămâne pe adresa lui,
+tab-ul „Site CV" devine doar **legături** (cu previzualizare **legată**, nu copy
+embedded), iar site-ul CV devine site propriu, cu adresă proprie. Și **ambele** în
+MiniMax Code (secțiunea SITES) **și** în oglinda locală de pe E:.
+
+### Ce s-a făcut
+- ✅ `SITE/build.py` scrie în `SITE/dist-cv/<rol>/index.html` — site autonom, index la rădăcină
+- ✅ Panoul nu mai conține copii: `SITE/dist/` = doar panoul; `curata_dist()` elimină `*.index.html` rămase
+- ✅ Tab-ul „Site CV": carduri cu legături + previzualizare legată (iframe → site-ul surs)
+- ✅ Lista se citește **de pe server** la fiecare încărcare (`registryUrl`, `cache: no-store`); rezervă locală = doar titlu/rol/URL
+- ✅ `SITE/docs-viewer/index.html` intrat în repo — altfel un build nou pierdea vizualizatorul de documente (era doar pe server)
+- ✅ `SITE/test_split.py` — 4 teste; rulează și în CI (`verify.yml`)
+- ✅ `SITE/prepare-deploy.py` — pregătește build + sursă, fără nimic din restul repo-ului
+- ✅ Oglinda locală: `CASA/_Sites/Mavis/Mavis-Cloud/` și `CASA/_Sites/Mavis/Mavis-CV-Graphic-Designer/`
+- ✅ `AGENTS.md` Regula 0 + 3 skill-uri actualizate: panoul e pe nodul viu, site-urile CV sunt separate
+
+### Măsurat, nu estimat
+- 4/4 teste split verzi · `ast.parse` pe tot Python-ul din `SITE/` · `node --check` pe JS · scanare de secrete în diff: **zero**
+- CORS măsurat **înainte** de scris cod: `Access-Control-Allow-Origin: *` pe host → fetch cross-origin merge. Altfel design-ul era greșit
+- URL-ul vechi din Regula 0 (`da15e9yb994ps`) → **404**: panoul viu e `4nsxl2or95u1a`
+
+### Nepublicat — și de ce
+Instrumentul de deploy din app a răspuns `401 invalid access token` la `get_upload_url`,
+de 4 ori, cu tokenul local valid (`mcode-tools auth status` → authenticated). Nu e
+build-ul: build-ul e gata, testat, în oglindă și în repo. E o blocadă de autentificare
+a platformei. Ordinea publicării, în 3 apeluri: `CASA/_Sites/Mavis/PUBLISH.md`.
 
 ---
 
