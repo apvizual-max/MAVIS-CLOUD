@@ -408,9 +408,10 @@
   <!-- FOUR PILLARS (fixed spacing, cards evenly spaced) -->
   <div class="section-divider my-16"><span class="text-accent text-xs font-bold uppercase tracking-widest whitespace-nowrap px-4">The Four Pillars</span></div>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-    <div class="glass-card p-6 rounded-xl flex flex-col cursor-pointer transition-all hover:scale-[1.02]" data-popup data-title="Pillar I: Proven DTC & Corporate Execution and Corporate responsiveness and adaptability" data-depth="VERIFIED PROOF" data-content="Led 50+ online campaigns for Ninja, AIPER, PURE Electric; Processed 25,000+ visuals for MADE.com; Direct experience with   brands Crock-Pot and Shark. Results: 20% sales acceleration, 25% engagement lift.">
+    <div class="glass-card p-6 rounded-xl flex flex-col cursor-pointer transition-all hover:scale-[1.02]" data-popup data-title="Pillar I: Proven DTC & Corporate Execution" data-depth="VERIFIED PROOF" data-content="Led 50+ online campaigns for Ninja, AIPER, PURE Electric; Processed 25,000+ visuals for MADE.com; Direct experience with   brands Crock-Pot and Shark. Results: 20% sales acceleration, 25% engagement lift.">
       <div class="w-10 h-10 rounded-lg bg-human/10 flex items-center justify-center mb-5"><svg class="w-5 h-5 text-human" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg></div>
-      <h4 class="font-display font-bold mb-2">DTC & Corporate Execution and Corporate responsability and Corporate responsability</h4>
+      <!-- JULES DESIGN: scurtat la "DTC & Corporate Execution" pentru consistenta cu restul structurii si pentru a corecta typo-ul -->
+      <h4 class="font-display font-bold mb-2">DTC & Corporate Execution</h4>
       <p class="text-xs text-textMuted mb-5 leading-relaxed">Ninja, Crock-Pot, Shark, AIPER</p>
       <div class="sparkline mt-auto mb-3"><div class="sparkline-bar" style="height:40%"></div><div class="sparkline-bar" style="height:60%"></div><div class="sparkline-bar" style="height:75%"></div><div class="sparkline-bar" style="height:50%"></div><div class="sparkline-bar" style="height:90%"></div><div class="sparkline-bar" style="height:80%"></div><div class="sparkline-bar" style="height:100%"></div></div>
       <div class="text-xs text-human font-mono mt-2">50+ Campaigns</div>
