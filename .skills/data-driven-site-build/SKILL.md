@@ -14,16 +14,28 @@ JSON. UI-ul nu se atinge niciodată.
 SITE/
 ├── date/graphic-designer.json   ← singurul lucru pe care îl schimbi
 ├── date/art-director.json       ← când ajungi la nivelul 2
+├── date/cv-sites.json           ← registrul site-urilor CV (URL-uri)
 ├── css/schelet.css              ← nu se atinge
 ├── build.py                     ← JSON intră, HTML iese
-└── dist/                        ← generat, nu se versionează
+├── dist-cv/                     ← generat: câte un folder per site CV
+└── dist/                        ← generat: doar panoul
 ```
 
 ## Comanda
 
 ```bash
-python3 SITE/build.py graphic-designer
+python3 SITE/build.py graphic-designer     # site-ul CV: dist-cv/graphic-designer/index.html
+python3 SITE/build.py --all                # toate rolurile
 ```
+
+## Un rol = un site, nu o pagină
+
+Fiecare rol e un **site autonom**: `index.html` la rădăcină, cu URL-ul lui,
+construit separat. Panoul **nu conține copii** ale paginilor CV — conține
+legături. Contractul complet: skill-ul `site-split-cv-sites`.
+
+Registrul `date/cv-sites.json` e sursa unică a listei: îl copiază lângă fiecare
+site, iar panoul îl citește de pe server, la fiecare încărcare.
 
 ## Ce se câștigă
 
@@ -66,6 +78,8 @@ Toate trei se construiesc **din același schelet**, cu JSON-uri diferite.
 ## Verificare înainte de commit
 
 ```bash
-python3 SITE/build.py graphic-designer
+python3 SITE/build.py --all
+python3 SITE/build-hub.py
+python3 SITE/test_split.py      # site-urile sunt separate, panoul doar leagă
 node --check ALEX-KIT/cv-mutator.js
 ```

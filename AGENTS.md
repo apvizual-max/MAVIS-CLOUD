@@ -19,12 +19,26 @@ Verificarea înainte de orice raport:
 
 ## Regula 0 — nu se negociază
 
-**Un singur deployment:**
+**Panoul e UN SINGUR deployment:**
 ```
-https://da15e9yb994ps.space.minimax.io
+https://4nsxl2or95u1a.space.minimax.io      (nod 451351241044296)
 ```
-**Niciodată altul**, fără cerere explicită de la POPY. Fiecare deploy creează
-un site nou în panoul lui. Am făcut asta de trei ori și l-am stricat.
+**Niciodată alt nod pentru panoul**, fără cerere explicită de la POPY. Fiecare
+deploy creează un site nou în panoul lui. Am făcut asta de trei ori și l-am stricat.
+
+> Măsurat 2026-10-29: URL-ul vechi din această regulă,
+> `da15e9yb994ps.space.minimax.io`, răspunde **404**. Panoul viu e cel de mai sus.
+
+**Update in place, nu nod nou.** Instrumentul de deploy acceptă `node_id`:
+actualizează site-ul existent, cu același URL, cu aceleași aliasuri. Asta e
+calea normală pentru panou.
+
+**Site-urile CV sunt site-uri SEPARATE, unul per rol** — cerere explicită de la
+POPY (2026-10-29). Fiecare rol primește nodul lui, cu URL-ul lui, cu build
+propriu. Panoul doar **leagă** site-urile, nu le copiază: tab-ul „Site CV" are
+legături și o previzualizare **legată** (iframe către site-ul surs), iar lista
+se citește de pe server la fiecare încărcare. Contractul complet, cu ordinea
+de deploy: skill-ul `site-split-cv-sites`.
 
 **Ramuri: nu.** Se lucrează pe `main`. Ramură se face **doar** când POPY o cere.
 
@@ -151,7 +165,7 @@ Fișierul complet: `docs/REGULI-PLATFORMA.md`
 
 1. **CRON → verific pe platforma ONLINE.** Cronurile Cloud și cronurile Local sunt în locuri diferite. Programat în cloud și căutat în interfața Local = concluzie greșită.
 2. **NotebookLM → browser.** API-ul oficial există DOAR pe Enterprise (licențe plătite). Cloud pregătește documentele, Local creează notebook-ul și le încarcă.
-3. **DEPLOY → Local.** Instrumentul cloud creează nod nou la fiecare rulare, nu actualizează.
+3. **DEPLOY → Local.** Instrumentul cloud creează nod nou la fiecare rulare, nu actualizează. **Local, instrumentul acceptă `node_id` → update in place, același URL** (măsurat 2026-10-29). Pentru panou: mereu update in place, niciodată nod nou.
 4. **VARIABILE → verifică ce există, nu inventa.** `LINKEDIN_EMAIL` nu există; e `GOOGLE_EMAIL`.
 5. **SECRETE → sertar.** O cheie, un scop. Nu în chat, nu în repo, nu prin Jules.
 6. **Nu cere date pe care le verific deja.** Nu întreb cine are notebook-ul. Nu întreb ce se vede în Drive.

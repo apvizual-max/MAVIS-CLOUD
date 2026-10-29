@@ -28,6 +28,7 @@ mavis-tools/bin/
 
 # PRODUSE GENERATE — se construiesc la deploy, nu se versioneaza
 SITE/dist/
+SITE/dist-cv/
 # FISIERE CU CREDENTIALE - NU SE COMITEAZA NICIODATA
 *Access*.md
 *LinkedIn*Access*

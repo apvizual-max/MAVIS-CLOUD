@@ -23,7 +23,9 @@ git commit -m "ce s-a făcut, într-o linie"
 # 3. R0 — verificarea ÎNAINTE de push
 node --check ALEX-KIT/cv-mutator.js
 node --check ALEX-KIT/letter-engine.js
+python3 SITE/build.py --all
 python3 SITE/build-hub.py
+python3 SITE/test_split.py
 python3 -c "import ast,io,glob; [ast.parse(io.open(f,encoding='utf-8').read()) for f in glob.glob('SITE/*.py')]"
 git diff --cached --name-only | grep -iE "secret|token|credential" && STOP
 
@@ -65,8 +67,12 @@ nu împingi, corectezi, și abia apoi.
 1. **`main`, niciodată ramură.** Ramuri doar când POPY spune cuvântul „ramură".
 2. **Fără întrebări.** Nu întreb dacă să comit. Comit.
 3. **Fără „vrei să vezi?"** — împing și îi arăt starea.
-4. **Fără deploy fără cerere explicită.** Un singur deployment:
-   `https://da15e9yb994ps.space.minimax.io`. **Niciodată altul.**
+4. **Fără deploy fără cerere explicită.** Panoul e **UN** deployment:
+   `https://4nsxl2or95u1a.space.minimax.io` (nod `451351241044296`).
+   **Niciodată alt nod pentru panoul.** Deploy-ul se face cu `node_id` →
+   **update in place**, același URL.
+   Site-urile CV: **nod nou per rol**, doar la cerere explicită de la POPY.
+   Contractul separării: skill-ul `site-split-cv-sites`.
 
 ## Când îi spun că împing
 

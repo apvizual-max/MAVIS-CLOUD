@@ -86,6 +86,11 @@ jobs:
           test -s SITE/dist/index.html
           echo "✅ site generat"
 
+      - name: Site-urile CV sunt separate (fără copie în panou)
+        run: |
+          python3 SITE/test_split.py
+          echo "✅ site-urile sunt separate, panoul doar leagă"
+
       - name: Șabloanele generice nu conțin nume de firmă
         run: |
           HIT=$(grep -ril "saatchi\|bell studio\|ontheroof\|flaminjoy\|international waters" ALEX-KIT/SABLOANE/ 2>/dev/null || true)

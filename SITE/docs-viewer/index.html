@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="ro"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Document · Mavis Cloud</title>
+<link href="../css/doc.css" rel="stylesheet">
+</head><body>
+
+<div class="bar"><div class="wrap">
+  <a class="back" href="../index.html">← Panou</a>
+  <span class="name" id="nume">…</span>
+</div></div>
+
+<div class="wrap"><div id="continut"><p style="color:#64748b">Se încarcă…</p></div></div>
+
+<script>
+function esc(s){return s.replace(/[&<>]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+
+function md(t){
+  var b=[],inCode=false;
+  t.split('\n').forEach(function(l){
+    if(/^```/.test(l)){
+      if(inCode){b.push('</code></pre>');inCode=false;}
+      else{b.push('<pre><code>');inCode=true;}
+      return;
+    }
+    if(inCode){b.push(esc(l));return;}
+
+    var h=l.match(/^(#{1,4})\s+(.*)$/);
+    if(h){b.push('<h'+h[1].length+'>'+inline(h[2])+'</h'+h[1].length+'>');return;}
+    if(/^(-{3,}|\*{3,})$/.test(l.trim())){b.push('<hr>');return;}
+    if(/^>\s?/.test(l)){b.push('<blockquote>'+inline(l.replace(/^>\s?/,''))+'</blockquote>');return;}
+    if(/^\s*[-*+]\s+/.test(l)){b.push('<li>'+inline(l.replace(/^\s*[-*+]\s+/,''))+'</li>');return;}
+    if(/^\s*\d+\.\s+/.test(l)){b.push('<li>'+inline(l.replace(/^\s*\d+\.\s+/,''))+'</li>');return;}
+    if(/^\|/.test(l)){b.push(l);return;}
+    if(!l.trim()){b.push('');return;}
+    b.push('<p>'+inline(l)+'</p>');
+  });
+
+  // tabela
+  var out=[],inT=false;
+  b.forEach(function(x){
+    if(x && x.charAt(0)==='|'){
+      if(!inT){out.push('<table>');inT=true;}
+      var cells=x.replace(/^\||\|$/g,'').split('|').map(function(c){return c.trim();});
+      if(cells.every(function(c){return /^:?-{2,}:?$/.test(c);}))return;
+      var tag=cells.length<3?'th':'td';
+      out.push('<tr>'+cells.map(function(c){return '<'+tag+'>'+inline(c)+'</'+tag+'>';}).join('')+'</tr>');
+    }else{
+      if(inT){out.push('</table>');inT=false;}
+      if(Array.isArray(x))out.push(x.join(''));
+      else if(x)out.push(x);
+    }
+  });
+  if(inT)out.push('</table>');
+
+  var s=out.join('\n');
+  // liste consecutive -> <ul>
+  s=s.replace(/(<li>[\s\S]*?<\/li>\n?)+/g,function(m){
+    return '<ul>'+m.replace(/<\/li>\n<li>/g,'</li>\n')+'</ul>';
+  });
+  return s;
+}
+
+function inline(s){
+  return esc(s)
+    .replace(/`([^`]+)`/g,'<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+    .replace(/(^|\s)\*([^*]+)\*/g,'$1<em>$2</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2">$1</a>');
+}
+
+var q=new URLSearchParams(location.search);
+var f=q.get('doc');
+var el=document.getElementById('nume'), c=document.getElementById('continut');
+
+if(!f){
+  el.textContent='Toate documentele';
+  c.innerHTML='<div class="choose"><h2>Alege un document</h2>'+
+    ['SENTINEL-LATEST.md','HANDOFF.md','PROCES-COMPLET.md','JULES-INSTRUMENTARE.md',
+     'REGISTRUL-EXTERN.md','INTENTII.md','CI-NOTES.md']
+    .map(function(n){return '<a href="?doc='+n+'">'+n+'</a>';}).join('')+
+    '</div>';
+}else{
+  el.textContent=f;
+  fetch(f).then(function(r){
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    return r.text();
+  }).then(function(t){
+    document.title=f+' · Mavis Cloud';
+    c.innerHTML='<h1>'+f.replace(/\.md$/,'')+'</h1>'+md(t);
+    window.scrollTo(0,0);
+  }).catch(function(e){
+    c.innerHTML='<div class="err"><b>Nu pot deschide documentul.</b><br>'+
+      'Fișier: '+esc(f)+'<br>Eroare: '+esc(e.message)+
+      '<br><br>Verifică dacă <code>docs/'+esc(f)+'</code> există pe server.'+
+      '<br><a href="../index.html">← înapoi la panou</a></div>';
+  });
+}
+</script>
+</body></html>

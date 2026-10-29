@@ -3,14 +3,20 @@
 
     python3 build.py graphic-designer
 
-Citeste SITE/date/<rol>.json, emite SITE/dist/<rol>.index.html
+Citeste SITE/date/<rol>.json, emite SITE/dist-cv/<rol>/index.html
 Structura ramane aceeasi. Schimbi datele, nu UI-ul.
+
+REGULA DE SEPARARE (2026-10-29): fiecare rol e un SITE AUTONOM.
+Panoul (build-hub.py) nu mai primeste copii ale paginilor CV - doar
+legaturi. De aceea build.py NU scrie in SITE/dist/, ci in SITE/dist-cv/<rol>/.
 """
-import json, os, sys, html
+import json, os, sys, html, glob
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 DATE = os.path.join(BASE, 'date')
 DIST = os.path.join(BASE, 'dist')
+DIST_CV = os.path.join(BASE, 'dist-cv')
+REGISTRY = os.path.join(DATE, 'cv-sites.json')
 CSS  = os.path.join(BASE, 'css', 'schelet.css')
 
 def esc(s):
@@ -23,6 +29,33 @@ def initials(name):
 def load_data(slug):
     src = os.path.join(DATE, slug + '.json')
     return json.load(open(src, encoding='utf-8'))
+
+def load_registry():
+    """Registrul de site-uri CV - sura unica, pentru panou si pentru site-uri.
+
+    Il citeste panoul la build (ca rezerva) si il citesc site-urile la runtime
+    (ca lista linked). Format: {"registryUrl": ..., "sites": [...]}.
+    """
+    if not os.path.exists(REGISTRY):
+        return {'sites': [], 'registryUrl': ''}
+    try:
+        with open(REGISTRY, encoding='utf-8') as f:
+            reg = json.load(f)
+    except Exception:
+        return {'sites': [], 'registryUrl': ''}
+    reg.setdefault('sites', [])
+    reg.setdefault('registryUrl', '')
+    return reg
+
+def roluri():
+    """Rolurile = fisierele JSON de date, mai putin fisierele de infrastructura."""
+    out = []
+    for p in sorted(glob.glob(os.path.join(DATE, '*.json'))):
+        n = os.path.basename(p)
+        if n in ('repos.json', 'cv-sites.json'):
+            continue
+        out.append(os.path.splitext(n)[0])
+    return out
 
 def render_cv(cv):
     skills = '\n'.join(
@@ -272,7 +305,7 @@ def render_template(r, cv, port, scr, con, css, skills, ach, tl, edu, cards, bod
 """
     return out
 
-def build(slug):
+def build(slug, out_dir=None):
     d = load_data(slug)
     r, cv, port, scr, con = d['rol'], d['cv'], d['portofolio'], d['scrisoare'], d['contact']
     css = open(CSS, encoding='utf-8').read()
@@ -284,13 +317,34 @@ def build(slug):
 
     out = render_template(r, cv, port, scr, con, css, skills, ach, tl, edu, cards, body, contact, links)
 
-    os.makedirs(DIST, exist_ok=True)
-    path = os.path.join(DIST, slug + '.index.html')
+    os.makedirs(out_dir or DIST, exist_ok=True)
+    path = os.path.join(out_dir or DIST, 'index.html')
     open(path, 'w', encoding='utf-8').write(out)
     return path, len(out), len(port)
 
+def build_site(slug):
+    """Construieste un SITE CV autonom: index.html la radacina.
+
+    Alaturi se pune cv-sites.json - registrul. Panoul il citeste de acolo,
+    de pe server, la fiecare incarcare. De aceea panoul nu tine nicio copie
+    a paginii CV: are legatura, nu continut copiat.
+    """
+    site_dir = os.path.join(DIST_CV, slug)
+    path, n, cards = build(slug, site_dir)
+    reg = load_registry()
+    with open(os.path.join(site_dir, 'cv-sites.json'), 'w', encoding='utf-8') as f:
+        json.dump(reg, f, ensure_ascii=False, indent=2)
+        f.write('\n')
+    return site_dir, path, n, cards
+
 if __name__ == '__main__':
-    slug = sys.argv[1] if len(sys.argv) > 1 else 'graphic-designer'
-    p, n, cards = build(slug)
-    print('OK  %s' % p)
-    print('    %d caractere, %d carduri de proiect' % (n, cards))
+    args = sys.argv[1:]
+    if not args or args[0] == '--all':
+        for slug in roluri():
+            d, p, n, cards = build_site(slug)
+            print('OK  %s' % d)
+            print('    %d caractere, %d carduri de proiect' % (n, cards))
+    else:
+        d, p, n, cards = build_site(args[0])
+        print('OK  %s' % p)
+        print('    %d caractere, %d carduri de proiect' % (n, cards))

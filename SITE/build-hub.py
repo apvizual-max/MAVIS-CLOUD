@@ -74,6 +74,126 @@ def esc(s):
     return (str(s).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
             .replace('"', '&quot;'))
 
+# --- REGISTRUL DE SITE-URI CV -------------------------------------------------
+# Panoul NU are copii ale paginilor CV. Are legaturi catre site-uri separate.
+# Lista se citeste LIVE, de la server, la fiecare incarcare a paginii: de aceea
+# schimbarea sursei se vede imediat, fara sa reconstruiesc panoul.
+REGISTRY = os.path.join(BASE, 'date', 'cv-sites.json')
+
+def load_registry():
+    if not os.path.exists(REGISTRY):
+        return {'sites': [], 'registryUrl': ''}
+    try:
+        with open(REGISTRY, encoding='utf-8') as f:
+            reg = json.load(f)
+    except Exception:
+        return {'sites': [], 'registryUrl': ''}
+    reg.setdefault('sites', [])
+    reg.setdefault('registryUrl', '')
+    return reg
+
+def curata_dist():
+    """Scoate artefactele vechi ale paginilor CV din panou.
+
+    SITE/dist/ e generat, nu se versioneaza. Un *.index.html ramas acolo
+    ar insera o COPIE a paginii CV in panou - exact ce nu mai vrem.
+    Se atinge doar fisiere generate, nimic din repo.
+    """
+    scoase = []
+    for p in glob.glob(os.path.join(DIST, '*.index.html')):
+        try:
+            os.remove(p)
+            scoase.append(os.path.basename(p))
+        except OSError:
+            pass
+    return scoase
+
+CSS_CV = """
+.cvlist{display:grid;gap:10px;margin:16px 0 18px}
+.cvcard{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:14px 16px;
+  cursor:pointer;transition:.2s}
+.cvcard:hover{border-color:rgba(20,184,166,.45)}
+.cvcard.on{border-color:#14b8a6;background:rgba(20,184,166,.06)}
+.cvcard .cvt b{font-size:14.5px}
+.cvcard .cvr{color:#64748b;font-size:12.5px;margin-top:3px}
+.cvgo{font-size:12.5px;font-weight:800;white-space:nowrap}
+.pvhead{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin:0 0 10px;color:#94a3b8;font-size:13px}
+"""
+
+CV_JS = """
+(function(){
+  var REG = '__REGISTRY_URL__';
+  var FALLBACK = __FALLBACK__;
+  var DATA = [];
+  var list = document.getElementById('cv-list');
+  var frame = document.getElementById('cv-frame');
+  var link = document.getElementById('pv-link');
+  var titlu = document.getElementById('pv-titlu');
+  var sursa = document.getElementById('cv-sursa');
+  var ct = document.getElementById('cv-ct');
+
+  function esc(s){ return (s||'').replace(/[&<>"]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function alege(slug){
+    var s = null, i;
+    for (i=0;i<DATA.length;i++){ if (DATA[i].slug === slug) { s = DATA[i]; break; } }
+    if (!s || !s.url) return;
+    frame.src = s.url;
+    link.href = s.url;
+    titlu.textContent = s.titlu || s.slug;
+    var cards = list.querySelectorAll('.cvcard');
+    for (i=0;i<cards.length;i++){
+      cards[i].classList.toggle('on', cards[i].getAttribute('data-slug') === s.slug);
+    }
+  }
+
+  function rand(live){
+    if (!DATA.length){
+      list.innerHTML = '<p style="color:#64748b;font-size:13.5px">Niciun site CV inregistrat inca.</p>';
+      ct.textContent = '0 roluri';
+      return;
+    }
+    ct.textContent = DATA.length + ' roluri, fiecare pe site propriu';
+    var h = '', i;
+    for (i=0;i<DATA.length;i++){
+      var s = DATA[i];
+      h += '<div class="cvcard" data-slug="'+esc(s.slug)+'">'
+         +   '<div class="cvt"><b>'+esc(s.titlu||s.slug)+'</b>'
+         +   '<div class="cvr">'+esc(s.rol||'')+'</div></div>'
+         +   '<a class="cvgo" href="'+esc(s.url)+'" target="_blank" rel="noopener">Deschide &#8599;</a>'
+         + '</div>';
+    }
+    list.innerHTML = h;
+    var cards = list.querySelectorAll('.cvcard');
+    for (i=0;i<cards.length;i++){
+      (function(c){
+        c.addEventListener('click', function(ev){
+          if (ev.target && ev.target.tagName === 'A') return;
+          alege(c.getAttribute('data-slug'));
+        });
+      })(cards[i]);
+    }
+    alege(DATA[0].slug);
+    sursa.innerHTML = live
+      ? '<b>Sursa live.</b> Lista vine de la <code class="mono">'+esc(REG)+'</code> - se reia la fiecare incarcare a paginii.'
+      : '<b>Rezerva locala.</b> Registrul de la sursa nu a raspuns; asta e ultima copie locala (doar titlu si URL). Recarci pagina.';
+  }
+
+  if (REG){
+    fetch(REG + (REG.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now(), {cache:'no-store'})
+      .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function(d){ DATA = (d && d.sites) || FALLBACK; rand(true); })
+      .catch(function(e){ DATA = FALLBACK; rand(false); });
+  } else {
+    DATA = FALLBACK;
+    rand(false);
+  }
+})();
+"""
+
 ICON = {'debug': '·', 'info': '›', 'atentie': '!', 'eroare': '✕', 'critic': '■'}
 CUL  = {'debug': '#64748b', 'info': '#14b8a6', 'atentie': '#fbbf24',
         'eroare': '#f87171', 'critic': '#ef4444'}
@@ -104,6 +224,12 @@ def copiaza_docs():
         n += 1
     # vizualizatorul ramane langa documente
     # vizualizatorul e creat o data si pastrat in repo, nu se suprascrie
+    # Vine din repo (SITE/docs-viewer/index.html), altfel un build nou l-ar pierde
+    # si linkurile 'docs/?doc=...' ar da 404.
+    viewer_src = os.path.join(BASE, 'docs-viewer', 'index.html')
+    if os.path.exists(viewer_src):
+        shutil.copyfile(viewer_src, os.path.join(dst, 'index.html'))
+        n += 1
 
     # CSS-ul vizualizatorului trebuie SAU LANGa el, nu doar in repo.
     # Deployul trimite doar dist/, deci ../css/ din docs/ dava 404.
@@ -124,6 +250,9 @@ def badge(m):
 
 def main():
     os.makedirs(DIST, exist_ok=True)
+    legacy = curata_dist()
+    if legacy:
+        print('    curatat din panou (copii CV vechi): %s' % ', '.join(legacy))
     ndocs = copiaza_docs()
     todo = {'sarcini': []}
     tp = os.path.join(REPO, 'docs', 'TODO.json')
@@ -198,8 +327,16 @@ def main():
         srows += '<tr><td class="mono">%s</td><td>%s</td><td><span class="tag %s">%s</span></td></tr>' % (
             n, esc(desc), 'v' if n in vn else '', 'vendor' if n in vn else 'propriu')
 
-    sites = sorted(os.path.basename(p).replace('.index.html', '')
-                   for p in glob.glob(os.path.join(DIST, '*.index.html')))
+    reg = load_registry()
+    sites = reg.get('sites', [])
+    registry_url = reg.get('registryUrl', '')
+    # Rezerva locala: doar titlu, rol si URL. Niciun continut de CV copiat in panou.
+    fallback = [{'slug': s.get('slug', ''), 'titlu': s.get('titlu', ''),
+                 'rol': s.get('rol', ''), 'url': s.get('url', '')}
+                for s in sites]
+    cv_script = (CV_JS
+                 .replace('__REGISTRY_URL__', json.dumps(registry_url))
+                 .replace('__FALLBACK__', json.dumps(fallback, ensure_ascii=False)))
     sab = sorted(os.path.basename(p) for p in glob.glob(os.path.join(REPO, 'ALEX-KIT', 'SABLOANE', '*.md')))
     docs = sorted(os.path.basename(p) for p in glob.glob(os.path.join(REPO, 'docs', '*.md')))
     nskill = len(own) + len(vend)
@@ -305,6 +442,7 @@ pre{{background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:15px
 .kv{{display:grid;grid-template-columns:auto 1fr;gap:7px 16px;font-size:13.5px;color:#94a3b8}}
 .kv b{{color:#f8fafc}}
 iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;background:#0b0f19}}
+{CSS_CV}
 </style></head><body>
 
 <div class="wrap"><header>
@@ -367,14 +505,18 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
 
 <!-- ============ SITE CV ============ -->
 <section class="pane" role="tabpanel" id="cv">
-  <h2>Site de CV <span class="ct">{len(sites)} roluri, se construiește din date</span></h2>
-  <div class="note"><b>Nu e o pagină goală.</b> Fiecare rol e un fișier JSON;
-  interfața e aceeași pentru toate. Adăugarea unui rol nou nu înseamnă scriere de HTML.</div>
-  <div style="margin:16px 0">
-    {' · '.join('<a href="%s.index.html" style="margin-right:14px">%s</a>' % (s, s) for s in sites) or 'niciunul'}
-    <a href="/">← Panoul</a>
+  <h2>Site de CV <span class="ct" id="cv-ct">{len(sites)} roluri, fiecare pe site propriu</span></h2>
+  <div class="note"><b>Site-uri separate, nu pagini lipite.</b> Fiecare rol e un site cu
+  URL-ul lui, construit din fișierul lui de date. Tab-ul de aici doar le <b>leagă</b> —
+  nu copiază niciun cuvânt din ele. Previzualizarea de mai jos e <b>site-ul sursă</b>,
+  încărcat de pe server, nu o copie: când schimbi sursa, se vede imediat.</div>
+  <div class="cvlist" id="cv-list"></div>
+  <div class="pvhead">
+    <span class="mono" id="pv-titlu">—</span>
+    <a id="pv-link" href="#" target="_blank" rel="noopener">Deschide site-ul &#8599;</a>
   </div>
-  <iframe src="graphic-designer.index.html" title="Site CV"></iframe>
+  <iframe id="cv-frame" title="Previzualizare site CV" loading="lazy"></iframe>
+  <div class="note" id="cv-sursa"></div>
 </section>
 
 <!-- ============ PUNTE ============ -->
@@ -600,6 +742,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
   rand();
 }})();
 </script>
+<script>{cv_script}</script>
 </body></html>"""
 
     out = os.path.join(DIST, 'index.html')
