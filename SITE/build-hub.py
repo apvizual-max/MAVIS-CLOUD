@@ -118,6 +118,8 @@ CSS_CV = """
 .cvcard .cvt b{font-size:14.5px}
 .cvcard .cvr{color:#64748b;font-size:12.5px;margin-top:3px}
 .cvgo{font-size:12.5px;font-weight:800;white-space:nowrap}
+.cvcard-fara-url{opacity:.55;cursor:default}
+.cvgo-inactiv{color:#64748b;font-weight:600}
 .pvhead{display:flex;align-items:center;justify-content:space-between;gap:12px;
   margin:0 0 10px;color:#94a3b8;font-size:13px}
 """
@@ -160,10 +162,13 @@ CV_JS = """
     var h = '', i;
     for (i=0;i<DATA.length;i++){
       var s = DATA[i];
-      h += '<div class="cvcard" data-slug="'+esc(s.slug)+'">'
+      var areUrl = !!s.url;
+      h += '<div class="cvcard'+(areUrl?'':' cvcard-fara-url')+'" data-slug="'+esc(s.slug)+'">'
          +   '<div class="cvt"><b>'+esc(s.titlu||s.slug)+'</b>'
          +   '<div class="cvr">'+esc(s.rol||'')+'</div></div>'
-         +   '<a class="cvgo" href="'+esc(s.url)+'" target="_blank" rel="noopener">Deschide &#8599;</a>'
+         +   (areUrl
+             ? '<a class="cvgo" href="'+esc(s.url)+'" target="_blank" rel="noopener">Deschide &#8599;</a>'
+             : '<span class="cvgo cvgo-inactiv">fara adresa inca</span>')
          + '</div>';
     }
     list.innerHTML = h;
@@ -172,6 +177,7 @@ CV_JS = """
       (function(c){
         c.addEventListener('click', function(ev){
           if (ev.target && ev.target.tagName === 'A') return;
+          if (c.classList.contains('cvcard-fara-url')) return;
           alege(c.getAttribute('data-slug'));
         });
       })(cards[i]);
