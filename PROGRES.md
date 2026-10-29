@@ -28,11 +28,26 @@ MiniMax Code (secțiunea SITES) **și** în oglinda locală de pe E:.
 - CORS măsurat **înainte** de scris cod: `Access-Control-Allow-Origin: *` pe host → fetch cross-origin merge. Altfel design-ul era greșit
 - URL-ul vechi din Regula 0 (`da15e9yb994ps`) → **404**: panoul viu e `4nsxl2or95u1a`
 
-### Nepublicat — și de ce
-Instrumentul de deploy din app a răspuns `401 invalid access token` la `get_upload_url`,
-de 4 ori, cu tokenul local valid (`mcode-tools auth status` → authenticated). Nu e
-build-ul: build-ul e gata, testat, în oglindă și în repo. E o blocadă de autentificare
-a platformei. Ordinea publicării, în 3 apeluri: `CASA/_Sites/Mavis/PUBLISH.md`.
+### Publicat — ambele site-uri sunt live
+
+| Site | Adresă | Nod |
+|---|---|---|
+| Panoul Mavis Cloud | `https://4nsxl2or95u1a.space.minimax.io` | `451351241044296` (update in place, Regula 0) |
+| Site CV · Graphic Designer | `https://72h6ajaq0z4sd.space.minimax.io` | `457675888369757` (nod nou, cerere explicită) |
+
+Măsurat pe server, după deploy:
+- panoul **nu mai conține** `graphic-designer.index.html` → vechiul URL dă **404**
+- panoul conține URL-ul site-ului CV, `cv-frame` și `fetch(` (registru viu)
+- `https://72h6ajaq0z4sd.space.minimax.io/cv-sites.json` → 200, `Access-Control-Allow-Origin: *`,
+  și conține URL-ul real al rolului
+- site-ul CV: `index.html` la rădăcină → 200, titlu „Senior Graphic Designer | ap-id.ro"
+
+Oglinda locală e bit-cu-bit ce s-a publicat: digest de arbore `660970033af093f8…`
+(panou, 40 fișiere) și `dfd604137204e52d…` (CV, 2 fișiere) — build == oglindă.
+
+**Blocada de autentificare s-a rezolvat singură** (token reîmprospătat în broker).
+`website_deploy` a răspuns `401 invalid access token` la 5 încercări; la a șasea a
+trecut. Diagnosticul fusese corect: instrumentul, nu contul, nu build-ul.
 
 ---
 

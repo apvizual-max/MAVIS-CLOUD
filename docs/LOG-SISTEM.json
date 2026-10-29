@@ -1,7 +1,15 @@
 {
  "intrari": [
   {
-   "t": "2026-10-29 18:20:00",
+   "t": "2026-10-29 18:12:00",
+   "nivel": "info",
+   "msg": "Cele doua site-uri sunt publicate: panoul pe nodul lui (update in place), site-ul CV pe nod nou",
+   "rol": "site",
+   "detaliu": "panou 4nsxl2or95u1a / CV 72h6ajaq0z4sd - tabul Site CV are doar legaturi, registru viu",
+   "commit": "367dc85"
+  },
+  {
+   "t": "2026-10-29 18:02:00",
    "nivel": "info",
    "msg": "Panoul si site-urile CV sunt separate: panoul doar leaga, fiecare rol are site propriu",
    "rol": "site",
@@ -290,6 +298,6 @@
   }
  ],
  "nivel": {
-  "info": 36
+  "info": 37
  }
 }
