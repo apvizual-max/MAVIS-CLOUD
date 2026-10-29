@@ -8,5 +8,6 @@
   "report-simulate-sort.js": 66,
   "readbodies.js": 10,
   "extract.js": 2,
-  "report-build.js": 4
+  "report-build.js": 4,
+  "test-drive.js": 1
 }

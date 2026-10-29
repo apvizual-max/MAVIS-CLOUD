@@ -1,3 +1,4 @@
+<!-- Actualizat pentru a reflecta arhitectura reală a motoarelor JS/GS implementate în repo, trecând de la formatele .json conceptuale la cele executabile. -->
 This update solidifies the top of the funnel. Retaining the massive processing capacity of **Step 0** and **Step 1** locally via MCP allows the system to act as an un-truncated structural sieve. By evaluating 50+ raw inputs at once and applying a harsh categorical filter _before_ any text generation occurs, you protect your localized system state from downstream processing noise.
 
 We remain strictly in **Mod A (Strategic Planning)**. Here is the revised architectural blueprint for the initial ingestion, filtering, and scoring stage.
@@ -22,7 +23,7 @@ As specified, the absolute top section of the generated `JD's_SOT_Report.md` fil
 
 ## 2. Programmatic Filtering & Scoring Matrix (Step 1)
 
-When the local AI processes the daily staging file via your local MCP framework, it runs every entry against a multi-axis scoring engine (`JD_SCORING.json`). It applies your exact preferential hierarchies and explicit disqualifiers.
+When the local AI processes the daily staging file via your local MCP framework, it runs every entry against a multi-axis scoring engine (`scoring.gs`). It applies your exact preferential hierarchies and explicit disqualifiers.
 
 ### The Logic Filter Settings
 
@@ -142,7 +143,7 @@ To confirm and lock this in, here is how the consolidated, simplified execution 
 
 - **Input:** The un-ordered, raw daily list of 50+ JDs.
     
-- **Process:** The local AI processes the entire file via MCP, applying `JD_SCORING.json`. It evaluates seniority, discipline tags, location constraints, and engagement types, while explicitly attaching the **[B2B] / [B2C] / [DTC]** business classifier.
+- **Process:** The local AI processes the entire file via MCP, applying `scoring.gs`. It evaluates seniority, discipline tags, location constraints, and engagement types, while explicitly attaching the **[B2B] / [B2C] / [DTC]** business classifier.
     
 - **Output:** A completely restructured, score-ordered `JD's_SOT_Report.md` cleanly divided into your 4 distinct sections, topped with an automated Table of Contents indexing the day's market landscape.
 
@@ -154,7 +155,7 @@ To confirm and lock this in, here is how the consolidated, simplified execution 
 
 - **Input:** A selected JD from your batch + the immutable template file `ALEX_MASTER_CV.md`.
     
-- **Process:** Applying `CV_HEADER_MUTATOR.json`, the AI bypasses full-scale corporate research and extracts target tokens directly from the JD text. It mutates _only_ the top header block of your CV—generating a hyper-focused Headline, Professional Summary, Areas of Expertise, and Key Achievements. It ensures every line includes concrete metrics, maps specific portfolio links using your deterministic lookup matrix, and respects strict layout character counts. The rest of your career history and **Testimonial 1** at the bottom remain completely untouched.
+- **Process:** Applying `cv-mutator.js`, the AI bypasses full-scale corporate research and extracts target tokens directly from the JD text. It mutates _only_ the top header block of your CV—generating a hyper-focused Headline, Professional Summary, Areas of Expertise, and Key Achievements. It ensures every line includes concrete metrics, maps specific portfolio links using your deterministic lookup matrix, and respects strict layout character counts. The rest of your career history and **Testimonial 1** at the bottom remain completely untouched.
     
 - **Output:** `[Company]_ADAPTED_CV.md` (The finalized structural profile ready for compilation).
 
@@ -162,7 +163,7 @@ To confirm and lock this in, here is how the consolidated, simplified execution 
 
 - **Input:** The extracted target tokens from Step 2 + the text of your hard-coded **Testimonial 2**.
     
-- **Process:** Applying `LETTER_ENGINE.json`, the system synthesizes a lean, direct, architect-level Letter of Intent. It strips out corporate fluff and immediately addresses the position's primary operational problems using your past execution metrics. The engine strictly restricts the text body length so that it fits on a single page, ending directly with the full transcription of **Testimonial 2** (including the author's name, role, and hierarchical relationship).
+- **Process:** Applying `letter-engine.js`, the system synthesizes a lean, direct, architect-level Letter of Intent. It strips out corporate fluff and immediately addresses the position's primary operational problems using your past execution metrics. The engine strictly restricts the text body length so that it fits on a single page, ending directly with the full transcription of **Testimonial 2** (including the author's name, role, and hierarchical relationship).
     
 - **Output:** `[Company]_LETTER_OF_INTENT.md`.
 
@@ -202,7 +203,7 @@ To run this seamlessly, you treat your daily chat session as a linear, two-stage
     
 2. **The Raw Dump:** You paste the raw, un-ordered list of 50+ scraped JDs into the chat.
     
-3. **The Local Write:** The AI executes `JD_SCORING.json` via MCP. It screens every job, drops the junk, sorts the survivors into your 4 structured sections, generates the Table of Contents, and overwrites `JD's_SOT_Report.md` directly in your Obsidian vault.
+3. **The Local Write:** The AI executes `scoring.gs` via MCP. It screens every job, drops the junk, sorts the survivors into your 4 structured sections, generates the Table of Contents, and overwrites `JD's_SOT_Report.md` directly in your Obsidian vault.
     
 
 > **The User Intermission (Outside the Chat Window)**
@@ -217,9 +218,9 @@ To run this seamlessly, you treat your daily chat session as a linear, two-stage
     
     - It pulls the immutable history from `ALEX_MASTER_CV.md`.
         
-    - It extracts the specific JD tokens and applies `CV_HEADER_MUTATOR.json` to generate the personalized header.
+    - It extracts the specific JD tokens and applies `cv-mutator.js` to generate the personalized header.
         
-    - It applies `LETTER_ENGINE.json` to generate the single-page cover letter with **Testimonial 2** fully transcribed.
+    - It applies `letter-engine.js` to generate the single-page cover letter with **Testimonial 2** fully transcribed.
         
     - It calls your local file system via MCP to create the company folder and drops the intermediate Markdown profiles inside.
         
@@ -251,9 +252,9 @@ D:\Alex - KV Obsidian\- ALEX - KV\ALEX-Folder\
            ├── 📄 folder_structure_mindmap.md       ◄── This file (Reference System Map)
            │
            ├── 📁 SCHEMAS\                          ◄── The "Automation Brains" (Logic Constraints)
-           │    ├── 📄 jd_scoring.json              ◄── Step 1: Ingestion, 4-axis scoring & classifiers
-           │    ├── 📄 cv_header_mutator.json       ◄── Step 2: Joanna's top CV block mutation rules
-           │    └── 📄 letter_engine.json           ◄── Step 3: Single-page strategic LOI generation
+           │    ├── 📄 scoring.gs              ◄── Step 1: Ingestion, 4-axis scoring & classifiers
+           │    ├── 📄 cv-mutator.js       ◄── Step 2: Joanna's top CV block mutation rules
+           │    └── 📄 letter-engine.js           ◄── Step 3: Single-page strategic LOI generation
            │
            └── 📁 [Company_Name]\                   ◄── Dynamic Output Folder (Created per application)
                 ├── 📄 [Company_Name]_CV.pdf        ◄── Generated adapted CV (PDF compiled format)
@@ -298,11 +299,11 @@ D:\Alex - KV Obsidian\- ALEX - KV\ALEX-Folder\
     
 - **Key Files:**
     
-    1. `jd_scoring.json`: Runs the 4-axis math ($Score_{Total}$) and categorizes target brands into `[B2B]`, `[B2C]`, or `[DTC]`.
+    1. `scoring.gs`: Runs the 4-axis math ($Score_{Total}$) and categorizes target brands into `[B2B]`, `[B2C]`, or `[DTC]`.
         
-    2. `cv_header_mutator.json`: Personalizes only your Headline, Summary, Areas of Expertise, and Key Achievements.
+    2. `cv-mutator.js`: Personalizes only your Headline, Summary, Areas of Expertise, and Key Achievements.
         
-    3. `letter_engine.json`: Generates a strategic, single-page Letter of Intent that addresses the company's pain points.
+    3. `letter-engine.js`: Generates a strategic, single-page Letter of Intent that addresses the company's pain points.
         
 
 ### D. Dynamic Output Folders
@@ -323,18 +324,18 @@ D:\Alex - KV Obsidian\- ALEX - KV\ALEX-Folder\
  [Step 0: Paste Raw JDs] ──► Injected into [JD's_SOT_Report.md]
                                    │
                                    ▼
- [Step 1: AI Scoring Run] ──► Executes [jd_scoring.json] 
+ [Step 1: AI Scoring Run] ──► Executes [scoring.gs]
                                    │
                                    ▼
  [User Selective Gate]   ──► You pick 5-10 winning jobs out of the report
                                    │
                                    ▼
- [Step 2: CV Mutation]   ──► Extracts tokens, runs [cv_header_mutator.json],
+ [Step 2: CV Mutation]   ──► Extracts tokens, runs [cv-mutator.js],
                              maps [ALEX_LINK_MATRIX.json] 
                              ──► Generates [Company]_ADAPTED_CV.md
                                    │
                                    ▼
- [Step 3: Letter Build]  ──► Runs [letter_engine.json], appends Testimonial 2
+ [Step 3: Letter Build]  ──► Runs [letter-engine.js], appends Testimonial 2
                              ──► Generates [Company]_LETTER_OF_INTENT.md
                                    │
                                    ▼
@@ -393,7 +394,7 @@ You gather the raw, un-ordered text of 50+ JDs from your daily browsing (LinkedI
 
 **2.Step 1: Local MCP Filtering, Scoring & Classification:**Automated Sieve Loop.
 
-The local AI reads the raw file via MCP and applies `JD_SCORING.json`. It runs every listing through your strict multi-axis logic gates:
+The local AI reads the raw file via MCP and applies `scoring.gs`. It runs every listing through your strict multi-axis logic gates:
 
 - **Seniority Gate:** Keeps Senior/Lead (>10 yrs), routes Mid (~5 yrs) to Section 3, kills Junior/Entry-level instantly.
     
@@ -412,7 +413,7 @@ You open the freshly sorted `JD's_SOT_Report.md` in Obsidian. You skim the top-s
 
 **4.Step 2: Component Personalization Block Mutation:**Automated Processing Loop.
 
-For each selected job, the AI reads the JD text and your `ALEX_LINK_MATRIX.json`. Applying `CV_HEADER_MUTATOR.json`, it extracts active ATS keywords and targets tokens directly. It generates **only** the top header block of your CV:
+For each selected job, the AI reads the JD text and your `ALEX_LINK_MATRIX.json`. Applying `cv-mutator.js`, it extracts active ATS keywords and targets tokens directly. It generates **only** the top header block of your CV:
 
 - **Headline:** Max 10 words, matching the core JD expectation.
     
@@ -429,7 +430,7 @@ For each selected job, the AI reads the JD text and your `ALEX_LINK_MATRIX.json`
 
 **5.Step 3: Single-Page Letter Synthesis:**Automated Processing Loop.
 
-The AI extracts the target commercial stress points and the assigned market token (`[B2B]/[B2C]/[DTC]`) from the current profile. Applying `LETTER_ENGINE.json`, it synthesizes a concise, direct, architect-level Letter of Intent. It skips standard corporate introductions, maps the position's core problems to your past execution metrics, enforces a strict line-count boundary to ensure it fits on exactly one page, and appends the full transcription of **Testimonial 2** right at the floor.
+The AI extracts the target commercial stress points and the assigned market token (`[B2B]/[B2C]/[DTC]`) from the current profile. Applying `letter-engine.js`, it synthesizes a concise, direct, architect-level Letter of Intent. It skips standard corporate introductions, maps the position's core problems to your past execution metrics, enforces a strict line-count boundary to ensure it fits on exactly one page, and appends the full transcription of **Testimonial 2** right at the floor.
 
 - **Output:** Generates `[Company]_LETTER_OF_INTENT.md`.
 
@@ -520,7 +521,7 @@ All pipeline outputs, intermediate structures, and target folders must map deter
 - **Daily Staging File:** `D:\Alex - KV Obsidian\- ALEX - KV\ALEX-Folder\1 - Alex - CV and Person\JOB Aplications\JD's_SOT_Report.md`
     
 
-## 3. Step 1: Programmatic Filtering & Scoring Schema (`jd_scoring.json`)
+## 3. Step 1: Programmatic Filtering & Scoring Schema (`scoring.gs`)
 
 When a daily raw batch of $N \ge 50$ unformatted JDs is pasted into the chat session, the local AI must execute a strict mathematical scoring loop for each entry.
 
@@ -611,7 +612,7 @@ After evaluation, the daily staging file `JD's_SOT_Report.md` must be overwritte
 4. **Section 4: Out-of-Location High Scorers:** The exceptional non-local, non-remote roles that scored $\ge 9.0$ on core skill axes.
     
 
-## 4. Step 2: Component Personalization Block Schema (`cv_header_mutator.json`)
+## 4. Step 2: Component Personalization Block Schema (`cv-mutator.js`)
 
 When you activate processing for a selected JD, the AI mutates **only** the top header block of `ALEX_MASTER_CV.md`. It must respect these layout boundaries to prevent compile-time visual page overflow:
 
@@ -643,7 +644,7 @@ To eliminate broken URLs or system hallucinations, the AI must resolve URLs stri
 - _Strict Invariants:_ The AI is strictly prohibited from writing or inventing a custom URL string. If no exact match is resolved in the matrix, fall back to the base domain 'https://ap-id.ro'. For video or motion graphics requests, write exactly: `'proof of work provided on request'`.
     
 
-## 5. Step 3: Single-Page Letter Engine Schema (`letter_engine.json`)
+## 5. Step 3: Single-Page Letter Engine Schema (`letter-engine.js`)
 
 The synthesized Letter of Intent must function as a high-velocity strategic pitch tailored to a busy human reader, answering _"Why Hire Alex?"_ without printing the prompt.
 
@@ -692,9 +693,9 @@ I have generated the `ALEX_MASTER_BOOTSTRAP_PROFILE.md` file. It consolidates al
     
 2. Ensure your static dependency files (`ALEX_MASTER_CV.md`, `ALEX_LINK_MATRIX.json`, and `ALEX_TESTIMONIAL_LETTER.txt`) are prepared and placed in their respective local paths.
     
-3. Once those local assets are in place, we are ready to write the programmatic JSON schemas (`JD_SCORING.json`, `CV_HEADER_MUTATOR.json`, and `LETTER_ENGINE.json`) to implement the exact automated filters.
+3. Once those local assets are in place, we are ready to write the programmatic JSON schemas (`scoring.gs`, `cv-mutator.js`, and `letter-engine.js`) to implement the exact automated filters.
 
-Would you like to start building out the precise logical criteria for the first schema file, **`JD_SCORING.json`**?
+Would you like to start building out the precise logical criteria for the first schema file, **`scoring.gs`**?
 
 ---
 
@@ -897,7 +898,7 @@ _Sep_ $2020$ _– Nov_ $2020$ _| Remote (Bucharest, Romania)_
 * **ATS Optimization Met:** Every block of experience strictly integrates dynamic, hard-hitting metrics formatted via LaTeX, elevating your visual and computational profile to executive corporate standards.
 * **Verifiable Reference Anchored:** Kevin Donlan's testimonial is verbatim integrated as the structural "floor" of page 2, proving world-class expertise to any reader.
 
-We are now in a prime position to build out your execution schemas. Would you like to proceed with the primary sorting engine, **`JD_SCORING.json`**, or begin mapping the structural **`CV_HEADER_MUTATOR.json`** file?
+We are now in a prime position to build out your execution schemas. Would you like to proceed with the primary sorting engine, **`scoring.gs`**, or begin mapping the structural **`cv-mutator.js`** file?
 
 ---
 
@@ -929,7 +930,7 @@ Here is your updated, non-truncated **`ALEX_LINK_MATRIX.json`** file.
 
 Your complete workspace foundation is now fully optimized on disk. We are ready to build the active schemas.
 
-Would you like to write the filtering and sorting engine—**`JD_SCORING.json`**—to set up the daily automated ingestion?
+Would you like to write the filtering and sorting engine—**`scoring.gs`**—to set up the daily automated ingestion?
 
 ---
 
@@ -974,17 +975,17 @@ With `ALEX_TESTIMONIAL_LETTER.txt` on your drive, your local system's **Static S
 
 These files provide your local workspace with an ironclad, hallucination-free barrier.
 
-Now that our database dependencies are secured, we are ready to build the first active automation script for your local engine: **`JD_SCORING.json`**. This schema will run your daily 4-axis filtering math and apply the `[B2B] / [B2C] / [DTC]` classifiers to your incoming batches of 50+ scraped JDs.
+Now that our database dependencies are secured, we are ready to build the first active automation script for your local engine: **`scoring.gs`**. This schema will run your daily 4-axis filtering math and apply the `[B2B] / [B2C] / [DTC]` classifiers to your incoming batches of 50+ scraped JDs.
 
-Should we proceed with drafting the precise scoring rules and criteria fields for **`JD_SCORING.json`**?
-
----
-
-Should we proceed with drafting the precise scoring rules and criteria fields for JD_SCORING.json? - yes please
+Should we proceed with drafting the precise scoring rules and criteria fields for **`scoring.gs`**?
 
 ---
 
-We will now build the core filtering engine of your pipeline: **`jd_scoring.json`**.
+Should we proceed with drafting the precise scoring rules and criteria fields for scoring.gs? - yes please
+
+---
+
+We will now build the core filtering engine of your pipeline: **`scoring.gs`**.
 
 This schema acts as the master programmatic blueprint for Step 1. It contains the exact mathematical parameters, multi-axis weighting formulas, circuit breakers, and keyword token maps that your local AI uses to filter 50+ raw listings daily. It also includes the precise logical classifiers for business models (`[B2B]`, `[B2C]`, and `[DTC]`) and maps out how to sort the survivors into the 4 distinct tracking sections.
 
@@ -1005,15 +1006,15 @@ JD Scoring Schema - 10 Jul, 08:22
 
 Your local AI system now has an analytical routing map.
 
-Shall we proceed to building your next core automation script—**`CV_HEADER_MUTATOR.json`**—to set up the rules for personalization block generation and portfolio link routing?
+Shall we proceed to building your next core automation script—**`cv-mutator.js`**—to set up the rules for personalization block generation and portfolio link routing?
 
 ---
 
-Shall we proceed to building your next core automation script—CV_HEADER_MUTATOR.json—to set up the rules for personalization block generation and portfolio link routing? - yes please
+Shall we proceed to building your next core automation script—cv-mutator.js—to set up the rules for personalization block generation and portfolio link routing? - yes please
 
 Are you 100% sure you included all the relevant data and specification from the transcript of this video that explains EXACTLY HOW TO ADAPT EACH OF THE 4 SECTIONS OF THE ADAPTABLE HEADER:     headline, your summary, areas of expertise, and key achievements.== !! 
 
-https://www.youtube.com/watch?v=o2sleDy_GAk - here is the link for reference and context. please make sure you do not miss a single detail please here is the full transcript and also please use al your knowledge and sources to program this json correctly as this is the heart of the entire process. make it as good as you can please and update the  CV_HEADER_MUTATOR.json
+https://www.youtube.com/watch?v=o2sleDy_GAk - here is the link for reference and context. please make sure you do not miss a single detail please here is the full transcript and also please use al your knowledge and sources to program this json correctly as this is the heart of the entire process. make it as good as you can please and update the  cv-mutator.js
  
 
 Transcript
@@ -1112,7 +1113,7 @@ Transcript
 
 I have thoroughly analyzed the video transcript and extracted the exact structural, psychological, and strategic rules used by Joanna (Hiring Manager & Career Coach) to achieve her $66\%$ interview success rate.
 
-To ensure your local AI executes this strategy flawlessly, we need to embed these precise directives directly into your system. I have reconstructed **`cv_header_mutator.json`** into a highly detailed, programmatic schema. This file now maps Joanna’s exact strategies—such as the hard/soft skill balance, metric-first achievement hooks, and single-line positioning—directly into your local execution pipeline.
+To ensure your local AI executes this strategy flawlessly, we need to embed these precise directives directly into your system. I have reconstructed **`cv-mutator.js`** into a highly detailed, programmatic schema. This file now maps Joanna’s exact strategies—such as the hard/soft skill balance, metric-first achievement hooks, and single-line positioning—directly into your local execution pipeline.
 
 Here is the updated, production-ready schema for your local setup:
 
@@ -1129,11 +1130,11 @@ Here is the updated, production-ready schema for your local setup:
 
 The system database and first two schemas are now fully complete.
 
-Shall we proceed with the final Phase 1 schema, **`LETTER_ENGINE.json`**, to establish the single-page synthesis and testimonial embedding rules for your Letter of Intent?
+Shall we proceed with the final Phase 1 schema, **`letter-engine.js`**, to establish the single-page synthesis and testimonial embedding rules for your Letter of Intent?
 
 ---
 
-Shall we proceed with the final Phase 1 schema, LETTER_ENGINE.json, to establish the single-page synthesis and testimonial embedding rules for your Letter of Intent? - yes please and for this step I am going to give you a different inspiration source. Please use this as a reference model and also, as previously use al your knowledge and sources to program this json correctly as this is the brain of the entire process. it has to answer to the particular question: "Why you should hire Alex?" without actually printing the questions, meaning the entire body and contents of this document should represent the direct answer to this question for each JD. it should be based on the previous logic of the CV_HEADER_MUTATOR.json in the sense of reflecting the information in the adapted CV in order to answer the question for each particular JD, generating different relevant documents for each particular individual JD requirements and specific characteristics. here is an example for an Art Direction position :
+Shall we proceed with the final Phase 1 schema, letter-engine.js, to establish the single-page synthesis and testimonial embedding rules for your Letter of Intent? - yes please and for this step I am going to give you a different inspiration source. Please use this as a reference model and also, as previously use al your knowledge and sources to program this json correctly as this is the brain of the entire process. it has to answer to the particular question: "Why you should hire Alex?" without actually printing the questions, meaning the entire body and contents of this document should represent the direct answer to this question for each JD. it should be based on the previous logic of the cv-mutator.js in the sense of reflecting the information in the adapted CV in order to answer the question for each particular JD, generating different relevant documents for each particular individual JD requirements and specific characteristics. here is an example for an Art Direction position :
 
 
 Dear {Company_Name_Here},
@@ -1153,7 +1154,7 @@ Founder and Artistic Director, AP-ID.ro
 
 ---
 
-We are now wrapping up Phase 1 of your application strategy by generating the final active schema: **`letter_engine.json`**.
+We are now wrapping up Phase 1 of your application strategy by generating the final active schema: **`letter-engine.js`**.
 
 This schema serves as the master programmatic brain for Step 3 of your daily workflow. It completely reimagines the traditional, boring cover letter, transforming it into a high-velocity, architect-level **Letter of Intent**.
 
@@ -1167,12 +1168,12 @@ Here is your completed, production-ready schema file:
 
 ### Phase 1 System Strategy Finalized
 
-With the creation of `letter_engine.json`, your daily automation framework is now structurally and programmatically complete.
+With the creation of `letter-engine.js`, your daily automation framework is now structurally and programmatically complete.
 
 We have successfully established:
 
 1. **Your Vault Assets:** `ALEX_MASTER_BOOTSTRAP_PROFILE.md`, `ALEX_MASTER_CV.md`, `ALEX_LINK_MATRIX.json`, and `ALEX_TESTIMONIAL_LETTER.txt`.
-2. **Your Automation Brains:** `jd_scoring.json`, `cv_header_mutator.json`, and `letter_engine.json`.
+2. **Your Automation Brains:** `scoring.gs`, `cv-mutator.js`, and `letter-engine.js`.
 
 This system is completely locked, verified, and ready to be deployed on your local machine to process raw batches of 50+ JDs down into premium, customized applications with absolute precision.
 
@@ -1220,12 +1221,12 @@ When you scrape or extract a job, format it in `JD's_SOT_Report.md` using the ex
     
 2. **The Target Role** determines which link array is pulled from `ALEX_LINK_MATRIX.json` (e.g., UI-UX, Design, Photo, Video).
     
-3. **The User Specific Notes** act as the ultimate strategic "hook" for `LETTER_ENGINE.json`. If you paste a phone-screen note mentioning that the company is dealing with "energy trading and grid visualization," the letter will immediately pivot on that precise stress point, ensuring the output reads as a highly tailored, custom pitch rather than a generic template.
+3. **The User Specific Notes** act as the ultimate strategic "hook" for `letter-engine.js`. If you paste a phone-screen note mentioning that the company is dealing with "energy trading and grid visualization," the letter will immediately pivot on that precise stress point, ensuring the output reads as a highly tailored, custom pitch rather than a generic template.
     
 
 ## 2. Step 1 Staging Output: `JD's_SOT_Report.md`
 
-After you feed the raw list of $50+$ JDs into your daily chat session, the local AI executes `jd_scoring.json` and completely overwrites `JD's_SOT_Report.md`.
+After you feed the raw list of $50+$ JDs into your daily chat session, the local AI executes `scoring.gs` and completely overwrites `JD's_SOT_Report.md`.
 
 - **Storage Path**: `D:\Alex - KV Obsidian\- ALEX - KV\ALEX-Folder\1 - Alex - CV and Person\JOB Aplications\JD's_SOT_Report.md`
     
