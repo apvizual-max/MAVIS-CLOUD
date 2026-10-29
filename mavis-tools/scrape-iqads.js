@@ -58,8 +58,15 @@ function parseJob(html) {
     if (sp) out.specialization = [...sp[1].matchAll(/<a[^>]*>([^<]+)<\/a>/g)].map(m => m[1].trim());
     const jt = hdr.match(/Tip job:\s*([\s\S]*?)<br\/>/);
     if (jt) out.jobType = [...jt[1].matchAll(/<a[^>]*>([^<]+)<\/a>/g)].map(m => m[1].trim());
-    const lv = hdr.match(/Nivel:\s*<a[^>]*>([^<]+)<\/a>/);
-    if (lv) out.level = lv[1].trim();
+    // MĂSURAT 2026-10-29: unele anunturi au NIVEL MULTI ("Nivel: Middle, Senior"
+    // la Cohn & Jansen #24000). Regex-ul cu un singur <a> lua doar primul si
+    // pierdea semnalul de senioritate. Acelasi tratament ca Tip job /
+    // Specializare: toate etichetele, unite.
+    const lvSeg = hdr.match(/Nivel:([\s\S]*?)(?:<\/p>|$)/);
+    if (lvSeg) {
+      const lvAll = [...lvSeg[1].matchAll(/<a[^>]*>([^<]+)<\/a>/g)].map(m => m[1].trim()).filter(Boolean);
+      if (lvAll.length) out.level = lvAll.join(', ');
+    }
   }
   // corpul: de la primul <p> DUPA header pana la sectiunea de aplicare
   const start = h ? html.indexOf('</p>', h.index) + 4 : 0;

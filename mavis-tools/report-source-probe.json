@@ -1,29 +1,47 @@
 {
-  "date": "2026-10-28",
+  "date": "2026-10-29",
   "designproject": {
-    "count": 15,
-    "jdLenMin": 16612,
+    "count": 13,
+    "jdLenMin": 363,
     "jdLenMax": 30012,
     "employmentType": {
-      "FULL_TIME": 15
+      "FULL_TIME": 13
     },
     "jsonLdAllFullTime": true,
-    "badgeFullTime": 15,
-    "withJobTypeLine": 15,
+    "badgeFullTime": 13,
+    "withJobTypeLine": 13,
     "newestPostDate": "Sep 30, 2026",
     "validThrough": {
-      "checked": 15,
-      "exact": 15,
+      "checked": 13,
+      "exact": 13,
       "offByOne": 0,
       "other": 0,
       "rule": "datePosted + 30 zile"
     },
     "pagination": {
-      "error": "timeout https://designproject.io/jobs/location/romania?page=1"
+      "pagesTested": [
+        0,
+        1,
+        2
+      ],
+      "cardsPerPage": {
+        "0": 10,
+        "1": 10,
+        "2": 3
+      },
+      "page1NewSlugs": 0,
+      "page2NewSlugs": 3,
+      "paginationAdvances": true,
+      "scraperPages": [
+        0,
+        2,
+        3
+      ],
+      "scraperCoversNewSlugs": true
     }
   },
   "iqads": {
-    "catalogueLinks": 42,
+    "catalogueLinks": 45,
     "pagesTested": [
       0,
       2,

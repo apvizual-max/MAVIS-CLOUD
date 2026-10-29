@@ -80,10 +80,15 @@ const fmtRo = s => { const t = parseDate(s); if (!t) return '—';
 const decodeHtml = s => String(s || '')
   .replace(/&#39;|&#x27;/g, "'").replace(/&quot;|&#34;/g, '"')
   .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-  .replace(/&nbsp;/g, ' ');
+  .replace(/&nbsp;/g, ' ')
+  // entitati numerice (&#233; &#x21B;) — Jointable vin din emailurile HTML-only
+  .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(+d))
+  .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)));
 // curata un citat de corp: fara bare de separare "=====", fara URL-uri
 // de tracking, fara spatii multiple — sa ramana informatia, nu zgomotul.
 const clean = s => decodeHtml(s)
+  // caractere invizibile (combining grapheme joiner, zero-width) — uzura in excerpt
+  .replace(/[͏᠎-‏⁠﻿]/g, '')
   .replace(/\s*={5,}\s*/g, ' | ')
   .replace(/https?:\/\/\S+/g, '')
   .replace(/\s*\|\s*\|\s*/g, ' | ')
@@ -427,8 +432,22 @@ if (fyiList.length) {
 }
 // leads verificate: alerte de job care au condus la un anunt real, citit direct
 let leads = null;
-try { leads = JSON.parse(fs.readFileSync(path.join(DIR, `email-leads-${DATE}.json`), 'utf8')); } catch (e) {}
-if (leads && leads.leads && leads.leads.length) {
+let leadsError = null;
+try {
+  leads = JSON.parse(fs.readFileSync(path.join(DIR, `email-leads-${DATE}.json`), 'utf8'));
+} catch (e) {
+  // 2026-10-28: fisierul de leads avea un JSON invalid (ghilimele drepte in loc
+  // de cele romanesti) si sectiunea LIPSA SILENT din raport — s-a urcat pe Drive
+  // fara ea si am aflat abia citind continutul inapoi. ⇒ daca fisierul exista
+  // dar nu se parseaza, se RAPORTEAZA, nu se ascunde.
+  if (e && e.code !== 'ENOENT') leadsError = e.message;
+}
+if (leadsError) {
+  console.error('!! ATENTIE: email-leads-' + DATE + '.json NU se parseaza (' + leadsError + ') — sectiunea de leads va lipsi din raport.');
+}
+if (leadsError) {
+  md += `> ⛔ **Sectiunea de leads lipsește:** fisierul \`email-leads-${DATE}.json\` exista dar nu se parseaza (\`${leadsError.replace(/`/g, "'")}\`). Corecteaza-l si re-ruleaza raportul — nu am inclus nimic inventat in loc.\n\n`;
+} else if (leads && leads.leads && leads.leads.length) {
   md += `**Leads din alertele de job.** Fiecare poartă propria cale de verificare, declarată mai jos — nu toate sunt citite direct de pe pagină:\n\n`;
   for (const l of leads.leads) {
     md += `##### ${l.resolvedTitle}\n\n`;

@@ -85,15 +85,30 @@ const cardCount = body => (body.match(/job-card/g) || []).length;
   } catch (e) { out.designproject = { error: e.message }; }
 
   // ---------- designproject.io: paginatia ----------
+  // MĂSURAT 2026-10-28: compararea pe LUNGIMEA IN OCTETI era prea slaba.
+  // Ea raporta "sameBytes: false" (diferenta e un token CSRF, nu joburi)
+  // si NU arata ca paginatia AVANSEAZA: pe 28.10 page 2 avea 4 slug-uri
+  // noi peste page 0, dar lungimea paginilor era aceeasi.
+  // ⇒ comparam SLUG-urile reale ale joburilor, pe paginile 0, 1 si 2.
   try {
     const base = 'https://designproject.io/jobs/location/romania';
-    const [p0, p1] = await Promise.all([get(base + '?page=0'), get(base + '?page=1')]);
+    const pages = {};
+    for (const p of [0, 1, 2]) {
+      const r = await get(base + '?page=' + p);
+      pages[p] = [...new Set([...r.body.matchAll(/<a class="block p-4[^"]*job-card" href="(\/jobs\/[^"]+)"/g)].map(m => m[1]))];
+    }
+    const p0 = new Set(pages[0]);
+    const novel = p => pages[p].filter(s => !p0.has(s));
     out.designproject.pagination = {
-      page0Cards: cardCount(p0.body),
-      page1Cards: cardCount(p1.body),
-      sameBytes: p0.body.length === p1.body.length,
-      // paginatia nu avanseaza => catalogul complet e pe page=0
-      page1EqualsPage0: p0.body.length === p1.body.length && cardCount(p0.body) === cardCount(p1.body),
+      pagesTested: [0, 1, 2],
+      cardsPerPage: { 0: pages[0].length, 1: pages[1].length, 2: pages[2].length },
+      // slug-uri pe care paginile 1 si 2 le adaug peste pagina 0
+      page1NewSlugs: novel(1).length,
+      page2NewSlugs: novel(2).length,
+      paginationAdvances: novel(1).length + novel(2).length > 0,
+      // ce pagini ia scraperul (0, 2, 3) — deci e acoperit ce conteaza
+      scraperPages: [0, 2, 3],
+      scraperCoversNewSlugs: novel(1).length === 0,
     };
   } catch (e) { out.designproject = out.designproject || {}; out.designproject.pagination = { error: e.message }; }
 

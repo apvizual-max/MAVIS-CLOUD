@@ -35,8 +35,12 @@ const NEWS_TEXT = /weekly|newsletter|edition|ed\.\s*$|dumitrascu|smart city/i;
 // ---- robot: local-part de tip no-reply ----
 const ROBOT_LOCAL = /^(no-?reply|do-?not-?reply|donotreply|noreply|notify|notifications?|alerts?|automated|mailer|newsletter|newsletters|news|bounce|postmaster)/i;
 // ---- ALERTA DE SECURITATE: cere verificare umana, chiar daca vine de la robot ----
+// MĂSURAT 2026-10-29: „Notice of Security Incident" (Scribd, prin Epiq) — un
+// incident real de date, dar de la alt expeditor decât Google. Deci NU
+// condiționăm alerta doar de expeditor: și SUBIECTUL poate spune "incident".
 const SECURITY_FROM = /accounts\.google\.com|@google\.com|security|alert@/i;
-const SECURITY_TEXT = /security alert|alerta de securitate|new sign-in|new device|dispozitiv nou|someone may be trying|acces neautorizat|verifica.*activit|check activity|secure your account/i;
+const SECURITY_SUBJECT = /security alert|security incident|incident de securitate|alerta de securitate|new sign-in|new device|dispozitiv nou|someone may be trying|acces neautorizat/i;
+const SECURITY_TEXT = /security alert|security incident|alerta de securitate|new sign-in|new device|dispozitiv nou|someone may be trying|acces neautorizat|verifica.*activit|check activity|secure your account|gained access to certain user data|may have affected your data/i;
 // ---- CI / workflow esuat: cere actiune, chiar daca e "zgomot de pipeline" ----
 const CI_FAIL_SUBJECT = /\brun failed\b|workflow.*fail|\bfailed\b|\bfailure\b|build failed|eroare/i;
 const CI_FROM = /notifications@github\.com|githubactions|@github\.com/i;
@@ -106,7 +110,7 @@ function triage(rows) {
     const isJobAlert = JOB_ALERT.test(from) || JOB_ALERT.test(subj);
 
     let cls, why;
-    if (SECURITY_FROM.test(from) && SECURITY_TEXT.test(text)) {
+    if ((SECURITY_FROM.test(from) && SECURITY_TEXT.test(text)) || SECURITY_SUBJECT.test(subj)) {
       cls = 'needs-action'; why = 'alerta de securitate — cere verificare umana';
     } else if (CI_FROM.test(from) && CI_FAIL_SUBJECT.test(subj)) {
       cls = 'needs-action'; why = 'workflow CI esuat — cere actiune';
