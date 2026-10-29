@@ -105,7 +105,121 @@ def pregateste(out):
             REG=reg.get('registryUrl', '') or '—',
         ))
 
+    scrie_md(os.path.join(out, 'README.md'), complete(README_ROOT,
+        N=len(sites),
+        REG=reg.get('registryUrl', '') or '—',
+        CV_URL=(sites[0].get('url', '') if sites else '') or 'se publica la pasul 1',
+        CV_NAME=nume_cv(sites[0]['slug']) if sites else 'Mavis-CV',
+        PANEL_URL='https://4nsxl2or95u1a.space.minimax.io',
+        PANEL_NODE='451351241044296',
+    ))
+    scrie_md(os.path.join(out, 'PUBLISH.md'), complete(PUBLISH,
+        CV_NAME=nume_cv(sites[0]['slug']) if sites else 'Mavis-CV',
+        CV_URL=(sites[0].get('url', '') if sites else '') or '<nod>.space.minimax.io',
+        PANEL_URL='https://4nsxl2or95u1a.space.minimax.io',
+        PANEL_NODE='451351241044296',
+    ))
+
     return out
+
+
+README_ROOT = """# Mavis — cele doua site-uri
+
+Două site-uri, două foldere, două adrese.
+
+| Folder | Site | Adresa |
+|---|---|---|
+| `Mavis-Cloud/` | panoul | {{PANEL_URL}} (nod {{PANEL_NODE}}) |
+| `{{CV_NAME}}/` | site-ul CV | {{CV_URL}} |
+
+## Ce e in fiecare folder
+
+| Ce | Folder |
+|---|---|
+| build-ul publicat (index.html la radacina) | `site/` |
+| sursa: generatorul, datele, registrul | `source/` |
+| contractul site-ului | `README.md` |
+
+## Contractul separarii
+
+Panoul **nu contine copii** ale paginilor CV. Contine **legaturi**.
+
+- Lista de site-uri CV se citeste **de pe server**, la fiecare incarcare:
+  `{{REG}}`
+- Previzualizarea e un `iframe` catre **site-ul surs**, nu o pagina locala.
+- Deci: schimbi datele CV → redeployezi site-ul CV → panoul arata noul imediat,
+  **fara rebuild de panou**.
+
+Testul care tine contractul: `SITE/test_split.py` (4 teste, si in CI).
+
+**{{N}} rol(i)** in registru.
+
+## Publicare
+
+`PUBLISH.md` — 3 apeluri, un minut.
+
+## Sursa
+
+Repo (istoric, CI, skill-uri): https://github.com/apvizual-max/MAVIS-CLOUD
+Clona locala folosita la build: `E:\\Google\\Cache\\MAVIS-CLOUD`
+"""
+
+PUBLISH = """# PUBLICAREA — 3 apeluri, ~1 minut
+
+Build-urile sunt gata, testate si in oglinda. Instrumentul de deploy al app-ului
+(`website_deploy`) a raspuns `401 invalid access token` la ultima rulare — blocada
+e de autentificare a platformei, nu de build.
+
+Dupa ce autentificarea se reface, ruleaza cele trei apeluri, in ordine.
+
+## 1. Site-ul CV — nod NOU
+
+```
+website_deploy(
+  path        = ...\\_Sites\\Mavis\\{{CV_NAME}}\\site
+  source_path = ...\\_Sites\\Mavis\\{{CV_NAME}}\\source
+  project_name= "Mavis CV · Graphic Designer"
+)
+```
+
+Intoarce `node_id` + URL. Noteaza URL-ul (forma `https://<nod>.space.minimax.io`).
+
+## 2. Scrie URL-ul in registru, apoi rebuild
+
+In `SITE/date/cv-sites.json`:
+- `sites[0].url` = URL-ul de la pasul 1
+- `registryUrl` = `<url>/cv-sites.json`
+
+Apoi, in clona repo-ului:
+
+```
+python SITE/build.py --all
+python SITE/build-hub.py
+python SITE/prepare-deploy.py ...\\_Sites\\Mavis
+```
+
+Ultimul command re-reflecta oglinda (README-uri cu URL-urile reale).
+
+## 3. Actualizeaza ambele site-uri — in place, ACELASI nod
+
+```
+website_deploy(node_id=<nod de la pasul 1>,
+  path=...\\{{CV_NAME}}\\site, source_path=...\\{{CV_NAME}}\\source,
+  project_name="Mavis CV · Graphic Designer")
+
+website_deploy(node_id={{PANEL_NODE}},
+  path=...\\Mavis-Cloud\\site, source_path=...\\Mavis-Cloud\\source,
+  project_name="Mavis Cloud")
+```
+
+## Reguli
+
+- **Panoul: nodul {{PANEL_NODE}}, mereu update in place** ({{PANEL_URL}}).
+  NICIODATA nod nou — Regula 0 din `AGENTS.md`.
+- **Site-ul CV:** nod nou o singura data (pasul 1), apoi update in place (pasul 3).
+- Dupa pasul 3, verifica: panoul arata cardul cu linkul catre site-ul CV, iar
+  `cv-sites.json` de pe site-ul CV listeaza rolul.
+"""
 
 
 README_PANOU = """# Mavis Cloud — panoul (site 1)
