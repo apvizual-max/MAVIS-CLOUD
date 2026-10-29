@@ -164,61 +164,42 @@ Repo (istoric, CI, skill-uri): https://github.com/apvizual-max/MAVIS-CLOUD
 Clona locala folosita la build: `E:\\Google\\Cache\\MAVIS-CLOUD`
 """
 
-PUBLISH = """# PUBLICAREA — 3 apeluri, ~1 minut
+PUBLISH = """# PUBLICAREA — starea actuala
 
-Build-urile sunt gata, testate si in oglinda. Instrumentul de deploy al app-ului
-(`website_deploy`) a raspuns `401 invalid access token` la ultima rulare — blocada
-e de autentificare a platformei, nu de build.
+| Site | Adresa | Nod |
+|---|---|---|
+| Panoul Mavis Cloud | {{PANEL_URL}} | {{PANEL_NODE}} |
+| {{CV_NAME}} | {{CV_URL}} | 457675888369757 |
 
-Dupa ce autentificarea se reface, ruleaza cele trei apeluri, in ordine.
+Ambele sunt publicate. Panoul e pe nodul lui original (update in place, Regula 0).
 
-## 1. Site-ul CV — nod NOU
-
-```
-website_deploy(
-  path        = ...\\_Sites\\Mavis\\{{CV_NAME}}\\site
-  source_path = ...\\_Sites\\Mavis\\{{CV_NAME}}\\source
-  project_name= "Mavis CV · Graphic Designer"
-)
-```
-
-Intoarce `node_id` + URL. Noteaza URL-ul (forma `https://<nod>.space.minimax.io`).
-
-## 2. Scrie URL-ul in registru, apoi rebuild
-
-In `SITE/date/cv-sites.json`:
-- `sites[0].url` = URL-ul de la pasul 1
-- `registryUrl` = `<url>/cv-sites.json`
-
-Apoi, in clona repo-ului:
+## Cum se republica — update in place, fara nod nou
 
 ```
-python SITE/build.py --all
-python SITE/build-hub.py
-python SITE/prepare-deploy.py ...\\_Sites\\Mavis
-```
-
-Ultimul command re-reflecta oglinda (README-uri cu URL-urile reale).
-
-## 3. Actualizeaza ambele site-uri — in place, ACELASI nod
-
-```
-website_deploy(node_id=<nod de la pasul 1>,
-  path=...\\{{CV_NAME}}\\site, source_path=...\\{{CV_NAME}}\\source,
-  project_name="Mavis CV · Graphic Designer")
-
 website_deploy(node_id={{PANEL_NODE}},
   path=...\\Mavis-Cloud\\site, source_path=...\\Mavis-Cloud\\source,
   project_name="Mavis Cloud")
+
+website_deploy(node_id=457675888369757,
+  path=...\\{{CV_NAME}}\\site, source_path=...\\{{CV_NAME}}\\source,
+  project_name="Mavis CV · Graphic Designer")
 ```
 
-## Reguli
+## Daca adaugi un rol nou (site CV nou)
 
-- **Panoul: nodul {{PANEL_NODE}}, mereu update in place** ({{PANEL_URL}}).
-  NICIODATA nod nou — Regula 0 din `AGENTS.md`.
-- **Site-ul CV:** nod nou o singura data (pasul 1), apoi update in place (pasul 3).
-- Dupa pasul 3, verifica: panoul arata cardul cu linkul catre site-ul CV, iar
-  `cv-sites.json` de pe site-ul CV listeaza rolul.
+1. `python SITE/build.py --all` — apare `SITE/dist-cv/<rol>/`
+2. `website_deploy(path=...\\Mavis-CV-<Rol>\\site, source_path=...\\Mavis-CV-<Rol>\\source)`
+   → **nod NOU**; primesti URL-ul
+3. Scrie URL-ul in `SITE/date/cv-sites.json`: `sites[].url` + `registryUrl`
+4. `python SITE/build.py --all` && `python SITE/build-hub.py` &&
+   `python SITE/prepare-deploy.py <oglinda>`
+5. Republica ambele (update in place). CV-ul nou primeste si el registrul,
+   iar panoul il arata **imediat** — fara rebuild de panou.
+
+## De ce sunt 2 deployuri la un rol nou
+
+URL-ul nodului e dat de platforma la creare: pana atunci, nimeni nu-l stie.
+**Registrul e puntea** — si de aceea e singurul loc unde se scrie URL-ul.
 """
 
 
