@@ -51,12 +51,24 @@ def complete(tmpl, **tokens):
     return tmpl
 
 
+PANEL_NAME = 'Mavis Optimus Control Center'
+
+
+def slug_nume(t):
+    """'Alex CV - Graphic Designer' -> 'Alex-CV-Graphic-Designer'"""
+    s = ''.join(ch if ch.isalnum() else '-' for ch in str(t))
+    while '--' in s:
+        s = s.replace('--', '-')
+    return s.strip('-')
+
+
 def nume_panou():
-    return 'Mavis-Cloud'
+    return slug_nume(PANEL_NAME)
 
 
-def nume_cv(slug):
-    return 'Mavis-CV-' + '-'.join(w[:1].upper() + w[1:] for w in slug.split('-'))
+def nume_cv(site):
+    """Folderul oglinzii = numele site-ului, slug-uit."""
+    return slug_nume(site.get('titlu') or site.get('slug') or 'site')
 
 
 def pregateste(out):
@@ -87,7 +99,7 @@ def pregateste(out):
         slug = s.get('slug')
         if not slug:
             continue
-        cdir = os.path.join(out, nume_cv(slug))
+        cdir = os.path.join(out, nume_cv(s))
         copiere_arbore(os.path.join(BASE, 'dist-cv', slug), os.path.join(cdir, 'site'))
 
         cs = os.path.join(cdir, 'source')
@@ -105,17 +117,24 @@ def pregateste(out):
             REG=reg.get('registryUrl', '') or '—',
         ))
 
+    cv_site = sites[0] if sites else {}
     scrie_md(os.path.join(out, 'README.md'), complete(README_ROOT,
         N=len(sites),
         REG=reg.get('registryUrl', '') or '—',
-        CV_URL=(sites[0].get('url', '') if sites else '') or 'se publica la pasul 1',
-        CV_NAME=nume_cv(sites[0]['slug']) if sites else 'Mavis-CV',
+        CV_URL=cv_site.get('url', '') or 'se publica la pasul 1',
+        CV_FOLDER=nume_cv(cv_site) if cv_site else 'site-cv',
+        CV_DISPLAY=cv_site.get('titlu', '') or 'Site CV',
+        PANEL_FOLDER=nume_panou(),
+        PANEL_NAME=PANEL_NAME,
         PANEL_URL='https://4nsxl2or95u1a.space.minimax.io',
         PANEL_NODE='451351241044296',
     ))
     scrie_md(os.path.join(out, 'PUBLISH.md'), complete(PUBLISH,
-        CV_NAME=nume_cv(sites[0]['slug']) if sites else 'Mavis-CV',
-        CV_URL=(sites[0].get('url', '') if sites else '') or '<nod>.space.minimax.io',
+        CV_FOLDER=nume_cv(cv_site) if cv_site else 'site-cv',
+        CV_DISPLAY=cv_site.get('titlu', '') or 'Site CV',
+        CV_URL=cv_site.get('url', '') or '<nod>.space.minimax.io',
+        PANEL_FOLDER=nume_panou(),
+        PANEL_NAME=PANEL_NAME,
         PANEL_URL='https://4nsxl2or95u1a.space.minimax.io',
         PANEL_NODE='451351241044296',
     ))
@@ -129,8 +148,8 @@ Două site-uri, două foldere, două adrese.
 
 | Folder | Site | Adresa |
 |---|---|---|
-| `Mavis-Cloud/` | panoul | {{PANEL_URL}} (nod {{PANEL_NODE}}) |
-| `{{CV_NAME}}/` | site-ul CV | {{CV_URL}} |
+| `{{PANEL_FOLDER}}/` | {{PANEL_NAME}} | {{PANEL_URL}} (nod {{PANEL_NODE}}) |
+| `{{CV_FOLDER}}/` | {{CV_DISPLAY}} | {{CV_URL}} |
 
 ## Ce e in fiecare folder
 
@@ -156,7 +175,7 @@ Testul care tine contractul: `SITE/test_split.py` (4 teste, si in CI).
 
 ## Publicare
 
-`PUBLISH.md` — 3 apeluri, un minut.
+`PUBLISH.md` — nodurile si apelurile de republicare.
 
 ## Sursa
 
@@ -168,8 +187,8 @@ PUBLISH = """# PUBLICAREA — starea actuala
 
 | Site | Adresa | Nod |
 |---|---|---|
-| Panoul Mavis Cloud | {{PANEL_URL}} | {{PANEL_NODE}} |
-| {{CV_NAME}} | {{CV_URL}} | 457675888369757 |
+| {{PANEL_NAME}} | {{PANEL_URL}} | {{PANEL_NODE}} |
+| {{CV_DISPLAY}} | {{CV_URL}} | 457675888369757 |
 
 Ambele sunt publicate. Panoul e pe nodul lui original (update in place, Regula 0).
 
@@ -177,18 +196,18 @@ Ambele sunt publicate. Panoul e pe nodul lui original (update in place, Regula 0
 
 ```
 website_deploy(node_id={{PANEL_NODE}},
-  path=...\\Mavis-Cloud\\site, source_path=...\\Mavis-Cloud\\source,
-  project_name="Mavis Cloud")
+  path=...\\{{PANEL_FOLDER}}\\site, source_path=...\\{{PANEL_FOLDER}}\\source,
+  project_name="{{PANEL_NAME}}")
 
 website_deploy(node_id=457675888369757,
-  path=...\\{{CV_NAME}}\\site, source_path=...\\{{CV_NAME}}\\source,
-  project_name="Mavis CV · Graphic Designer")
+  path=...\\{{CV_FOLDER}}\\site, source_path=...\\{{CV_FOLDER}}\\source,
+  project_name="{{CV_DISPLAY}}")
 ```
 
 ## Daca adaugi un rol nou (site CV nou)
 
 1. `python SITE/build.py --all` — apare `SITE/dist-cv/<rol>/`
-2. `website_deploy(path=...\\Mavis-CV-<Rol>\\site, source_path=...\\Mavis-CV-<Rol>\\source)`
+2. `website_deploy(path=...\\<Numele-Sitului>\\site, source_path=...\\<Numele-Sitului>\\source)`
    → **nod NOU**; primesti URL-ul
 3. Scrie URL-ul in `SITE/date/cv-sites.json`: `sites[].url` + `registryUrl`
 4. `python SITE/build.py --all` && `python SITE/build-hub.py` &&
@@ -203,7 +222,7 @@ URL-ul nodului e dat de platforma la creare: pana atunci, nimeni nu-l stie.
 """
 
 
-README_PANOU = """# Mavis Cloud — panoul (site 1)
+README_PANOU = """# Mavis Optimus Control Center — panoul (site 1)
 
 **Live:** https://4nsxl2or95u1a.space.minimax.io
 

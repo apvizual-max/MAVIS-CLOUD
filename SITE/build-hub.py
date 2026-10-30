@@ -369,7 +369,7 @@ def main():
 
     html = f"""<!DOCTYPE html><html lang="ro"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mavis Cloud · tot ce există</title>
+<title>Mavis Optimus Control Center · tot ce există</title>
 <meta http-equiv="refresh" content="180">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -452,7 +452,7 @@ iframe{{width:100%;height:640px;border:1px solid #1e293b;border-radius:12px;back
 </style></head><body>
 
 <div class="wrap"><header>
-  <h1>Mavis <span>Cloud</span> · tot ce există</h1>
+  <h1>Mavis Optimus <span>Control Center</span> · tot ce există</h1>
   <p class="sub">{azi} · <a href="https://github.com/apvizual-max/MAVIS-CLOUD">apvizual-max/MAVIS-CLOUD</a> ·
   ramura <code class="mono">{esc(branch)}</code> · {commits} commit-uri · {dirty} necomitate</p>
 </header></div>
