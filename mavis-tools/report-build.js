@@ -600,6 +600,7 @@ if (dpP && !dpP.error) {
   md += `3. **Celelalte două câmpuri de engagement ale designproject.io sunt inutilizabile.** \`employmentType\` din JSON-LD spune \`FULL_TIME\` pentru ${dpP.employmentType.FULL_TIME || 0} din ${dpP.count}, iar badge-ul din listing spune "Full-time" pentru ${dpP.badgeFullTime} din ${dpP.count}. Singura sură corectă e linia **"Job Type:"** din descriere — prezentă la ${dpP.withJobTypeLine} din ${dpP.count}. Am folosit asta.\n`;
 } else {
   md += `2. *(Sonda de surse nu a rulat azi — cifrele despre designproject.io lipsesc.)*\n`;
+  md += `3. *(Fara sonda, nu pot masura care e sursa de adevar pentru engagementul de pe designproject.io.)*\n`;
 }
 if (iqP && !iqP.error) {
   md += `4. **Paginatia IQads nu funcționează.** \`?page=${iqP.pagesTested.slice(1).join('\` și \`?page=')}\` servesc exact pagina 0 (aceleași ${iqP.catalogueLinks} de linkuri — verificat azi pe ${iqP.pagesTested.join(', ')}). Catalogul complet e pe pagina 0 — nu iterez pagini.\n`;

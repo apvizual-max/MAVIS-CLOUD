@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-30",
+  "note": "Leads din alertele de job de azi (2026-10-30). Fiecare poarta calea de verificare declarata in verifiedVia — unde pagina sursei a raspuns 403, am folosit textul indexat sau corpul emailului si am spus-o explicit. Astazi: 3 alerte Bestjobs (una noua, de tip „angajatori care cauta oameni ca tine”) + 1 alerta Jooble + 1 eJobs. eJobs nu contine design azi (Customer Support Agent iGaming), deci corect a fost clasificat ca fyi.",
+  "leads": [
+    {
+      "resolvedTitle": "Web Graphic Designer @ Profitshare (NOU)",
+      "from": "Jooble",
+      "subject": "Profitshare caută Web Graphic Designer și 100 mai multe oferte noi de muncă",
+      "summary": "Profitshare (entitatea legala: Conversion Marketing SRL) angajeaza un Web Graphic Designer. Alerta Jooble de azi il numeste drept jobul-cheie — dar corpul emailului e o lista generica de 100 de oferte (UX Designer, ux/ui graphic designer, Graphic design Bucuresti / România), fara detalii despre rol. DETALIILE le-am luat de pe pagina de cariere a firmei, care le publica integral.",
+      "requirements": [
+        "Designer web cu ochiul format pentru user experience (UX) si arhitectura informatiei (AI)",
+        "La zi cu noile trenduri in digital, deschis spre concepte noi si tehnologii noi",
+        "Experienta de lucru de minimum 3 ani",
+        "Instrumente de CRO pentru wireframes si prototype-uri",
+        "Programe din suita Adobe, incepand cu Photoshop si Illustrator",
+        "Familiar cu grid system-urile curente",
+        "Animatii html5 si/sau video reprezinta un avantaj (Google Web Designer, After Effects)",
+        "Notiuni de baza despre marketing afiliat",
+        "Proiecte cu impact la nivel national si international"
+      ],
+      "rates": [],
+      "terms": "Locatie: NEPRECIZATA in anunt. Salariu: nepublicat. Echipa de creatie + UX, alaturi de project manageri si web developeri.",
+      "process": "Aplicare pe pagina oficiala de cariere a firmei (profitshare.ro/en/career/18).",
+      "caveat": "Excelenta potrivire cu profilul: UX + design + Adobe + animatii, cu 3+ ani ceruti. Doua lucruri lipsesc din anunt si trebuie sa le afli tu: LOCATIA (nici oras, nici remote/onsite) si SALARIUL. In plus, rolul intra in UX ca proces strategic si cere notiuni de marketing afiliat — e un hybrid design/UX, nu graphic design clasic. Inainte sa aplici, intreaba clar remote si buget.",
+      "verifiedVia": "Pagina de cariere a firmei citita DIRECT (profitshare.ro/en/career/18): cerintele complete, rolul in echipa si entitatea legala (Conversion Marketing SRL). Locatia si salariul: absente de pe pagina — confirmat ca nu sunt publicate.",
+      "url": "https://profitshare.ro/en/career/18"
+    },
+    {
+      "resolvedTitle": "3D Video Games Artist @ Atypical Games (NOU)",
+      "from": "Bestjobs",
+      "subject": "These employers are looking for people like you",
+      "summary": "Atypical Games (studio de jocuri din Bucuresti) angajeaza 3D Video Games Artist. Anuntul a aparut azi in alerta Bestjobs de tip „angajatori care cauta oameni ca tine”. Pe paginile de listare Bestjobs apare in mai multe categorii de design (3D, modelator/animator 3D, game tester), cu acelasi interval de plata.",
+      "requirements": [
+        "Necesa in anunt — pagina Bestjobs /en/job/ raspunde 403 pentru acces automat; am verificat listingul de pe paginile de categorie",
+        "Experienta in 3D pentru jocuri video (modelare, texturare, animatie)",
+        "Portofoliu de lucrari 3D"
+      ],
+      "rates": [
+        "1000 - 2000 (suma afisata de Bestjobs, fara mentiune „estimare” — deci publicata de angajator)"
+      ],
+      "terms": "Bulevardul Doina Cornea 2F, Bucuresti. Acelasi interval 1000-2000 apare la toate rolurile Atypical Games din listing (2D Game Artist, Free 2 Play Game Designer, C++ Game Programmer 1810-2000) — deci e o banda pe care angajatorul o foloseste la nivel de studio, nu o suma negociata individual.",
+      "process": "Aplicare pe anuntul Bestjobs.",
+      "caveat": "E un rol de 3D pentru jocuri, nu design de brand — depinde cat de mult te duce jocurile video. Salariul de 1000-2000 e generos, dar e un interval lat folosit de studio pe mai multe roluri, deci nu stiu unde te plaseaza concret. Important: Bestjobs are si roluri conexe la acest studio — Technical Artist UI la EA SPORTS FC si Associate Cinematics Designer la EA Sports (tot Bucuresti) — pe care nu le-am pus in lista de azi pentru ca nu sunt in alertele tale.",
+      "verifiedVia": "Text integral al anuntului obtinut din indexarea motorului de cautare pe paginile de listare Bestjobs (titlu, angajator, interval de plata, adresa). Pagina /en/job/ raspunde 403 pentru acces automat — NU am deschis-o.",
+      "url": "https://www.bestjobs.eu/locuri-de-munca/modelator+animator+3d"
+    },
+    {
+      "resolvedTitle": "Bestjobs — 14 joburi de design cu salariu (suma pentru decizie)",
+      "from": "Bestjobs",
+      "subject": "New design graphic bucuresti jobs available on bestjobs",
+      "summary": "Alerta de azi aduce acelasi set de 14 joburi de design — cu SALARIU pentru fiecare (azi la fel ca ieri; asta e o imbunatatire fata de 27-28.10, unde salariul lipsea). Tabelul complet:\n\n| Job | Angajator | Salariu | Locatie |\n|---|---|---|---|\n| Proiectant Productie Publicitara (DISPONIBIL IMEDIAT) | BD Lemntech | 1405 – 2000 | Bucuresti / Popesti-Leordeni |\n| AI Video Editor – Meta & AppLovin Performance Ads | Apex Digital Alliance | 1200 – 1300 | (fara oras in anunt) |\n| Graphic Designer | ELBI ElectricLighting | 1195 – 1325 (estimare de piata) | Bragadiru, Hybrid |\n| SudRezidential Videograf & Editor Video | SudRezidential Real Estate | 1000 – 1200 | Bucuresti (Drumul Jilavei 72) |\n| ARHITECT / DESIGNER MOBILA LA COMANDA | UNICAN PRODUCTION | 800 – 1420 | Voluntari |\n| Specialist Marketing Digital | Fabrica De Podcasturi | 700 – 1350 | Hybrid, Bucuresti |\n| Operator Grafica, Print & Personalizari | Viragos Design | 800 – 1000 | Bucuresti |\n| Colaboratori design grafic, creatie si grafica | AGRESIV MEDIA | 780 – 1020 | Bucuresti |\n| Video Editor | BLEU PHARMA | 800 – 1000 | Bucuresti |\n| Social Media & Content Creator | AMAL HEALTH CARE | 900 | Hybrid, Bucuresti |\n| Junior Content Creator | INTAX TRADING | 700 | Otopeni |\n| Graphic Designer part-time 15h (remote) | CreativeEd Media | 525 | Remote |\n| Illustrator/Sketcher/Cartoonist (Turing) | Confidential | 3000 | Remote |\n| Photographer (Turing) | Confidential | 2000 | Remote |",
+      "requirements": [
+        "Pentru fiecare job: portofoliu + CV pe anuntul Bestjobs, din email"
+      ],
+      "rates": [
+        "Cel mai mult platit: BD Lemntech, 1405 – 2000",
+        "Cea mai buna raport bani/ore: Turing remote (totusi vezi caveat-ul de la leadul separat despre 3000 vs $300)"
+      ],
+      "terms": "Toate din alerta zilnica Bestjobs, pe criteriul „design graphic bucuresti”.",
+      "process": "Aplicare pe anuntul Bestjobs, din email.",
+      "caveat": "Sumele de la ELBI si BCR sunt „market estimate on similar positions” — NU le publica angajatorul. Restul apar publicate de angajator. Bestjobs /en/job/ raspunde 403 la acces automat, deci valorile vin din corpul emailului (care, spre noroc, poarta si salariul).",
+      "verifiedVia": "Corpul COMPLET al emailului Bestjobs de azi (titlu, angajator, salariu si locatie pentru fiecare job). Pagina de anunt Bestjobs raspunde 403 — NU am deschis paginile individuale.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "Brand Executive @ Imperial Brands (REAPĂRUT) + roluri de brand NOI azi",
+      "from": "Bestjobs",
+      "subject": "These employers are looking for people like you",
+      "summary": "Alerta de azi de tip „angajatori care cauta oameni ca tine” a adus un grup de roluri de BRAND si marketing care ieri nu erau acolo. Leadul principal: Brand Executive @ Imperial Brands — acelasi anunt care a fost si in leads din 27.10, deci reaparut, cu salariu afumat acum.\n\n| Rol | Angajator | Salariu | Locatie |\n|---|---|---|---|\n| Brand Executive | Imperial Brands | 1340 – 1485 (estimare) | Bucharest |\n| BRAND MANAGER | FEDERATIA ROMANA DE FOTBAL | 1340 – 1485 (estimare) | Bucuresti |\n| BRAND MANAGER | Maspex | fara suma | Bucuresti |\n| Director Marketing @ TEZAUR | TEZAUR INVESTMENT GROUP | 1790 – 1975 (estimare) | Sector 1, Bucuresti |\n| Marketing Specialist | Rompetrol | 1340 – 1485 (estimare) | Bucharest |\n| Consultant management senior | Electrica Furnizare | 1790 – 1975 (estimare) | Bucuresti |\n| Account Manager BTL – Brand Activations & Events | Instore Power Provider | 1790 – 1975 (estimare) | Bucuresti |\n| Corporate Marketing Director | Working4U Exclusive | 1790 – 1975 (estimare) | Bucuresti/Voluntari/Afumati |",
+      "requirements": [
+        "Necesa in anunt — Bestjobs /en/job/ raspunde 403, deci cerintele nu au putut fi citite de pe pagina",
+        "Din titlu: experienta in brand si/sau marketing, la agentie sau companie mare"
+      ],
+      "rates": [
+        "Cea mai mare suma din grup: 1790 – 1975 (estimare de piata) — la Director Marketing @ TEZAUR, Consultant @ Electrica, Corporate Marketing Director @ Working4U",
+        "Restul grupului: 1340 – 1485 (estimare de piata)"
+      ],
+      "terms": "Toate in Bucuresti (TEZAUR in Sector 1).",
+      "process": "Aplicare pe anuntul Bestjobs, din email.",
+      "caveat": "ONEST: toate sumele din acest grup sunt „market estimate on similar positions” — Bestjobs le calculeaza din pozitii similare, NU le publica angajatorii. Deci sunt indicii de piata, nu oferte. In plus, sunt roluri de management de brand/marketing, nu de design efectiv — daca urmaresti Traseul 1 (creatie), sunt secundare; daca urmaresti Traseul 2 (proiecte + produse), merita evaluat. Brand Executive la Imperial Brands e cel mai apropiat de profilul tau.",
+      "verifiedVia": "Corpul COMPLET al emailului Bestjobs de azi (grupul „angajatori care cauta oameni ca tine”, cu angajator, suma si locatie). Pagina de anunt Bestjobs raspunde 403 pentru acces automat.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "Jooble — 100 de oferte, cu joburi de design (alerta de azi)",
+      "from": "Jooble",
+      "subject": "Profitshare caută Web Graphic Designer și 100 mai multe oferte noi de muncă",
+      "summary": "Alerta Jooble de azi are 100 de oferte. Corpul ei listeaza, printre altele: UX Designer (Bucuresti, 40 km), Remote ux/ui graphic designer (Bucuresti, 40 km), Graphic design România (40 km) si Graphic design Bucuresti (40 km) — adica joburi de design remote si din Bucuresti. Nu am intrat in ele unul cate unul: ar fi fost 100 de cereri, iar alerta Jooble nu da nici salariu in corp. Am extras doar leadul cu nume (Profitshare).",
+      "requirements": [
+        "Joburile individuale au pagini proprii pe Jooble, cu detalii si salariu — dar deschiderea lor costa 1 cerere fiecare."
+      ],
+      "rates": [],
+      "terms": "Bucuresti si remote, cu raza de 40 km in jurul orasului.",
+      "process": "Aplicare prin Jooble.",
+      "caveat": "Alerta Jooble de azi nu contine salariu in corp — deci NU pot face comparatia de bani ca la Bestjobs. Daca vrei, pot citi paginile joburilor de design din ea (40 km, Remote ux/ui) — costa ~1 cerere Google fiecare.",
+      "verifiedVia": "Corpul emailului de alerta (lista de joburi cu titlu si localizare, fara salariu). Joburile individuale NU au fost deschise.",
+      "url": "https://www.jooble.ro"
+    }
+  ]
+}
