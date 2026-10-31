@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-31",
+  "note": "Leads din alertele de job de azi (2026-10-31). Sambata: doar 7 mesaje, 2 alerte cu continut de job. Fiecare lead poarta calea de verificare declarata in verifiedVia - unde pagina sursei a raspuns 403, am folosit textul indexat sau corpul emailului si am spus-o explicit.",
+  "leads": [
+    {
+      "resolvedTitle": "Creative Lead & 3D Designer @ MARKQUEN EUROPE (NOU - cel mai bine platit din lista de azi)",
+      "from": "Bestjobs",
+      "subject": "11 design graphic bucuresti jobs available on bestjobs",
+      "summary": "MARKQUEN Europe angajeaza un Creative Lead & 3D Designer in Bucuresti. MARKQUEN e un grup international specializat in POSM, trade marketing si solutii de retail pentru branduri FMCG, cu birouri in Romania, Polonia si Ucraina, proiecte livrate in peste 30 de tari. Adresa din anunt: Strada Promoroaca 5, Bucuresti.",
+      "requirements": [
+        "Necesa complete in anunt - pagina Bestjobs /en/job/ raspunde 403 pentru acces automat; am verificat listingul de pe bebee, care are descrierea firmei si regimul de lucru",
+        "Rolul combina directie creativa si executie 3D pentru retail si POSM (afisaj, mobilier de retail, retail marketing pentru FMCG)"
+      ],
+      "rates": [
+        "1400 - 1800 (suma afisata de Bestjobs, fara mentiune de estimare - deci publicata de angajator)"
+      ],
+      "terms": "Hybrid, Strada Promoroaca 5, Bucuresti. ATENTIE: listarea de pe bebee a aceluiasi rol (3D Designer Retail/POSM) spune La sediu, adica on-site, in timp ce Bestjobs zice Hybrid. Exista discrepanta pe regim - intreaba in aplicatie.",
+      "process": "Aplicare pe anuntul Bestjobs.",
+      "caveat": "Cel mai bine platit rol de design din zilele trecute (1400-1800) si singurul de azi care combina titlul de creativitate pe care il cauti (Creative Lead) cu 3D. Punct slab: 3D si POSM e o nisa diferita de brand identity - daca portofoliul tau e greu de port, suna inainte de a aplica. E si Creative Lead, deci salvare mai mare, dar verifica inainte.",
+      "verifiedVia": "Corpul COMPLET al emailului Bestjobs (titlu, angajator, suma 1400-1800, Hybrid, adresa) plus listingul indexat de pe bebee, care confirma firma, profilul (POSM, trade marketing, retail FMCG, peste 30 de tari) si regimul de lucru La sediu. Pagina /en/job/ de pe Bestjobs raspunde 403 - NU am deschis-o.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "UX Jobs Weekly (LinkedIn) - canal NOU de alerte UX, editia 82",
+      "from": "UX Jobs via LinkedIn",
+      "subject": "UX Jobs Weekly | 82nd Ed.",
+      "summary": "Newsletter NOU in inboxul lui Alex, care n-a mai aparut in rapoartele anterioare. UX Jobs Weekly aduna roluri din peste 60 de surse intr-un singur loc, actualizate zilnic, pe jobs.uxjobs.io - cu filtru pe tara. Are si plugin pentru ChatGPT. Relevanta pentru Alex: contine roluri de UX si Product Design, exact profilul lui.",
+      "requirements": [
+        "Nu e un job, e un canal de alerte - relevant pentru faptul ca Alex are deja abonament la el."
+      ],
+      "rates": [],
+      "terms": "Jobs listate in editia de azi: 236 in Statele Unite (se afiseaza 20). Filtreaza pe Romania sau Remote inainte sa te astepti la roluri locale.",
+      "process": "Nu se aplica nimic - e un agregator. Intra pe jobs.uxjobs.io si foloseste filtrul de tara.",
+      "caveat": "Editia de azi arata doar roluri din SUA (Amazon AWS, Capital One, JPMorgan, Target) - pentru tate relevant e filtrul Romania si Remote din jobs.uxjobs.io, nu lista din email. Ca sursa de urmarit: 60+ surse intr-un loc, actualizat zilnic. Daca vrei, pot citi zilnic filtrul Romania si Remote si sa-l adaug in raport ca sursa 4.",
+      "verifiedVia": "Corpul COMPLET al emailului (editia 82, linkurile catre joburi, numarul de roluri si de surse, linkul catre jobs.uxjobs.io). Newsletterul e nou in inbox - nu a mai aparut in rapoartele anterioare.",
+      "url": "https://jobs.uxjobs.io"
+    },
+    {
+      "resolvedTitle": "Bestjobs - 11 joburi de design cu salariu (suma pentru decizie)",
+      "from": "Bestjobs",
+      "subject": "11 design graphic bucuresti jobs available on bestjobs",
+      "summary": "Alerta de azi aduce 11 joburi de design, cu SALARIU pentru fiecare. Tabelul complet:\n\n| Job | Angajator | Salariu | Locatie |\n|---|---|---|---|\n| Creative Lead & 3D Designer | MARKQUEN EUROPE | 1400 - 1800 | Hybrid, Bucuresti |\n| Proiectant Productie Publicitara (DISPONIBIL IMEDIAT) | BD Lemntech | 1405 - 2000 | Bucuresti / Popesti-Leordeni |\n| Specialist Marketing Digital | Fabrica De Podcasturi | 700 - 1350 | Hybrid, Bucuresti |\n| AI Video Editor - Meta & AppLovin Performance Ads | Apex Digital Alliance | 1200 - 1300 | fara oras in anunt |\n| Graphic Designer | ELBI ElectricLighting | 1195 - 1325 (estimare de piata) | Bragadiru, Hybrid |\n| SudRezidential Videograf & Editor Video | SudRezidential Real Estate | 1000 - 1200 | Bucuresti, Drumul Jilavei 72 |\n| ARHITECT / DESIGNER MOBILA LA COMANDA | UNICAN PRODUCTION | 800 - 1420 | Voluntari |\n| Operator Grafica, Print & Personalizari | Viragos Design | 800 - 1000 | Bucuresti |\n| Colaboratori design grafic, creatie si grafica | AGRESIV MEDIA | 780 - 1020 | Bucuresti |\n| Junior Content Creator | INTAX TRADING | 700 | Otopeni |\n| Graphic Designer part-time 15h (remote) | CreativeEd Media | 525 | Remote |",
+      "requirements": [
+        "Pentru fiecare job: portofoliu si CV pe anuntul Bestjobs, din email"
+      ],
+      "rates": [
+        "Cel mai mult platit: BD Lemntech, 1405 - 2000 (DAR scrie DISPONIBIL IMEDIAT - merita intai verificat daca anuntul mai e activ)",
+        "Cel mai nou si cu titlu de creativitate: MARKQUEN, 1400 - 1800 Hybrid"
+      ],
+      "terms": "Toate din alerta zilnica Bestjobs, pe criteriul design graphic bucuresti.",
+      "process": "Aplicare pe anuntul Bestjobs, din email.",
+      "caveat": "Suma de la ELBI este market estimate on similar positions - NU o publica angajatorul; restul apar publicate de angajator. Bestjobs /en/job/ raspunde 403 la acces automat, deci valorile vin din corpul emailului (care, spre noroc, poarta si salariul). Nota: Turing (3000 si 2000) NU mai apare in lista de azi - deci alegerile de ieri s-au scos din alerte.",
+      "verifiedVia": "Corpul COMPLET al emailului Bestjobs de azi (titlu, angajator, salariu si locatie pentru fiecare job). Pagina de anunt Bestjobs raspunde 403 - NU am deschis paginile individuale.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "eJobs - 2 joburi azi, niciunul de design (raportat onest)",
+      "from": "eJobs",
+      "subject": "2 joburi noi azi! Fii printre primii aplicanti!",
+      "summary": "Alerta eJobs de azi are 2 joburi: Digital Marketing Manager la STIFT LUX DESIGN SRL si Gaming Equipment Integrity Manager la ARRISE LIVE S.R.L. Niciunul nu e rol de design. STIFT LUX DESIGN SRL e o firma de mobilier de gradina (producator, distribuitor, importator) cu sediul in Otopeni - deci Digital Marketing Manager acolo e marketing pentru produs, nu design. Filtrarea eJobs a fost pe departamentul Grafică / Webdesign / DTP, pe care le-a bifat, dar rolul in sine nu e de design.",
+      "requirements": [
+        "Necesa in anunt - pagina eJobs raspunde 403 pentru acces automat, deci NU am putut citi cerintele",
+        "Rolurile: Digital Marketing Manager la STIFT LUX DESIGN SRL si Gaming Equipment Integrity Manager la ARRISE LIVE S.R.L. Filtru eJobs: Mid-Level 2-5 ani, orase Bucuresti sau Strainatate"
+      ],
+      "rates": [],
+      "terms": "Bucuresti sau Strainatate, Mid-Level 2-5 ani.",
+      "process": "Aplicare pe eJobs.ro.",
+      "caveat": "NEVERIFICAT pe paginile anunturilor (403). Si, mai important: niciunul din cele 2 joburi nu e de design - deci azi alerta eJobs nu iti aduce nimic relevant. Se poate intelege ca o confirmare ca filtrele tale eJobs prind bine la Grafică si Webdesign, dar la nivel de job concret, 0 relevant.",
+      "verifiedVia": "Corpul emailului de alerta (numele celor 2 joburi, filtrul de departament, nivelul si orasele) plus identificarea firmei STIFT LUX DESIGN SRL ca producator, distribuitor si importator de mobilier de gradina cu sediu in Otopeni (companie publica, sursa indexata). Pagina eJobs.ro raspunde 403.",
+      "url": "https://www.ejobs.ro"
+    },
+    {
+      "resolvedTitle": "Art Director / Graphic Designer @ Cohn & Jansen - inca deschis, inca fara localizare (REAPARUT)",
+      "from": "IQads (scraping direct)",
+      "subject": "Art Director / Graphic Designer @ Cohn & Jansen",
+      "summary": "Nu e un posting nou (IQads #24000, aparut pe 29.10), dar e inca in catalogul activ si expira pe 27.12.2026, deci merita verificat. Full Time, nivel Middle si Senior, minimum 5 ani intr-o agentie de publicitate, campanii 360 de la idee la executie, curiozitate fata de noile tehnologii creative.",
+      "requirements": [
+        "Cel putin 5 ani de experienta, ideal intr-o agentie de publicitate",
+        "Experienta cu campanii 360 - de la idee la executie, pe diverse canale",
+        "Ochi pentru detalii si curiositate fata de noile tehnologii creative"
+      ],
+      "rates": [],
+      "terms": "Full Time. Nivel: Middle, Senior. Specializare: Art, Digital, Graphic Designer, Marketing, Social Media. Valabil pana la 2026-12-27.",
+      "process": "Aplicare pe IQads (anuntul #24000).",
+      "caveat": "IQads NU publica localizarea pentru acest anunt - am verificat din nou pagina de anunt si listarile categoriale (a 3-a zi la rand, tot nimic). De asta sta in verdict amanat cu scor 8: nu stiu unde e. Daca e Bucuresti, scorul sare la 9,6 si ar fi al doilea in tabel. Verifica tu - e o agentie mare, dar nu presupun.",
+      "verifiedVia": "Pagina IQads a anuntului citita DIRECT (HTTP 200, headerul parsat: companie, nivel, tip job, expirare). Localizarea: absenta de pe pagina si de pe listarile categoriale - reconfirmat azi.",
+      "url": "https://www.iqads.ro/adjob/24000/art-director-graphic-designer-cohn-jansen"
+    }
+  ]
+}
