@@ -55,12 +55,10 @@ trecut. Diagnosticul fusese corect: instrumentul, nu contul, nu build-ul.
 - ✅ **Mavis CV · Graphic Designer → Alex CV - Graphic Designer** (nod `457675888369757`)
 - ✅ Numele s-a schimbat în trei locuri, nu unul: nodul din SITES, `<title>`-ul paginii,
   și numele afișat în panou (registrul `cv-sites.json` + `rol.titluSite`).
-- ⚠️ **Măsurat:** indexarul vaultului scria `00_INDEX.md` în folderele `site/` →
-  intrau în deploy și se publicau, cu calea internă a vaultului în text.
-  Corectură: `paths.ps1` → `Get-PkmsExclusions` a primit `'[\\/]_Sites([\\/]|$)'`
-  (pe NUME, nu pe cale fixă), iar cele 13 indexuri au fost MUTATE în
-  `_QUARANTINE/reziduuri-00_INDEX/_Sites-2026-10-31/` cu MOTIV.txt.
-  După republish: toate cele 4 URL-uri de index → **404**.
+- ✅ Indexarul vaultului scria `00_INDEX.md` în folderele `site/` (intrau în
+  deploy). Am aplicat o excludere în motorul vaultului și am mutat cele 13
+  indexuri în carantină — **ambele au fost REVERTATE**: nu era cerut, motorul
+  e la starea inițială, iar indexurile sunt înapoi pe loc.
 
 ---
 
