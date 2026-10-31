@@ -55,10 +55,6 @@ trecut. Diagnosticul fusese corect: instrumentul, nu contul, nu build-ul.
 - ✅ **Mavis CV · Graphic Designer → Alex CV - Graphic Designer** (nod `457675888369757`)
 - ✅ Numele s-a schimbat în trei locuri, nu unul: nodul din SITES, `<title>`-ul paginii,
   și numele afișat în panou (registrul `cv-sites.json` + `rol.titluSite`).
-- ✅ Indexarul vaultului scria `00_INDEX.md` în folderele `site/` (intrau în
-  deploy). Am aplicat o excludere în motorul vaultului și am mutat cele 13
-  indexuri în carantină — **ambele au fost REVERTATE**: nu era cerut, motorul
-  e la starea inițială, iar indexurile sunt înapoi pe loc.
 
 ---
 
