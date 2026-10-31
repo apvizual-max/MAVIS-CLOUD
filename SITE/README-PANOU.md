@@ -1,4 +1,4 @@
-# Panoul Mavis Cloud — sursa
+# Panoul Mavis Optimus Control Center — sursa
 
 Panoul e **site-ul 1**. Adresa lui: `https://4nsxl2or95u1a.space.minimax.io`
 

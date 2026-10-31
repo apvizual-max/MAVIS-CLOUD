@@ -128,7 +128,7 @@ def main():
 
     html = f"""<!DOCTYPE html><html lang="ro"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mavis Cloud · Tot ce există</title>
+<title>Mavis Optimus Control Center · Tot ce există</title>
 <meta http-equiv="refresh" content="120">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>

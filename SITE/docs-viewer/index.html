@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="ro"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Document · Mavis Cloud</title>
+<title>Document · Mavis Optimus Control Center</title>
 <link href="../css/doc.css" rel="stylesheet">
 </head><body>
 
@@ -86,7 +86,7 @@ if(!f){
     if(!r.ok) throw new Error('HTTP '+r.status);
     return r.text();
   }).then(function(t){
-    document.title=f+' · Mavis Cloud';
+    document.title=f+' · Mavis Optimus Control Center';
     c.innerHTML='<h1>'+f.replace(/\.md$/,'')+'</h1>'+md(t);
     window.scrollTo(0,0);
   }).catch(function(e){
