@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-31",
+  "date": "2026-11-01",
   "designproject": {
     "count": 13,
     "jdLenMin": 363,
@@ -27,10 +27,10 @@
       "cardsPerPage": {
         "0": 10,
         "1": 10,
-        "2": 3
+        "2": 1
       },
       "page1NewSlugs": 0,
-      "page2NewSlugs": 3,
+      "page2NewSlugs": 1,
       "paginationAdvances": true,
       "scraperPages": [
         0,
@@ -41,7 +41,7 @@
     }
   },
   "iqads": {
-    "catalogueLinks": 45,
+    "catalogueLinks": 44,
     "pagesTested": [
       0,
       2,

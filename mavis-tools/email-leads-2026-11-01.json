@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-01",
+  "note": "Leads din alertele de job de azi (2026-11-01). Duminica: 7 mesaje, 2 alerte Bestjobs cu continut de job. Fiecare lead poarta calea de verificare declarata in verifiedVia - unde pagina sursei a raspuns 403, am folosit textul indexat sau corpul emailului si am spus-o explicit.",
+  "leads": [
+    {
+      "resolvedTitle": "Creative Lead & 3D Designer @ MARKQUEN EUROPE (a 2-a zi consecutiv - cel mai bine platit)",
+      "from": "Bestjobs",
+      "subject": "Because you searched for design graphic bucuresti jobs / Candidates like you applied for these jobs",
+      "summary": "Cel mai bine platit rol de design din zilele trecute, din nou in alerte. MARKQUEN Europe angajeaza un Creative Lead & 3D Designer in Bucuresti. MARKQUEN e un grup international specializat in POSM, trade marketing si solutii de retail pentru branduri FMCG, cu birouri in Romania, Polonia si Ucraina, proiecte livrate in peste 30 de tari. Adresa din anunt: Strada Promoroaca 5, Bucuresti.",
+      "requirements": [
+        "Rolul combina directie creativa si executie 3D pentru retail si POSM (afisaj, mobilier de retail, retail marketing pentru FMCG)",
+        "Necesa complete in anunt - pagina Bestjobs /en/job/ raspunde 403 la acces automat; descrierea firmei si regimul de lucru sunt pe listingul indexat de pe bebee"
+      ],
+      "rates": [
+        "1400 - 1800 (suma afisata de Bestjobs, fara mentiune de estimare - deci publicata de angajator)"
+      ],
+      "terms": "Hybrid, Strada Promoroaca 5, Bucuresti. ATENTIE: listarea de pe bebee a aceluiasi rol (3D Designer Retail/POSM) spune La sediu, adica on-site, in timp ce Bestjobs zice Hybrid. Exista discrepanta pe regim - intreaba in aplicatie.",
+      "process": "Aplicare pe anuntul Bestjobs.",
+      "caveat": "Apare in doua alerte diferite azi, deci e inca activ. Punct slab: 3D si POSM e o nisa diferita de brand identity - daca portofoliul tau e greu de port, suna inainte de a aplica. E si Creative Lead, deci salvare mai mare, dar verifica inainte.",
+      "verifiedVia": "Corpul COMPLET al celor doua emailuri Bestjobs de azi (titlu, angajator, suma 1400-1800, Hybrid, adresa) plus listingul indexat de pe bebee, care confirma firma, profilul si regimul de lucru La sediu. Pagina /en/job/ de pe Bestjobs raspunde 403 - NU am deschis-o.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "Bestjobs - tip NOU de alerta: Candidates like you applied for these jobs (18 joburi)",
+      "from": "Bestjobs",
+      "subject": "Candidates like you applied for these jobs",
+      "summary": "Alerta NOUA, care nu a mai aparut pana acum: Bestjobs iti trimite joburile la care au aplicat candidati similari cu tine. Asta e un filtru diferit de cautarea ta - lista e mai larga si mai putin tintita pe design. Ea contine MARKQUEN din nou. Joburile NOI fata de ieri, cu sumele de azi:\n\n| Job | Angajator | Salariu | Locatie |\n|---|---|---|---|\n| Trade Marketing Specialist | macromex | 1790 - 1980 (estimare) | Bucuresti |\n| Consultant management senior | Electrica Furnizare | 1790 - 1980 (estimare) | Bucuresti |\n| Brand Executive | Imperial Brands | 1345 - 1485 (estimare) | Bucharest |\n| BRAND MANAGER | Maspex | fara suma | Bucuresti |\n| Marketing Specialist | Rompetrol | 1345 - 1485 (estimare) | Bucharest |\n| Referent Marketing | HUMANITAS FICTION | 1345 - 1485 (estimare) | Piata Presei Libere, Bucuresti |\n| Marketing Assistant - Bucuresti | PROHUMAN APT | 1345 - 1485 (estimare) | Bucuresti |\n| Content Specialist | Dr.Max | fara suma | Bucuresti |\n| Asistent Promovare si Comunicare (2 ani) | BERGERAT MONNOYEUR | fara suma | Bucuresti, Chitila, Mogosoaia |\n| Manager comunicare | FUNDATIA DAN VOICULESCU PENTRU | fara suma | (Bucuresti) |",
+      "requirements": [
+        "Pentru fiecare job: portofoliu si CV pe anuntul Bestjobs, din email"
+      ],
+      "rates": [
+        "Cea mai mare suma: Trade Marketing Specialist la macromex, 1790 - 1980 (estimare)",
+        "ATENTIE: estimarile de piata se recalculeaza zilnic - ieri erau 1340-1485 si 1790-1975, azi sunt 1345-1485 si 1790-1980. Nu sunt oferte de angajator, sunt indicii de jobboard"
+      ],
+      "terms": "Toate din alerta zilnica Bestjobs, pe criteriul profilului tau.",
+      "process": "Aplicare pe anuntul Bestjobs, din email.",
+      "caveat": "Utilitatea acestui tip de alerta: iti arata ce aplica altii similari cu tine, deci e un proxy bun pentru ce se cauta efectiv. Dar lista e plina de roluri de marketing si comunicare - filtreaza pe titlu, nu lua tot. Si nu confunda estimarea de piata cu o oferta: se misca zilnic.",
+      "verifiedVia": "Corpul COMPLET al emailului Bestjobs de azi (18 joburi cu angajator, suma estimata sau publicata, si localizare). Pagina de anunt Bestjobs raspunde 403 - NU am deschis paginile individuale.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "Bestjobs - lista de 11 joburi de design (a 2-a zi, neschimbata)",
+      "from": "Bestjobs",
+      "subject": "Because you searched for design graphic bucuresti jobs",
+      "summary": "Aceleasi 11 joburi de design ca ieri, cu salariu. Tabelul:\n\n| Job | Angajator | Salariu | Locatie |\n|---|---|---|---|\n| Creative Lead & 3D Designer | MARKQUEN EUROPE | 1400 - 1800 | Hybrid, Bucuresti |\n| Proiectant Productie Publicitara (DISPONIBIL IMEDIAT) | BD Lemntech | 1405 - 2000 | Bucuresti / Popesti-Leordeni |\n| Specialist Marketing Digital | Fabrica De Podcasturi | 700 - 1350 | Hybrid, Bucuresti |\n| AI Video Editor - Meta & AppLovin Performance Ads | Apex Digital Alliance | 1200 - 1300 | fara oras in anunt |\n| Graphic Designer | ELBI ElectricLighting | 1195 - 1325 (estimare de piata) | Bragadiru, Hybrid |\n| SudRezidential Videograf & Editor Video | SudRezidential Real Estate | 1000 - 1200 | Bucuresti, Drumul Jilavei 72 |\n| ARHITECT / DESIGNER MOBILA LA COMANDA | UNICAN PRODUCTION | 800 - 1420 | Voluntari |\n| Operator Grafica, Print & Personalizari | Viragos Design | 800 - 1000 | Bucuresti |\n| Colaboratori design grafic, creatie si grafica | AGRESIV MEDIA | 780 - 1020 | Bucuresti |\n| Junior Content Creator | INTAX TRADING | 700 | Otopeni |\n| Graphic Designer part-time 15h (remote) | CreativeEd Media | 525 | Remote |",
+      "requirements": [
+        "Pentru fiecare job: portofoliu si CV pe anuntul Bestjobs, din email"
+      ],
+      "rates": [
+        "Cel mai mult platit: BD Lemntech, 1405 - 2000 (dar scrie DISPONIBIL IMEDIAT - verifica daca anuntul mai e activ)"
+      ],
+      "terms": "Toate din alerta zilnica Bestjobs, pe criteriul design graphic bucuresti.",
+      "process": "Aplicare pe anuntul Bestjobs, din email.",
+      "caveat": "Identica cu lista de ieri - deci nimic nou aici, dar niciunul nu a disparut. Suma de la ELBI e estimare de piata, restul sunt publicate de angajator. Turing (3000 si 2000) nu apare in niciuna dintre cele doua liste.",
+      "verifiedVia": "Corpul COMPLET al emailului Bestjobs de azi. Pagina de anunt Bestjobs raspunde 403 - NU am deschis paginile individuale.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "Cohn & Jansen - a 4-a zi, tot fara localizare publicata (REAPARUT)",
+      "from": "IQads (scraping direct)",
+      "subject": "Art Director / Graphic Designer @ Cohn & Jansen",
+      "summary": "Nu e posting nou (IQads #24000, aparut pe 29.10), dar e inca in catalogul activ si expira pe 27.12.2026. Full Time, nivel Middle si Senior, minimum 5 ani intr-o agentie de publicitate, campanii 360 de la idee la executie, curiozitate fata de noile tehnologii creative.",
+      "requirements": [
+        "Cel putin 5 ani de experienta, ideal intr-o agentie de publicitate",
+        "Experienta cu campanii 360 - de la idee la executie, pe diverse canale",
+        "Ochi pentru detalii si curiositate fata de noile tehnologii creative"
+      ],
+      "rates": [],
+      "terms": "Full Time. Nivel: Middle, Senior. Specializare: Art, Digital, Graphic Designer, Marketing, Social Media. Valabil pana la 2026-12-27.",
+      "process": "Aplicare pe IQads (anuntul #24000).",
+      "caveat": "IQads NU publica localizarea pentru acest anunt - am verificat din nou pagina de anunt si listarile categoriale (a 4-a zi la rand, tot nimic). De asta sta in verdict amanat cu scor 8: nu stiu unde e. Daca e Bucuresti, scorul sare la 9,6 si ar fi al doilea in tabel. Verifica tu - e o agentie mare, dar nu presupun.",
+      "verifiedVia": "Pagina IQads a anuntului citita DIRECT (HTTP 200, headerul parsat: companie, nivel, tip job, expirare). Localizarea: absenta de pe pagina si de pe listarile categoriale - reconfirmat azi.",
+      "url": "https://www.iqads.ro/adjob/24000/art-director-graphic-designer-cohn-jansen"
+    }
+  ]
+}
