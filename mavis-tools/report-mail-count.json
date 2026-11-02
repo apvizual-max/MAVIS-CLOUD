@@ -1,47 +1,47 @@
 {
-  "today": "2026/11/01",
+  "today": "2026/11/02",
   "labels": [
     {
       "key": "joburi",
       "title": "Joburi",
       "name": "MAVIS/Joburi",
       "counts": {
-        "azi": 4,
-        "24h": 20,
-        "7z": 168,
-        "30z": 384
+        "azi": 5,
+        "24h": 17,
+        "7z": 185,
+        "30z": 385
       },
       "newest": {
-        "id": "1a195aefc6fbf3ad",
-        "subject": "When the Danube Sets the Price",
-        "date": "Sun, 1 Nov 2026 05:57:15 +0000 (UTC)",
-        "from": "Alexandru Chirita via LinkedIn <newsletters-noreply@linkedin.com>"
+        "id": "1a19ad041ae35e18",
+        "subject": "DuckDuckGo is hiring for Remote",
+        "date": "Mon, 2 Nov 2026 05:51:41 +0000 (UTC)",
+        "from": "LinkedIn <jobs-noreply@linkedin.com>"
       },
-      "newestDate": "Sun, 1 Nov 2026 05:57:15 +0000 (UTC)",
+      "newestDate": "Mon, 2 Nov 2026 05:51:41 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a195aefc6fbf3ad",
-          "subject": "When the Danube Sets the Price",
-          "date": "Sun, 1 Nov 2026 05:57:15 +0000 (UTC)",
-          "from": "Alexandru Chirita via LinkedIn <newsletters-noreply@linkedin.com>"
+          "id": "1a19ad041ae35e18",
+          "subject": "DuckDuckGo is hiring for Remote",
+          "date": "Mon, 2 Nov 2026 05:51:41 +0000 (UTC)",
+          "from": "LinkedIn <jobs-noreply@linkedin.com>"
         },
         {
-          "id": "1a195a78162b9a3c",
+          "id": "1a19aca60dab3b1f",
           "subject": "Because you searched for design graphic bucuresti jobs",
-          "date": "Sun, 01 Nov 2026 07:49:11 +0200",
+          "date": "Mon, 02 Nov 2026 07:45:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a19596b0320d753",
-          "subject": "Candidates like you applied for these jobs",
-          "date": "Sun, 01 Nov 2026 07:30:11 +0200",
+          "id": "1a19ab288c39c5a9",
+          "subject": "New graphic design, bucharest jobs available on bestjobs",
+          "date": "Mon, 02 Nov 2026 07:19:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a19570d824ed370",
-          "subject": "Stagiar - Autorizari la GROUPAMA ASIGURARI S.A. Încă 22 de locuri de muncă în București, Ilfov",
-          "date": "Sun, 01 Nov 2026 04:49:22 +0000",
-          "from": "Indeed <donotreply@jobalert.indeed.com>"
+          "id": "1a19aaa659cac40f",
+          "subject": "Aplica acum la cel mai nou job!",
+          "date": "Mon, 02 Nov 2026 05:01:03 +0000",
+          "from": "Alerta eJobs <contact@mta.ejobs.ro>"
         }
       ]
     },
@@ -50,42 +50,42 @@
       "title": "AI si comunitati",
       "name": "AI Folder/AI si Comunitati",
       "counts": {
-        "azi": 1,
-        "24h": 12,
-        "7z": 74,
-        "30z": 152
+        "azi": 0,
+        "24h": 6,
+        "7z": 80,
+        "30z": 148
       },
       "newest": {
-        "id": "1a195b5f66412a18",
-        "subject": "doctor claude",
-        "date": "Sun, 1 Nov 2026 06:04:52 +0000",
-        "from": "Vaibhav Sisinty <stayingahead@mail.beehiiv.com>"
+        "id": "1a19972a5066adb9",
+        "subject": "🤩 50% off sale for Faster Please!",
+        "date": "Sun, 1 Nov 2026 23:29:32 +0000",
+        "from": "\"James Pethokoukis: Faster, Please!\" <fasterplease@substack.com>"
       },
-      "newestDate": "Sun, 1 Nov 2026 06:04:52 +0000",
+      "newestDate": "Sun, 1 Nov 2026 23:29:32 +0000",
       "samples": [
         {
-          "id": "1a195b5f66412a18",
-          "subject": "doctor claude",
-          "date": "Sun, 1 Nov 2026 06:04:52 +0000",
-          "from": "Vaibhav Sisinty <stayingahead@mail.beehiiv.com>"
+          "id": "1a19972a5066adb9",
+          "subject": "🤩 50% off sale for Faster Please!",
+          "date": "Sun, 1 Nov 2026 23:29:32 +0000",
+          "from": "\"James Pethokoukis: Faster, Please!\" <fasterplease@substack.com>"
         },
         {
-          "id": "1a193622c57f3697",
-          "subject": "How I grew my YouTube channel with a team of AI agents",
-          "date": "Sat, 31 Oct 2026 19:06:19 +0000 (UTC)",
-          "from": "Samin Yasar <samin@aianswer.us>"
-        },
-        {
-          "id": "1a192c00384389c8",
-          "subject": "Soft-on-crime Democrats let suspected Somali gang shooter go",
-          "date": "Sat, 31 Oct 2026 16:03:39 +0000",
+          "id": "1a19965fcdcb9597",
+          "subject": "Paris riots escalate, chaos spills beyond french borders as Europe burns",
+          "date": "Sun, 1 Nov 2026 23:00:48 +0000",
           "from": "PolitiBrawl <politibrawl@substack.com>"
         },
         {
-          "id": "1a1927eff7b69c1f",
-          "subject": "Five controls to set before you let an AI agent buy, pay, or cancel anything for you, so it finishes the job witho…",
-          "date": "Sat, 31 Oct 2026 14:04:01 +0000",
+          "id": "1a1984e162ba9dde",
+          "subject": "Executive Briefing: Your AI Agent Can Pass Every Demo and Still Double-Credit a Customer. The 8 Tests to Run Befor…",
+          "date": "Sun, 1 Nov 2026 17:01:38 +0000",
           "from": "\"Nate from Nate’s Substack\" <natesnewsletter@substack.com>"
+        },
+        {
+          "id": "1a197357fb94d6c0",
+          "subject": "Can you see what your AI agents did yesterday?",
+          "date": "Sun, 1 Nov 2026 13:03:47 +0000 (UTC)",
+          "from": "Chandrakumar R Pillai via LinkedIn <newsletters-noreply@linkedin.com>"
         }
       ]
     },
@@ -96,40 +96,40 @@
       "counts": {
         "azi": 0,
         "24h": 3,
-        "7z": 21,
-        "30z": 141
+        "7z": 24,
+        "30z": 123
       },
       "newest": {
-        "id": "1a192201129be34b",
-        "subject": "Jonathan Pritchard posted \"Are you a solo business founder?\"",
-        "date": "Sat, 31 Oct 2026 13:22:15 +0000 (UTC)",
-        "from": "Project 720 <noreply@skool.com>"
+        "id": "1a19731695c37e27",
+        "subject": "33 new notifications since 2:58 pm (Oct 31, 2026)",
+        "date": "Sun, 01 Nov 2026 12:59:19 +0000 (UTC)",
+        "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
       },
-      "newestDate": "Sat, 31 Oct 2026 13:22:15 +0000 (UTC)",
+      "newestDate": "Sun, 01 Nov 2026 12:59:19 +0000 (UTC)",
       "samples": [
+        {
+          "id": "1a19731695c37e27",
+          "subject": "33 new notifications since 2:58 pm (Oct 31, 2026)",
+          "date": "Sun, 01 Nov 2026 12:59:19 +0000 (UTC)",
+          "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a1964100dfb14f9",
+          "subject": "1 event happening tomorrow",
+          "date": "Sun, 01 Nov 2026 08:36:43 +0000 (UTC)",
+          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a1962c1b0d44e18",
+          "subject": "Robert Niculescu reposted: Che missili  Crediti @toonholechris  #perte...",
+          "date": "Sun, 01 Nov 2026 08:13:54 +0000 (UTC)",
+          "from": "TikTok <notification@service.tiktok.com>"
+        },
         {
           "id": "1a192201129be34b",
           "subject": "Jonathan Pritchard posted \"Are you a solo business founder?\"",
           "date": "Sat, 31 Oct 2026 13:22:15 +0000 (UTC)",
           "from": "Project 720 <noreply@skool.com>"
-        },
-        {
-          "id": "1a191ed09c07910f",
-          "subject": "18 new notifications since 2:26 pm (Oct 30, 2026)",
-          "date": "Sat, 31 Oct 2026 12:26:31 +0000 (UTC)",
-          "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a1912383d1e0d71",
-          "subject": "1 event happening tomorrow",
-          "date": "Sat, 31 Oct 2026 08:46:25 +0000 (UTC)",
-          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a18f7600079bde5",
-          "subject": "2 new notifications since 2:47 am (Oct 30, 2026)",
-          "date": "Sat, 31 Oct 2026 00:57:17 +0000 (UTC)",
-          "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
         }
       ]
     },
@@ -138,42 +138,42 @@
       "title": "Newsletter",
       "name": "Newsletter",
       "counts": {
-        "azi": 2,
-        "24h": 30,
-        "7z": 226,
-        "30z": 356
+        "azi": 3,
+        "24h": 21,
+        "7z": 247,
+        "30z": 364
       },
       "newest": {
-        "id": "1a195b5f66412a18",
-        "subject": "doctor claude",
-        "date": "Sun, 1 Nov 2026 06:04:52 +0000",
-        "from": "Vaibhav Sisinty <stayingahead@mail.beehiiv.com>"
+        "id": "1a19ad041ae35e18",
+        "subject": "DuckDuckGo is hiring for Remote",
+        "date": "Mon, 2 Nov 2026 05:51:41 +0000 (UTC)",
+        "from": "LinkedIn <jobs-noreply@linkedin.com>"
       },
-      "newestDate": "Sun, 1 Nov 2026 06:04:52 +0000",
+      "newestDate": "Mon, 2 Nov 2026 05:51:41 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a195b5f66412a18",
-          "subject": "doctor claude",
-          "date": "Sun, 1 Nov 2026 06:04:52 +0000",
-          "from": "Vaibhav Sisinty <stayingahead@mail.beehiiv.com>"
+          "id": "1a19ad041ae35e18",
+          "subject": "DuckDuckGo is hiring for Remote",
+          "date": "Mon, 2 Nov 2026 05:51:41 +0000 (UTC)",
+          "from": "LinkedIn <jobs-noreply@linkedin.com>"
         },
         {
-          "id": "1a195aefc6fbf3ad",
-          "subject": "When the Danube Sets the Price",
-          "date": "Sun, 1 Nov 2026 05:57:15 +0000 (UTC)",
-          "from": "Alexandru Chirita via LinkedIn <newsletters-noreply@linkedin.com>"
+          "id": "1a19a9e79e9abbf0",
+          "subject": " You've connected a new app to Dropbox",
+          "date": "Mon, 2 Nov 2026 04:57:18 +0000",
+          "from": "Dropbox <no-reply@dropbox.com>"
         },
         {
-          "id": "1a193956c887c804",
-          "subject": "The Robinhood Big 3 Basket Is +764.79% in 3 months",
-          "date": "Sat, 31 Oct 2026 20:10:04 +0000 (UTC)",
-          "from": "\"Crypto.com\" <no-reply@news.crypto.com>"
+          "id": "1a19a9dac891d30e",
+          "subject": "Hi Alexandru, we noticed a new sign in to your Dropbox account",
+          "date": "Mon, 2 Nov 2026 04:56:26 +0000",
+          "from": "Dropbox <no-reply@dropbox.com>"
         },
         {
-          "id": "1a1934c0f231cce3",
-          "subject": "New idea by Cryptollica — check it out",
-          "date": "Sat, 31 Oct 2026 18:49:56 -0000",
-          "from": "TradingView <noreply@tradingview.com>"
+          "id": "1a197a7c34e70a63",
+          "subject": "what would you do with 2,000 extra hours?",
+          "date": "Sun, 1 Nov 2026 15:08:33 +0000 (GMT)",
+          "from": "Mark Moss <info@marketdisruptors.io>"
         }
       ]
     },
@@ -183,18 +183,24 @@
       "name": "Finante",
       "counts": {
         "azi": 0,
-        "24h": 3,
-        "7z": 16,
+        "24h": 1,
+        "7z": 17,
         "30z": 21
       },
       "newest": {
-        "id": "1a1934c0f231cce3",
+        "id": "1a196db2670e06c4",
         "subject": "New idea by Cryptollica — check it out",
-        "date": "Sat, 31 Oct 2026 18:49:56 -0000",
+        "date": "Sun, 01 Nov 2026 11:25:06 -0000",
         "from": "TradingView <noreply@tradingview.com>"
       },
-      "newestDate": "Sat, 31 Oct 2026 18:49:56 -0000",
+      "newestDate": "Sun, 01 Nov 2026 11:25:06 -0000",
       "samples": [
+        {
+          "id": "1a196db2670e06c4",
+          "subject": "New idea by Cryptollica — check it out",
+          "date": "Sun, 01 Nov 2026 11:25:06 -0000",
+          "from": "TradingView <noreply@tradingview.com>"
+        },
         {
           "id": "1a1934c0f231cce3",
           "subject": "New idea by Cryptollica — check it out",
@@ -212,12 +218,6 @@
           "subject": "New idea by Cryptollica — check it out",
           "date": "Sat, 31 Oct 2026 18:04:14 -0000",
           "from": "TradingView <noreply@tradingview.com>"
-        },
-        {
-          "id": "1a18d963a4b41ef6",
-          "subject": "📈 Anthropic shares are trading now",
-          "date": "Fri, 30 Oct 2026 16:13:15 +0000 (UTC)",
-          "from": "GenAI Works via LinkedIn <newsletters-noreply@linkedin.com>"
         }
       ]
     },
@@ -242,7 +242,7 @@
         "azi": 0,
         "24h": 0,
         "7z": 0,
-        "30z": 14
+        "30z": 13
       },
       "newest": {
         "id": "1a120e8558d6b485",
@@ -310,50 +310,50 @@
       "name": "Optimus CD",
       "counts": {
         "azi": 0,
-        "24h": 2,
-        "7z": 421,
-        "30z": 1022
+        "24h": 3,
+        "7z": 323,
+        "30z": 1023
       },
       "newest": {
-        "id": "1a191fb6c4aded80",
-        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (e6912fb)",
-        "date": "Sat, 31 Oct 2026 05:42:15 -0700",
+        "id": "1a197d0090a75c84",
+        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: Invoke Jules - main (c3f03a9)",
+        "date": "Sun, 01 Nov 2026 07:52:35 -0800",
         "from": "apvizual-max <notifications@github.com>"
       },
-      "newestDate": "Sat, 31 Oct 2026 05:42:15 -0700",
+      "newestDate": "Sun, 01 Nov 2026 07:52:35 -0800",
       "samples": [
+        {
+          "id": "1a197d0090a75c84",
+          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: Invoke Jules - main (c3f03a9)",
+          "date": "Sun, 01 Nov 2026 07:52:35 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
+        {
+          "id": "1a1974f930a2d2e7",
+          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (c3f03a9)",
+          "date": "Sun, 01 Nov 2026 05:32:16 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
+        {
+          "id": "1a196b68bb523aa5",
+          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
+          "date": "Sun, 01 Nov 2026 02:45:07 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
         {
           "id": "1a191fb6c4aded80",
           "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (e6912fb)",
           "date": "Sat, 31 Oct 2026 05:42:15 -0700",
           "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a19161e6f867641",
-          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
-          "date": "Sat, 31 Oct 2026 02:54:33 -0700",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a18c561bd898ce2",
-          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
-          "date": "Fri, 30 Oct 2026 03:23:34 -0700",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a189188f811969e",
-          "subject": "An update on Jules and what's next",
-          "date": "Thu, 29 Oct 2026 12:17:30 -0700",
-          "from": "Jules <jules-noreply@google.com>"
         }
       ]
     }
   ],
   "missing": [],
   "totals": {
-    "azi": 7,
-    "24h": 70,
-    "7z": 926,
-    "30z": 2091
+    "azi": 8,
+    "24h": 51,
+    "7z": 876,
+    "30z": 2078
   }
 }

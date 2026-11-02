@@ -38,9 +38,18 @@ const ROBOT_LOCAL = /^(no-?reply|do-?not-?reply|donotreply|noreply|notify|notifi
 // MĂSURAT 2026-10-29: „Notice of Security Incident" (Scribd, prin Epiq) — un
 // incident real de date, dar de la alt expeditor decât Google. Deci NU
 // condiționăm alerta doar de expeditor: și SUBIECTUL poate spune "incident".
+// MĂSURAT 2026-11-02: trei cazuri noi, toate ratate de regula veche:
+//   • „we noticed a new sign in to your Dropbox account" — fără cratime
+//     („new sign in", nu „new sign-in") ⇒ nu se potriva.
+//   • „Cloud Governance Center: 1 Critical Risk(s) – Action Required" (Alibaba
+//     Cloud) ⇒ nici „security", nici „new device". ȘI era clasificat PROMO,
+//     pentru că pagina de alertă conține „Free Trial" în meniu ⇒ o alertă
+//     critică ajungea la „promoție". ⇒ regula trebuie să se declanșeze pe
+//     acțiunea cerută, nu pe vocabular.
+//   • „You've connected a new app to Dropbox" ⇒ grant OAuth nou.
 const SECURITY_FROM = /accounts\.google\.com|@google\.com|security|alert@/i;
-const SECURITY_SUBJECT = /security alert|security incident|incident de securitate|alerta de securitate|new sign-in|new device|dispozitiv nou|someone may be trying|acces neautorizat/i;
-const SECURITY_TEXT = /security alert|security incident|alerta de securitate|new sign-in|new device|dispozitiv nou|someone may be trying|acces neautorizat|verifica.*activit|check activity|secure your account|gained access to certain user data|may have affected your data/i;
+const SECURITY_SUBJECT = /security alert|security incident|incident de securitate|alerta de securitate|new sign[ -]?in|new device|dispozitiv nou|someone may be trying|acces neautorizat|action required|critical risk|connected a new app|mfa is disabled|immediate remediation/i;
+const SECURITY_TEXT = /security alert|security incident|alerta de securitate|new sign[ -]?in|new device|dispozitiv nou|someone may be trying|acces neautorizat|verifica.*activit|check activity|secure your account|gained access to certain user data|may have affected your data|is this you|immediate remediation|mfa is disabled/i;
 // ---- CI / workflow esuat: cere actiune, chiar daca e "zgomot de pipeline" ----
 const CI_FAIL_SUBJECT = /\brun failed\b|workflow.*fail|\bfailed\b|\bfailure\b|build failed|eroare/i;
 const CI_FROM = /notifications@github\.com|githubactions|@github\.com/i;
@@ -49,7 +58,14 @@ const ACCOUNT_TEXT = /trebuie sa (aleg|schimb|confirm|setez|verific)|aleg(e|eti)
 // ---- semnale ca un mesaj sa ceara raspuns ----
 const REPLY_TEXT = /action requested|opportunity|interview|invitatie|invitație|raspuns|răspuns|your application|aplicatia ta|aplicatia ta a fost|reply to|confirm|accept|offer|contract|negotiat|trebuie sa|urgent|deadline|scadenta/i;
 // ---- semnale ca un mesaj sa ceara o decizie legata de joburi ----
-const JOB_ALERT = /bestjobs|jooble|indeed|hipo|jobleads|recruit|linkedin job|job alert|joburi|locuri de munca|job openings/i;
+// MĂSURAT 2026-11-02: „DuckDuckGo is hiring for Remote" (LinkedIn) conținea un
+// rol REAL de design („Senior Product Designer — DuckDuckGo — Romania (Remote)")
+// și totuși a ajuns în fyi: expresia cerea „linkedin job" sau „job alert",
+// iar subiectul spune „is hiring". ⇒ recunoaștem și formularea de anunț de
+// angajare, și domeniul eJobs.
+const JOB_ALERT = /bestjobs|jooble|indeed|hipo|ejobs|jobleads|recruit|linkedin job|job alert|joburi|locuri de munca|job openings/i;
+// anunt de angajare in subiect („X is hiring for Y") — verificat SI pe rol de design
+const JOB_HIRING = /\bis hiring\b|\bhiring for\b/i;
 
 const _rxCache = new Map();
 function hasWord(text, w) {
@@ -107,7 +123,7 @@ function triage(rows) {
     const isRobot = ROBOT_LOCAL.test(lp);
     const isDesign = hasAny(text, DESIGN_KW);
     const isLoc = hasAny(text, LOC_KW);
-    const isJobAlert = JOB_ALERT.test(from) || JOB_ALERT.test(subj);
+    const isJobAlert = JOB_ALERT.test(from) || JOB_ALERT.test(subj) || JOB_HIRING.test(subj);
 
     let cls, why;
     if ((SECURITY_FROM.test(from) && SECURITY_TEXT.test(text)) || SECURITY_SUBJECT.test(subj)) {

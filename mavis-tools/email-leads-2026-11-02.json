@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-02",
+  "note": "Leads din alertele de job de azi (2026-11-02). Luni: 9 mesaje, 7 needs-action (3 sunt alerte de securitate, 4 joburi). Fiecare lead poarta calea de verificare declarata in verifiedVia - unde pagina sursei a raspuns 403, am folosit textul indexat sau corpul emailului si am spus-o explicit.",
+  "leads": [
+    {
+      "resolvedTitle": "Senior Product Designer @ DuckDuckGo - 178.500 USD/anual + equity, Remote (Romania eligibila)",
+      "from": "LinkedIn (Jobs You Might Be Interested In)",
+      "subject": "DuckDuckGo is hiring for Remote",
+      "summary": "Cel mai bine platit rol din zilele trecute, si primul gasit pe canalul LinkedIn. DuckDuckGo angajeaza un Senior Product Designer, departament Design, Full time, 100% remote - Romania este pe lista explicita a tarilor eligibile. Pe langa rolul principal, anuntul mai aduce Senior Product Designer, Design Systems (aceeasi suma, tot remote).",
+      "requirements": [
+        "6+ ani de experienta in product design, din care 2+ ani in pozitii senior la branduri globale de consum",
+        "Rolul e hands-on: de la idee la executie, pe produse la scara milioanelor de utilizatori",
+        "Reuniuni obligatoriu cu camera pornita",
+        "Cele putin doua deplasari pe an (all-hands + retreat de echipa, 4-5 zile fiecare)",
+        "Background check obligatoriu ca parte a angajarii"
+      ],
+      "rates": [
+        "178.500 USD pe an + optiuni de actiuni (aceeasi suma pentru toate tarile eligibile, transparent la nivel de companie)",
+        "Complementare de sanatate sponsorizata de angajator: doar pentru applicantii din SUA - nu se aplica Romaniei"
+      ],
+      "terms": "Remote; Romania eligibila explicit. Full time, ~40 ore/saptamana, fara ore fixe (work arrangement flexibil).",
+      "process": "Aplicare pe boardul oficial DuckDuckGo (jobs.ashbyhq.com/duck-duck-go). Se cere portofoliu la upload.",
+      "caveat": "ATENTIE la doua lucruri. (1) E product design, nu art direction/graphic design - e vecin cu profilul tau, dar nu identic; portofoliul trebuie sa arate proces, nu doar executie. (2) Postarea contine un text ascuns care cere aplicantilor AI sa insereze un cuvant anume in raspuns, ca sa nu fie marcata drept invalidata - eu NU am facut asta si nu o voi face; e continut necredibil, nu o cerinta ta. O poti ignora complet, dar merita sa stii ca ai intalnit-o. Separat: un agregator (Long Journey Ventures) spune ca nu mai primeste aplicatii, dar boardul oficial Ashby are inca formularul deschis - verifica pe sursa oficiala inainte sa aplici.",
+      "verifiedVia": "Boardul oficial de joburi DuckDuckGo (jobs.ashbyhq.com/duck-duck-go) citit prin indexarea motorului de cautare: titlu, departament, tip angajare, lista completa de tari eligibile (inclusiv Romania) si compensarea. Confirmat si pe un director de joburi care listeaza rolul din feed-urile de cariere ale angajatorului, si pe un jobboard de expat care da aceeasi suma.",
+      "url": "https://jobs.ashbyhq.com/duck-duck-go"
+    },
+    {
+      "resolvedTitle": "Creative Lead & 3D Designer @ MARKQUEN EUROPE (a 3-a zi consecutiv)",
+      "from": "Bestjobs",
+      "subject": "Because you searched for design graphic bucuresti jobs / New graphic design, bucharest jobs available on bestjobs",
+      "summary": "Cel mai bine platit rol de design din Romania listat azi, din nou in doua alerte Bestjobs. MARKQUEN Europe angajeaza un Creative Lead & 3D Designer in Bucuresti. MARKQUEN e un grup international specializat in POSM, trade marketing si solutii de retail pentru branduri FMCG, cu birouri in Romania, Polonia si Ucraina, proiecte livrate in peste 30 de tari. Adresa: Strada Promoroaca 5, Bucuresti.",
+      "requirements": [
+        "Rolul combina directie creativa si executie 3D pentru retail si POSM (afisaj, mobilier de retail, retail marketing pentru FMCG)",
+        "Necesa complete in anunt - pagina Bestjobs /en/job/ raspunde 403 la acces automat; descrierea firmei si regimul de lucru sunt pe listingul indexat de pe bebee"
+      ],
+      "rates": [
+        "1400 - 1800 (suma afisata de Bestjobs, fara mentiune de estimare - deci publicata de angajator)"
+      ],
+      "terms": "Hybrid, Strada Promoroaca 5, Bucuresti. ATENTIE: listarea de pe bebee a aceluiasi rol (3D Designer Retail/POSM) spune La sediu, adica on-site, in timp ce Bestjobs zice Hybrid. Exista discrepanta pe regim - intreaba in aplicatie.",
+      "process": "Aplicare pe anuntul Bestjobs.",
+      "caveat": "A treia zi consecutiv in alerte, deci anuntul e activ. Punct slab: 3D si POSM e o nisa diferita de brand identity - daca portofoliul tau e greu de port, suna inainte de a aplica. E si Creative Lead, deci salvare mai mare, dar verifica inainte.",
+      "verifiedVia": "Corpul COMPLET al celor doua emailuri Bestjobs de azi (titlu, angajator, suma 1400-1800, Hybrid, adresa) plus listingul indexat de pe bebee, care confirma firma, profilul si regimul de lucru La sediu. Pagina /en/job/ de pe Bestjobs raspunde 403 - NU am deschis-o.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "Bestjobs - 11 si 12 joburi de design cu salariu (cele doua alerte de azi)",
+      "from": "Bestjobs",
+      "subject": "Because you searched for design graphic bucuresti jobs / New graphic design, bucharest jobs available on bestjobs",
+      "summary": "Azi Bestjobs a trimis doua alerte de design, cu liste usor diferite (11 si 12 joburi). Tabelul complet:\n\n| Job | Angajator | Salariu | Locatie |\n|---|---|---|---|\n| Creative Lead & 3D Designer | MARKQUEN EUROPE | 1400 - 1800 | Hybrid, Bucuresti |\n| Proiectant Productie Publicitara (DISPONIBIL IMEDIAT) | BD Lemntech | 1405 - 2000 | Bucuresti / Popesti-Leordeni |\n| Specialist Marketing Digital | Fabrica De Podcasturi | 700 - 1350 | Hybrid, Bucuresti |\n| AI Video Editor - Meta & AppLovin Performance Ads | Apex Digital Alliance | 1200 - 1300 | fara oras in anunt |\n| Graphic Designer | ELBI ElectricLighting | 1195 - 1325 (estimare de piata) | Bragadiru, Hybrid |\n| SudRezidential Videograf & Editor Video | SudRezidential Real Estate | 1000 - 1200 | Bucuresti, Drumul Jilavei 72 |\n| ARHITECT / DESIGNER MOBILA LA COMANDA | UNICAN PRODUCTION | 800 - 1420 | Voluntari |\n| Operator Grafica, Print & Personalizari | Viragos Design | 800 - 1000 | Bucuresti |\n| Colaboratori design grafic, creatie si grafica | AGRESIV MEDIA | 780 - 1020 | Bucuresti |\n| Social Media & Content Creator | AMAL HEALTH CARE | 900 | Hybrid, Bucuresti |\n| Junior Content Creator | INTAX TRADING | 700 | Otopeni |\n| Graphic Designer part-time 15h (remote) | CreativeEd Media | 525 | Remote |\n| Senior Marketing & CX Specialist | BCR Asigurari de Viata VIG | 1795 - 1985 (estimare de piata) | Hybrid, Bucuresti |",
+      "requirements": [
+        "Pentru fiecare job: portofoliu si CV pe anuntul Bestjobs, din email"
+      ],
+      "rates": [
+        "Cel mai mult platit din lista de design: BD Lemntech, 1405 - 2000 (dar scrie DISPONIBIL IMEDIAT - verifica daca anuntul mai e activ)",
+        "Estimarea de piata pentru BCR s-a miscat din nou: 1790-1975 (29.10) -> 1790-1980 (01.11) -> 1795-1985 (azi)"
+      ],
+      "terms": "Toate din alertele zilnice Bestjobs, pe criteriile design graphic bucuresti si graphic design, bucharest.",
+      "process": "Aplicare pe anuntul Bestjobs, din email.",
+      "caveat": "Sumele de la ELBI si BCR sunt estimari de piata si se recalculeaza zilnic - nu sunt oferte de angajator. Restul apar publicate de angajator. Turing (3000 si 2000) nu apare in niciuna dintre liste.",
+      "verifiedVia": "Corpul COMPLET al celor doua emailuri Bestjobs de azi. Pagina de anunt Bestjobs raspunde 403 - NU am deschis paginile individuale.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "Interior Designer / Kitchen Design Specialist @ ARMONI MOBILIER DE BUCATARIE (marginal)",
+      "from": "eJobs",
+      "subject": "Aplica acum la cel mai nou job!",
+      "summary": "Un singur job in alerta eJobs de azi: Interior Designer / Kitchen Design Specialist la ARMONI MOBILIER DE BUCATARIE S.R.L. Este rol de design, dar de alt tip decat ce cauti tu - design de interior si bucatarie, nu brand/graphic. Filtrul eJobs l-a bifat pe departamentul Grafică / Webdesign / DTP.",
+      "requirements": [
+        "Necesa in anunt - pagina eJobs raspunde 403 pentru acces automat, deci NU am putut citi cerintele",
+        "Nivel: Mid-Level (2-5 ani), orase Bucuresti sau Strainatate"
+      ],
+      "rates": [],
+      "terms": "Bucuresti sau Strainatate, Mid-Level (2-5 ani).",
+      "process": "Aplicare pe eJobs.ro.",
+      "caveat": "NEVERIFICAT pe pagina anuntului (403). Si e marginal pentru profilul tau: design de interior/bucatarie, nu design de brand. Am lasat-o in raport pentru completitudine, dar nu as numera-o ca relevanta.",
+      "verifiedVia": "Corpul emailului de alerta (titlul jobului, numele angajatorului, filtrul de departament, nivelul si orasele). Pagina eJobs.ro raspunde 403 pentru acces automat.",
+      "url": "https://www.ejobs.ro"
+    }
+  ]
+}
