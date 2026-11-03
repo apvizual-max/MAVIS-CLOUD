@@ -1,0 +1,97 @@
+{
+  "date": "2026-11-03",
+  "note": "Leads din alertele de job de azi (2026-11-03). 12 mesaje, 6 needs-action (4 joburi + 2 CI esuate). Fiecare lead poarta calea de verificare declarata in verifiedVia - unde pagina sursei a raspuns 403, am folosit textul indexat sau corpul emailului si am spus-o explicit.",
+  "leads": [
+    {
+      "resolvedTitle": "Art Director (Thumbnails & Packaging) @ YTMG LTD - pana la 4.500 USD/luna, Remote",
+      "from": "LinkedIn Job Alerts",
+      "subject": "YTMG LTD is hiring a Art Director (Thumbnails & Packaging)",
+      "summary": "YTMG LTD produce continut YouTube in stil documentar (canalele BeyondFacts si beyondmilitary, 38 de milioane de vizualizari lunare combinate, al treilea canal in dezvoltare). Echipa e remote, cu 20 de oameni. Rolul de Art Director este tot ce se intampla vizual inainte de apasarea play: thumbnails, titluri, strategie de packaging si identitatea vizuala completa a unui canal nou. Cu timpul, rolul evolueaza spre conducere de departament - vei recruta, forma si conduce designeri.",
+      "requirements": [
+        "Portfolio de thumbnails YouTube cu impact masurabil pe CTR (ideal, canale cu 100.000+ de abonati)",
+        "Intelegere profunda a analiticii YouTube",
+        "Photoshop (inclusiv functiile AI/beta), Illustrator, Lightroom",
+        "Instrumente de generare de imagini AI: Nano Banana, Ideogram, Magnific",
+        "Sa explici DE CE functioneaza un thumbnail, nu doar ca arata bine",
+        "Bonus: identitate vizuala de canal de la zero, motion graphics, subiecte militare/geopolitice/inginerie, gestionarea designerilor"
+      ],
+      "rates": [
+        "Baza: 2.000 - 3.000 USD/luna, in functie de experienta",
+        "Bonus de performanta pana la 750 USD/luna, se reseteaza lunar: 250 pentru benchmark-uri de CTR, 250 pentru retentie de 30s peste 75%, 250 pentru optimizare proactiva",
+        "Total cand performezi bine: 3.750 - 4.500 USD/luna"
+      ],
+      "terms": "Full-time, remote, 40 ore/saptamana. Se cere minimum 6 ore zilnice de suprapunere cu EET/Cipra (Romania e EET, deci e direct compatibil). Raportezi direct la CEO.",
+      "process": "Aplicare pe LinkedIn (Easy Apply). La aplicare alegi TREI thumbnails din portofoliu si, pentru fiecare, spui CTR-ul obtinut (sau estimarea ta), de ce a functionat designul si ce ai schimba azi. Plus linkuri catre canalele pe care ai lucrat.",
+      "caveat": "Excelenta potrivire cu profilul tau: Art Director, thumbnails, remote, cu latura de leadership si cu rezultate masurabile pe CTR. Trei lucruri de stiut: (1) e un rol cu performanta masurata pe CTR, nu doar estetica - anuntul spune explicit ca daca instinctul tau e sa designezi pentru frumusete, nu pentru click-uri, nu e potrivirea; (2) un agregator arata o postare din martie 2026 marcata inchisa, dar LinkedIn o listeaza AZI cu Easy Apply, deci starea de job deschis vine de la sursa actuala - verifica pe LinkedIn; (3) portofoliul trebuie sa aiba thumbnails cu CTR dovedit - daca nu ai, asta e pragul real, nu anuntul.",
+      "verifiedVia": "Descrierea completa a jobului, obtinuta prin indexarea motorului de cautare de pe un agregator de joburi YouTube: salariu, bonusul lunar pe trei criterii, cerintele, programul si instructiunile de aplicare. Confirmat si ca YTMG LTD este un angajator real (pagina de companie LinkedIn, plus un ex-angajat al carui profil LinkedIn apare in cautare).",
+      "url": "https://www.linkedin.com/jobs"
+    },
+    {
+      "resolvedTitle": "Senior Marketing Designer @ NeaMob Tech - Bucuresti (Remote), agentie de marketing",
+      "from": "LinkedIn Job Alerts",
+      "subject": "YTMG LTD is hiring a Art Director (Thumbnails & Packaging)",
+      "summary": "NeaMob Tech e o agentie de marketing digital in crestere, specializata in solutii de growth online. Echipa combina dezvoltatori, analisti, specialisti de growth si creativi. Alerta LinkedIn de azi o listase ca al doilea job nou din Romania pentru preferintele tale de design.",
+      "requirements": [
+        "5+ ani in marketing design, ideal in agentie digitala sau mediu performance-driven",
+        "Experienta cu clientii: prezentare de lucru creativ, gestionare feedback, aliniere cu obiectivele clientului",
+        "Portofoliu puternic cu bannere (statice si animate), ads video si GIF-uri",
+        "Figma, Adobe Creative Suite (Photoshop, Illustrator, After Effects)",
+        "Bonus: animatie, productii cu AI, prototipare, ilustratie"
+      ],
+      "rates": [],
+      "terms": "Bucuresti, Romania (Remote). Echipa lucreaza pe piete globale.",
+      "process": "Aplicare pe neamob.com/careers (CV + portofoliu). Echipa raspunde in 48 de ore.",
+      "caveat": "ATENTIE: sunt deja 183 de aplicanti la acest rol, deci pragul de intrare e real. Portofoliul cerut (bannere animate, video ads, GIF-uri) e mai greu decat un portofoliu de brand identity - daca nu ai motion in portofoliu, e un handicap. Salariul nu e publicat. Rolul e mai aproape de performance creative decat de art direction.",
+      "verifiedVia": "Pagina de cariere a firmei citita prin indexarea motorului de cautare (neamob.com/careers/marketing-designer): descrierea completa, responsabilitatile, cerintele, numarul de aplicanti si pasii de aplicare. Confirmat si pe un director de joburi care listeaza rolul ca singura pozitie deschisa a firmei, cu Remote EU si fara salariu publicat.",
+      "url": "https://www.neamob.com/careers/marketing-designer/"
+    },
+    {
+      "resolvedTitle": "Head of Content - 100+ conturi OnlyFans @ Click2Leads.com - 2500, Bucuresti (NOU)",
+      "from": "Bestjobs",
+      "subject": "These employers are looking for people like you",
+      "summary": "Cel mai nou rol din lista de azi: Head of Content pentru un portofoliu de 100+ conturi OnlyFans, la Click2Leads.com, cu 2500 in Bucuresti. Click2Leads este un angajator real, prezent in listele Bestjobs cu mai multe roluri de marketing (Marketing Manager, Marketing Specialist).",
+      "requirements": [
+        "Necesa in anunt - anuntul nu a fost gasit in indexarea motorului de cautare, deci NU am putut citi cerintele",
+        "Din titlu: rol de conducere de continut pe un portofoliu mare de conturi"
+      ],
+      "rates": ["2500 (fara mentiune de estimare in email, deci suma pare publicata de angajator)"],
+      "terms": "Bucuresti.",
+      "process": "Aplicare pe anuntul Bestjobs.",
+      "caveat": "NEVERIFICAT pe pagina anuntului: anuntul Head of Content nu apare in indexarea motorului de cautare. Angajatorul e confirmat (Click2Leads.com are alte roluri listate activ pe Bestjobs). Titlul sugereaza ca e un rol de management de continut intr-o agentie care administreaza conturi de continut adult - merita sa verifici tu profilul clientilor inainte sa aplici, pentru ca asta schimba tot contextul jobului. Salariul de 2500 e cel mai bun din lista de azi dupa MARKQUEN.",
+      "verifiedVia": "Corpul COMPLET al emailului Bestjobs de azi (titlu, angajator, suma 2500, localizarea). Identitatea angajatorului confirmata prin alte listari ale sale pe Bestjobs (Marketing Manager, Marketing Specialist). Anuntul Head of Content in sine nu a fost gasit in indexarea motorului de cautare - deci cerintele NU sunt cunoscute.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "Creative Lead & 3D Designer @ MARKQUEN EUROPE (a 4-a zi + alerta dedicata a angajatorului)",
+      "from": "Bestjobs",
+      "subject": "MARKQUEN EUROPE is hiring Creative Lead & 3D Designer",
+      "summary": "MARKQUEN are acum propria alerta dedicata pe Bestjobs - compania impinge activ rolul, nu mai este doar in lista ta de cautare. Este cel mai bine platit rol de design din Romania listat, in topul fiecareia dintre cele trei alerte de azi.",
+      "requirements": [
+        "Rolul combina directie creativa si executie 3D pentru retail si POSM (afisaj, mobilier de retail, retail marketing pentru FMCG)",
+        "Necesa complete in anunt - pagina Bestjobs /en/job/ raspunde 403 la acces automat; descrierea firmei si regimul de lucru sunt pe listingul indexat de pe bebee"
+      ],
+      "rates": ["1400 - 1800 (suma afisata de Bestjobs, fara mentiune de estimare - deci publicata de angajator)"],
+      "terms": "Hybrid, Strada Promoroaca 5, Bucuresti. ATENTIE: listarea de pe bebee a aceluiasi rol (3D Designer Retail/POSM) spune La sediu, adica on-site, in timp ce Bestjobs zice Hybrid. Exista discrepanta pe regim - intreaba in aplicatie.",
+      "process": "Aplicare pe anuntul Bestjobs.",
+      "caveat": "Faptul ca angajatorul are alerta dedicata e un semnal mai puternic decat prezenta in lista de cautare - dar si unul mai concurent. Punct slab: 3D si POSM e o nisa diferita de brand identity - daca portofoliul tau e greu de port, suna inainte de a aplica.",
+      "verifiedVia": "Corpul COMPLET al celor trei emailuri Bestjobs de azi (titlul alertei dedicate, angajator, suma 1400-1800, Hybrid, adresa) plus listingul indexat de pe bebee, care confirma firma, profilul si regimul de lucru La sediu. Pagina /en/job/ de pe Bestjobs raspunde 403 - NU am deschis-o.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "Bestjobs - 17 joburi in lista de azi, cu salariu (suma pentru decizie)",
+      "from": "Bestjobs",
+      "subject": "These employers are looking for people like you",
+      "summary": "Lista de azi pentru candidati similari cu tine. Joburile cu suma publicata de angajator:\n\n| Job | Angajator | Salariu | Locatie |\n|---|---|---|---|\n| Creative Lead & 3D Designer | MARKQUEN EUROPE | 1400 - 1800 | Hybrid, Bucuresti |\n| Proiectant Productie Publicitara (DISPONIBIL IMEDIAT) | BD Lemntech | 1405 - 2000 | Bucuresti / Popesti-Leordeni |\n| Head of Content - 100+ conturi OnlyFans | Click2Leads.com | 2500 | Bucuresti |\n| Specialist Marketing Digital | Fabrica De Podcasturi | 700 - 1350 | Hybrid, Bucuresti |\n| AI Video Editor - Meta & AppLovin Performance Ads | Apex Digital Alliance | 1200 - 1300 | fara oras in anunt |\n| 3D Video Games Artist | Atypical Games | 1000 - 2000 | Bulevardul Doina Cornea 2F, Bucuresti |\n| SudRezidential Videograf & Editor Video | SudRezidential Real Estate | 1000 - 1200 | Bucuresti |\n| Operator Grafica, Print & Personalizari | Viragos Design | 800 - 1000 | Bucuresti |\n| Colaboratori design grafic, creatie si grafica | AGRESIV MEDIA | 780 - 1020 | Bucuresti |\n| Social Media & Content Creator | AMAL HEALTH CARE | 900 | Hybrid, Bucuresti |\n| Junior Content Creator | INTAX TRADING | 700 | Otopeni |\n| Graphic Designer part-time 15h (remote) | CreativeEd Media | 525 | Remote |\n\nCu estimare de piata (nu e oferta de angajator): Graphic Designer ELBI 1195-1325, Brand Executive Imperial Brands 1385-1530, BRAND MANAGER FRF 1385-1530, Marketing Specialist Rompetrol 1385-1530, Consultant Electrica 1795-1985, Account Manager BTL Instore 1795-1985, Corporate Marketing Director Working4U 1795-1985.",
+      "requirements": ["Pentru fiecare job: portofoliu si CV pe anuntul Bestjobs, din email"],
+      "rates": [
+        "Cele mai mari sume publicate: Click2Leads 2500, BD Lemntech 1405-2000, MARKQUEN 1400-1800, Atypical Games 1000-2000",
+        "Estimarile de piata s-au miscat din nou: ieri 1345-1485 si 1790-1980, azi 1385-1530 si 1795-1985 - deci se recalculeaza zilnic"
+      ],
+      "terms": "Toate din alerta zilnica Bestjobs de tipul These employers are looking for people like you.",
+      "process": "Aplicare pe anuntul Bestjobs, din email.",
+      "caveat": "Sumele fara mentiune de estimare sunt publicate de angajator; cele cu estimare de piata se recalculeaza zilnic si nu sunt oferte. Paginile de anunt Bestjobs raspund 403 la acces automat, deci tot ce e aici vine din corpul emailului.",
+      "verifiedVia": "Corpul COMPLET al celor trei emailuri Bestjobs de azi. Pagina de anunt Bestjobs raspunde 403 - NU am deschis paginile individuale.",
+      "url": "https://www.bestjobs.eu"
+    }
+  ]
+}
