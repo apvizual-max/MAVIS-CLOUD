@@ -216,7 +216,14 @@ function computeGenuinelyNew(jobs, prev) {
   const prevRunDate = new Date((path.basename(PREV).match(/(\d{4}-\d{2}-\d{2})/) || [, '2026-10-22'])[1] + 'T00:00:00Z');
   const dp = jobs.filter(j => j.src === 'designproject.io')
     .map(j => ({ j, d: parseDpDate(j.date) }))
-    .filter(x => x.d && x.d > prevRunDate)
+    // MĂSURAT 2026-11-04: cu `>` strict, un anunt postat chiar ÎN ZIUA rulării
+    // precedente era exclus — deși putea să fi apărut DUPĂ acea rulare (ora
+    // exactă nu se știe: datePosted are granularitate de zi). Astfel raportul
+    // spunea „0 anunțuri noi" în timp ce tabelele arătau 10 joburi noi.
+    // ⇒ pragul e INCLUSIV: „postat în ziua rulării precedente sau după".
+    // Ce a fost deja vizibil atunci e prins de `newJobs` (company+role lipsă
+    // din setul PREV), deci nu se dubla numărătoarea.
+    .filter(x => x.d && x.d >= prevRunDate)
     .map(x => ({ company: x.j.company, role: x.j.role, date: x.j.date, url: x.j.url }));
   const dpAll = jobs.filter(j => j.src === 'designproject.io').map(j => parseDpDate(j.date)).filter(Boolean);
   const newestDp = dpAll.length ? new Date(Math.max(...dpAll.map(d => d.getTime()))) : null;

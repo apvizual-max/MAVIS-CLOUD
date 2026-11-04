@@ -1,47 +1,47 @@
 {
-  "today": "2026/11/03",
+  "today": "2026/11/04",
   "labels": [
     {
       "key": "joburi",
       "title": "Joburi",
       "name": "MAVIS/Joburi",
       "counts": {
-        "azi": 8,
-        "24h": 39,
-        "7z": 224,
-        "30z": 404
+        "azi": 5,
+        "24h": 37,
+        "7z": 222,
+        "30z": 429
       },
       "newest": {
-        "id": "1a1a0018870b202e",
-        "subject": "MARKQUEN EUROPE is hiring Creative Lead & 3D Designer",
-        "date": "Tue, 03 Nov 2026 08:03:11 +0200",
+        "id": "1a1a520a95734072",
+        "subject": "Candidates like you applied for these jobs",
+        "date": "Wed, 04 Nov 2026 07:55:11 +0200",
         "from": "Bestjobs <contact@bestjobs.eu>"
       },
-      "newestDate": "Tue, 03 Nov 2026 08:03:11 +0200",
+      "newestDate": "Wed, 04 Nov 2026 07:55:11 +0200",
       "samples": [
         {
-          "id": "1a1a0018870b202e",
-          "subject": "MARKQUEN EUROPE is hiring Creative Lead & 3D Designer",
-          "date": "Tue, 03 Nov 2026 08:03:11 +0200",
+          "id": "1a1a520a95734072",
+          "subject": "Candidates like you applied for these jobs",
+          "date": "Wed, 04 Nov 2026 07:55:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a19ff5ebd196928",
-          "subject": "YTMG LTD is hiring a Art Director (Thumbnails & Packaging)",
-          "date": "Tue, 3 Nov 2026 05:50:56 +0000 (UTC)",
-          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+          "id": "1a1a5190be61089e",
+          "subject": "Membru al echipei - Part Time la Lovisa. Încă 12 locuri de muncă în București, Ilfov",
+          "date": "Wed, 04 Nov 2026 05:47:23 +0000",
+          "from": "Indeed <donotreply@jobalert.indeed.com>"
         },
         {
-          "id": "1a19fea599300c82",
-          "subject": "These employers are looking for people like you",
-          "date": "Tue, 03 Nov 2026 07:38:11 +0200",
+          "id": "1a1a50768ba4a898",
+          "subject": "Because you searched for design graphic bucuresti jobs",
+          "date": "Wed, 04 Nov 2026 07:28:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a19fd3dad0b6b1e",
-          "subject": "Avem un job nou care ti se potriveste!",
-          "date": "Tue, 03 Nov 2026 05:01:32 +0000",
-          "from": "Alerta eJobs <contact@mta.ejobs.ro>"
+          "id": "1a1a4ffd1f1869ad",
+          "subject": "Dulce înainte de Amar",
+          "date": "Wed, 4 Nov 2026 05:19:50 +0000 (GMT)",
+          "from": "Mihai Svasta via LinkedIn <newsletters-noreply@linkedin.com>"
         }
       ]
     },
@@ -50,42 +50,42 @@
       "title": "AI si comunitati",
       "name": "AI Folder/AI si Comunitati",
       "counts": {
-        "azi": 1,
-        "24h": 11,
-        "7z": 91,
-        "30z": 154
+        "azi": 2,
+        "24h": 14,
+        "7z": 87,
+        "30z": 167
       },
       "newest": {
-        "id": "1a19fab7e6b0ca08",
-        "subject": "PLATFORMS OF JUDEA",
-        "date": "Tue, 3 Nov 2026 04:27:48 +0000",
-        "from": "DocFreemason <docfreemason@substack.com>"
+        "id": "1a1a513ac5e2996e",
+        "subject": "The Secrets of Diwali",
+        "date": "Wed, 4 Nov 2026 05:41:32 +0000",
+        "from": "Isha News <isha.offerings@sadhguru.org>"
       },
-      "newestDate": "Tue, 3 Nov 2026 04:27:48 +0000",
+      "newestDate": "Wed, 4 Nov 2026 05:41:32 +0000",
       "samples": [
         {
-          "id": "1a19fab7e6b0ca08",
-          "subject": "PLATFORMS OF JUDEA",
-          "date": "Tue, 3 Nov 2026 04:27:48 +0000",
-          "from": "DocFreemason <docfreemason@substack.com>"
+          "id": "1a1a513ac5e2996e",
+          "subject": "The Secrets of Diwali",
+          "date": "Wed, 4 Nov 2026 05:41:32 +0000",
+          "from": "Isha News <isha.offerings@sadhguru.org>"
         },
         {
-          "id": "1a19eadab443207e",
-          "subject": "Democrats are LOSING THEIR MINDS after Haley Stevens endorses Mike Rodgers",
-          "date": "Mon, 2 Nov 2026 23:40:34 +0000",
+          "id": "1a1a42ab4542cf35",
+          "subject": "SURVIVAL FOOD LIST & ACCESSORY ITEMS",
+          "date": "Wed, 4 Nov 2026 01:26:51 +0000",
+          "from": "Ken wheeler from Ken Theoria Apophasis Substack <kenwheeler@substack.com>"
+        },
+        {
+          "id": "1a1a2de99e83bdb1",
+          "subject": "Migrant caravan heading toward the border hopes Republicans lose the midterms",
+          "date": "Tue, 3 Nov 2026 19:12:32 +0000",
           "from": "PolitiBrawl <politibrawl@substack.com>"
         },
         {
-          "id": "1a19e4a930584c1c",
-          "subject": "there was no way to win",
-          "date": "Mon, 2 Nov 2026 22:03:15 +0000",
-          "from": "\"Felix & Winston 🐶\" <felix@goatacademy.org>"
-        },
-        {
-          "id": "1a19d6e2d7f81ba9",
-          "subject": "Your free AI has a second mode most people never open",
-          "date": "Mon, 2 Nov 2026 18:03:23 +0000",
-          "from": "Hyperautomation AI Report <hyperautomationaireport@mail.beehiiv.com>"
+          "id": "1a1a250375ce5bc0",
+          "subject": "AI in Mortgage Servicing: The 25-Year Relationship Nobody Manages",
+          "date": "Tue, 3 Nov 2026 16:48:48 +0000 (UTC)",
+          "from": "\"mindit.io via LinkedIn\" <newsletters-noreply@linkedin.com>"
         }
       ]
     },
@@ -94,42 +94,42 @@
       "title": "Social",
       "name": "Socials",
       "counts": {
-        "azi": 0,
-        "24h": 3,
-        "7z": 27,
-        "30z": 115
+        "azi": 2,
+        "24h": 6,
+        "7z": 29,
+        "30z": 110
       },
       "newest": {
-        "id": "1a19c60477ae0f7b",
-        "subject": "32 new notifications since 3:06 pm (Nov 1, 2026)",
-        "date": "Mon, 02 Nov 2026 13:08:37 +0000 (UTC)",
-        "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
+        "id": "1a1a519af2c61c60",
+        "subject": "Weekly digest for Wed, Oct 28 2026",
+        "date": "Wed, 04 Nov 2026 05:48:04 +0000 (UTC)",
+        "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
       },
-      "newestDate": "Mon, 02 Nov 2026 13:08:37 +0000 (UTC)",
+      "newestDate": "Wed, 04 Nov 2026 05:48:04 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a19c60477ae0f7b",
-          "subject": "32 new notifications since 3:06 pm (Nov 1, 2026)",
-          "date": "Mon, 02 Nov 2026 13:08:37 +0000 (UTC)",
+          "id": "1a1a519af2c61c60",
+          "subject": "Weekly digest for Wed, Oct 28 2026",
+          "date": "Wed, 04 Nov 2026 05:48:04 +0000 (UTC)",
+          "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a1a420d8321f278",
+          "subject": "15 new notifications since 3:14 am (Nov 3, 2026)",
+          "date": "Wed, 04 Nov 2026 01:16:17 +0000 (UTC)",
           "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a19b7757da23cac",
-          "subject": "1 event happening tomorrow",
-          "date": "Mon, 02 Nov 2026 08:54:10 +0000 (UTC)",
-          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
+          "id": "1a1a3808854957a2",
+          "subject": "Did you just log in near Bucharest on a new device?",
+          "date": "Tue, 3 Nov 2026 14:21:08 -0800",
+          "from": "Facebook <security@facebookmail.com>"
         },
         {
-          "id": "1a19b5e698720dc2",
-          "subject": "1 event happening tomorrow",
-          "date": "Mon, 02 Nov 2026 08:26:56 +0000 (UTC)",
-          "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a19731695c37e27",
-          "subject": "33 new notifications since 2:58 pm (Oct 31, 2026)",
-          "date": "Sun, 01 Nov 2026 12:59:19 +0000 (UTC)",
-          "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
+          "id": "1a1a271bfd8607eb",
+          "subject": "Jonathan Pritchard posted \"Personal Branding Is Dead\"",
+          "date": "Tue, 03 Nov 2026 17:25:25 +0000 (UTC)",
+          "from": "Project 720 <noreply@skool.com>"
         }
       ]
     },
@@ -138,42 +138,42 @@
       "title": "Newsletter",
       "name": "Newsletter",
       "counts": {
-        "azi": 3,
-        "24h": 55,
-        "7z": 302,
-        "30z": 411
+        "azi": 5,
+        "24h": 52,
+        "7z": 304,
+        "30z": 459
       },
       "newest": {
-        "id": "1a19ff5ebd196928",
-        "subject": "YTMG LTD is hiring a Art Director (Thumbnails & Packaging)",
-        "date": "Tue, 3 Nov 2026 05:50:56 +0000 (UTC)",
-        "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+        "id": "1a1a519af2c61c60",
+        "subject": "Weekly digest for Wed, Oct 28 2026",
+        "date": "Wed, 04 Nov 2026 05:48:04 +0000 (UTC)",
+        "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
       },
-      "newestDate": "Tue, 3 Nov 2026 05:50:56 +0000 (UTC)",
+      "newestDate": "Wed, 04 Nov 2026 05:48:04 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a19ff5ebd196928",
-          "subject": "YTMG LTD is hiring a Art Director (Thumbnails & Packaging)",
-          "date": "Tue, 3 Nov 2026 05:50:56 +0000 (UTC)",
-          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+          "id": "1a1a519af2c61c60",
+          "subject": "Weekly digest for Wed, Oct 28 2026",
+          "date": "Wed, 04 Nov 2026 05:48:04 +0000 (UTC)",
+          "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a19f50f4802ee0f",
-          "subject": "In Arena – Ziua Mortilor si expozitia „Catrinas, amintiri mexicane”",
-          "date": "Tue, 3 Nov 2026 02:50:44 +0000 (UTC)",
-          "from": "\"Cafenea   ☕️☕️☕️ via LinkedIn\" <newsletters-noreply@linkedin.com>"
+          "id": "1a1a513ac5e2996e",
+          "subject": "The Secrets of Diwali",
+          "date": "Wed, 4 Nov 2026 05:41:32 +0000",
+          "from": "Isha News <isha.offerings@sadhguru.org>"
         },
         {
-          "id": "1a19f4e39cefd415",
-          "subject": "In Arena – Targul Arhanghelilor Mihail si Gavriil, la Muzeul National al Taranului Roman",
-          "date": "Tue, 3 Nov 2026 02:47:46 +0000 (UTC)",
-          "from": "\"Cafenea   ☕️☕️☕️ via LinkedIn\" <newsletters-noreply@linkedin.com>"
+          "id": "1a1a4ffd1f1869ad",
+          "subject": "Dulce înainte de Amar",
+          "date": "Wed, 4 Nov 2026 05:19:50 +0000 (GMT)",
+          "from": "Mihai Svasta via LinkedIn <newsletters-noreply@linkedin.com>"
         },
         {
-          "id": "1a19e66173f3a638",
-          "subject": "Getting Claude to run a smart home",
-          "date": "Mon, 2 Nov 2026 22:34:12 +0000",
-          "from": "XDA <newsletter@xda-developers.com>"
+          "id": "1a1a420d8321f278",
+          "subject": "15 new notifications since 3:14 am (Nov 3, 2026)",
+          "date": "Wed, 04 Nov 2026 01:16:17 +0000 (UTC)",
+          "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
         }
       ]
     },
@@ -183,18 +183,30 @@
       "name": "Finante",
       "counts": {
         "azi": 0,
-        "24h": 3,
-        "7z": 20,
-        "30z": 23
+        "24h": 2,
+        "7z": 19,
+        "30z": 25
       },
       "newest": {
-        "id": "1a19d731fbcbd098",
+        "id": "1a1a1b28e2e44e61",
         "subject": "New idea by BtheTrade — check it out",
-        "date": "Mon, 02 Nov 2026 18:08:48 -0000",
+        "date": "Tue, 03 Nov 2026 13:56:35 -0000",
         "from": "TradingView <noreply@tradingview.com>"
       },
-      "newestDate": "Mon, 02 Nov 2026 18:08:48 -0000",
+      "newestDate": "Tue, 03 Nov 2026 13:56:35 -0000",
       "samples": [
+        {
+          "id": "1a1a1b28e2e44e61",
+          "subject": "New idea by BtheTrade — check it out",
+          "date": "Tue, 03 Nov 2026 13:56:35 -0000",
+          "from": "TradingView <noreply@tradingview.com>"
+        },
+        {
+          "id": "1a1a0491f3a27361",
+          "subject": "New idea by Cryptollica — check it out",
+          "date": "Tue, 03 Nov 2026 07:21:48 -0000",
+          "from": "TradingView <noreply@tradingview.com>"
+        },
         {
           "id": "1a19d731fbcbd098",
           "subject": "New idea by BtheTrade — check it out",
@@ -205,18 +217,6 @@
           "id": "1a19be11c8d07e2f",
           "subject": "New idea by BtheTrade — check it out",
           "date": "Mon, 02 Nov 2026 10:49:41 -0000",
-          "from": "TradingView <noreply@tradingview.com>"
-        },
-        {
-          "id": "1a19bc394877c2f4",
-          "subject": "New idea by TradingView — check it out",
-          "date": "Mon, 02 Nov 2026 10:17:27 -0000",
-          "from": "TradingView <noreply@tradingview.com>"
-        },
-        {
-          "id": "1a196db2670e06c4",
-          "subject": "New idea by Cryptollica — check it out",
-          "date": "Sun, 01 Nov 2026 11:25:06 -0000",
           "from": "TradingView <noreply@tradingview.com>"
         }
       ]
@@ -309,19 +309,31 @@
       "title": "Agenti (pipeline propriu)",
       "name": "Optimus CD",
       "counts": {
-        "azi": 2,
-        "24h": 5,
-        "7z": 127,
+        "azi": 0,
+        "24h": 2,
+        "7z": 114,
         "30z": 1026
       },
       "newest": {
-        "id": "1a19efa196b85cdd",
-        "subject": "[apvizual-max/hermes-agent-temp] Run failed: CI - main (bc2ca07)",
-        "date": "Mon, 02 Nov 2026 17:15:51 -0800",
+        "id": "1a1a1cc84b38bd3c",
+        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (0bd11b2)",
+        "date": "Tue, 03 Nov 2026 06:24:56 -0800",
         "from": "apvizual-max <notifications@github.com>"
       },
-      "newestDate": "Mon, 02 Nov 2026 17:15:51 -0800",
+      "newestDate": "Tue, 03 Nov 2026 06:24:56 -0800",
       "samples": [
+        {
+          "id": "1a1a1cc84b38bd3c",
+          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (0bd11b2)",
+          "date": "Tue, 03 Nov 2026 06:24:56 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
+        {
+          "id": "1a1a11f33a6c9698",
+          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
+          "date": "Tue, 03 Nov 2026 03:15:37 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
         {
           "id": "1a19efa196b85cdd",
           "subject": "[apvizual-max/hermes-agent-temp] Run failed: CI - main (bc2ca07)",
@@ -333,18 +345,6 @@
           "subject": "[apvizual-max/hermes-agent-temp] Run failed: CI - main (4831dfb)",
           "date": "Mon, 02 Nov 2026 17:09:41 -0800",
           "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a19db998ea28aee",
-          "subject": "[apvizual-max/hermes-agent-temp] Run failed: OSV-Scanner - main (7954e2d)",
-          "date": "Mon, 02 Nov 2026 11:25:47 -0800",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a19d030a0b88a8b",
-          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (790f1df)",
-          "date": "Mon, 02 Nov 2026 08:06:23 -0800",
-          "from": "apvizual-max <notifications@github.com>"
         }
       ]
     }
@@ -352,8 +352,8 @@
   "missing": [],
   "totals": {
     "azi": 14,
-    "24h": 116,
-    "7z": 791,
-    "30z": 2147
+    "24h": 113,
+    "7z": 775,
+    "30z": 2230
   }
 }

@@ -34,6 +34,13 @@ const NEWS_FROM = /newsletter|substack|news@|digest|mailchimp|beehiiv|twine|medi
 const NEWS_TEXT = /weekly|newsletter|edition|ed\.\s*$|dumitrascu|smart city/i;
 // ---- robot: local-part de tip no-reply ----
 const ROBOT_LOCAL = /^(no-?reply|do-?not-?reply|donotreply|noreply|notify|notifications?|alerts?|automated|mailer|newsletter|newsletters|news|bounce|postmaster)/i;
+// ---- CERERE DE CONFIRMARE DE IDENTITATE: trebuie omul, nu automatul ----
+// MĂSURAT 2026-11-04: Academia.edu — „Yes / no — Alexandru, your name is on a
+// paper" (o lucrare din 2010 potrivita pe numele „Alexandru Popescu"). E o cerere
+// legitima de confirmare, dar numele e comun => „Yes, It's Mine" ar pune lucrarea
+// pe profilul altcuiva. Deci cere omul, dar NU e alerta de securitate.
+const IDENTITY_CHECK = /your name is on a paper|confirm (this|that) (paper|is)|is this (yours|you)|it'?s mine|this is not me|confirm (your|this) (email|phone|identity)/i;
+
 // ---- ALERTA DE SECURITATE: cere verificare umana, chiar daca vine de la robot ----
 // MĂSURAT 2026-10-29: „Notice of Security Incident" (Scribd, prin Epiq) — un
 // incident real de date, dar de la alt expeditor decât Google. Deci NU
@@ -126,7 +133,9 @@ function triage(rows) {
     const isJobAlert = JOB_ALERT.test(from) || JOB_ALERT.test(subj) || JOB_HIRING.test(subj);
 
     let cls, why;
-    if ((SECURITY_FROM.test(from) && SECURITY_TEXT.test(text)) || SECURITY_SUBJECT.test(subj)) {
+    if (IDENTITY_CHECK.test(headText) && !SECURITY_SUBJECT.test(subj)) {
+      cls = 'needs-action'; why = 'cer confirmare umana de identitate — verifica inainte sa raspunzi';
+    } else if ((SECURITY_FROM.test(from) && SECURITY_TEXT.test(text)) || SECURITY_SUBJECT.test(subj)) {
       cls = 'needs-action'; why = 'alerta de securitate — cere verificare umana';
     } else if (CI_FROM.test(from) && CI_FAIL_SUBJECT.test(subj)) {
       cls = 'needs-action'; why = 'workflow CI esuat — cere actiune';
