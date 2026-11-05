@@ -635,7 +635,9 @@ md += `
 `;
 for (const j of sc.remoteFalsePositives) md += `| ${cell(j.role)} | ${cell(j.company)} | ${j.remoteFalsePositive.kind}: \`${j.remoteFalsePositive.hit}\` | ${j.L} |\n`;
 md += `
-"Remote" apare în text, dar jobul **nu** e remote. \`L\` ar trebui să fie 8 (București) sau 0 (necunoscut), nu 10. Diferență: **0.4 puncte** per job. Nu am atins motorul — portul e fidel prin design.
+"Remote" apare în text, dar jobul **nu** e remote. \`L\` ar trebui să fie 8 (București) sau -5 (necunoscut), nu 10. Diferență: **0.4 puncte** per job. Nu am atins motorul — portul e fidel prin design.
+
+**Trei mecanisme, măsurate pe 05.11:** (1) **negatie** — anunțul spune exact contrariul; (2) **eticheta** — linia \`Remote Status: Hybrid\` e citită ca remote; (3) **cultura** — „distributed team setting", „we are a global team", jobul fiind on-site într-un oraș anume.
 
 ### 6.2 Axa D ridicată de prosa, nu de titlu — ${sc.axisFromProse.length} joburi (${sc.axisFromProse.reduce((a, x) => a + x.flags.length, 0)} semnalări)
 

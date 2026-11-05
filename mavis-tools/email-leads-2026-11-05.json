@@ -1,0 +1,111 @@
+{
+  "date": "2026-11-05",
+  "note": "Leads din alertele de job de azi (2026-11-05) si din joburile NOI de pe designproject.io (15 postinguri noi, dintre care 2 publicate chiar ieri). Fiecare lead poarta calea de verificare declarata in verifiedVia - unde pagina sursei a raspuns 403, am folosit textul indexat sau corpul emailului si am spus-o explicit.",
+  "leads": [
+    {
+      "resolvedTitle": "Staff Product Designer - AI Products @ Kraken - Romania remote (NOU)",
+      "from": "LinkedIn Job Alerts",
+      "subject": "Kraken Staff Product Designer - AI Products",
+      "summary": "Kraken angajeaza un Staff Product Designer pentru AI Products, remote din Romania, cu statut „Actively recruiting”. Alerta ta pentru „Product Designer remote” a listat 4 joburi noi in Romania la care se potrivesc preferintele, intre care acesta si Lead Product Designer la Scrambly (tot remote).",
+      "requirements": [
+        "Necesa in anunt - alerta LinkedIn contine doar titlul si statutul, nu cerintele; pagina oficiala de joburi a firmei nu a fost deschisa",
+        "Nivel STAFF - cu experienta in produse de crypto/AI, la o companie de exchange"
+      ],
+      "rates": [],
+      "terms": "Romania (Remote). Actively recruiting.",
+      "process": "Aplicare pe LinkedIn (alerta iti da linkul direct spre anunt).",
+      "caveat": "Cele doua lucruri de care sa te asiguri: (1) e nivel STAFF la Kraken - asteapta senioritate foarte mare si, fiind crypto exchange, experienta in produse financiare; (2) alerta LinkedIn iti da titlul si localizarea, NU cerintele - deschide anuntul pe site-ul firmei inainte sa aplici, ca sa nu pierzi timpul. Salariul nu e publicat.",
+      "verifiedVia": "Corpul COMPLET al emailului de alerta LinkedIn (titlul, statutul Actively recruiting, localizarea remote Romania, si celelalte 3 joburi din aceeasi alerta). Cerintele NU au fost verificate - pagina oficiala nu a fost deschisa.",
+      "url": "https://www.linkedin.com/jobs"
+    },
+    {
+      "resolvedTitle": "Senior UX/UI Designer @ Accion Labs - Bucuresti hybrid (NOU)",
+      "from": "LinkedIn Job Alerts",
+      "subject": "Accion Labs SENIOR UX/UI DESIGNER",
+      "summary": "Accion Labs angajeaza un Senior UX/UI Designer in Bucuresti, hybrid, cu „Actively recruiting” si Easy Apply. Anuntul e aparut in alerta ta pentru „User Experience Designer”.",
+      "requirements": [
+        "Rol senior de UX/UI - anuntul (rezumat in email) confirma pozitia si seniority-ul, dar cerintele complete nu apar in email"
+      ],
+      "rates": [],
+      "terms": "Bucuresti, Romania (Hybrid). Actively recruiting, Easy Apply.",
+      "process": "Aplicare pe LinkedIn cu Easy Apply.",
+      "caveat": "Aplicare usoara si rolul e activ - dar e UX/UI, nu brand identity. Salariul nu e publicat, iar Accion Labs e un startup, deci merita sa verifici pe site-ul firmei ce cauta concret (brand vs. product) inainte sa aplici.",
+      "verifiedVia": "Corpul emailului de alerta LinkedIn (titlul, compania, localizarea hybrid, statutul Actively recruiting si Easy Apply, plus celelalte joburi din alerta). Cerintele complete NU au fost verificate.",
+      "url": "https://www.linkedin.com/jobs"
+    },
+    {
+      "resolvedTitle": "UX Designer @ E.ON - Iasi (scor 10, dar vezi caveat-ul de scoring)",
+      "from": "designproject.io (catalog)",
+      "subject": "UX Designer @ E.ON",
+      "summary": "Aparut recent in catalogul designproject.io. E un rol de design de experiente digitale la un gigant energetic, cu echipa locala in Iasi, comunicare cu stakeholderi si facilitare de workshop-uri de design thinking cu clientii.",
+      "requirements": [
+        "Necesa in anunt - linkul de aplicare este pe SmartRecruiters; textul complet al anuntului este pe designproject.io dar linkul oficial nu a fost deschis"
+      ],
+      "rates": [],
+      "terms": "Iasi, Romania. Full time. Postat 08.10.2026, expiră 07.11.2026 - deci are doar două zile.",
+      "process": "Aplicare pe anuntul E.ON (linkul oficial e in listingul de pe designproject.io).",
+      "caveat": "ATENTIE - SCORUL E INFLAT: motorul i-a dat L=10 (remote) pentru că descrierea spune „an international, DISTRIBUTED team setting” - cuvântul „distributed” e într-o proza de cultură, nu despre regimul de lucru. Jobul e la Iasi, pe loc. Cu L corect (8) ar fi 9,6, nu 10 - deci NU e momentan #1, ci la egalitate cu Art Director @ Mercury360. Vezi §6.1. În plus, expiră pe 07.11: dacă te interesează, e urgent.",
+      "verifiedVia": "Listingul de pe designproject.io (titlu, companie, localizarea Iasi, tipul de angajare, data publicarii si expirarea) plus textul descrierii, din care am extras contextul exact al cuvântului „distributed”. Pagina oficiala E.ON (SmartRecruiters) NU a fost deschisă.",
+      "url": "https://designproject.io/jobs/ux-designer-at-e-on-z3l7kz"
+    },
+    {
+      "resolvedTitle": "Fabricator (Prototyping) @ Runware - Bucuresti, on-site (NOU, postat ieri)",
+      "from": "designproject.io (catalog)",
+      "subject": "Fabricator (Prototyping) @ Runware",
+      "summary": "Postat chiar ieri, la Runware. Rol de prototipare fizică: transformă idei în volume și obiecte reale, cu focus pe operațiuni de prototipare. Intră în secțiunea 1 pentru că e rol de design hands-on cu senioritate bună.",
+      "requirements": [
+        "Necesa in anunt - textul complet e pe designproject.io, linkul de aplicare pe SmartRecruiters; cerintele exacte nu au fost verificate",
+        "Rol de prototipare fizica / modelare - hands-on, cu senioritate mid (3+ ani)"
+      ],
+      "rates": [],
+      "terms": "Bucharest, Romania, ON-SITE. Full time. Postat 04.11.2026, expiră 04.12.2026.",
+      "process": "Aplicare pe anuntul Runware (linkul oficial e in listingul de pe designproject.io).",
+      "caveat": "On-site in Bucuresti, si rolul e de prototipare fizica (volume, obiecte) - nu design digital. E o_DIRECTIE diferita de restul profilului tau, dar pentru un art director e un rol de workshop si de executie care poate fi interesant. Salariul nu e publicat. IMPORTANT: motorul i-a dat L=10 pentru că linia de metadate spune „remote status: on-site” - linia care declara regimul e citita ca semnal de remote. Practic e on-site.",
+      "verifiedVia": "Listingul de pe designproject.io (titlu, companie, localizarea on-site, linia „Remote Status: on-site\" din descriere, tipul de angajare, data publicarii si expirarea). Pagina oficiala Runware (SmartRecruiters) NU a fost deschisă.",
+      "url": "https://designproject.io/jobs/fabricator-prototyping-at-runware-0mlk9e"
+    },
+    {
+      "resolvedTitle": "Product Designer @ Jobgether - Romania fully remote (NOU, postat ieri)",
+      "from": "designproject.io (catalog)",
+      "subject": "Product Designer @ Jobgether",
+      "summary": "Postat ieri, la Jobgether: Product Designer, Romania fully remote, cu tip „Full-time Contractor Engagement”. A intrat în tabel cu scor 9,4.",
+      "requirements": [
+        "Necesa in anunt - linkul de aplicare pe SmartRecruiters; cerintele exacte nu au fost verificate"
+      ],
+      "rates": [],
+      "terms": "Romania, Fully Remote. Full-time Contractor Engagement. Postat 04.11.2026, expiră 04.12.2026.",
+      "process": "Aplicare pe anuntul Jobgether (linkul oficial e in listingul de pe designproject.io).",
+      "caveat": "Contractor, nu angajare permanentă - ține cont de asta când compari cu un salariu fix. Restul e un rol de product design remote, cu porțion de „distributed teams” în descriere (care e motivul pentru care motorul i-a dat L=10; aici e corect, jobul e remote).",
+      "verifiedVia": "Listingul de pe designproject.io (titlu, companie, localizarea fully remote, linia „Job Type: Full-time Contractor Engagement\" din descriere, data publicarii si expirarea). Pagina oficiala Jobgether (SmartRecruiters) NU a fost deschisă.",
+      "url": "https://designproject.io/jobs/product-designer-at-jobgether-pqedji"
+    },
+    {
+      "resolvedTitle": "Content Strategy & Creative Operations Lead @ Viseven - Bucuresti remote (NOU)",
+      "from": "LinkedIn Job Alerts",
+      "subject": "Viseven Content Strategy & Creative Operations Lead",
+      "summary": "Viseven angajeaza un Content Strategy & Creative Operations Lead, remote din Bucuresti. A venit in alerta ta pentru „Creative Strategist”.",
+      "requirements": [
+        "Necesa in anunt - emailul contine doar titlul, compania si localizarea; cerintele nu apar"
+      ],
+      "rates": [],
+      "terms": "Bucharest (Remote).",
+      "process": "Aplicare pe LinkedIn.",
+      "caveat": "Rol de strategie de continut si operatiuni creative - mai aproape de content/creative ops decat de design de brand. Salariul nu e publicat, iar cerintele lipsesc din email: deschide anuntul înainte să aplici.",
+      "verifiedVia": "Corpul emailului de alerta LinkedIn (titlul, compania, localizarea remote Bucuresti). Cerintele NU au fost verificate - anuntul nu a fost deschis.",
+      "url": "https://www.linkedin.com/jobs"
+    },
+    {
+      "resolvedTitle": "Alerte de securitate Google - 3 grant-uri OAuth azi (cloudHQ, Awesome Screenshot, Crossover)",
+      "from": "Google",
+      "subject": "Security alert / You shared some Google Account data with ...",
+      "summary": "Trei notificări despre acces la contul tău Google, toate azi: cloudHQ (05:28 UTC), Awesome Screenshot (07:18 EEST) și Crossover (02:59 EEST). Dintre ele, Awesome Screenshot are și emailul de „Welcome” azi - deci pe acesta l-ai deschis tu, intenționat. Crossover și cloudHQ n-au email de bun venit, deci nu pot confirma din mesaje că le-ai aprobat tu.",
+      "requirements": ["Nu e o cerere de job - e un item de securitate care cere verificare umană."],
+      "rates": [],
+      "terms": "Contul afectat: apvizual@gmail.com.",
+      "process": "Verificare la https://myaccount.google.com/permissions (acces third-party) și revocarea celor pe care nu le recunoști.",
+      "caveat": "NU e o alertă de intrus: toate trei sunt notificări de grant OAuth („You allowed X access...” / „you used Sign in with Google”), nu „someone else may be trying to access”. Deci nu e semn de hacked - dar merită verificat, fiindcă fiecare app rămâne cu acces la contul tău. Awesome Screenshot are email de welcome ⇒ probabil intenționat. Crossover și cloudHQ: dacă nu le recunoști, revocă-le. Context: pe 28.10 ai avut deja un grant similar („Sentinel Hermes Google Access\"), deci tiparul se repetă.",
+      "verifiedVia": "Corpul COMPLET al celor trei emailuri Google, cu textul exact („You allowed cloudHQ access...”, „you used Sign in with Google to sign in to Awesome Screenshot on 5 November at 07:18”, idem Crossover la 02:59) și lista profilurilor partajate. Prezența emailului de welcome pentru Awesome Screenshot e verificată în același set de mesaje.",
+      "url": "https://myaccount.google.com/permissions"
+    }
+  ]
+}

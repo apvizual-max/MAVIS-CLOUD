@@ -1,47 +1,47 @@
 {
-  "today": "2026/11/04",
+  "today": "2026/11/05",
   "labels": [
     {
       "key": "joburi",
       "title": "Joburi",
       "name": "MAVIS/Joburi",
       "counts": {
-        "azi": 5,
-        "24h": 37,
-        "7z": 222,
-        "30z": 429
+        "azi": 7,
+        "24h": 43,
+        "7z": 224,
+        "30z": 453
       },
       "newest": {
-        "id": "1a1a520a95734072",
-        "subject": "Candidates like you applied for these jobs",
-        "date": "Wed, 04 Nov 2026 07:55:11 +0200",
-        "from": "Bestjobs <contact@bestjobs.eu>"
+        "id": "1a1aa50e07b0a71a",
+        "subject": "Membru al echipei - Part Time la Lovisa. Încă 23 de locuri de muncă în București, Ilfov",
+        "date": "Thu, 05 Nov 2026 06:06:28 +0000",
+        "from": "Indeed <donotreply@jobalert.indeed.com>"
       },
-      "newestDate": "Wed, 04 Nov 2026 07:55:11 +0200",
+      "newestDate": "Thu, 05 Nov 2026 06:06:28 +0000",
       "samples": [
         {
-          "id": "1a1a520a95734072",
-          "subject": "Candidates like you applied for these jobs",
-          "date": "Wed, 04 Nov 2026 07:55:11 +0200",
-          "from": "Bestjobs <contact@bestjobs.eu>"
-        },
-        {
-          "id": "1a1a5190be61089e",
-          "subject": "Membru al echipei - Part Time la Lovisa. Încă 12 locuri de muncă în București, Ilfov",
-          "date": "Wed, 04 Nov 2026 05:47:23 +0000",
+          "id": "1a1aa50e07b0a71a",
+          "subject": "Membru al echipei - Part Time la Lovisa. Încă 23 de locuri de muncă în București, Ilfov",
+          "date": "Thu, 05 Nov 2026 06:06:28 +0000",
           "from": "Indeed <donotreply@jobalert.indeed.com>"
         },
         {
-          "id": "1a1a50768ba4a898",
-          "subject": "Because you searched for design graphic bucuresti jobs",
-          "date": "Wed, 04 Nov 2026 07:28:11 +0200",
+          "id": "1a1aa42a631320da",
+          "subject": "Kraken Staff Product Designer - AI Products",
+          "date": "Thu, 5 Nov 2026 05:50:56 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+        },
+        {
+          "id": "1a1aa4000963dd97",
+          "subject": "New opportunities in top companies",
+          "date": "Thu, 05 Nov 2026 07:48:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a1a4ffd1f1869ad",
-          "subject": "Dulce înainte de Amar",
-          "date": "Wed, 4 Nov 2026 05:19:50 +0000 (GMT)",
-          "from": "Mihai Svasta via LinkedIn <newsletters-noreply@linkedin.com>"
+          "id": "1a1aa328c2889555",
+          "subject": "13 new jobs for you: graphic design, bucharest",
+          "date": "Thu, 05 Nov 2026 07:33:11 +0200",
+          "from": "Bestjobs <contact@bestjobs.eu>"
         }
       ]
     },
@@ -50,42 +50,42 @@
       "title": "AI si comunitati",
       "name": "AI Folder/AI si Comunitati",
       "counts": {
-        "azi": 2,
-        "24h": 14,
-        "7z": 87,
-        "30z": 167
+        "azi": 3,
+        "24h": 21,
+        "7z": 91,
+        "30z": 179
       },
       "newest": {
-        "id": "1a1a513ac5e2996e",
-        "subject": "The Secrets of Diwali",
-        "date": "Wed, 4 Nov 2026 05:41:32 +0000",
-        "from": "Isha News <isha.offerings@sadhguru.org>"
+        "id": "1a1aa4c13645f4f4",
+        "subject": "Grok Bot is taking over (10 MASSIVE updates)",
+        "date": "Thu, 05 Nov 2026 06:01:12 +0000 (UTC)",
+        "from": "Jay E <robonuggets@mail.beehiiv.com>"
       },
-      "newestDate": "Wed, 4 Nov 2026 05:41:32 +0000",
+      "newestDate": "Thu, 05 Nov 2026 06:01:12 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a1a513ac5e2996e",
-          "subject": "The Secrets of Diwali",
-          "date": "Wed, 4 Nov 2026 05:41:32 +0000",
-          "from": "Isha News <isha.offerings@sadhguru.org>"
+          "id": "1a1aa4c13645f4f4",
+          "subject": "Grok Bot is taking over (10 MASSIVE updates)",
+          "date": "Thu, 05 Nov 2026 06:01:12 +0000 (UTC)",
+          "from": "Jay E <robonuggets@mail.beehiiv.com>"
         },
         {
-          "id": "1a1a42ab4542cf35",
-          "subject": "SURVIVAL FOOD LIST & ACCESSORY ITEMS",
-          "date": "Wed, 4 Nov 2026 01:26:51 +0000",
-          "from": "Ken wheeler from Ken Theoria Apophasis Substack <kenwheeler@substack.com>"
+          "id": "1a1aa42a631320da",
+          "subject": "Kraken Staff Product Designer - AI Products",
+          "date": "Thu, 5 Nov 2026 05:50:56 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
         },
         {
-          "id": "1a1a2de99e83bdb1",
-          "subject": "Migrant caravan heading toward the border hopes Republicans lose the midterms",
-          "date": "Tue, 3 Nov 2026 19:12:32 +0000",
+          "id": "1a1a9561488ea319",
+          "subject": "A personal message from Felix",
+          "date": "Thu, 5 Nov 2026 01:30:35 +0000",
+          "from": "\"Felix & Winston 🐶\" <felix@goatacademy.org>"
+        },
+        {
+          "id": "1a1a8d61ae4e7ed9",
+          "subject": "The Deluge: What me must learn from Tuesday night",
+          "date": "Wed, 4 Nov 2026 23:00:49 +0000",
           "from": "PolitiBrawl <politibrawl@substack.com>"
-        },
-        {
-          "id": "1a1a250375ce5bc0",
-          "subject": "AI in Mortgage Servicing: The 25-Year Relationship Nobody Manages",
-          "date": "Tue, 3 Nov 2026 16:48:48 +0000 (UTC)",
-          "from": "\"mindit.io via LinkedIn\" <newsletters-noreply@linkedin.com>"
         }
       ]
     },
@@ -94,42 +94,42 @@
       "title": "Social",
       "name": "Socials",
       "counts": {
-        "azi": 2,
-        "24h": 6,
-        "7z": 29,
-        "30z": 110
+        "azi": 1,
+        "24h": 4,
+        "7z": 27,
+        "30z": 102
       },
       "newest": {
-        "id": "1a1a519af2c61c60",
-        "subject": "Weekly digest for Wed, Oct 28 2026",
-        "date": "Wed, 04 Nov 2026 05:48:04 +0000 (UTC)",
-        "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
+        "id": "1a1a96e69c7f7a1b",
+        "subject": "32 new notifications since 3:58 am (Nov 4, 2026)",
+        "date": "Thu, 05 Nov 2026 01:59:07 +0000 (UTC)",
+        "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
       },
-      "newestDate": "Wed, 04 Nov 2026 05:48:04 +0000 (UTC)",
+      "newestDate": "Thu, 05 Nov 2026 01:59:07 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a1a519af2c61c60",
-          "subject": "Weekly digest for Wed, Oct 28 2026",
-          "date": "Wed, 04 Nov 2026 05:48:04 +0000 (UTC)",
-          "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a1a420d8321f278",
-          "subject": "15 new notifications since 3:14 am (Nov 3, 2026)",
-          "date": "Wed, 04 Nov 2026 01:16:17 +0000 (UTC)",
+          "id": "1a1a96e69c7f7a1b",
+          "subject": "32 new notifications since 3:58 am (Nov 4, 2026)",
+          "date": "Thu, 05 Nov 2026 01:59:07 +0000 (UTC)",
           "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a1a3808854957a2",
-          "subject": "Did you just log in near Bucharest on a new device?",
-          "date": "Tue, 3 Nov 2026 14:21:08 -0800",
-          "from": "Facebook <security@facebookmail.com>"
+          "id": "1a1a5938a41bfb8e",
+          "subject": "1 event happening tomorrow",
+          "date": "Wed, 04 Nov 2026 08:01:11 +0000 (UTC)",
+          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a1a271bfd8607eb",
-          "subject": "Jonathan Pritchard posted \"Personal Branding Is Dead\"",
-          "date": "Tue, 03 Nov 2026 17:25:25 +0000 (UTC)",
-          "from": "Project 720 <noreply@skool.com>"
+          "id": "1a1a5545f6f375cc",
+          "subject": "Weekly digest for Wed, Oct 28 2026",
+          "date": "Wed, 04 Nov 2026 06:52:11 +0000 (UTC)",
+          "from": "\"AI Automation Vault (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a1a5518ad1db28c",
+          "subject": "Weekly digest for Wed, Oct 28 2026",
+          "date": "Wed, 04 Nov 2026 06:49:05 +0000 (UTC)",
+          "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
         }
       ]
     },
@@ -138,42 +138,42 @@
       "title": "Newsletter",
       "name": "Newsletter",
       "counts": {
-        "azi": 5,
-        "24h": 52,
-        "7z": 304,
-        "30z": 459
+        "azi": 10,
+        "24h": 71,
+        "7z": 320,
+        "30z": 526
       },
       "newest": {
-        "id": "1a1a519af2c61c60",
-        "subject": "Weekly digest for Wed, Oct 28 2026",
-        "date": "Wed, 04 Nov 2026 05:48:04 +0000 (UTC)",
-        "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
+        "id": "1a1aa4f5939661e8",
+        "subject": "New idea by Cryptollica — check it out",
+        "date": "Thu, 05 Nov 2026 06:04:48 -0000",
+        "from": "TradingView <noreply@tradingview.com>"
       },
-      "newestDate": "Wed, 04 Nov 2026 05:48:04 +0000 (UTC)",
+      "newestDate": "Thu, 05 Nov 2026 06:04:48 -0000",
       "samples": [
         {
-          "id": "1a1a519af2c61c60",
-          "subject": "Weekly digest for Wed, Oct 28 2026",
-          "date": "Wed, 04 Nov 2026 05:48:04 +0000 (UTC)",
-          "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
+          "id": "1a1aa4f5939661e8",
+          "subject": "New idea by Cryptollica — check it out",
+          "date": "Thu, 05 Nov 2026 06:04:48 -0000",
+          "from": "TradingView <noreply@tradingview.com>"
         },
         {
-          "id": "1a1a513ac5e2996e",
-          "subject": "The Secrets of Diwali",
-          "date": "Wed, 4 Nov 2026 05:41:32 +0000",
-          "from": "Isha News <isha.offerings@sadhguru.org>"
+          "id": "1a1aa4c13645f4f4",
+          "subject": "Grok Bot is taking over (10 MASSIVE updates)",
+          "date": "Thu, 05 Nov 2026 06:01:12 +0000 (UTC)",
+          "from": "Jay E <robonuggets@mail.beehiiv.com>"
         },
         {
-          "id": "1a1a4ffd1f1869ad",
-          "subject": "Dulce înainte de Amar",
-          "date": "Wed, 4 Nov 2026 05:19:50 +0000 (GMT)",
-          "from": "Mihai Svasta via LinkedIn <newsletters-noreply@linkedin.com>"
+          "id": "1a1aa42a631320da",
+          "subject": "Kraken Staff Product Designer - AI Products",
+          "date": "Thu, 5 Nov 2026 05:50:56 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
         },
         {
-          "id": "1a1a420d8321f278",
-          "subject": "15 new notifications since 3:14 am (Nov 3, 2026)",
-          "date": "Wed, 04 Nov 2026 01:16:17 +0000 (UTC)",
-          "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
+          "id": "1a1aa2e4386ee1ce",
+          "subject": "Security alert",
+          "date": "Thu, 05 Nov 2026 05:28:39 GMT",
+          "from": "Google <no-reply@accounts.google.com>"
         }
       ]
     },
@@ -182,41 +182,41 @@
       "title": "Finante",
       "name": "Finante",
       "counts": {
-        "azi": 0,
-        "24h": 2,
+        "azi": 1,
+        "24h": 5,
         "7z": 19,
-        "30z": 25
+        "30z": 29
       },
       "newest": {
-        "id": "1a1a1b28e2e44e61",
-        "subject": "New idea by BtheTrade — check it out",
-        "date": "Tue, 03 Nov 2026 13:56:35 -0000",
+        "id": "1a1aa4f5939661e8",
+        "subject": "New idea by Cryptollica — check it out",
+        "date": "Thu, 05 Nov 2026 06:04:48 -0000",
         "from": "TradingView <noreply@tradingview.com>"
       },
-      "newestDate": "Tue, 03 Nov 2026 13:56:35 -0000",
+      "newestDate": "Thu, 05 Nov 2026 06:04:48 -0000",
       "samples": [
         {
-          "id": "1a1a1b28e2e44e61",
-          "subject": "New idea by BtheTrade — check it out",
-          "date": "Tue, 03 Nov 2026 13:56:35 -0000",
-          "from": "TradingView <noreply@tradingview.com>"
-        },
-        {
-          "id": "1a1a0491f3a27361",
+          "id": "1a1aa4f5939661e8",
           "subject": "New idea by Cryptollica — check it out",
-          "date": "Tue, 03 Nov 2026 07:21:48 -0000",
+          "date": "Thu, 05 Nov 2026 06:04:48 -0000",
           "from": "TradingView <noreply@tradingview.com>"
         },
         {
-          "id": "1a19d731fbcbd098",
+          "id": "1a1a874ff5a2a392",
           "subject": "New idea by BtheTrade — check it out",
-          "date": "Mon, 02 Nov 2026 18:08:48 -0000",
+          "date": "Wed, 04 Nov 2026 21:26:41 -0000",
           "from": "TradingView <noreply@tradingview.com>"
         },
         {
-          "id": "1a19be11c8d07e2f",
+          "id": "1a1a81fe0a0e518d",
+          "subject": "New idea by Cryptollica — check it out",
+          "date": "Wed, 04 Nov 2026 19:53:43 -0000",
+          "from": "TradingView <noreply@tradingview.com>"
+        },
+        {
+          "id": "1a1a6b7db3c669f0",
           "subject": "New idea by BtheTrade — check it out",
-          "date": "Mon, 02 Nov 2026 10:49:41 -0000",
+          "date": "Wed, 04 Nov 2026 13:20:28 -0000",
           "from": "TradingView <noreply@tradingview.com>"
         }
       ]
@@ -242,7 +242,7 @@
         "azi": 0,
         "24h": 0,
         "7z": 0,
-        "30z": 13
+        "30z": 12
       },
       "newest": {
         "id": "1a120e8558d6b485",
@@ -311,17 +311,29 @@
       "counts": {
         "azi": 0,
         "24h": 2,
-        "7z": 114,
+        "7z": 18,
         "30z": 1026
       },
       "newest": {
-        "id": "1a1a1cc84b38bd3c",
-        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (0bd11b2)",
-        "date": "Tue, 03 Nov 2026 06:24:56 -0800",
+        "id": "1a1a7009ac076ba2",
+        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (af84840)",
+        "date": "Wed, 04 Nov 2026 06:39:56 -0800",
         "from": "apvizual-max <notifications@github.com>"
       },
-      "newestDate": "Tue, 03 Nov 2026 06:24:56 -0800",
+      "newestDate": "Wed, 04 Nov 2026 06:39:56 -0800",
       "samples": [
+        {
+          "id": "1a1a7009ac076ba2",
+          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (af84840)",
+          "date": "Wed, 04 Nov 2026 06:39:56 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
+        {
+          "id": "1a1a64ff6251f09d",
+          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
+          "date": "Wed, 04 Nov 2026 03:27:00 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
         {
           "id": "1a1a1cc84b38bd3c",
           "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (0bd11b2)",
@@ -333,27 +345,15 @@
           "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
           "date": "Tue, 03 Nov 2026 03:15:37 -0800",
           "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a19efa196b85cdd",
-          "subject": "[apvizual-max/hermes-agent-temp] Run failed: CI - main (bc2ca07)",
-          "date": "Mon, 02 Nov 2026 17:15:51 -0800",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a19ef473d0d91d6",
-          "subject": "[apvizual-max/hermes-agent-temp] Run failed: CI - main (4831dfb)",
-          "date": "Mon, 02 Nov 2026 17:09:41 -0800",
-          "from": "apvizual-max <notifications@github.com>"
         }
       ]
     }
   ],
   "missing": [],
   "totals": {
-    "azi": 14,
-    "24h": 113,
-    "7z": 775,
-    "30z": 2230
+    "azi": 22,
+    "24h": 146,
+    "7z": 699,
+    "30z": 2328
   }
 }

@@ -106,15 +106,46 @@ function dpEng(jd, title) {
 }
 
 /**
- * Diagnostic: 'remote' apare in text dar NU inseamna ca jobul e remote.
- * Exemple reale: "nu se lucreaza remote/hybrid" (negatie), "Remote Status: Hybrid" (eticheta).
- * Nu schimbam motorul (portul ramane fidel) — masuram impactul ca decizia sa fie a lui Alex.
+ * Diagnostic: 'remote' pozitiv fals — L=10 obținut fără ca jobul să fie remote.
+ *
+ * MĂSURAT 2026-11-05, două clase noi:
+ * 1. **Linia care spune regimul e citită ca semnal de remote.** Ad-urile de pe
+ *    designproject.io au o linie de metadate `Remote Status: on-site` /
+ *    `Remote Status: hybrid` — iar motorul caută cuvântul „remote" în corp,
+ *    deci chiar linia care declară regimul îl face să sune remote.
+ * 2. **Cuvinte de cultură, nu de regim.** „distributed team setting",
+ *    „ideas from anywhere", „we are a global team" — joburi on-site în Iași,
+ *    Brașov sau Timișoara primesc L=10 pentru că proza conține cuvântul.
+ *
+ * Nu schimbăm motorul (portul rămâne fidel) — măsurăm și semnalăm, deci decizia
+ * e a lui Alex.
  */
-function remoteFalsePositive(jd) {
+function remoteFalsePositive(jd, loc, L) {
   const neg = jd.match(/(nu se lucreaza|nu lucram|fara|without|no)\s+[^.\n]{0,40}remote/gi);
-  const label = jd.match(/Remote Status:\s*Hybrid/gi);
   if (neg) return { kind: 'negatie', hit: neg[0].trim() };
+  const label = jd.match(/Remote Status:\s*Hybrid/gi);
   if (label) return { kind: 'eticheta', hit: label[0].trim() };
+  if (L === 10) {
+    // regimul declarat e on-site sau hybrid, dar motorul a citit L=10
+    const declared = jd.match(/Remote Status:\s*(on-?site|hybrid)/gi);
+    if (declared) return { kind: 'regim-declarat', hit: declared[0].trim() };
+    // cuvânt generic de cultură, care NU apare în locație — și doar dacă
+    // anunțul NU oferă remote și locația e un oraș anume (nu București).
+    // Altfel am flagui joburi remote adevărate (Fluxon, KittySpout, Jobgether
+    // spun toate „fully remote") și semnalul s-ar dilua.
+    const locLow = String(loc || '').toLowerCase();
+    const culture = jd.match(/\b(distributed|anywhere|global team)\b/gi);
+    if (culture) {
+      const k = culture[0].toLowerCase();
+      const offersRemote = /fully\s*remote|remote status:\s*(fully\s*)?remote|work from home/i.test(jd);
+      const locIsBucharest = /bucharest|bucuresti/.test(locLow);
+      const locHasCity = /\b(iasi|brasov|timisoara|cluj|constant|sibiu|craiova|ploiesti)\b/.test(locLow);
+      if (!offersRemote && !locIsBucharest && locHasCity && !locLow.includes(k)) {
+        const i = jd.toLowerCase().indexOf(k);
+        return { kind: 'cultura', hit: jd.slice(Math.max(0, i - 60), i + 60).replace(/\s+/g, ' ').trim() };
+      }
+    }
+  }
   return null;
 }
 
@@ -274,7 +305,7 @@ function main() {  const eng = loadEngine();
                    expired: !!(expDate && expDate < TODAY),
                    loc: j.loc, locWhy: j.locWhy, eng: j.eng, engWhy: j.engWhy || null, special: j.special || null, salary: j.salary || null,
                    inPrevSet: prevKeys.has(key(j)), inPrevScored: prevScored.has(key(j)), jd: j.jd };
-    const fp = remoteFalsePositive(j.jd);
+    const fp = remoteFalsePositive(j.jd, j.loc, r.L);
     if (fp) meta.remoteFalsePositive = fp;
     if (r.dropped) { dropped.push({ ...r, ...meta, reasonFixed: rf.dropped ? rf.reason : null }); continue; }
     const row = { ...r, ...meta, scoreFixed: rf.dropped ? null : rf.score,
