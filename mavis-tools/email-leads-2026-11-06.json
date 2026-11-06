@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-06",
+  "note": "Leads din alertele de job de azi (2026-11-06) si din postingul nou de pe designproject.io (AECOM, postat ieri). Fiecare lead poarta calea de verificare declarata in verifiedVia - unde pagina sursei a raspuns 403, am folosit textul indexat sau corpul emailului si am spus-o explicit.",
+  "leads": [
+    {
+      "resolvedTitle": "Senior Graphic Designer - Multimedia Designer @ Yardi Romania (NOU)",
+      "from": "Jooble",
+      "subject": "Yardi Romania cauta Senior Graphic Designer - Multimedia Designer",
+      "summary": "Yardi (companie de software pentru real estate, cu birou la Cluj-Napoca - a doua cea mai mare locatie a lor din lume) angajeaza un Senior Graphic Designer - Multimedia Designer. Combina graphic design, motion si video: banneruri animate pentru campanii, vizualuri de email, landing pages, prezentari, materiale de marketing, tutoriale de produs si demonstratii, si short-form video (pre-roll, YouTube, CTV). Jobul a fost republicat acum o luna, dar apare azi ca jobul-cheie in alerta Jooble.",
+      "requirements": [
+        "Portofoliu puternic de graphic design creativ, plus exemple de video si motion - ideal short-form video platit sau de performanta (pre-roll, ads social)",
+        "Minimum 3 ani de experienta in graphic design, cu abilitate demonstrata in motion graphics sau montaj video, ideal in context de marketing",
+        "Licenta in graphic design / visual communication sau experienta profesionala echivalenta",
+        "Cunoasterea teoriei culorii, a compozitiei si a principiilor de layout",
+        "Figma, Adobe Creative Suite (design, motion si video)",
+        "Cunoscinta solidă a principiilor de design, identitate de brand si standardelor de platforma"
+      ],
+      "rates": [],
+      "terms": "Cluj-Napoca, Romania. Hybrid: cel putin o zi pe saptamana la birou, iar din ianuarie 2027 cerinta creste la doua zile pe saptamana. Full time, senior level. Pana la 26 zile de vacanta, pana la 20 zile de lucru remote in UE pe an, pana la 2.000 USD/an pentru dezvoltare profesionala, 40 RON/zi tichete de masa.",
+      "process": "Aplicare pe boardul oficial de joburi Yardi Romania (yardiromania.breezy.hr) sau pe anuntul de pe LinkedIn/Built In.",
+      "caveat": "ATENTIE - LOCATIA: jobul e in CLUJ-NAPOCA, la birou cel putin o zi pe saptamana (doua zile din ianuarie 2027), nu in Bucuresti si nu remote. Daca nu esti dispus la deplasare sau relocalizare, sari peste el. In rest, potrivirea cu profilul tau de art direction e excelenta: portofoliul cere si video/motion, nu doar design static - daca nu ai, asta e pragul real. Anuntul e republicat de o luna, deci grabeste daca te intereseaza.",
+      "verifiedVia": "Boardul oficial de joburi Yardi Romania (yardiromania.breezy.hr) citit prin indexarea motorului de cautare: titlu, departament, localizare, regim hybrid cu cresterea la doua zile pe saptamana din ianuarie 2027, cerinte complete si beneficii. Confirmat si pe Built In (anunt republicat acum o luna, Cluj-Napoca, in-office) si pe o lista de joburi de pe LinkedIn care include rolul la Yardi.",
+      "url": "https://yardiromania.breezy.hr/"
+    },
+    {
+      "resolvedTitle": "AGRESIV MEDIA - alerta dedicata a angajatorului (NOU)",
+      "from": "Bestjobs",
+      "subject": "AGRESIV MEDIA is hiring Colaboratori design grafic creatie si grafica",
+      "summary": "AGRESIV MEDIA are acum propria alerta dedicata pe Bestjobs - al doilea angajator care iti impinge activ rolul (primul a fost MARKQUEN). Apare in topul tuturor celor trei alerte Bestjobs de azi, la 780-1020, in Bucuresti. Pozitia e in top si la cautarea ta pe criteriul design graphic bucuresti, si in lista de angajatori care cauta oameni ca tine.",
+      "requirements": [
+        "Necesa in anunt - pagina Bestjobs /en/job/ raspunde 403 pentru acces automat; valoarea si localizarea vin din corpul emailului de alerta"
+      ],
+      "rates": ["780 - 1020 (suma publicata de angajator - fara mentiune de estimare)"],
+      "terms": "Bucuresti, Romania.",
+      "process": "Aplicare pe anuntul Bestjobs, din email.",
+      "caveat": "Alerta dedicata e un semnal ca angajatorul recruteaza activ - dar e si mai concurent. Punct slab: 780-1020 e sub media ta de pret, iar rolul de colaborator (nu senior) poate insemna cauti un executant. Salariul e publicat de angajator, deci e cifra reala, nu estimare de jobboard.",
+      "verifiedVia": "Corpul COMPLET al celor trei emailuri Bestjobs de azi (titlul alertei dedicate, angajator, suma 780-1020, localizarea Bucuresti). Pagina de anunt Bestjobs raspunde 403 pentru acces automat - NU am deschis paginile individuale.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "Creative Lead & 3D Designer @ MARKQUEN EUROPE (a 7-a zi, in topul tuturor alertelor)",
+      "from": "Bestjobs",
+      "subject": "Because you searched for design graphic bucuresti jobs / New opportunities in top companies / AGRESIV MEDIA is hiring ...",
+      "summary": "MARKQUEN e in topul tuturor celor trei alerte Bestjobs de azi, cu a saptea zi consecutiv. Cel mai bine platit rol de design din Romania listat. Discrepanta de regim pe care o semnalez de zile ramane: Bestjobs zice Hybrid, listingul de pe bebee pentru acelasi rol spune La sediu (on-site).",
+      "requirements": [
+        "Rolul combina directie creativa si executie 3D pentru retail si POSM (afisaj, mobilier de retail, retail marketing pentru FMCG)",
+        "Necesa complete in anunt - pagina Bestjobs /en/job/ raspunde 403 la acces automat; descrierea firmei si regimul de lucru sunt pe listingul indexat de pe bebee"
+      ],
+      "rates": ["1400 - 1800 (suma publicata de angajator, fara mentiune de estimare)"],
+      "terms": "Hybrid, Strada Promoroaca 5, Bucuresti. ATENTIE: listarea de pe bebee a aceluiasi rol (3D Designer Retail/POSM) spune La sediu, adica on-site, in timp ce Bestjobs zice Hybrid. Exista discrepanta pe regim - intreaba in aplicatie.",
+      "process": "Aplicare pe anuntul Bestjobs.",
+      "caveat": "A saptea zi in alerte inseamna ca rolul e activ, dar si caalti se uita la el. Daca ai aplicat si n-ai primit raspuns, merita sa re-aplici sau sa cauti un contact direct la ei.",
+      "verifiedVia": "Corpul COMPLET al celor trei emailuri Bestjobs de azi (titlu, angajator, suma 1400-1800, Hybrid, adresa) plus listingul indexat de pe bebee, care confirma firma, profilul si regimul de lucru La sediu. Pagina /en/job/ de pe Bestjobs raspunde 403 - NU am deschis-o.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "Data Center Deputy Design Manager @ AECOM - Bucuresti hybrid (NOU, postat ieri)",
+      "from": "designproject.io (catalog)",
+      "subject": "Data Center Deputy Design Manager @ AECOM",
+      "summary": "Postat chiar ieri, la AECOM: Deputy Design Manager pentru proiecte de data centre. Coordoneaza echipe multidisciplinare de design pentru proiecte complexe de infrastructura critica, conduce intregul ciclu de design (de la conceptualizare la design detaliat) si lucreaza in portofoliul Enterprise Capabilities al AECOM. Categorie: Engineering & Design Management (Data Centers).",
+      "requirements": [
+        "10+ ani de experienta (nivelul declarat in anunt)",
+        "Experienta in conducerea/coordonarea echipelor multidisciplinare de design pe proiecte complexe",
+        "Specializare in data centre si facilitati critice - cu expertiza tehnica in design, nu doar vizual"
+      ],
+      "rates": [],
+      "terms": "Bucharest, Romania. Hybrid. Full-time. Postat 05.11.2026, expiră 05.12.2026.",
+      "process": "Aplicare pe anuntul AECOM (linkul oficial e in listingul de pe designproject.io).",
+      "caveat": "ATENTIE - ASTA NU E DESIGN VIZUAL. E design MANAGEMENT pe infrastructura: coordonare de echipe de ingineri pentru data centre, cu 10+ ani ceruti. Adica exact inversul profilului tau (creative/art direction). L-am inclus pentru ca e cel mai recent posting si pentru completitudine, dar ca potrivire e scazut. Salariul nu e publicat.",
+      "verifiedVia": "Listingul de pe designproject.io (titlu, companie, localizarea Bucuresti hybrid, tipul de angajare, data publicarii si expirarea) plus textul descrierii, din care am extras rolul, categoria si nivelul de experienta cerut. Pagina oficiala AECOM (SmartRecruiters) NU a fost deschisă.",
+      "url": "https://designproject.io/jobs/data-center-deputy-design-manager-at-aecom-r9epz0"
+    },
+    {
+      "resolvedTitle": "Bestjobs - lista completa cu salarii, 11 joburi de design (suma pentru decizie)",
+      "from": "Bestjobs",
+      "subject": "Because you searched for design graphic bucuresti jobs",
+      "summary": "Cele 11 joburi de design din alerta de cautare, cu sumele publicate de angajator: Proiectant Productie Publicitara la BD Lemntech 1405-2000 (DISPONIBIL IMEDIAT), Creative Lead & 3D Designer la MARKQUEN 1400-1800 Hybrid, Specialist Marketing Digital la Fabrica De Podcasturi 700-1350, AI Video Editor la Apex Digital Alliance 1200-1300, SudRezidential Videograf & Editor Video 1000-1200, ARHITECT/DESIGNER MOBILA LA COMANDA la UNICAN PRODUCTION 800-1420, Operator Grafica la Viragos Design 800-1000, Colaboratori design grafic la AGRESIV MEDIA 780-1020, Social Media & Content Creator la AMAL HEALTH CARE 900, Junior Content Creator la INTAX TRADING 700, Graphic Designer part-time 15h remote la CreativeEd Media 525.",
+      "requirements": ["Pentru fiecare job: portofoliu si CV pe anuntul Bestjobs, din email"],
+      "rates": [
+        "Cele mai mari sume publicate: BD Lemntech 1405-2000, MARKQUEN 1400-1800, Apex Digital Alliance 1200-1300",
+        "Cu estimare de piata (nu e oferta de angajator): ELBI 1195-1325, BCR 1795-1985, Imperial Brands 1385-1530, FRF 1385-1530, Rompetrol 1385-1530, Electrica 1795-1985, Instore 1795-1985, Working4U 1795-1985"
+      ],
+      "terms": "Toate din alerta zilnica Bestjobs pe criteriul design graphic bucuresti.",
+      "process": "Aplicare pe anuntul Bestjobs, din email.",
+      "caveat": "Sumele fara mentiune de estimare sunt publicate de angajator; cele cu estimare de piata se recalculeaza zilnic (ieri 1345-1485 si 1790-1980, azi 1385-1530 si 1795-1985) si nu sunt oferte. Paginile de anunt Bestjobs raspund 403 la acces automat, deci tot ce e aici vine din corpul emailului. La BD Lemntech scrie DISPONIBIL IMEDIAT - verifica daca anuntul mai e activ inainte sa aplici.",
+      "verifiedVia": "Corpul COMPLET al celor trei emailuri Bestjobs de azi. Pagina de anunt Bestjobs raspunde 403 - NU am deschis paginile individuale.",
+      "url": "https://www.bestjobs.eu"
+    }
+  ]
+}

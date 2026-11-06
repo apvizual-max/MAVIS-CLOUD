@@ -79,7 +79,18 @@ const cardCount = body => (body.match(/job-card/g) || []).length;
       jsonLdAllFullTime: Object.keys(et).length === 1 && !!et.FULL_TIME,
       badgeFullTime,
       withJobTypeLine: withJobType,
-      newestPostDate: jobs.map(j => j.date).filter(Boolean).sort().slice(-1)[0] || null,
+      // MĂSURAT 2026-11-06: sortarea LEXICOGRAFICA a datelor de tip „Nov 5, 2026"
+      // punea „Sep 30, 2026" la final (S > O > N), deci raporta cel mai vechi
+      // anunt ca fiind cel mai recent. ⇒ se parseaza ca Date, apoi se compara.
+      newestPostDate: (() => {
+        const MON = { Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11 };
+        const parsed = jobs.map(j => j.date).filter(Boolean).map(d => {
+          const m = d.match(/([A-Z][a-z]{2}) (\d{1,2}), (\d{4})/);
+          return m ? new Date(Date.UTC(+m[3], MON[m[1]], +m[2])) : null;
+        }).filter(Boolean);
+        if (!parsed.length) return null;
+        return new Date(Math.max(...parsed.map(d => d.getTime()))).toISOString().slice(0, 10);
+      })(),
       validThrough: { checked, exact, offByOne, other, rule: 'datePosted + 30 zile' },
     };
   } catch (e) { out.designproject = { error: e.message }; }
