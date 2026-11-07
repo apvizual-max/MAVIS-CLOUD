@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-07",
+  "note": "Leads din alertele de job de azi (2026-11-07) si postingul nou de pe IQads. Fiecare lead poarta calea de verificare declarata in verifiedVia - unde pagina sursei a raspuns 403, am folosit textul indexat sau corpul emailului si am spus-o explicit.",
+  "leads": [
+    {
+      "resolvedTitle": "Staff Brand Designer - Consumer @ Kraken - remote, Romania eligibila (NOU)",
+      "from": "LinkedIn Job Alerts",
+      "subject": "You may be a fit for Kraken's Staff Brand Designer - Consumer",
+      "summary": "Kraken angajeaza un Staff Brand Designer - Consumer. Setezi viziunea vizuala si standardul de design al brandului Kraken pe consumator: design static pentru lansari, campanii si activitate permanenta, si te asiguri ca arata ca un singur brand oriunde intalneste cineva. Ia un brief sau o idee si o duci pana la un set de asseturi aprobat, cu layout curat si systemizat in Figma. Raportezi la Creative Lead, Consumer Creative & Design - senior individual contributor, fara oameni in subordine.",
+      "requirements": [
+        "Portofoliu care demonstreaza lucru de brand si static, adaptare multi-format si multi-piata, si sisteme de design reutilizabile",
+        "Pentru varianta 3D: expertiza in Cinema 4D (modelare, iluminare, materiale, randare), biblioteci de asseturi 3D si kit-uri de campanie modulare in Figma",
+        "Figma de nivel expert (componente, auto layout, variabile, fisiere pregatite pentru predare)",
+        "Adobe Creative Suite la nivel avansat si instrumentele de productie asistata de AI",
+        "Varianta 3D cere 7+ ani de experienta in brand, static si 3D, intr-un echipament in-house de volum mare sau agentie",
+        "Experienta in localizare si versionare pe piete si limbi diferite, cu layout-uri care rezista la traducere"
+      ],
+      "rates": [
+        "Varianta de Statele Unite: 127.200 – 254.400 USD pe an (banda publicata de angajator)",
+        "Varianta europeana: salariu nepublicat pe anuntul de pe Ashby"
+      ],
+      "terms": "Remote, full time. Romania este pe lista explicita a tarilor eligibile (la fel ca UK, Argentina, Brazilia, Bulgaria, Canada, Chile, Columbia, Cipru, Cehia, Ungaria, Irlanda, Lituania, Mexic, Peru, Polonia, Portugalia, Africa de Sud, Spania, Suedia, Elvetia, UAE). Postat 15-16 octombrie 2026, dar aplicarile sunt acceptate permanent.",
+      "process": "Aplicare pe boardul oficial Kraken (jobs.ashbyhq.com/kraken.com). Daca vrei varianta 3D, intri pe rolul separat cu pricina despre Cinema 4D.",
+      "caveat": "Cea mai bună potrivire cu profilul tău din ultimele zile: brand + sisteme + 3D + Figma + unelte AI, remote, și România e eligibilă explicit. Două nuanțe: (1) e un rol de brand de CONSUMER la un exchange de crypto - adică identitate de brand și campanii, nu interfețe de trading; (2) există două variante: una statică (raportată la US cu 127-254K USD - banda e foarte lată și nu spune ce primești tu) și una 3D cu Cinema 4D, care cere 7+ ani. Asta e a doua poziție Kraken în 3 zile - compania recrutează activ pe design, și tu urmărești deja crypto.",
+      "verifiedVia": "Boardul oficial de joburi Kraken (jobs.ashbyhq.com/kraken.com) citit prin indexarea motorului de cautare: titlul, departamentul, lista completa de tari eligibile (inclusiv Romania), tipul de angajare si banda de compensare pentru varianta SUA. Confirmat si pe jobboard-uri de crypto (DCG, Electric Capital, Hirify) care dau descrierea completa, cerintele si data de publicare, plus un agregator care listeaza 49 de roluri deschise la Kraken, cu 5 in Design & Creative.",
+      "url": "https://jobs.ashbyhq.com/kraken.com"
+    },
+    {
+      "resolvedTitle": "Google - 5 notificari de acces pentru Antigravity for Google Drive / Calendar (o singura actiune)",
+      "from": "Google",
+      "subject": "Security alert",
+      "summary": "Cinci emailuri identice de la Google, toate trimise la 03:46. Toate spun ca ai permis accesul la contul apvizual@gmail.com pentru Antigravity for Google Drive (4 notificari, pentru scope-uri diferite) si Antigravity for Google Calendar (1). Sunt cinci notificari pentru UN SINGUR eveniment - o conectare a aplicatiei, cu mai multe scope-uri.",
+      "requirements": ["Nu e o cerere de job - e un item de securitate care cere verificare umana."],
+      "rates": [],
+      "terms": "Contul afectat: apvizual@gmail.com.",
+      "process": "Verificare la https://myaccount.google.com/permissions (acces third-party) si revocare daca nu recunosti conectarea.",
+      "caveat": "Antigravity este IDE-ul de programare cu AI al Google - conectarea lui la Drive si Calendar are sens daca lucrezi cu ele. Nu exista insemn de intrus (nu e formularea de atac, ci de autorizare). Dar verifica in myaccount.google.com/permissions ce scope-uri are efectiv, pentru ca ele raman active dupa deconectarea aplicatiei. Observatie de metoda: daca nu ai citit cele 5 emailuri in corp, ai putea conclude \"5 aplicatii compromise\" - de fapt e una.",
+      "verifiedVia": "Corpul COMPLET al celor cinci emailuri Google, cu textul exact (\"You allowed Antigravity for Google Drive access to some of your Google Account data\" x4 si \"...for Google Calendar...\" x1) si acelasi timestamp. Confirmat ca toate cele 5 provin din aceeasi conectare, prin compararea numelor de scope din corp.",
+      "url": "https://myaccount.google.com/permissions"
+    },
+    {
+      "resolvedTitle": "AI Graphic Designer @ SIHAMCO (NEVERIFICAT)",
+      "from": "Jooble",
+      "subject": "SIHAMCO cauta AI Graphic Designer si 102 mai multe oferte noi de munca",
+      "summary": "Alerta Jooble de azi anunta un rol nou la SIHAMCO: AI Graphic Designer. Corpul emailului contine insa lista generica de 102 de oferte (Graphic design Romania, UX Designer Bucuresti, Remote ux/ui graphic designer, User Interface Designer), fara detalii despre rolul SIHAMCO.",
+      "requirements": [
+        "Necesa in anunt - anuntul SIHAMCO nu apare in corpul emailului, iar pagina Jooble pentru el nu a fost deschisa"
+      ],
+      "rates": [],
+      "terms": "Necunoscute - anuntul nu a fost citit.",
+      "process": "Aplicare prin Jooble.",
+      "caveat": "NEVERIFICAT si, mai mult, fara detalii: alerta iti spune doar numele rolului. Titlul cu AI in el e interesant, dar deschide anuntul inainte sa aplici - nu stii nici localizarea, nici tipul de contract, nici salariul. Daca e AI graphic designer de product, e altfel decat profilul tau de brand.",
+      "verifiedVia": "Corpul emailului de alerta (subiectul cu numele rolului si lista generica de 102 de oferte). Anuntul SIHAMCO insa NU a fost deschis - deci locatia, contractul si salariul sunt necunoscute.",
+      "url": "https://www.jooble.ro"
+    },
+    {
+      "resolvedTitle": "Social Media Content Creator @ Digitas (NOU, IQads #24008)",
+      "from": "IQads (scraping direct)",
+      "subject": "Social Media Content Creator @ Digitas",
+      "summary": "Posting NOU pe IQads (ID 24008), cu expirare 05.01.2027 - cel mai lung termen din catalogul de acum. Digitas e o agentie mare din grupul Publicis. Rolul e de creare de continut si social media, la nivel middle, cu specializare Content Creation, Digital, Marketing, Social Media.",
+      "requirements": [
+        "Cerinta exacta nu a fost extrasa - anuntul e in catalogul IQads, iar pagina lui nu a fost deschisa"
+      ],
+      "rates": [],
+      "terms": "Full Time, nivel Middle. Expirare 05.01.2027 - deci e un posting de lunga durata, tipic pentru agentii mari.",
+      "process": "Aplicare pe IQads (anuntul #24008).",
+      "caveat": "E content/social media, nu design vizual - scorul e 7,4 si a rămas in verdict amanat pentru că locația nu e publicată de sursă. Îl semnalez pentru că e agentie bună și expiră peste două luni (anunțuri lungi = deschise cu adevărat), dar ca potrivire e secundar față de restul tabelului.",
+      "verifiedVia": "Listingul de pe IQads (ID, companie, titlu, expirare, tip job, nivel, specializare) prin scraping direct. Pagina anuntului NU a fost deschisă, deci cerințele exacte nu sunt cunoscute.",
+      "url": "https://www.iqads.ro/adjob/24008/social-media-content-creator-digitas"
+    },
+    {
+      "resolvedTitle": "Bestjobs - 12 joburi de design cu salariu (suma pentru decizie)",
+      "from": "Bestjobs",
+      "subject": "12 graphic design, bucharest jobs available on bestjobs",
+      "summary": "Lista de azi: Proiectant Productie Publicitara la BD Lemntech 1405-2000 (DISPONIBIL IMEDIAT), Creative Lead & 3D Designer la MARKQUEN 1400-1800 Hybrid, Specialist Marketing Digital la Fabrica De Podcasturi 700-1350, AI Video Editor la Apex Digital Alliance 1200-1300, SudRezidential Videograf & Editor Video 1000-1200, ARHITECT/DESIGNER MOBILA LA COMANDA la UNICAN PRODUCTION 800-1420, Operator Grafica la Viragos Design 800-1000, Colaboratori design grafic la AGRESIV MEDIA 780-1020, Social Media & Content Creator la AMAL HEALTH CARE 900, Junior Content Creator la INTAX TRADING 700, Graphic Designer part-time 15h remote la CreativeEd Media 525, Senior Marketing & CX Specialist la BCR (estimare de piata).",
+      "requirements": ["Pentru fiecare job: portofoliu si CV pe anuntul Bestjobs, din email"],
+      "rates": [
+        "Cele mai mari sume publicate de angajator: BD Lemntech 1405-2000, MARKQUEN 1400-1800, Apex Digital Alliance 1200-1300",
+        "Cu estimare de piata (nu e oferta): BCR 1795-1985, ELBI 1195-1325, Imperial Brands 1385-1530"
+      ],
+      "terms": "Toate din alerta zilnica Bestjobs pe criteriul graphic design, bucharest.",
+      "process": "Aplicare pe anuntul Bestjobs, din email.",
+      "caveat": "MARKQUEN e in top de opt zile consecutiv - rolul e activ, dar concurenta creaza. La BD Lemntech scrie DISPONIBIL IMEDIAT: verifica daca anuntul mai e activ inainte sa aplici. Sumele cu estimare de piata se recalculeaza zilnic si nu sunt oferte de angajator.",
+      "verifiedVia": "Corpul COMPLET al emailului Bestjobs de azi. Pagina de anunt Bestjobs raspunde 403 la acces automat - NU am deschis paginile individuale.",
+      "url": "https://www.bestjobs.eu"
+    }
+  ]
+}

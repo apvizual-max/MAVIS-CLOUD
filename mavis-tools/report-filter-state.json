@@ -116,8 +116,8 @@
       "id": "ANe1Bmgu_4pn0Q3f-3dPwYaSEJfLoKVPZ4svwJZZnDsOWQ",
       "query": "from:{jooble bestjobs hipo indeed jobleads linkedin} OR subject:{job angajare vacanta oportunitate}",
       "fixedQuery": "from:{jooble bestjobs hipo indeed jobleads linkedin} OR subject:{job angajare vacanta oportunitate}",
-      "matchesAsIs": 1107,
-      "matchesFixed": 1107,
+      "matchesAsIs": 1115,
+      "matchesFixed": 1115,
       "categories": [
         "joburi"
       ]
@@ -126,8 +126,8 @@
       "id": "ANe1BmhfBNF17H3V8yb39Uc-EEym8olEBnbQQyNR-Utj1w",
       "query": "from:{substack goatacademy aiautomationsociety sadhguru beehiiv twine} OR subject:{AI artificial intelligence}",
       "fixedQuery": "from:{substack goatacademy aiautomationsociety sadhguru beehiiv twine} OR subject:{AI artificial intelligence}",
-      "matchesAsIs": 419,
-      "matchesFixed": 419,
+      "matchesAsIs": 426,
+      "matchesFixed": 426,
       "categories": [
         "ai"
       ]
@@ -136,8 +136,8 @@
       "id": "ANe1Bmhr0TFhSeF75mv4H0xOCCEIxw7k6PTf2dl_5RCoOA",
       "query": "from:{skool facebook instagram pinterest tiktok polibrawl}",
       "fixedQuery": "from:{skool facebook instagram pinterest tiktok polibrawl}",
-      "matchesAsIs": 136,
-      "matchesFixed": 136,
+      "matchesAsIs": 133,
+      "matchesFixed": 133,
       "categories": [
         "social"
       ]
@@ -146,8 +146,8 @@
       "id": "ANe1BmhvRgLhU5cyxG-jCADLUhXt5C_29MotSxK2SlilOQ",
       "query": "from:{noreply no-reply newsletter digest mail@ info@ news@ updates@}",
       "fixedQuery": "from:{noreply no-reply newsletter digest mail@ info@ news@ updates@}",
-      "matchesAsIs": 1292,
-      "matchesFixed": 1292,
+      "matchesAsIs": 1313,
+      "matchesFixed": 1313,
       "categories": [
         "newsletter"
       ]
@@ -156,8 +156,8 @@
       "id": "ANe1BmhiLu_ahhYfNmDqesTn0hLQGeoXBzHRaktmyFLt1Q",
       "query": "from:{kraken tradingview bitunix coinbase binance} OR subject:{factura investitie trading}",
       "fixedQuery": "from:{kraken tradingview bitunix coinbase binance} OR subject:{factura investitie trading}",
-      "matchesAsIs": 36,
-      "matchesFixed": 36,
+      "matchesAsIs": 37,
+      "matchesFixed": 37,
       "categories": [
         "finante"
       ]
@@ -166,8 +166,8 @@
       "id": "ANe1BmjB_Jj9yzn7W6F9QE45lTE3LQOZJwzcBLE36OAxfQ",
       "query": "from:(notifications@github.com OR *jules*) OR subject:(Jules OR GitHub OR \"apvizual-max\")",
       "fixedQuery": "from:{notifications@github.com OR *jules*} OR subject:{Jules OR GitHub OR \"apvizual-max\"}",
-      "matchesAsIs": 1024,
-      "matchesFixed": 1024,
+      "matchesAsIs": 1023,
+      "matchesFixed": 1023,
       "categories": [
         "agenti"
       ]
@@ -190,42 +190,42 @@
         "categories": [
           "joburi"
         ],
-        "matches": 1107
+        "matches": 1115
       },
       {
         "id": "ANe1BmhfBNF17H3V8yb39Uc-EEym8olEBnbQQyNR-Utj1w",
         "categories": [
           "ai"
         ],
-        "matches": 419
+        "matches": 426
       },
       {
         "id": "ANe1Bmhr0TFhSeF75mv4H0xOCCEIxw7k6PTf2dl_5RCoOA",
         "categories": [
           "social"
         ],
-        "matches": 136
+        "matches": 133
       },
       {
         "id": "ANe1BmhvRgLhU5cyxG-jCADLUhXt5C_29MotSxK2SlilOQ",
         "categories": [
           "newsletter"
         ],
-        "matches": 1292
+        "matches": 1313
       },
       {
         "id": "ANe1BmhiLu_ahhYfNmDqesTn0hLQGeoXBzHRaktmyFLt1Q",
         "categories": [
           "finante"
         ],
-        "matches": 36
+        "matches": 37
       },
       {
         "id": "ANe1BmjB_Jj9yzn7W6F9QE45lTE3LQOZJwzcBLE36OAxfQ",
         "categories": [
           "agenti"
         ],
-        "matches": 1024
+        "matches": 1023
       }
     ]
   }
