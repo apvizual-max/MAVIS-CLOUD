@@ -155,7 +155,11 @@ function why(j, flags) {
 const allSections = [];
 for (const s of [1, 2, 3, 4]) allSections.push(...sc.sections[s]);
 allSections.sort((a, b) => b.score - a.score);
-const top = allSections.slice(0, 5);
+// Top 5 = cele mai bune joburi CARE SE MAI POT APLICA. Un job expirat nu
+// e un candidat, oricât de mare e scorul (de exemplu pe 08.11: #1 cu scor 10
+// expira exact pe 07.11). ⇒ neexpirații primii, expirații la final, iar
+// tabelul marchează explicit cine e expirat. (Secțiunea 2 rămâne completă.)
+const top = [...allSections.filter(j => !j.expired), ...allSections.filter(j => j.expired)].slice(0, 5);
 const amanzatNew = sc.amanzat.filter(x => x.isNew);
 const newJobs = allSections.filter(x => x.isNew);
 const gn = sc.genuinelyNew || { newIqads: [], newDesignproject: [], maxPrevIqadsId: null, newestDesignprojectDate: null };
@@ -448,6 +452,13 @@ if (leadsError) {
 if (leadsError) {
   md += `> ⛔ **Sectiunea de leads lipsește:** fisierul \`email-leads-${DATE}.json\` exista dar nu se parseaza (\`${leadsError.replace(/`/g, "'")}\`). Corecteaza-l si re-ruleaza raportul — nu am inclus nimic inventat in loc.\n\n`;
 } else if (leads && leads.leads && leads.leads.length) {
+  // Integritatea fiecarui lead: cheile obligatorii. O cheie lipsa (ex. un
+  // „verifiedVia" uitat) nu arata la randare, dar ar insemna un lead incomplet.
+  const REQUIRED = ['resolvedTitle', 'from', 'subject', 'summary', 'verifiedVia', 'url'];
+  const incomplete = leads.leads.filter(l => REQUIRED.some(k => !l[k] || !String(l[k]).trim()));
+  if (incomplete.length) {
+    md += `> ⚠️ **${incomplete.length} leaduri incomplete** (lipsă o cheie obligatorie: ${REQUIRED.join(', ')}): ${incomplete.map(l => `\`${(l.resolvedTitle || '(fără titlu)').slice(0, 40)}\` — lipsă ${REQUIRED.filter(k => !l[k]).join(', ')}`).join('; ')}\n\n`;
+  }
   md += `**Leads din alertele de job.** Fiecare poartă propria cale de verificare, declarată mai jos — nu toate sunt citite direct de pe pagină:\n\n`;
   for (const l of leads.leads) {
     md += `##### ${l.resolvedTitle}\n\n`;
@@ -511,6 +522,8 @@ md += `
 ---
 
 ## 3. Top 5 joburi cu scor
+
+*Rankingul pune **neexpirații primii** — un job expirat nu e un candidat, oricât de mare e scorul. Tabelul marchează explicit cine e expirat, iar secțiunea 2 are lista completă.*
 
 `;
 md += '| # | Scor | Tag | Rol | Companie | Locație | Engagement | Expirat? | De ce contează |\n|---|---|---|---|---|---|---|---|---|\n';

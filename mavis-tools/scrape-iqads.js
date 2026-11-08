@@ -45,6 +45,18 @@ const strip = s => s.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&
   .replace(/&middot;/g, '·').replace(/&euro;/g, 'EUR').replace(/&#(\d+);/g, (m, d) => String.fromCharCode(d))
   .replace(/\s+/g, ' ').trim();
 
+// MĂSURAT 2026-11-08: compania venea ca „Cohn &amp; Jansen" (entitate HTML
+// nedecodată). Asta strica atât slug-ul paginii companiei („cohn-amp-jansen"
+// in loc de „cohn-jansen"), cât și potrivirea numelui cu pagina. ⇒ decodăm
+// entitățile la extragere, ca datele din JSON să fie curate.
+const decodeEntities = s => String(s || '')
+  .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"')
+  .replace(/&#39;/g, "'").replace(/&rsquo;/g, "'").replace(/&ldquo;|&rdquo;/g, '"')
+  .replace(/&middot;/g, '·').replace(/&euro;/g, 'EUR')
+  .replace(/&#(\d+);/g, (m, d) => String.fromCharCode(d))
+  .replace(/&#x([0-9a-f]+);/gi, (m, h) => String.fromCodePoint(parseInt(h, 16)))
+  .trim();
+
 function parseJob(html) {
   const out = { expiry: null, company: null, specialization: [], jobType: [], level: null, jd: '', title: null };
   const h = html.match(/<p class="muted">([\s\S]*?)<\/p>/);
@@ -53,7 +65,7 @@ function parseJob(html) {
     const ex = hdr.match(/Anunt valabil pana la data de\s*<span>([^<]+)<\/span>/);
     if (ex) out.expiry = ex[1].trim();
     const co = hdr.match(/Companie:\s*<a[^>]*>([^<]+)<\/a>/);
-    if (co) out.company = co[1].trim();
+    if (co) out.company = decodeEntities(co[1]);
     const sp = hdr.match(/Specializare:\s*([\s\S]*?)<br\/>/);
     if (sp) out.specialization = [...sp[1].matchAll(/<a[^>]*>([^<]+)<\/a>/g)].map(m => m[1].trim());
     const jt = hdr.match(/Tip job:\s*([\s\S]*?)<br\/>/);
@@ -84,7 +96,7 @@ function parseJob(html) {
     .filter(t => t.length > 2);
   out.jd = paras.join('\n');
   const t = html.match(/<title>([^<]*?)\s*@\s*([^<]*)<\/title>/);
-  if (t) { out.title = t[1].trim(); }
+  if (t) { out.title = decodeEntities(t[1]); }
   return out;
 }
 
@@ -122,4 +134,64 @@ function parseJob(html) {
   }
   fs.writeFileSync(OUT, JSON.stringify({ _meta: { scraped: '2026-10-23', source: BASE + '/p/adjob', count: jobs.length }, jobs }, null, 2));
   console.log('\nscrapat: ' + jobs.length + ' -> ' + OUT);
+
+  // ---- LOCALIZAREA, de pe pagina companiei ----
+  // MĂSURAT 2026-11-08: multe anunturi IQads nu publică orasul. De exemplu
+  // „Art Director / Graphic Designer @ Cohn & Jansen" (#24000) nu-l avea NICAIDEATA
+  // in anunt - si timp de 5 zile a stat in „verdict amanat" cu scor 8, desi
+  // jobul e in Bucuresti. Pagina de contact a companiei pe IQads (t=info) ARE
+  // adresa. ⇒ pentru firmele cu joburi fara oras, o cautam acolo.
+  //
+  // ATENTIE: pagina companiei listeaza si anunturi ale altor agentii (Cohn &
+  // Jansen e o retea care publica si pentru altii). Deci localizarea se aplica
+  // DOAR daca numele companiei din anunt corespunde celui al paginii.
+  const CITY_RE = [
+    [/\bbucharest\b|\bbucuresti\b/i, 'Bucuresti'],
+    [/\bcluj\b/i, 'Cluj'], [/\bia[sș]i\b/i, 'Iasi'],
+    [/\btimi[sș]oara\b/i, 'Timisoara'], [/\bbra[sș]ov\b/i, 'Brasov'],
+    [/\bconstan[sț]a\b/i, 'Constanta'], [/\bsibiu\b/i, 'Sibiu'],
+    [/\bcraiova\b/i, 'Craiova'], [/\bploie[sș]ti\b/i, 'Ploiesti'],
+    [/\boradea\b/i, 'Oradea'], [/\bpite[sș]ti\b/i, 'Pitesti'],
+    [/\bdeva\b/i, 'Deva'], [/\bbacau\b/i, 'Bacau'],
+  ];
+  const slugOf = s => String(s || '').toLowerCase().normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const norm = s => String(s || '').toLowerCase().normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '').trim();
+
+  const byCompany = new Map();
+  for (const j of jobs) {
+    const hasCity = CITY_RE.some(([re]) => re.test(j.jd || ''));
+    if (hasCity) continue;
+    const key = slugOf(j.company);
+    if (!key) continue;
+    if (!byCompany.has(key)) byCompany.set(key, []);
+    byCompany.get(key).push(j);
+  }
+  console.log('\nlocalizare: caut pe paginile companiei ' + byCompany.size + ' firme cu joburi fara oras...');
+  for (const [key, list] of byCompany) {
+    let html;
+    try { const r = await get(BASE + '/relevant/' + key + '?t=info'); if (r.status !== 200) continue; html = r.body; }
+    catch (e) { console.log('  ! ' + key + ' ' + e.message); continue; }
+    // numele companiei din titlul paginii (titlul e forma „X - IQads" sau „X | IQads")
+    const titleM = html.match(/<title>([^<]*?)(?:\s*[-|]\s*IQads)?\s*<\/title>/i);
+    const pageCompany = titleM ? titleM[1] : '';
+    const addrM = html.match(/Adresa:([^<]{0,160})/i);
+    const addr = addrM ? addrM[1] : '';
+    let city = null;
+    for (const [re, name] of CITY_RE) { if (re.test(addr)) { city = { name, evidence: addr.trim().slice(0, 90) }; break; } }
+    if (!city) { console.log('  ' + key + ': fara adresa de contact'); continue; }
+    let applied = 0;
+    for (const j of list) {
+      // doar daca anuntul e chiar al acelei companii
+      if (norm(j.company) !== norm(pageCompany)) continue;
+      j.companyCity = city;
+      applied++;
+    }
+    console.log('  ' + key + ': ' + (pageCompany || '?') + ' -> ' + city.name + ' (aplicat la ' + applied + '/' + list.length + ' joburi)');
+    await new Promise(res => setTimeout(res, 350));
+  }
+
+  fs.writeFileSync(OUT, JSON.stringify({ _meta: { scraped: '2026-10-23', source: BASE + '/p/adjob', count: jobs.length }, jobs }, null, 2));
+  console.log('rescris cu localizare: ' + OUT);
 })();

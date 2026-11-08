@@ -1,47 +1,47 @@
 {
-  "today": "2026/11/07",
+  "today": "2026/11/08",
   "labels": [
     {
       "key": "joburi",
       "title": "Joburi",
       "name": "MAVIS/Joburi",
       "counts": {
-        "azi": 7,
-        "24h": 38,
-        "7z": 240,
-        "30z": 502
+        "azi": 9,
+        "24h": 35,
+        "7z": 254,
+        "30z": 500
       },
       "newest": {
-        "id": "1a1b4989dc2212ad",
-        "subject": "See Nathália’s and other people’s connections, experience, and more",
-        "date": "Sat, 7 Nov 2026 06:01:02 +0000 (GMT)",
+        "id": "1a1b9bef9f77bd22",
+        "subject": "See Zoe Yanpei’s and other people’s connections, experience, and more",
+        "date": "Sun, 8 Nov 2026 06:01:02 +0000 (GMT)",
         "from": "LinkedIn <invitations@linkedin.com>"
       },
-      "newestDate": "Sat, 7 Nov 2026 06:01:02 +0000 (GMT)",
+      "newestDate": "Sun, 8 Nov 2026 06:01:02 +0000 (GMT)",
       "samples": [
         {
-          "id": "1a1b4989dc2212ad",
-          "subject": "See Nathália’s and other people’s connections, experience, and more",
-          "date": "Sat, 7 Nov 2026 06:01:02 +0000 (GMT)",
+          "id": "1a1b9bef9f77bd22",
+          "subject": "See Zoe Yanpei’s and other people’s connections, experience, and more",
+          "date": "Sun, 8 Nov 2026 06:01:02 +0000 (GMT)",
           "from": "LinkedIn <invitations@linkedin.com>"
         },
         {
-          "id": "1a1b48f599b0b27c",
-          "subject": "You may be a fit for Kraken’s Staff Brand Designer - Consumer role - Actively recruiting",
-          "date": "Sat, 7 Nov 2026 05:50:55 +0000 (GMT)",
+          "id": "1a1b9b5b4682e437",
+          "subject": "Staff Brand Designer - Consumer job at Kraken - Actively recruiting",
+          "date": "Sun, 8 Nov 2026 05:50:55 +0000 (GMT)",
           "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
         },
         {
-          "id": "1a1b46da6198ccde",
-          "subject": "12 graphic design, bucharest jobs available on bestjobs",
-          "date": "Sat, 07 Nov 2026 07:14:11 +0200",
+          "id": "1a1b9b4413cc4ce1",
+          "subject": "Job offers that fit your profile",
+          "date": "Sun, 08 Nov 2026 07:49:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a1b46cd0c3403ea",
-          "subject": "Un job nou azi! Fii printre primii aplicanti!",
-          "date": "Sat, 07 Nov 2026 05:01:22 +0000",
-          "from": "Alerta eJobs <contact@mta.ejobs.ro>"
+          "id": "1a1b99c35d991f43",
+          "subject": "AGRESIV MEDIA is hiring Colaboratori design grafic creatie si grafica",
+          "date": "Sun, 08 Nov 2026 07:23:11 +0200",
+          "from": "Bestjobs <contact@bestjobs.eu>"
         }
       ]
     },
@@ -50,42 +50,42 @@
       "title": "AI si comunitati",
       "name": "AI Folder/AI si Comunitati",
       "counts": {
-        "azi": 3,
-        "24h": 16,
+        "azi": 1,
+        "24h": 12,
         "7z": 100,
-        "30z": 205
+        "30z": 200
       },
       "newest": {
-        "id": "1a1b4596a5ea58b4",
-        "subject": "SIHAMCO caută AI Graphic Designer și 102 mai multe oferte noi de muncă",
-        "date": "Sat, 07 Nov 2026 04:52:01 +0000",
-        "from": "Jooble <subscribe@ro.jooble.org>"
+        "id": "1a1b9bce9a7650db",
+        "subject": "What Is the Tantric Symbolism of Kali Standing on Shiva’s Chest?",
+        "date": "Sun, 8 Nov 2026 05:58:47 +0000",
+        "from": "Shiva Newsletter <isha.offerings@sadhguru.org>"
       },
-      "newestDate": "Sat, 07 Nov 2026 04:52:01 +0000",
+      "newestDate": "Sun, 8 Nov 2026 05:58:47 +0000",
       "samples": [
         {
-          "id": "1a1b4596a5ea58b4",
-          "subject": "SIHAMCO caută AI Graphic Designer și 102 mai multe oferte noi de muncă",
-          "date": "Sat, 07 Nov 2026 04:52:01 +0000",
-          "from": "Jooble <subscribe@ro.jooble.org>"
+          "id": "1a1b9bce9a7650db",
+          "subject": "What Is the Tantric Symbolism of Kali Standing on Shiva’s Chest?",
+          "date": "Sun, 8 Nov 2026 05:58:47 +0000",
+          "from": "Shiva Newsletter <isha.offerings@sadhguru.org>"
         },
         {
-          "id": "1a1b434b7ce5ec7f",
-          "subject": "Reminder: Generative AI Mastermind -IND starts in 1 hour",
-          "date": "Sat, 07 Nov 2026 04:11:54 +0000 (UTC)",
-          "from": "Outskill <no-reply@zoom.us>"
+          "id": "1a1b85e0a7229ab9",
+          "subject": "FIVE DANGER FOR SENTIENT BEINGS",
+          "date": "Sat, 7 Nov 2026 23:35:22 +0000",
+          "from": "Ken wheeler from Ken Theoria Apophasis Substack <kenwheeler@substack.com>"
         },
         {
-          "id": "1a1b38893f94ba06",
-          "subject": "Last Seats.",
-          "date": "Sat, 7 Nov 2026 01:03:15 +0000",
-          "from": "\"Felix & Winston 🐶\" <felix@goatacademy.org>"
-        },
-        {
-          "id": "1a1b3304364cd086",
-          "subject": "Leftists are Threatening to Assassinate Top Republicans After Midterms Victory Lap",
-          "date": "Fri, 6 Nov 2026 23:15:38 +0000",
+          "id": "1a1b7b8766a0a1a1",
+          "subject": "What Ballot Measures Reveal About Woke 2.0",
+          "date": "Sat, 7 Nov 2026 20:23:02 +0000",
           "from": "PolitiBrawl <politibrawl@substack.com>"
+        },
+        {
+          "id": "1a1b6ccca4e3f1cb",
+          "subject": "There are 5 new jobs matching your saved search for November 7: AI Designer",
+          "date": "Sat, 07 Nov 2026 17:17:16 +0100",
+          "from": "JobLeads <mailer@jobleads.com>"
         }
       ]
     },
@@ -95,41 +95,41 @@
       "name": "Socials",
       "counts": {
         "azi": 1,
-        "24h": 5,
+        "24h": 3,
         "7z": 32,
-        "30z": 62
+        "30z": 60
       },
       "newest": {
-        "id": "1a1b3ea3bfa3750e",
-        "subject": "30 new notifications since 4:50 am (Nov 6, 2026)",
-        "date": "Sat, 07 Nov 2026 02:50:32 +0000 (UTC)",
+        "id": "1a1b92cf7afb87f5",
+        "subject": "25 new notifications since 5:19 am (Nov 7, 2026)",
+        "date": "Sun, 08 Nov 2026 03:21:33 +0000 (UTC)",
         "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
       },
-      "newestDate": "Sat, 07 Nov 2026 02:50:32 +0000 (UTC)",
+      "newestDate": "Sun, 08 Nov 2026 03:21:33 +0000 (UTC)",
       "samples": [
+        {
+          "id": "1a1b92cf7afb87f5",
+          "subject": "25 new notifications since 5:19 am (Nov 7, 2026)",
+          "date": "Sun, 08 Nov 2026 03:21:33 +0000 (UTC)",
+          "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a1b6402cf4ed203",
+          "subject": "1 new notification since 3:43 pm (Nov 6, 2026)",
+          "date": "Sat, 07 Nov 2026 13:43:39 +0000 (UTC)",
+          "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a1b529abfea10d8",
+          "subject": "1 event happening tomorrow",
+          "date": "Sat, 07 Nov 2026 08:39:27 +0000 (UTC)",
+          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
+        },
         {
           "id": "1a1b3ea3bfa3750e",
           "subject": "30 new notifications since 4:50 am (Nov 6, 2026)",
           "date": "Sat, 07 Nov 2026 02:50:32 +0000 (UTC)",
           "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a1b3236c5d472c5",
-          "subject": "ap.identity, see what's been happening on Instagram",
-          "date": "Fri, 6 Nov 2026 15:13:20 -0800",
-          "from": "Instagram <posts-recap@mail.instagram.com>"
-        },
-        {
-          "id": "1a1b066045392749",
-          "subject": "1 new notification since 12:17 pm (Nov 5, 2026)",
-          "date": "Fri, 06 Nov 2026 10:27:16 +0000 (UTC)",
-          "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a1b00c6b63312d9",
-          "subject": "1 event happening tomorrow",
-          "date": "Fri, 06 Nov 2026 08:49:24 +0000 (UTC)",
-          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
         }
       ]
     },
@@ -138,42 +138,42 @@
       "title": "Newsletter",
       "name": "Newsletter",
       "counts": {
-        "azi": 9,
-        "24h": 49,
-        "7z": 337,
-        "30z": 612
+        "azi": 8,
+        "24h": 30,
+        "7z": 336,
+        "30z": 611
       },
       "newest": {
-        "id": "1a1b48f599b0b27c",
-        "subject": "You may be a fit for Kraken’s Staff Brand Designer - Consumer role - Actively recruiting",
-        "date": "Sat, 7 Nov 2026 05:50:55 +0000 (GMT)",
-        "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+        "id": "1a1b9bce9a7650db",
+        "subject": "What Is the Tantric Symbolism of Kali Standing on Shiva’s Chest?",
+        "date": "Sun, 8 Nov 2026 05:58:47 +0000",
+        "from": "Shiva Newsletter <isha.offerings@sadhguru.org>"
       },
-      "newestDate": "Sat, 7 Nov 2026 05:50:55 +0000 (GMT)",
+      "newestDate": "Sun, 8 Nov 2026 05:58:47 +0000",
       "samples": [
         {
-          "id": "1a1b48f599b0b27c",
-          "subject": "You may be a fit for Kraken’s Staff Brand Designer - Consumer role - Actively recruiting",
-          "date": "Sat, 7 Nov 2026 05:50:55 +0000 (GMT)",
+          "id": "1a1b9bce9a7650db",
+          "subject": "What Is the Tantric Symbolism of Kali Standing on Shiva’s Chest?",
+          "date": "Sun, 8 Nov 2026 05:58:47 +0000",
+          "from": "Shiva Newsletter <isha.offerings@sadhguru.org>"
+        },
+        {
+          "id": "1a1b9b5b4682e437",
+          "subject": "Staff Brand Designer - Consumer job at Kraken - Actively recruiting",
+          "date": "Sun, 8 Nov 2026 05:50:55 +0000 (GMT)",
           "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
         },
         {
-          "id": "1a1b434b7ce5ec7f",
-          "subject": "Reminder: Generative AI Mastermind -IND starts in 1 hour",
-          "date": "Sat, 07 Nov 2026 04:11:54 +0000 (UTC)",
-          "from": "Outskill <no-reply@zoom.us>"
+          "id": "1a1b94d7f11a3be0",
+          "subject": "SOTI has an opportunity for you. Apply Now.",
+          "date": "Sun, 08 Nov 2026 03:57:05 +0000 (UTC)",
+          "from": "Glassdoor Jobs <noreply@glassdoor.com>"
         },
         {
-          "id": "1a1b41de7509faf3",
-          "subject": "Security alert",
-          "date": "Sat, 07 Nov 2026 03:46:59 GMT",
-          "from": "Google <no-reply@accounts.google.com>"
-        },
-        {
-          "id": "1a1b41db7163d000",
-          "subject": "Security alert",
-          "date": "Sat, 07 Nov 2026 03:46:47 GMT",
-          "from": "Google <no-reply@accounts.google.com>"
+          "id": "1a1b947d7a60dc34",
+          "subject": "Staff Brand Designer - Consumer at Kraken",
+          "date": "Sun, 8 Nov 2026 03:50:55 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
         }
       ]
     },
@@ -183,18 +183,30 @@
       "name": "Finante",
       "counts": {
         "azi": 0,
-        "24h": 1,
-        "7z": 19,
-        "30z": 32
+        "24h": 2,
+        "7z": 18,
+        "30z": 34
       },
       "newest": {
-        "id": "1a1af8e9fcb49ae0",
-        "subject": "Upcoming subscription payment",
-        "date": "Fri, 06 Nov 2026 06:32:01 -0000",
+        "id": "1a1b651661aef000",
+        "subject": "New idea by Cryptollica — check it out",
+        "date": "Sat, 07 Nov 2026 14:02:29 -0000",
         "from": "TradingView <noreply@tradingview.com>"
       },
-      "newestDate": "Fri, 06 Nov 2026 06:32:01 -0000",
+      "newestDate": "Sat, 07 Nov 2026 14:02:29 -0000",
       "samples": [
+        {
+          "id": "1a1b651661aef000",
+          "subject": "New idea by Cryptollica — check it out",
+          "date": "Sat, 07 Nov 2026 14:02:29 -0000",
+          "from": "TradingView <noreply@tradingview.com>"
+        },
+        {
+          "id": "1a1b5b028bba317f",
+          "subject": "Bitunix’s Latest Proof of Reserves Report Is Now Available",
+          "date": "Sat, 07 Nov 2026 11:06:21 +0000 (UTC)",
+          "from": "Bitunix <Noreply@bitunix.com>"
+        },
         {
           "id": "1a1af8e9fcb49ae0",
           "subject": "Upcoming subscription payment",
@@ -205,18 +217,6 @@
           "id": "1a1ad6991a0814b7",
           "subject": "New idea by Cryptollica — check it out",
           "date": "Thu, 05 Nov 2026 20:32:17 -0000",
-          "from": "TradingView <noreply@tradingview.com>"
-        },
-        {
-          "id": "1a1ac1fe8623110c",
-          "subject": "Factura Digi a fost emisa",
-          "date": "Thu, 05 Nov 2026 16:32:14 +0200",
-          "from": "DIGI <support@info.digi.ro>"
-        },
-        {
-          "id": "1a1abe378eb5b602",
-          "subject": "New idea by TradingView — check it out",
-          "date": "Thu, 05 Nov 2026 13:22:46 -0000",
           "from": "TradingView <noreply@tradingview.com>"
         }
       ]
@@ -315,13 +315,25 @@
         "30z": 1026
       },
       "newest": {
-        "id": "1a1b13d9441d5a13",
-        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (a443593)",
-        "date": "Fri, 06 Nov 2026 06:22:44 -0800",
+        "id": "1a1b62339eab320b",
+        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (ee4abe4)",
+        "date": "Sat, 07 Nov 2026 05:12:03 -0800",
         "from": "apvizual-max <notifications@github.com>"
       },
-      "newestDate": "Fri, 06 Nov 2026 06:22:44 -0800",
+      "newestDate": "Sat, 07 Nov 2026 05:12:03 -0800",
       "samples": [
+        {
+          "id": "1a1b62339eab320b",
+          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (ee4abe4)",
+          "date": "Sat, 07 Nov 2026 05:12:03 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
+        {
+          "id": "1a1b5956b5cca182",
+          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
+          "date": "Sat, 07 Nov 2026 02:37:09 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
         {
           "id": "1a1b13d9441d5a13",
           "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (a443593)",
@@ -333,27 +345,15 @@
           "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
           "date": "Fri, 06 Nov 2026 03:23:14 -0800",
           "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a1ac2af5bd7eedd",
-          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (8526644)",
-          "date": "Thu, 05 Nov 2026 06:44:17 -0800",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a1ab74d88bdcefc",
-          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
-          "date": "Thu, 05 Nov 2026 03:25:22 -0800",
-          "from": "apvizual-max <notifications@github.com>"
         }
       ]
     }
   ],
   "missing": [],
   "totals": {
-    "azi": 20,
-    "24h": 111,
-    "7z": 746,
-    "30z": 2447
+    "azi": 19,
+    "24h": 84,
+    "7z": 758,
+    "30z": 2439
   }
 }

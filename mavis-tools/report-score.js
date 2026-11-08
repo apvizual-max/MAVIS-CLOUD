@@ -53,17 +53,25 @@ function iqadsLoc(job) {
   const hasRemote = types.some(t => /remote/i.test(t));
   const hasHybrid = types.some(t => /hybrid/i.test(t));
   const hasOffice = types.some(t => /at the office/i.test(t));
+  // MĂSURAT 2026-11-08: multe anunturi IQads nu publică orasul, dar pagina de
+  // contact a companiei îl are (adresa). Scraperul o atașează ca `companyCity`.
+  // ⇒ Cohn & Jansen (#24000) era 5 zile în „verdict amânat" doar pentru că
+  // anunțul nu spunea „București".
+  const cc = job.companyCity && !c ? { name: job.companyCity.name, evidence: job.companyCity.evidence } : null;
   const parts = [];
   if (c) parts.push(c.name);
+  if (cc) parts.push(cc.name);
   if (hasHybrid) parts.push('Hybrid (Office & Remote)');
   else if (hasRemote) parts.push('Remote');
-  if (!parts.length) return { loc: '', why: 'nici oras, nici remote/hybrid in anunt' };
-  if (!c && (hasRemote || hasHybrid)) {
+  if (!c && !cc && (hasRemote || hasHybrid)) {
     // doar remote, fara oras
     return { loc: parts.join(', '), why: 'remote/hybrid din tipul jobului, oras neprecizat' };
   }
-  if (!c && hasOffice) return { loc: '', why: 'at the office, dar orasul nu apare in anunt' };
-  return { loc: parts.join(', '), why: c ? `oras: "${c.evidence}"` : 'din tipul jobului' };
+  if (!c && !cc && hasOffice) return { loc: '', why: 'at the office, dar orasul nu apare in anunt' };
+  return {
+    loc: parts.join(', '),
+    why: c ? `oras: "${c.evidence}"` : (cc ? `oras de pe pagina companiei pe IQads: "${cc.evidence}"` : 'din tipul jobului')
+  };
 }
 
 function iqadsEng(job) {

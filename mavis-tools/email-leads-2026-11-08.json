@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-08",
+  "note": "Leads din alertele de job de azi (2026-11-08). Fiecare lead poarta calea de verificare declarata in verifiedVia - unde pagina sursei a raspuns 403, am folosit textul indexat sau corpul emailului si am spus-o explicit.",
+  "leads": [
+    {
+      "resolvedTitle": "Art Director / Graphic Designer @ Cohn & Jansen - Bucuresti, scor 9,6 (localizarea rezolvata azi)",
+      "from": "IQads (scraping direct) + Jooble (alerta de azi)",
+      "subject": "Cohn & Jansen cauta Art Director / Graphic Designer @ Cohn & Jansen",
+      "summary": "Rolul care a stat 5 zile in verdict amanat pentru ca IQads nu publica orasul in anunt. AZI e rezolvat: atat Jooble (in alerta de azi) cat si pagina companiei pe IQads (care da adresa) spun BUCURESTI. Deci jobul e real, in oras, si cu scorul corect ajunge pe 9,6 - pe locul 2 in tabel, la egalitate cu Art Director @ Mercury360. Agentie de publicitate: proiecte diverse, branduri mari, campanii de care sa fie mandri, bonusuri cand campanile castiga.",
+      "requirements": [
+        "Cel putin 5 ani de experienta, ideal intr-o agentie de publicitate",
+        "Experienta cu campanii 360 - de la idee la executie, pe diverse canale",
+        "Ochi pentru detalii si curiositate fata de noile tehnologii creative",
+        "Mediu de lucru relaxat, dar cu oameni de treaba - asa se descrie firma in anunt"
+      ],
+      "rates": [],
+      "terms": "Bucuresti, sector 2 (Strada Sperantei nr. 21, etaj 2, sediul companiei). Full time, nivel Middle, Senior. Valabil pana la 2026-12-27.",
+      "process": "Aplicare pe IQads (anuntul #24000) sau pe Jooble, de unde a venit alerta de azi.",
+      "caveat": "Salariul nu e publicat de nimeni - nici IQads, nici Jooble. Punctul de verificat: rolul cere 5+ ani intr-o agentie, deci daca portofoliul tau e mai greu de port spre agentie, intreaba. In rest, e potential cea mai buna potrivire din tabel: Art Director, agentie, proiecte de brand mari, expira peste 7 saptamani.",
+      "verifiedVia": "Pagina anuntului IQads (titlu, companie, nivel, tip job, expirare) plus adresa de pe pagina companiei pe IQads (rel/cohn-jansen?t=info: Strada Sperantei nr. 21, etaj 2, sector 2, Bucuresti) plus anuntul listat de Jooble cu localizarea Bucuresti (reluat de la 4 zile in urma). Localizarea e acum rezolvata automat de scraper (paginile companiei), cu verificarea ca numele companiei din anunt corespunde paginii - altfel s-ar aplica adresa altui angajator de pe aceeasi pagina.",
+      "url": "https://www.iqads.ro/adjob/24000/art-director-graphic-designer-cohn-jansen"
+    },
+    {
+      "resolvedTitle": "Staff Brand Designer - Consumer @ Kraken - remote, Romania eligibila (a 2-a zi)",
+      "from": "LinkedIn Job Alerts",
+      "subject": "Staff Brand Designer - Consumer job at Kraken - Actively recruiting",
+      "summary": "A doua zi consecutiv pe alerta ta. Kraken angajeaza un Staff Brand Designer - Consumer: stabilesti standardul vizual al brandului Kraken pe consumator (design static pentru lansari si campanii, layout-uri systemizate in Figma, localizare multi-piata). Raportezi la Creative Lead, Consumer Creative & Design - senior individual contributor, fara oameni in subordine. Kraken are 5 roluri deschise in Design & Creative, iar doua au ajuns pe alertele tale in 3 zile.",
+      "requirements": [
+        "Portofoliu cu lucru de brand si static, adaptare multi-format si multi-piata, si sisteme de design reutilizabile",
+        "Pentru varianta 3D: Cinema 4D expert (modelare, iluminare, materiale, randare), biblioteci de asseturi 3D, 7+ ani",
+        "Figma de nivel expert (componente, auto layout, variabile)",
+        "Adobe Creative Suite avansat plus productie asistata de AI",
+        "Versionare si localizare pe piete si limbi diferite, cu layout-uri care rezista la traducere"
+      ],
+      "rates": [
+        "Varianta SU: 127.200 - 254.400 USD pe an (banda publicata de angajator)",
+        "Varianta europeana: salariu nepublicat"
+      ],
+      "terms": "Remote, full time. Romania pe lista explicita a tarilor eligibile, alaturi de 23 de altele. Aplicarile sunt acceptate permanent.",
+      "process": "Aplicare pe boardul oficial Kraken (jobs.ashbyhq.com/kraken.com).",
+      "caveat": "Excelenta potrivire cu profilul tau: brand + sisteme + 3D + Figma + unelte AI, remote, Romania eligibila. Doua nuanțe: e brand de CONSUMER la un exchange de crypto (identitate si campanii, nu interfete de trading), iar banda de 127-254K USD e lata si nu spune ce primesti tu - varianta europeana nu publica suma.",
+      "verifiedVia": "Boardul oficial Kraken (jobs.ashbyhq.com/kraken.com) citit prin indexarea motorului de cautare: titlu, lista completa de tari eligibile (inclusiv Romania), tipul de angajare si banda de compensare pentru varianta SU. Confirmat si pe jobboard-uri de crypto care dau descrierea completa si cerintele, si pe un agregator care listeaza 49 de roluri deschise la Kraken (5 in Design & Creative).",
+      "url": "https://jobs.ashbyhq.com/kraken.com"
+    },
+    {
+      "resolvedTitle": "Senior User Experience Designer @ SS&C Technologies - Bucuresti hybrid (NOU)",
+      "from": "LinkedIn Job Alerts",
+      "subject": "SS&C Technologies is hiring: Senior User Experience Designer",
+      "summary": "SS&C Technologies (companie de tehnologie pentru servicii financiare si sanatate, cu sediul in Windsor, Connecticut, 27.000+ angajati in 35 de tari) angajeaza un Senior User Experience Designer in Bucuresti, hybrid, cu statut Actively recruiting si Easy Apply. In aceeasi alerta a venit si un Senior UI/UX Designer with German la EVA, tot in Bucuresti Metropolitan Area, hybrid.",
+      "requirements": [
+        "5+ ani de experienta in UX design cu focus pe product design (versiunea Senior UX Product Designer din anunt)",
+        "Pentru varianta Sr. UX Designer: 7+ ani in UX / interaction design, participand la ciclul complet de dezvoltare de produs",
+        "Portofoliu puternic, cercetare de utilizator, teste de uzabilitate, wireframes, prototipuri",
+        "Bun portofoliu de UX, comunicare excelenta cu stakeholderi si echipe cross-functional",
+        "Licenta sau master in design, HCI sau domeniu conex - dorit pentru varianta de produs"
+      ],
+      "rates": [
+        "Jobboard-ul estimeaza 8.000 - 10.000 RON/luna pentru Senior UX Product Designer in Bucuresti (circa 2.000 - 2.500 USD) - ESTIMARE, nu cifra angajatorului"
+      ],
+      "terms": "Bucuresti, Romania. Hybrid. Actively recruiting, Easy Apply.",
+      "process": "Aplicare pe LinkedIn cu Easy Apply; si pe boardul oficial SS&C.",
+      "caveat": "E product design pentru software B2B de servicii financiare, nu brand identity - vecin cu profilul tau, nu identic. Salariul nu e publicat de angajator (doar estimarea unui jobboard, care poate fi mult prea generoasa sau generoasa). Daca vrei varianta de pe anuntul de produs, cere clar despre buget inainte de a parcurge procesul lung.",
+      "verifiedVia": "Corpul emailului de alerta LinkedIn (titlu, companie, localizarea Bucuresti hybrid, statutul Actively recruiting si Easy Apply, plus al doilea rol din alerta). Descrierea completa si cerintele, din jobboard-uri de specialitate (himalayas.app, JobzMall) care citesc anuntul original. Pagina oficiala SS&C NU a fost deschisa.",
+      "url": "https://www.linkedin.com/jobs"
+    },
+    {
+      "resolvedTitle": "Google + Discord - doua evenimente de cont azi (parola si breach)",
+      "from": "Google, Discord",
+      "subject": "Critical security alert / Discord password changed",
+      "summary": "Doua mesaje care cer verificare umana, de tip diferit. (1) GOOGLE, Critical security alert: unele din parolele tale salvate au fost gasite online, intr-o incaclare de date a unui site sau app pe care il folosesti. Google spune explicit ca nu e afectat contul tau Google - e o notificare despre parole salvate care au aparut intr-un breach extern. (2) DISCORD, Discord password changed: parola contului tau Discord (popy911) a fost schimbata. Daca nu ai fost tu, Discord cere reset imediat.",
+      "requirements": ["Nu e o cerere de job - sunt doua evenimente de cont care cer actiune umana."],
+      "rates": [],
+      "terms": "Contul Google afectat: apvizual@gmail.com. Contul Discord: popy911.",
+      "process": "Google: myaccount.google.com/notifications si Password Manager (vezi parolele expuse). Discord: support.discord.com/hc/articles/218410947 (reset de parola).",
+      "caveat": "Distinctia conteaza: alerta Google NU inseamna cont compromis - inseamna ca acele parole au aparut intr-o baza de date furata, deci trebuie schimbate ACEA parola (si orice site care foloseste aceeasi parola). Iar Discord: daca NU ai schimbat tu parola, schimba-o acum si verifica sesiunile active. Nota: pe 05.11 ai avut un grant OAuth pentru Antigravity, pe 06.11 cinci notificari Google, iar acum asta - tiparul de evenimente pe cont se repeta, deci merita sa arunci un ochi la lista de aplicatii conectate.",
+      "verifiedVia": "Corpul COMPLET al ambelor emailuri, cu textul exact (Some of your saved passwords were found online... Your Google Account is not affected si We've... change your Discord account password... If this wasn't done by you, please immediately reset the password). Linkurile de reset sunt in ambele emailuri.",
+      "url": "https://myaccount.google.com/notifications"
+    },
+    {
+      "resolvedTitle": "Bestjobs - 4 tipuri de alerte azi, lista cu salarii",
+      "from": "Bestjobs",
+      "subject": "Job offers that fit your profile / Because you searched for design graphic bucuresti jobs / AGRESIV MEDIA is hiring / New opportunities in top companies",
+      "summary": "Bestjobs ti-a trimis azi PATRU tipuri de alerta distincte - cel mai mult observate pana acum intr-o zi: Job offers that fit your profile (tip NOU), Because you searched for design graphic bucuresti jobs, New opportunities in top companies, si alerta dedicata AGRESIV MEDIA is hiring Colaboratori design grafic (a doua zi pentru ei, a opta pentru MARKQUEN). Lista cu salariu: Proiectant Productie Publicitara la BD Lemntech 1405-2000 (DISPONIBIL IMEDIAT), Creative Lead & 3D Designer la MARKQUEN 1400-1800 Hybrid, Specialist Marketing Digital la Fabrica De Podcasturi 700-1350, AI Video Editor la Apex Digital Alliance 1200-1300, SudRezidential Videograf & Editor Video 1000-1200, ARHITECT/DESIGNER MOBILA la UNICAN PRODUCTION 800-1420, Operator Grafica la Viragos Design 800-1000, Colaboratori design grafic la AGRESIV MEDIA 780-1020, Social Media & Content Creator la AMAL HEALTH CARE 900, Junior Content Creator la INTAX TRADING 700, Graphic Designer part-time 15h remote la CreativeEd Media 525.",
+      "requirements": ["Pentru fiecare job: portofoliu si CV pe anuntul Bestjobs, din email"],
+      "rates": [
+        "Cele mai mari sume publicate de angajator: BD Lemntech 1405-2000, MARKQUEN 1400-1800, Apex Digital Alliance 1200-1300",
+        "Cu estimare de piata (nu e oferta): BCR 1795-1985, ELBI 1195-1325, Imperial Brands 1385-1530"
+      ],
+      "terms": "Toate din alertele zilnice Bestjobs.",
+      "process": "Aplicare pe anuntul Bestjobs, din email.",
+      "caveat": "MARKQUEN e in top de opt zile - rolul e activ, dar si concurenta. La BD Lemntech scrie DISPONIBIL IMEDIAT: verifica daca anuntul mai e activ. Sumele cu estimare de piata se recalculeaza zilnic si nu sunt oferte de angajator.",
+      "verifiedVia": "Corpul COMPLET al emailurilor Bestjobs de azi. Pagina de anunt Bestjobs raspunde 403 la acces automat - NU am deschis paginile individuale.",
+      "url": "https://www.bestjobs.eu"
+    }
+  ]
+}
