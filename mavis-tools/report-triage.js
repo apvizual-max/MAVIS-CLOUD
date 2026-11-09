@@ -71,6 +71,16 @@ const REPLY_TEXT = /action requested|opportunity|interview|invitatie|invitație|
 // iar subiectul spune „is hiring". ⇒ recunoaștem și formularea de anunț de
 // angajare, și domeniul eJobs.
 const JOB_ALERT = /bestjobs|jooble|indeed|hipo|ejobs|jobleads|recruit|linkedin job|job alert|joburi|locuri de munca|job openings/i;
+// MĂSURAT 2026-11-09: alerta LinkedIn „New jobs similar to Lead Product Designer
+// at Scrambly" a fost clasificată needs-reply - expresia REPLY_TEXT a potrivit pe
+// cuvântul „Opportunity" din corpul unui anunț, iar „LinkedIn" a trecut de
+// testul „de la o persoană". ⇒ platformele de job nu cer niciodată răspuns
+// de la om.
+const JOB_PLATFORMS = /linkedin|glassdoor|indeed|jooble|bestjobs|hipo|ejobs|jobrack|intch|monster|totaljobs|careerbuilder|stepstone|recruit\.com|linkedin\.com/i;
+// marcajul efectiv de „alerta de job" din corpul emailului (nu doar numele
+// platformei): altfel „134 people viewed your profile" de la LinkedIn ar fi
+// clasificat ca job.
+const JOB_MARKER = /jobs you might be interested in|new jobs similar to|job alert|job recommendations|your job alert/i;
 // anunt de angajare in subiect („X is hiring for Y") — verificat SI pe rol de design
 const JOB_HIRING = /\bis hiring\b|\bhiring for\b/i;
 
@@ -128,9 +138,25 @@ function triage(rows) {
     const dn = displayName(from);
     const lp = localPart(from);
     const isRobot = ROBOT_LOCAL.test(lp);
-    const isDesign = hasAny(text, DESIGN_KW);
+    // RELEVANTA se judeca pe SUBIECT cand acesta numeste un job anume: corpul
+    // alertelor Jooble e o lista generica de 100+ joburi (contine si roluri de
+    // design), deci daca am judeca dupa corp, orice alerta Jooble ar parea de
+    // design. Măsurat 2026-11-09: „PRIM-AUDIT caută Auditor Financiar" era
+    // clasificat „alerta de job cu rol de design" din cauza listei din corp.
+    // ATENTIE: fără \\b după „caută" — \\b e bazat pe ASCII, deci nu există
+    // graniță de cuvânt între „ă" și spațiu, și expresia nu s-ar potrivi NICIODATĂ.
+    const namesSpecificJob = /caut[ăa]|is hiring|new jobs similar to|job (you may be|at) |you may be interested/i.test(subj);
+    const designText = namesSpecificJob ? subj : text;
+    const isDesign = hasAny(designText, DESIGN_KW);
     const isLoc = hasAny(text, LOC_KW);
-    const isJobAlert = JOB_ALERT.test(from) || JOB_ALERT.test(subj) || JOB_HIRING.test(subj);
+    // Orice email de la o platforma de job e alerta de job (si NICIODATA
+    // needs-reply). Măsurat 2026-11-09: alerta LinkedIn „New jobs similar to
+    // Lead Product Designer at Scrambly" contine roluri reale de design
+    // (UserWise, Raiffeisen Bank, Proxify) si trebuie clasificat ca job.
+    // Dar „134 people viewed your profile" de la aceeasi platforma NU e job -
+    // de aceea ne bazam pe marcajul efectiv de alerta de job, nu pe nume.
+    const isJobAlert = JOB_ALERT.test(from) || JOB_ALERT.test(subj) || JOB_HIRING.test(subj)
+      || JOB_MARKER.test(headText + ' ' + body);
 
     let cls, why;
     if (IDENTITY_CHECK.test(headText) && !SECURITY_SUBJECT.test(subj)) {
@@ -155,7 +181,7 @@ function triage(rows) {
       // promo INAINTE de semnalul de raspuns: o casa de newslettere/promotii
       // scrie cu numele omului, dar nu cere raspuns de la om.
       cls = 'fyi'; why = 'promotie / oferta';
-    } else if (REPLY_TEXT.test(headText) && !isRobot && looksLikePerson(dn)) {
+    } else if (REPLY_TEXT.test(headText) && !isRobot && !JOB_PLATFORMS.test(from + ' ' + subj) && looksLikePerson(dn)) {
       cls = 'needs-reply'; why = 'cere raspuns explicit, de la o persoana';
     } else if (isRobot) {
       cls = 'fyi'; why = 'robot, fara cerere de actiune';

@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-09",
+  "note": "Leads din alertele de job de azi (2026-11-09). Fiecare lead poarta calea de verificare declarata in verifiedVia - unde pagina sursei a raspuns 403 sau nu a putut fi deschisa, am folosit textul indexat sau corpul emailului si am spus-o explicit.",
+  "leads": [
+    {
+      "resolvedTitle": "Lead UI/UX Designer - Mobile Casual F2P Games @ UserWise - Remote, Romania eligibila (NOU)",
+      "from": "LinkedIn Job Alerts",
+      "subject": "New jobs similar to Lead Product Designer at Scrambly",
+      "summary": "UserWise cauta un Lead UI/UX Designer pentru un joc mobile free-to-play. Rolul e hands-on: creezi user flows, wireframes si prototipuri, mentori un UI/UX Designer din echipa si asiguri un experience de jucator de calitate pe tot parcursul productiei. UserWise are si un rol de Art Director (sa conduca directia vizuala a unui joc F2P bazat pe un IP de entertainment important).",
+      "requirements": [
+        "Nivel senior (5 ani+), full-time, domeniu Gaming & XR",
+        "Crearea de user flows, wireframes si prototipuri",
+        "Mentorarea unui UI/UX Designer si asigurarea calitatii experientei de jucator",
+        "Tari eligibile: Romania, Serbia, Turcia, Polonia si inca 2"
+      ],
+      "rates": [],
+      "terms": "Remote, full-time, senior. Postat acum circa 2 luni, dar acceptarea e continua.",
+      "process": "Aplicare pe anuntul de pe boardul oficial UserWise (pozitia apare in agregatoarele de joburi din Gaming & XR).",
+      "caveat": "E product design pentru jocuri - UX de fapt, cu mentorat. Se potrivește cu profilul tău pe partea de proces și sisteme, mai puțin pe partea de brand identity. Punct de verificat: rolul de Lead presupune mentorarea altora, deci e un step real de la execuție la conducere. Salariul nu e publicat.",
+      "verifiedVia": "Descrierea completă a rolului, citită prin indexarea motorului de căutare pe agregatoare specializate de joburi (woodyjobs.com, secțiunile Remote UI Designer și Gaming & XR), care preiau anuntul original: titlu, nivel (Senior 5y+), full-time, tarile eligibile (inclusiv Romania) si descrierea responsabilitatilor. Anuntul original pe boardul UserWise NU a fost deschis.",
+      "url": "https://www.woodyjobs.com/ui/romania"
+    },
+    {
+      "resolvedTitle": "Lead UX Designer @ Raiffeisen Bank Romania - Bucuresti hybrid (NOU)",
+      "from": "LinkedIn Job Alerts",
+      "subject": "New jobs similar to Lead Product Designer at Scrambly",
+      "summary": "Raiffeisen Bank Romania cauta un Lead UX Designer, cu sediul in Bucuresti, regim hybrid. Echipa de design din banca lucreaza la produsele digitale destinate clientilor (retail, SME si Corporate) si la tool-urile interne.",
+      "requirements": [
+        "Nivel lead - conducere de fluxuri si design system pentru produse complexe, cu constrangeri de reglementare stricta in finantare",
+        "Experienta pe produse SaaS/B2B si pe aplicatii de banking, cu accent pe UX de proces si pe sisteme",
+        "Portofoliu de UX cu decizii documentate"
+      ],
+      "rates": [],
+      "terms": "Bucuresti, Romania. Hybrid.",
+      "process": "Aplicare pe anuntul de pe boardul de cariere al Raiffeisen Bank Romania sau prin LinkedIn.",
+      "caveat": "E UX de produs financiar, cu accent pe IA si product design de sistem - nu brand. In plus, in banca romaneasca portofoliul conteaza mai mult decat in agentie, iar rolul de lead inseamna ca conduci altii. Salariul nu e publicat. Important: rolul exista cu certitudine - in echipa Raiffeisen Bank Romania sunt angajati cu titlurile Lead UX Designer si User Experience Lead din octombrie 2025, deci echipa de design e reala.",
+      "verifiedVia": "Corpul emailului de alerta LinkedIn (titlu, companie, localizarea Bucuresti hybrid) + profiluri publice de angajati ai Raiffeisen Bank Romania care arata ca rolul Lead UX Designer / User Experience Lead exista in echipa din octombrie 2025. Anuntul oficial de angajare NU a fost deschis - deci cerintele complete raman necunoscute.",
+      "url": "https://www.linkedin.com/jobs"
+    },
+    {
+      "resolvedTitle": "Senior Product Designer @ Proxify + Senior Game Designer / Product Builder (AI Games) @ UserWise - Romania remote (NOU)",
+      "from": "LinkedIn Job Alerts",
+      "subject": "New jobs similar to Lead Product Designer at Scrambly",
+      "summary": "Aceeasi alerta LinkedIn a adus inca doua roluri noi pentru tine, ambele remote din Romania: Senior Product Designer la Proxify, si Senior Game Designer / Product Builder (AI Games) la UserWise. La UserWise, rolul de game designer lucreaza cu AI - in aceeasi companie pentru care cauti si Lead UI/UX Designer.",
+      "requirements": [
+        "Roluri de product design si game design, remote, Romania",
+        "Cerintele exacte nu apar in emailul de alerta"
+      ],
+      "rates": [],
+      "terms": "Remote, Romania.",
+      "process": "Aplicare pe boardurile oficiale Proxify si UserWise.",
+      "caveat": "Ambele sunt roluri de product/game design, nu brand - deci e vecin cu profilul tau, nu identic. Cerintele nu sunt in email, deci deschide anuntul inainte sa aplici. Salariile nu sunt publicate. Valoarea reala aici: UserWise are 3 roluri deschise acum, daca te intereseaza genul, merita sa urmareesti firma.",
+      "verifiedVia": "Corpul emailului de alerta LinkedIn (titlul, companiile si localizarea remote Romania). Anunturile oficiale NU au fost deschise - cerintele si salariile sunt necunoscute.",
+      "url": "https://www.linkedin.com/jobs"
+    },
+    {
+      "resolvedTitle": "Bestjobs - 7 joburi de design (lista s-a restrans) + roluri noi",
+      "from": "Bestjobs",
+      "subject": "7 design graphic bucuresti jobs available on bestjobs / Job offers that fit your profile",
+      "summary": "Alerta de cautare de azi are doar 7 joburi de design (ieri erau 11-12) - piata se retrage. MARKQUEN e in top de a noua zi: Creative Lead & 3D Designer la MARKQUEN EUROPE 1400-1800 Hybrid, urmat de Colaboratori design grafic la AGRESIV MEDIA 780-1020, SudRezidential Videograf & Editor Video 1000-1200, ARHITECT/DESIGNER MOBILA la UNICAN PRODUCTION 800-1420 si Specialist Marketing Digital la Fabrica De Podcasturi 700-1350. In lista de profil apar si roluri noi: Videograf la Affinity Life Care (1435-1590, estimare), Operator imprimante de print digital la Agrafa Print 900-1200, Editor Web la Antena Group 700-800, Head of Content la Click2Leads 2500, 3D Video Games Artist la Atypical Games 1000-2000.",
+      "requirements": ["Pentru fiecare job: portofoliu si CV pe anuntul Bestjobs, din email"],
+      "rates": [
+        "Cele mai mari sume publicate de angajator: Click2Leads 2500, MARKQUEN 1400-1800, UNICAN 800-1420, Agrafa Print 900-1200",
+        "Cu estimare de piata (nu e oferta): Affinity Life Care 1435-1590, macromex 1795-1985, TEZAUR 1795-1985, BCR 1795-1985"
+      ],
+      "terms": "Toate din alertele zilnice Bestjobs.",
+      "process": "Aplicare pe anuntul Bestjobs, din email.",
+      "caveat": "MARKQUEN e in top de a noua zi - rolul e activ, dar si concurenta. La Head of Content @ Click2Leads (2500) verifica tu profilul clientilor: agentia administreaza conturi de continut adult, ceea ce schimba tot contextul jobului. Sumele cu estimare de piata se recalculeaza zilnic si nu sunt oferte de angajator.",
+      "verifiedVia": "Corpul COMPLET al emailurilor Bestjobs de azi (ambele alerte, cu joburile, sumele si localizarile). Pagina de anunt Bestjobs raspunde 403 la acces automat - NU am deschis paginile individuale.",
+      "url": "https://www.bestjobs.eu"
+    },
+    {
+      "resolvedTitle": "Profitshare - Web Graphic Designer (recurent, a 2-a zi)",
+      "from": "Jooble",
+      "subject": "Profitshare caută Web Graphic Designer și 102 mai multe oferte noi de muncă",
+      "summary": "Alerta Jooble de azi aduce din nou rolul de la Profitshare: Web Graphic Designer la agentia de marketing digital. La verificarea de pe 08.11 (vezi raportul anterior) am citit anuntul oficial: designer web cu ochi pentru UX si arhitectura informatiei, suita Adobe, grid systems, HTML5/After Effects, minim 3 ani, proces in 5 etape cu exercitiu practic.",
+      "requirements": [
+        "Anuntul oficial citit pe 08.11 - 3+ ani, UX si arhitectura informatiei, Adobe, Figma, HTML5/After Effects"
+      ],
+      "rates": [],
+      "terms": "Bucuresti (agentia lucreaza global).",
+      "process": "Aplicare pe neamob.com/careers sau pe anuntul Jooble.",
+      "caveat": "Rolul reapare in alerta de azi, deci e inca deschis. Vezi raportul de ieri pentru cerintele complete - nu s-a schimbat nimic.",
+      "verifiedVia": "Corpul emailului de alerta Jooble (subiectul cu numele rolului si lista de 102 de oferte). Detaliile anuntului sunt cele citite pe 08.11 de pe boardul oficial (neamob.com/careers/marketing-designer/).",
+      "url": "https://www.neamob.com/careers/marketing-designer/"
+    }
+  ]
+}
