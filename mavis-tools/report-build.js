@@ -434,6 +434,21 @@ if (otherAlertList.length) {
 if (fyiList.length) {
   md += `**Newsletter / promoție, fără acțiune** (${fyiList.length}): ` + fyiList.map(r => r.displayName).join(', ') + `\n\n`;
 }
+// Aplicari trimise azi: confirmarea de aplicare NU cere decizie, dar merita
+// scrisa ca atare — e singura actiune reala din inbox. Numarul, rolul si
+// angajatorul vin din corpurile emailurilor de confirmare (0 cereri in plus).
+const appliedRows = tri.all.filter(r => r.appliedRole);
+if (appliedRows.length) {
+  md += `### 1.6 Aplicări trimise (${appliedRows.length})\n\n`;
+  md += `Sunt confirmări de aplicare extrase din corpurile emailurilor — nu cer nicio decizie, dar arată ce ai aplicat noaptea trecută.\n\n`;
+  md += `| # | Rol | Angajator | Sursă |\n|---|---|---|---|\n`;
+  appliedRows.forEach((r, i) => {
+    const role = (r.appliedRole.role || '(rol neextras)').replace(/\|/g, '/');
+    const emp = (r.appliedRole.employer || '(angajator neextras)').replace(/\|/g, '/');
+    md += `| ${i + 1} | ${role} | ${emp} | ${r.displayName} |\n`;
+  });
+  md += `\n`;
+}
 // leads verificate: alerte de job care au condus la un anunt real, citit direct
 let leads = null;
 let leadsError = null;

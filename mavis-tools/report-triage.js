@@ -83,6 +83,13 @@ const JOB_PLATFORMS = /linkedin|glassdoor|indeed|jooble|bestjobs|hipo|ejobs|jobr
 const JOB_MARKER = /jobs you might be interested in|new jobs similar to|job alert|job recommendations|your job alert/i;
 // anunt de angajare in subiect („X is hiring for Y") — verificat SI pe rol de design
 const JOB_HIRING = /\bis hiring\b|\bhiring for\b/i;
+// MĂSURAT 2026-11-10: 13 emailuri de la eJobs („Confirmare aplicare") au intrat
+// in needs-action doar pentru ca „eJobs.ro" se potriveste cu JOB_ALERT, iar
+// corpul lor contine „Graphic Designer". Dar o confirmare de aplicare este un
+// RECEIPT — nu cere nicio decizie. La fel, „your application was sent to X"
+// (LinkedIn) si „Thanks for applying" (broadbean). Regula: confirmarea de
+// aplicare se clasifica inaintea regulilor de alerta de job.
+const APPLIED_CONFIRM = /confirmare aplicare|application-confirmation|ai aplicat cu succes|your application was sent to|your application (was|has been) (sent|received|received by)|thanks for applying|we(?:'ve| have) got it/i;
 
 const _rxCache = new Map();
 function hasWord(text, w) {
@@ -117,6 +124,71 @@ function looksLikePerson(name) {
  * @param {Array} rows rânduri din report-simulate-sort.js
  * @returns {{buckets:Object, counts:Object, all:Array}}
  */
+/**
+ * Imparte „ROL ANGAJATOR" in doua. Semnalul: rolul e Title Case, angajatorul
+ * e de obicei SCAPS (STIFT LUX DESIGN SRL, LPP, IKEA ROMANIA S.A.).
+ * Daca primul cuvant e deja SCAPS (ex. „DESIGN ENGINEER - ..."), impartirea
+ * nu e sigura -> se pastreaza textul integral, fara inventat.
+ */
+function splitRoleCompany(raw) {
+  const parts = raw.split(' ').filter(Boolean);
+  let i = 0;
+  while (i < parts.length) {
+    const letters = parts[i].replace(/[^A-Za-zĂÂÎȘȚăâîșț]/g, '');
+    if (!letters) { i++; continue; }
+    const allCaps = letters.length > 1 && letters === letters.toUpperCase();
+    if (allCaps) break;
+    i++;
+  }
+  if (i === 0 || i >= parts.length) return { role: raw, employer: '' };
+  return { role: parts.slice(0, i).join(' ').trim(), employer: parts.slice(i).join(' ').trim() };
+}
+
+/**
+ * Extrage rolul si angajatorul dintr-un email de CONFIRMARE DE APLICARE.
+ * Best-effort: textul vine din corpul confirmarii, nu dintr-o baza de date.
+ * @returns {{role:string, employer:string}|null}
+ */
+function extractAppliedRole(r, subj, body) {
+  // \u034f (COMBINING GRAPHEME JOINER) si similare: LinkedIn le pune peste tot
+  // in corp si ar strica orice potrivire bazata pe text.
+  const b = (body || '').replace(/[͏᠎-‏﻿]/g, ' ').replace(/&#8202;/g, ' ').replace(/\s+/g, ' ').trim();
+  // eJobs: „Felicitări! Ai aplicat cu succes la următorul job: {ROL} {COMPANIE} Vezi job"
+  let m = b.match(/aplicat cu succes la urm[ăa]torul job:\s*(.+?)\s+Vezi job/i);
+  if (m) return splitRoleCompany(m[1].trim());
+  // LinkedIn: subiectul „Alexandru, your application was sent to {COMPANIE}"; in corp,
+  // intre acea fraza si „Applied on" se afla rolul + localizarea.
+  m = subj.match(/your application was sent to\s+(.+)$/i);
+  if (m) {
+    const employer = m[1].trim();
+    const mm = b.match(/your application was sent to\s+(.+?)\s+Applied on/i);
+    let role = '';
+    if (mm) {
+      // LinkedIn repeta fraza de 2 ori in corp (antet + continut)
+      let rest = mm[1].trim().replace(/your application was sent to/gi, ' ');
+      rest = rest.replace(/\s+/g, ' ').trim();
+      // numele angajatorului apare de 1-2 ori -> il scoatem
+      let guard = 0;
+      while (guard++ < 3) {
+        const i = rest.toLowerCase().indexOf(employer.toLowerCase());
+        if (i < 0) break;
+        rest = (rest.slice(0, i) + ' ' + rest.slice(i + employer.length)).trim();
+      }
+      // localizarea: „Bucharest, Romania (On-site)", „United Kingdom (Remote)", „London"
+      const loc = rest.match(/^(.*?)\s+((?:[A-Z][a-z]+(?:,\s*[A-Z][a-z]+)?)(?:\s+[A-Z][a-z]+)?\s*\((?:Remote|On-site|Hybrid)\)|Remote|On-site|Hybrid)$/);
+      let place = '';
+      if (loc) { rest = loc[1].trim(); place = loc[2]; }
+      else {
+        const bare = rest.match(/^(.*?)\s+([A-Z][a-z]+(?:,\s*[A-Z][a-z]+)?)$/);
+        if (bare) { rest = bare[1].trim(); place = bare[2]; }
+      }
+      role = place ? rest + ' — ' + place : rest;
+    }
+    return { role, employer };
+  }
+  return null;
+}
+
 function triage(rows) {
   const out = [];
   for (const r of rows) {
@@ -165,6 +237,10 @@ function triage(rows) {
       cls = 'needs-action'; why = 'alerta de securitate — cere verificare umana';
     } else if (CI_FROM.test(from) && CI_FAIL_SUBJECT.test(subj)) {
       cls = 'needs-action'; why = 'workflow CI esuat — cere actiune';
+    } else if (APPLIED_CONFIRM.test(subj + ' ' + headText)) {
+      // receipt de aplicare: NU cere decizie. Se clasifica INAINTE de regula
+      // de alerta de job, ca un receipt al unei aplicari sa nu devina sarcina.
+      cls = 'fyi'; why = 'confirmare de aplicare — nu cere actiune';
     } else if (ACCOUNT_TEXT.test(text)) {
       cls = 'needs-action'; why = 'contul cere o actiune (parola / confirmare)';
     } else if (NOISE_FROM.test(from)) {
@@ -188,7 +264,7 @@ function triage(rows) {
     } else {
       cls = 'fyi'; why = 'fara semnal de actiune';
     }
-    out.push({ ...r, cls, why, displayName: dn, isDesign, isLoc, isJobAlert });
+    out.push({ ...r, cls, why, displayName: dn, isDesign, isLoc, isJobAlert, appliedRole: extractAppliedRole(r, subj, body) });
   }
   const buckets = { 'needs-reply': [], 'needs-action': [], 'job-alert-other': [], fyi: [], noise: [] };
   for (const r of out) buckets[r.cls].push(r);

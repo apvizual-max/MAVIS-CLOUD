@@ -1,46 +1,46 @@
 {
-  "today": "2026/11/09",
+  "today": "2026/11/10",
   "labels": [
     {
       "key": "joburi",
       "title": "Joburi",
       "name": "MAVIS/Joburi",
       "counts": {
-        "azi": 7,
-        "24h": 22,
-        "7z": 259,
-        "30z": 487
+        "azi": 20,
+        "24h": 43,
+        "7z": 264,
+        "30z": 503
       },
       "newest": {
-        "id": "1a1bee1e820c8e54",
-        "subject": "7 design graphic bucuresti jobs available on bestjobs",
-        "date": "Mon, 09 Nov 2026 07:57:11 +0200",
-        "from": "Bestjobs <contact@bestjobs.eu>"
+        "id": "1a1c40bad9f8b236",
+        "subject": "See Goleanu’s and other people’s connections, experience, and more",
+        "date": "Tue, 10 Nov 2026 06:01:01 +0000 (GMT)",
+        "from": "LinkedIn <invitations@linkedin.com>"
       },
-      "newestDate": "Mon, 09 Nov 2026 07:57:11 +0200",
+      "newestDate": "Tue, 10 Nov 2026 06:01:01 +0000 (GMT)",
       "samples": [
         {
-          "id": "1a1bee1e820c8e54",
-          "subject": "7 design graphic bucuresti jobs available on bestjobs",
-          "date": "Mon, 09 Nov 2026 07:57:11 +0200",
+          "id": "1a1c40bad9f8b236",
+          "subject": "See Goleanu’s and other people’s connections, experience, and more",
+          "date": "Tue, 10 Nov 2026 06:01:01 +0000 (GMT)",
+          "from": "LinkedIn <invitations@linkedin.com>"
+        },
+        {
+          "id": "1a1c4026e7545d09",
+          "subject": "Lead UX Designer IRC307741 at GlobalLogic",
+          "date": "Tue, 10 Nov 2026 05:50:55 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+        },
+        {
+          "id": "1a1c4002bb4574fc",
+          "subject": "9 graphic design, bucharest jobs available on bestjobs",
+          "date": "Tue, 10 Nov 2026 07:48:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a1bedc0fea482c8",
-          "subject": "New jobs similar to Lead Product Designer at Scrambly",
-          "date": "Mon, 9 Nov 2026 05:50:55 +0000 (GMT)",
-          "from": "LinkedIn <jobs-noreply@linkedin.com>"
-        },
-        {
-          "id": "1a1bed25bfb7726f",
-          "subject": "Coordonator Activitate - Sales Controlling la Allianz. Încă 19 locuri de muncă în București, Ilfov",
-          "date": "Mon, 09 Nov 2026 05:40:18 +0000",
-          "from": "Indeed <donotreply@jobalert.indeed.com>"
-        },
-        {
-          "id": "1a1bec796609d265",
-          "subject": "Job offers that fit your profile",
-          "date": "Mon, 09 Nov 2026 07:28:11 +0200",
+          "id": "1a1c3f0f7c45d487",
+          "subject": "These employers are looking for people like you",
+          "date": "Tue, 10 Nov 2026 07:31:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         }
       ]
@@ -50,42 +50,42 @@
       "title": "AI si comunitati",
       "name": "AI Folder/AI si Comunitati",
       "counts": {
-        "azi": 0,
-        "24h": 9,
-        "7z": 103,
-        "30z": 191
+        "azi": 2,
+        "24h": 14,
+        "7z": 106,
+        "30z": 199
       },
       "newest": {
-        "id": "1a1bc828afbefe92",
-        "subject": "Deranged podcasters receive brutal karma after laughing about killing Charlie Kirk",
-        "date": "Sun, 8 Nov 2026 18:41:17 +0000",
-        "from": "PolitiBrawl <politibrawl@substack.com>"
+        "id": "1a1c389040fb9cc9",
+        "subject": "Someone copied our product. It had made $4,003.",
+        "date": "Tue, 10 Nov 2026 03:38:10 +0000",
+        "from": "Keith Rumjahn from AI for Solopreneurs <rumjahn@substack.com>"
       },
-      "newestDate": "Sun, 8 Nov 2026 18:41:17 +0000",
+      "newestDate": "Tue, 10 Nov 2026 03:38:10 +0000",
       "samples": [
         {
-          "id": "1a1bc828afbefe92",
-          "subject": "Deranged podcasters receive brutal karma after laughing about killing Charlie Kirk",
-          "date": "Sun, 8 Nov 2026 18:41:17 +0000",
+          "id": "1a1c389040fb9cc9",
+          "subject": "Someone copied our product. It had made $4,003.",
+          "date": "Tue, 10 Nov 2026 03:38:10 +0000",
+          "from": "Keith Rumjahn from AI for Solopreneurs <rumjahn@substack.com>"
+        },
+        {
+          "id": "1a1c2fbc4d811fa2",
+          "subject": "First the stock market. Now the banks?",
+          "date": "Tue, 10 Nov 2026 01:00:52 +0000",
+          "from": "\"Felix & Winston 🐶\" <felix@goatacademy.org>"
+        },
+        {
+          "id": "1a1c2b0f39863af4",
+          "subject": "Peter Doocy leaves Ro Khanna SPEECHLESS live on Fox News - Rains on his TDS parade",
+          "date": "Mon, 9 Nov 2026 23:30:36 +0000",
           "from": "PolitiBrawl <politibrawl@substack.com>"
         },
         {
-          "id": "1a1bc09220cdc3d0",
-          "subject": "There are 5 new jobs matching your saved search for November 8: AI Designer",
-          "date": "Sun, 08 Nov 2026 17:41:17 +0100",
-          "from": "JobLeads <mailer@jobleads.com>"
-        },
-        {
-          "id": "1a1bc23295b81293",
-          "subject": "Executive Briefing: If the Data-Center Backlash Leaves Fewer AI Suppliers, Who Will Your Company Rent Capacity Fro…",
-          "date": "Sun, 8 Nov 2026 16:02:48 +0000",
-          "from": "\"Nate from Nate’s Substack\" <natesnewsletter@substack.com>"
-        },
-        {
-          "id": "1a1bbe12ca900109",
-          "subject": "Julian Goldie posted \"🤯 40+ AI systems we built in 2 weeks (Grok Jarvis, Grok Bot Agent OS, FREE Local Jarvis + more)\"",
-          "date": "Sun, 08 Nov 2026 15:57:38 +0000 (UTC)",
-          "from": "AI Money Lab <noreply@skool.com>"
+          "id": "1a1c1f5b370c90c7",
+          "subject": "AI software development: how far has it actually come?",
+          "date": "Mon, 9 Nov 2026 20:17:47 +0000 (GMT)",
+          "from": "Alex Wang via LinkedIn <newsletters-noreply@linkedin.com>"
         }
       ]
     },
@@ -94,19 +94,31 @@
       "title": "Social",
       "name": "Socials",
       "counts": {
-        "azi": 1,
-        "24h": 5,
-        "7z": 34,
+        "azi": 0,
+        "24h": 2,
+        "7z": 33,
         "30z": 62
       },
       "newest": {
-        "id": "1a1be57a028714b1",
-        "subject": "27 new notifications since 5:25 am (Nov 8, 2026)",
-        "date": "Mon, 09 Nov 2026 03:26:15 +0000 (UTC)",
-        "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
+        "id": "1a1bf6a36d739c09",
+        "subject": "1 event happening tomorrow",
+        "date": "Mon, 09 Nov 2026 08:26:11 +0000 (UTC)",
+        "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
       },
-      "newestDate": "Mon, 09 Nov 2026 03:26:15 +0000 (UTC)",
+      "newestDate": "Mon, 09 Nov 2026 08:26:11 +0000 (UTC)",
       "samples": [
+        {
+          "id": "1a1bf6a36d739c09",
+          "subject": "1 event happening tomorrow",
+          "date": "Mon, 09 Nov 2026 08:26:11 +0000 (UTC)",
+          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a1bf607eafc91d4",
+          "subject": "Giurgiuvanu Mihai started following you",
+          "date": "Mon, 09 Nov 2026 08:15:33 +0000 (UTC)",
+          "from": "TikTok <notification@service.tiktok.com>"
+        },
         {
           "id": "1a1be57a028714b1",
           "subject": "27 new notifications since 5:25 am (Nov 8, 2026)",
@@ -118,18 +130,6 @@
           "subject": "1 new notification since 10:46 pm (Nov 7, 2026)",
           "date": "Sun, 08 Nov 2026 20:46:28 +0000 (UTC)",
           "from": "\"AI Automation Vault (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a1bbe12ca900109",
-          "subject": "Julian Goldie posted \"🤯 40+ AI systems we built in 2 weeks (Grok Jarvis, Grok Bot Agent OS, FREE Local Jarvis + more)\"",
-          "date": "Sun, 08 Nov 2026 15:57:38 +0000 (UTC)",
-          "from": "AI Money Lab <noreply@skool.com>"
-        },
-        {
-          "id": "1a1ba64d12421b1f",
-          "subject": "1 event happening tomorrow",
-          "date": "Sun, 08 Nov 2026 09:02:10 +0000 (UTC)",
-          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
         }
       ]
     },
@@ -138,41 +138,41 @@
       "title": "Newsletter",
       "name": "Newsletter",
       "counts": {
-        "azi": 6,
-        "24h": 23,
-        "7z": 338,
-        "30z": 595
+        "azi": 15,
+        "24h": 39,
+        "7z": 322,
+        "30z": 628
       },
       "newest": {
-        "id": "1a1bedc0fea482c8",
-        "subject": "New jobs similar to Lead Product Designer at Scrambly",
-        "date": "Mon, 9 Nov 2026 05:50:55 +0000 (GMT)",
-        "from": "LinkedIn <jobs-noreply@linkedin.com>"
+        "id": "1a1c4026e7545d09",
+        "subject": "Lead UX Designer IRC307741 at GlobalLogic",
+        "date": "Tue, 10 Nov 2026 05:50:55 +0000 (GMT)",
+        "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
       },
-      "newestDate": "Mon, 9 Nov 2026 05:50:55 +0000 (GMT)",
+      "newestDate": "Tue, 10 Nov 2026 05:50:55 +0000 (GMT)",
       "samples": [
         {
-          "id": "1a1bedc0fea482c8",
-          "subject": "New jobs similar to Lead Product Designer at Scrambly",
-          "date": "Mon, 9 Nov 2026 05:50:55 +0000 (GMT)",
-          "from": "LinkedIn <jobs-noreply@linkedin.com>"
+          "id": "1a1c4026e7545d09",
+          "subject": "Lead UX Designer IRC307741 at GlobalLogic",
+          "date": "Tue, 10 Nov 2026 05:50:55 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
         },
         {
-          "id": "1a1be76b5303b3f2",
-          "subject": "AirPods head-tracking now works on Linux, thanks to Claude",
-          "date": "Mon, 9 Nov 2026 04:00:12 +0000",
-          "from": "XDA <newsletter@xda-developers.com>"
+          "id": "1a1c391a85d72959",
+          "subject": "How is your Art Direction job search going?",
+          "date": "Tue, 10 Nov 2026 03:47:44 +0000 (UTC)",
+          "from": "Glassdoor Jobs <noreply@glassdoor.com>"
         },
         {
-          "id": "1a1be57a028714b1",
-          "subject": "27 new notifications since 5:25 am (Nov 8, 2026)",
-          "date": "Mon, 09 Nov 2026 03:26:15 +0000 (UTC)",
-          "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
+          "id": "1a1c36544f3945b7",
+          "subject": "In Arena – Expozitia de final a proiectului european „Masks”, la Muzeul Taranului Roman",
+          "date": "Tue, 10 Nov 2026 02:59:15 +0000 (GMT)",
+          "from": "\"Cafenea   ☕️☕️☕️ via LinkedIn\" <newsletters-noreply@linkedin.com>"
         },
         {
-          "id": "1a1be26b78765cb6",
+          "id": "1a1c3263de83b3c0",
           "subject": "SOTI has an opportunity for you. Apply Now.",
-          "date": "Mon, 09 Nov 2026 02:32:50 +0000 (UTC)",
+          "date": "Tue, 10 Nov 2026 01:50:24 +0000 (UTC)",
           "from": "Glassdoor Jobs <noreply@glassdoor.com>"
         }
       ]
@@ -183,18 +183,30 @@
       "name": "Finante",
       "counts": {
         "azi": 0,
-        "24h": 0,
-        "7z": 17,
-        "30z": 34
+        "24h": 2,
+        "7z": 16,
+        "30z": 36
       },
       "newest": {
-        "id": "1a1b651661aef000",
-        "subject": "New idea by Cryptollica — check it out",
-        "date": "Sat, 07 Nov 2026 14:02:29 -0000",
+        "id": "1a1bf93a688f3dac",
+        "subject": "New idea by TradingView — check it out",
+        "date": "Mon, 09 Nov 2026 09:11:26 -0000",
         "from": "TradingView <noreply@tradingview.com>"
       },
-      "newestDate": "Sat, 07 Nov 2026 14:02:29 -0000",
+      "newestDate": "Mon, 09 Nov 2026 09:11:26 -0000",
       "samples": [
+        {
+          "id": "1a1bf93a688f3dac",
+          "subject": "New idea by TradingView — check it out",
+          "date": "Mon, 09 Nov 2026 09:11:26 -0000",
+          "from": "TradingView <noreply@tradingview.com>"
+        },
+        {
+          "id": "1a1bf5d7ce7d4093",
+          "subject": "New idea by Cryptollica — check it out",
+          "date": "Mon, 09 Nov 2026 08:12:16 -0000",
+          "from": "TradingView <noreply@tradingview.com>"
+        },
         {
           "id": "1a1b651661aef000",
           "subject": "New idea by Cryptollica — check it out",
@@ -206,18 +218,6 @@
           "subject": "Bitunix’s Latest Proof of Reserves Report Is Now Available",
           "date": "Sat, 07 Nov 2026 11:06:21 +0000 (UTC)",
           "from": "Bitunix <Noreply@bitunix.com>"
-        },
-        {
-          "id": "1a1af8e9fcb49ae0",
-          "subject": "Upcoming subscription payment",
-          "date": "Fri, 06 Nov 2026 06:32:01 -0000",
-          "from": "TradingView <noreply@tradingview.com>"
-        },
-        {
-          "id": "1a1ad6991a0814b7",
-          "subject": "New idea by Cryptollica — check it out",
-          "date": "Thu, 05 Nov 2026 20:32:17 -0000",
-          "from": "TradingView <noreply@tradingview.com>"
         }
       ]
     },
@@ -266,40 +266,40 @@
       "name": "Optimus CD",
       "counts": {
         "azi": 0,
-        "24h": 3,
+        "24h": 5,
         "7z": 18,
-        "30z": 1028
+        "30z": 1030
       },
       "newest": {
-        "id": "1a1bbdb682df50ff",
-        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: Invoke Jules - main (7e73488)",
-        "date": "Sun, 08 Nov 2026 07:51:20 -0800",
+        "id": "1a1c1d683228380c",
+        "subject": "[apvizual-max/hermes-agent-temp] Run failed: OSV-Scanner - main (12a9b35)",
+        "date": "Mon, 09 Nov 2026 11:43:42 -0800",
         "from": "apvizual-max <notifications@github.com>"
       },
-      "newestDate": "Sun, 08 Nov 2026 07:51:20 -0800",
+      "newestDate": "Mon, 09 Nov 2026 11:43:42 -0800",
       "samples": [
         {
-          "id": "1a1bbdb682df50ff",
-          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: Invoke Jules - main (7e73488)",
-          "date": "Sun, 08 Nov 2026 07:51:20 -0800",
+          "id": "1a1c1d683228380c",
+          "subject": "[apvizual-max/hermes-agent-temp] Run failed: OSV-Scanner - main (12a9b35)",
+          "date": "Mon, 09 Nov 2026 11:43:42 -0800",
           "from": "apvizual-max <notifications@github.com>"
         },
         {
-          "id": "1a1bb5c893071170",
-          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (7e73488)",
-          "date": "Sun, 08 Nov 2026 05:32:45 -0800",
+          "id": "1a1c125fda818c5e",
+          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (b344d75)",
+          "date": "Mon, 09 Nov 2026 08:30:53 -0800",
           "from": "apvizual-max <notifications@github.com>"
         },
         {
-          "id": "1a1bac0071089cb6",
+          "id": "1a1c02d9aa07fd40",
           "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
-          "date": "Sun, 08 Nov 2026 02:41:48 -0800",
+          "date": "Mon, 09 Nov 2026 03:59:35 -0800",
           "from": "apvizual-max <notifications@github.com>"
         },
         {
-          "id": "1a1b62339eab320b",
-          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (ee4abe4)",
-          "date": "Sat, 07 Nov 2026 05:12:03 -0800",
+          "id": "1a1bfe6b9ba4abec",
+          "subject": "[apvizual-max/hermes-agent-temp] Run failed: CI - main (12a9b35)",
+          "date": "Mon, 09 Nov 2026 02:42:10 -0800",
           "from": "apvizual-max <notifications@github.com>"
         }
       ]
@@ -307,9 +307,9 @@
   ],
   "missing": [],
   "totals": {
-    "azi": 14,
-    "24h": 62,
-    "7z": 769,
-    "30z": 2397
+    "azi": 37,
+    "24h": 105,
+    "7z": 759,
+    "30z": 2458
   }
 }
