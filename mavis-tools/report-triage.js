@@ -241,7 +241,14 @@ function triage(rows) {
       // receipt de aplicare: NU cere decizie. Se clasifica INAINTE de regula
       // de alerta de job, ca un receipt al unei aplicari sa nu devina sarcina.
       cls = 'fyi'; why = 'confirmare de aplicare — nu cere actiune';
-    } else if (ACCOUNT_TEXT.test(text)) {
+    } else if (ACCOUNT_TEXT.test(headText) || (!isJobAlert && ACCOUNT_TEXT.test(body))) {
+      // MĂSURAT 2026-11-11: alerta Hipo.ro („Alex - 36 Joburi noi adaugate")
+      // era clasificata „contul cere o actiune (parola / confirmare)" — motiv
+      // FALS: expresia se potrivea pe link-ul de footer din newsletter
+      // („Trebuie sa alegi o parola noua"), nu pe o cerere reala de cont.
+      // Corect: semnalul de cont din CORP conteaza doar daca mesajul NU e
+      // alerta de job (cazul HiRo, 28.10 — body-only, firma, nu platforma).
+      // In antet+fragment semnalul de cont ramane dominant, oricand.
       cls = 'needs-action'; why = 'contul cere o actiune (parola / confirmare)';
     } else if (NOISE_FROM.test(from)) {
       cls = 'noise'; why = 'zgomot din pipeline-ul propriu';

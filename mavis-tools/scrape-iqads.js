@@ -21,6 +21,13 @@ const https = require('https');
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 const BASE = 'https://www.iqads.ro';
 const OUT = process.argv[2] || '/workspace/Mavis/mavis-tools/jobs-iqads-2026-10-23.json';
+// Data scrape-ului se deduce din NUMELE FISIERULUI de iesire (jobs-iqads-AAAA-LL-ZZ.json).
+// Masurat 2026-11-11: era hardcodata '2026-10-23' in _meta, deci raportul zilnic
+// purta o data de scrape FALSA. Daca numele nu contine o data, cadem pe data curenta.
+const SCRAPED_DATE = (() => {
+  const m = String(OUT).match(/(\d{4}-\d{2}-\d{2})/);
+  return m ? m[1] : new Date().toISOString().slice(0, 10);
+})();
 
 function get(url) {
   return new Promise((resolve, reject) => {
@@ -132,7 +139,7 @@ function parseJob(html) {
     process.stdout.write(`  ${id} ${p.company || '?'} | ${p.title || slug} | exp ${p.expiry} | tip ${p.jobType.join('/')} | niv ${p.level} | jd ${p.jd.length}c\n`);
     await new Promise(res => setTimeout(res, 450));
   }
-  fs.writeFileSync(OUT, JSON.stringify({ _meta: { scraped: '2026-10-23', source: BASE + '/p/adjob', count: jobs.length }, jobs }, null, 2));
+  fs.writeFileSync(OUT, JSON.stringify({ _meta: { scraped: SCRAPED_DATE, source: BASE + '/p/adjob', count: jobs.length }, jobs }, null, 2));
   console.log('\nscrapat: ' + jobs.length + ' -> ' + OUT);
 
   // ---- LOCALIZAREA, de pe pagina companiei ----
@@ -192,6 +199,6 @@ function parseJob(html) {
     await new Promise(res => setTimeout(res, 350));
   }
 
-  fs.writeFileSync(OUT, JSON.stringify({ _meta: { scraped: '2026-10-23', source: BASE + '/p/adjob', count: jobs.length }, jobs }, null, 2));
+  fs.writeFileSync(OUT, JSON.stringify({ _meta: { scraped: SCRAPED_DATE, source: BASE + '/p/adjob', count: jobs.length }, jobs }, null, 2));
   console.log('rescris cu localizare: ' + OUT);
 })();

@@ -250,6 +250,7 @@ let md = `# Raport zilnic — ${dayName} ${d.getUTCDate()} ${MONTHS[d.getUTCMont
 
 > Generat de Mavis Cloud · ${sim.total} mesaje noi măsurate azi (00:00–${windowEnd} EEST) · ${sc.stats.total} joburi analizate
 > Cota Google: **${usageTotal} cereri** (plafon 200${usageTotal > 200 ? ` — **depășit cu ${usageTotal - 200}**` : usageTotal === 200 ? ` — **exact pe plafon**` : ` — **în limita plafonului**`}). Zero scrieri pe Gmail; tot consumul a fost măsurare și diagnostic. Detaliu în §5.
+> Cifra e măsurată **la scrierea raportului**; verificarea conținutului de pe Drive (citire înapoi, după upload) mai adaugă **1 cerere**.
 
 ---
 
@@ -333,6 +334,24 @@ if (filterState) {
   const working = ft.filter(x => x.matchesAsIs > 0);
   const dead = ft.filter(x => x.matchesAsIs === 0);
 
+  // CAUZA se CALCULEAZA per filtru, din date. Măsurat 2026-11-11: textul
+  // vechi spunea mereu „paranteze în loc de acolade" și „addLabelIds e vid" —
+  // adevărat pe 27.10, FALS pe 11.11 (filtrul mort folosește OR explicit și
+  // are addLabelIds). Un diagnostic greșit într-un raport zilnic e exact
+  // clasa de eroare pe care o numim „cifră mascată".
+  const causeOf = (x) => {
+    const row = rowById[x.id] || {};
+    const q = x.query || '';
+    const paren = /from:\([^)]*\s[^)]*\)/i.test(q);
+    const noLabel = !(row.addLabelIds || []).length;
+    const noCat = !(row.categories || []).length;
+    if (paren) return 'criteriu cu paranteze `from:(...)` — în căutarea Gmail `()` = ȘI, deci cere un expeditor cu **toate** cuvintele simultan';
+    if (noLabel) return '`addLabelIds` vid — nici cu criteriu corect n-ar eticheta nimic';
+    if ((x.matchesFixed || 0) > (x.matchesAsIs || 0)) return `rescrierea cu \`{}\` ar lovi **${x.matchesFixed}** mesaje — restul e corect`;
+    if (noCat) return 'criteriu valid (`OR` explicit) și `addLabelIds` corect, dar 0 lovituri în 30 de zile: nu a venit niciun mail de la aceste surse în fereastră. Nu e o categorie a ta — eticheta țintă e `' + ((row.addLabelIds || []).join(', ') || 'niciuna') + '`';
+    return 'criteriu valid (`OR` explicit) și `addLabelIds` corect, dar 0 lovituri în 30 de zile';
+  };
+
   md += `Filtre cu criteriu de interogare pe cont: **${rowsF.length}**, din ${filterState.totalFilters} total. **${withAdd}** dintre ele are \`addLabelIds\`, iar **${withCatAdd}** atinge o etichetă de categorie.`;
   if (joburi) md += ` Criteriul celui de joburi, citit live azi:\n\n\`\`\`\n${joburi.query}\n\`\`\`\n`;
 
@@ -345,23 +364,29 @@ if (filterState) {
 `;
   }
   if (dead.length) {
+    const deadFixed = dead.reduce((a, x) => a + (x.matchesFixed || 0), 0);
     md += `
-**Cauza reală, măsurată azi pe Gmail:** în căutarea Gmail, \`()\` înseamnă **ȘI**, iar \`{}\` înseamnă **SAU**. Cele ${dead.length} filtre nefuncționale folosesc \`from:(jooble bestjobs ...)\` — deci cer un expeditor care să conțină **toate** cuvintele simultan. Rezultat: **0 mesaje lovite în 30 de zile.**
+**Cele ${dead.length} filtre cu criteriu care nu lovesc niciun mesaj în 30 de zile** — cauza e calculată per filtru, nu spusă din memorie:
 
-| Filtru | cum e scris acum | cum ar trebui scris (\`{}\`) |
-|---|---|---|
+| Filtru | cum e scris acum | cum ar trebui scris (\`{}\`) | cauza |
+|---|---|---|---|
 `;
     for (const x of dead) {
-      md += `| \`${x.query.slice(0, 58)}${x.query.length > 58 ? '…' : ''}\` | **${x.matchesAsIs}** | **${x.matchesFixed}** |\n`;
+      md += `| \`${x.query.slice(0, 58)}${x.query.length > 58 ? '…' : ''}\` | **${x.matchesAsIs}** | **${x.matchesFixed}** | ${causeOf(x)} |\n`;
     }
     md += `
-Cu acoladele, aceleași filtre ar fi prins **${totalFixed} mesaje în 30 de zile**.
-
-**Două defecte, în ordine:**
-1. **Criteriile nu pot lovi nimic** — paranteze în loc de acolade.
-2. **\`addLabelIds\` e vid** — nici măcar cu criterii corecte n-ar eticheta ceva.
-
-**De ce nu le-am reparat azi:** repararea de filtre cere scope-ul \`gmail.settings.basic\` — fără el, \`filters PATCH\` răspunde 403. Starea scope-urilor din cloud se **măsoară**, nu se presupune: \`node mavis-tools/google-preflight.js\` (pasul [6] — control de drift). Repararea se face prin **DELETE + CREATE** (\`filters.update\`/PUT → 404, \`filters.patch\`/PATCH → 404 „Method not found"). Scriptul e pregătit cu \`--dry-run\` și cu salvarea stării de dinainte pentru rollback: \`mavis-tools/fix-mavis-filters.js\`.
+${deadFixed > 0
+      ? `Rescrierea cu \`{}\` ar aduce **${deadFixed} mesaje** în plus în 30 de zile.`
+      : `**Rescrierea cu \`{}\` nu ar aduce nimic** (0 mesaje în plus) — deci aici nu e o eroare de sintaxă, ci absența mesajelor de la aceste surse în fereastra măsurată.`}
+`;
+    // Scope-ul pentru reparare: masurat azi, nu presupus.
+    const si = filterState.scopeInfo || {};
+    md += `
+**De ce nu le-am reparat azi:** ${si.checked
+      ? (si.settingsBasic
+        ? `scope-ul \`gmail.settings.basic\` **e acordat** (verificat live azi pe token, ${si.grantedCount} scope-uri) — deci repararea se poate face și din cloud, prin **DELETE + CREATE** (\`filters.update\`/PUT → 404, \`filters.patch\`/PATCH → 404 „Method not found").`
+        : `scope-ul \`gmail.settings.basic\` **nu e acordat** pe tokenul din cloud (verificat live azi) — fără el, \`filters PATCH\` răspunde 403, deci repararea se face de pe calculatorul lui POPY.`)
+      : 'starea scope-urilor nu a fost măsurată azi (rulează `node mavis-tools/google-preflight.js`, pasul [6] — control de drift).'}
 `;
   }
 } else {
@@ -614,14 +639,25 @@ if (daysOff !== null) {
 
   const deadStaleN = deadRows.filter(l => l.newest).length;
   const deadNeverN = deadRows.length - deadStaleN;
-  md += `1. **${deadRows.length} din ${labelRows.length} categorii nu mai primesc nimic**${deadStaleN ? ` (${deadStaleN} de ${deadDaysOff} zile` : ''}${deadStaleN && deadNeverN ? ', ' : ''}${deadNeverN ? `${deadNeverN} n-a fost folosită niciodată` : ''}).`;
+  const deadDetail = [];
+  if (deadStaleN) deadDetail.push(`${deadStaleN} de ${deadDaysOff} zile`);
+  if (deadNeverN) deadDetail.push(`${deadNeverN} n-a fost folosită niciodată`);
+  md += `1. **${deadRows.length} din ${labelRows.length} categorii nu mai primesc nimic**${deadDetail.length ? ` (${deadDetail.join(', ')})` : ''}.`;
   if (deadNoFilter.length) {
     md += ` Cauza pentru ${deadNoFilter.length === 1 ? 'una' : deadNoFilter.length + ' dintre ele'}: **nu au filtru creat** (${deadNoFilter.map(n => `\`${n}\``).join(', ')}) — deci nimic nu le poate eticheta, oricare ar fi criteriul.`;
   }
   if (deadBrokenFilter.length) {
     md += ` Pentru ${deadBrokenFilter.length === 1 ? 'cea ramasa' : 'celelalte'} (${deadBrokenFilter.map(n => `\`${n}\``).join(', ')}) exista filtru, dar el loveste 0 mesaje.`;
   }
-  md += ` Starea filtrelor, masurata azi: **${workingCount} functioneaza, ${brokenCount} sunt nefunctionale**${brokenCount ? ` — cele nefunctionale folosesc \`from:(...)\` unde Gmail cere \`from:{...}\` (paranteze = ȘI, acolade = SAU), deci nu pot lovi niciun mesaj; cu acoladele ar fi prins ${totalFixed} mesaje in 30 de zile` : ''}. ~${inboxCounts['7d_inbox']} mesaje/7 zile stau in inbox.\n`;
+  // Diagnosticul filtrelor moarte: calculat per filtru, nu repetat din memorie.
+  const deadTests = ft.filter(x => !/^list:/i.test(x.query || '') && x.matchesAsIs === 0);
+  const deadParen = deadTests.filter(x => /from:\([^)]*\s[^)]*\)/i.test(x.query || '')).length;
+  const deadSum = deadTests.reduce((a, x) => a + (x.matchesFixed || 0), 0);
+  const deadCauseTxt = deadTests.length === 0 ? ''
+    : deadParen === deadTests.length
+      ? ` — toate folosesc \`from:(...)\` unde Gmail cere \`from:{...}\` (paranteze = ȘI, acolade = SAU), deci nu pot lovi niciun mesaj${deadSum ? `; cu acoladele ar fi prins ${deadSum} mesaje in 30 de zile` : ''}`
+      : ` — cauza, măsurată per filtru: ${deadParen} din ${deadTests.length} au criteriu de tip \`from:(...)\` (paranteze = ȘI, acolade = SAU)${deadSum ? `; rescrierea cu \`{}\` ar aduce ${deadSum} mesaje in 30 de zile` : ''}; restul au criteriu valid (OR explicit) și \`addLabelIds\` corect, dar nu a venit niciun mail de la aceste surse în fereastra măsurată`;
+  md += ` Starea filtrelor, masurata azi: **${workingCount} functioneaza, ${brokenCount} sunt nefunctionale**${deadCauseTxt}. ~${inboxCounts['7d_inbox']} mesaje/7 zile stau in inbox.\n`;
 }
 if (dpP && !dpP.error) {
   md += `2. **designproject.io servește descrieri foarte inegale** (${dpP.jdLenMin}–${dpP.jdLenMax} de caractere pe cele ${dpP.count} de joburi, măsurat azi). Cele mai lungi sunt rescrise de AI și injectează cuvinte-cheie care ridică axele — vezi §6.2.\n`;

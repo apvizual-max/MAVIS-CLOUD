@@ -102,6 +102,25 @@ function toOrGroups(query) {
     if (row) row.functional = t.matchesAsIs > 0 && row.categories.length > 0;
   }
 
+  // SCOPE-UL pentru repararea filtrelor, MASURAT (nu presupus).
+  // Memorie 2026-10-27: repararea cerea scope-ul `gmail.settings.basic`, care
+  // lipsea din tokenul din cloud => se repara de pe calculatorul lui POPY.
+  // POPY a acordat scope-urile extinse pe 28.10, deci starea se verifica LIVE.
+  // 1 cerere (tokeninfo). Daca scope-ul e acordat, filtrele se pot repara si
+  // din cloud — si raportul trebuie sa spuna asta, nu sa repete motivul vechi.
+  let scopeInfo = { checked: false, settingsBasic: null, grantedCount: null };
+  try {
+    const ti = await k.tokeninfo();
+    const granted = String(ti.scope || '').split(/\s+/).filter(Boolean);
+    scopeInfo = {
+      checked: true,
+      settingsBasic: granted.includes('https://www.googleapis.com/auth/gmail.settings.basic'),
+      grantedCount: granted.length,
+    };
+  } catch (e) {
+    scopeInfo = { checked: true, settingsBasic: null, grantedCount: null, error: String(e.message || e).slice(0, 120) };
+  }
+
   const out = {
     totalFilters: all.length,
     mavisFilters: rows.length,
@@ -111,6 +130,7 @@ function toOrGroups(query) {
     withRemoveInbox: rows.filter(r => r.removeLabelIds.includes('INBOX')).length,
     rows,
     tests,
+    scopeInfo,
     verdict: {
       parenthesisIsAnd: tests.length > 0 && tests.every(t => t.matchesAsIs === 0 && t.matchesFixed > 0),
       note: 'Gmail: () = SI, {} = SAU. Filtrele cu from:(...) nu pot lovi niciun mesaj.',

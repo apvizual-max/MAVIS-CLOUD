@@ -17,6 +17,13 @@ const https = require('https');
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 const BASE = 'https://designproject.io';
 const OUT = process.argv[2] || '/workspace/Mavis/mavis-tools/jobs-designproject-2026-10-23.json';
+// Data scrape-ului se deduce din NUMELE FISIERULUI de iesire (jobs-designproject-AAAA-LL-ZZ.json).
+// Masurat 2026-11-11: era hardcodata '2026-10-23' in _meta, deci raportul zilnic
+// purta o data de scrape FALSA. Daca numele nu contine o data, cadem pe data curenta.
+const SCRAPED_DATE = (() => {
+  const m = String(OUT).match(/(\d{4}-\d{2}-\d{2})/);
+  return m ? m[1] : new Date().toISOString().slice(0, 10);
+})();
 
 function get(url) {
   return new Promise((resolve, reject) => {
@@ -137,6 +144,6 @@ function parseDetail(html, card) {
     console.log(`  ${c.date} | ${c.company} | ${c.title} | loc=${p.loc} | eng=${p.eng} | jd ${jd.length}c`);
     await new Promise(res => setTimeout(res, 350));
   }
-  fs.writeFileSync(OUT, JSON.stringify({ _meta: { scraped: '2026-10-23', source: 'designproject.io', count: jobs.length }, jobs }, null, 2));
+  fs.writeFileSync(OUT, JSON.stringify({ _meta: { scraped: SCRAPED_DATE, source: 'designproject.io', count: jobs.length }, jobs }, null, 2));
   console.log('\nscrapat: ' + jobs.length + ' -> ' + OUT);
 })();

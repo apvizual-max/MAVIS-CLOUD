@@ -1,47 +1,47 @@
 {
-  "today": "2026/11/10",
+  "today": "2026/11/11",
   "labels": [
     {
       "key": "joburi",
       "title": "Joburi",
       "name": "MAVIS/Joburi",
       "counts": {
-        "azi": 20,
-        "24h": 43,
-        "7z": 264,
-        "30z": 503
+        "azi": 5,
+        "24h": 40,
+        "7z": 266,
+        "30z": 525
       },
       "newest": {
-        "id": "1a1c40bad9f8b236",
-        "subject": "See Goleanu’s and other people’s connections, experience, and more",
-        "date": "Tue, 10 Nov 2026 06:01:01 +0000 (GMT)",
-        "from": "LinkedIn <invitations@linkedin.com>"
+        "id": "1a1c9191a5b61992",
+        "subject": "Anxietate și Kaizen",
+        "date": "Wed, 11 Nov 2026 05:33:47 +0000 (GMT)",
+        "from": "Mihai Svasta via LinkedIn <newsletters-noreply@linkedin.com>"
       },
-      "newestDate": "Tue, 10 Nov 2026 06:01:01 +0000 (GMT)",
+      "newestDate": "Wed, 11 Nov 2026 05:33:47 +0000 (GMT)",
       "samples": [
         {
-          "id": "1a1c40bad9f8b236",
-          "subject": "See Goleanu’s and other people’s connections, experience, and more",
-          "date": "Tue, 10 Nov 2026 06:01:01 +0000 (GMT)",
-          "from": "LinkedIn <invitations@linkedin.com>"
+          "id": "1a1c9191a5b61992",
+          "subject": "Anxietate și Kaizen",
+          "date": "Wed, 11 Nov 2026 05:33:47 +0000 (GMT)",
+          "from": "Mihai Svasta via LinkedIn <newsletters-noreply@linkedin.com>"
         },
         {
-          "id": "1a1c4026e7545d09",
-          "subject": "Lead UX Designer IRC307741 at GlobalLogic",
-          "date": "Tue, 10 Nov 2026 05:50:55 +0000 (GMT)",
-          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+          "id": "1a1c8f2b211a121b",
+          "subject": "4PSA caută UI/UX Designer și 101 mai multe oferte noi de muncă",
+          "date": "Wed, 11 Nov 2026 04:51:51 +0000",
+          "from": "Jooble <subscribe@ro.jooble.org>"
         },
         {
-          "id": "1a1c4002bb4574fc",
-          "subject": "9 graphic design, bucharest jobs available on bestjobs",
-          "date": "Tue, 10 Nov 2026 07:48:11 +0200",
-          "from": "Bestjobs <contact@bestjobs.eu>"
+          "id": "1a1c8df76910df3f",
+          "subject": "Alex - 36 Joburi noi adaugate pentru tine pe hipo.ro",
+          "date": "Wed, 11 Nov 2026 06:30:48 +0200",
+          "from": "\"Joburi Hipo.ro\" <joburi@alertele.hipo.ro>"
         },
         {
-          "id": "1a1c3f0f7c45d487",
-          "subject": "These employers are looking for people like you",
-          "date": "Tue, 10 Nov 2026 07:31:11 +0200",
-          "from": "Bestjobs <contact@bestjobs.eu>"
+          "id": "1a1c8ca81065e4ae",
+          "subject": "🔔 Cosmoworker caută Top - Lucrător depozit - Colectare și ambalare comenzi  și 84 mai multe oferte noi de muncă",
+          "date": "Wed, 11 Nov 2026 04:07:56 +0000",
+          "from": "Jooble <subscribe@ro.jooble.org>"
         }
       ]
     },
@@ -51,41 +51,41 @@
       "name": "AI Folder/AI si Comunitati",
       "counts": {
         "azi": 2,
-        "24h": 14,
-        "7z": 106,
-        "30z": 199
+        "24h": 19,
+        "7z": 111,
+        "30z": 216
       },
       "newest": {
-        "id": "1a1c389040fb9cc9",
-        "subject": "Someone copied our product. It had made $4,003.",
-        "date": "Tue, 10 Nov 2026 03:38:10 +0000",
-        "from": "Keith Rumjahn from AI for Solopreneurs <rumjahn@substack.com>"
+        "id": "1a1c91fd05e8bcc4",
+        "subject": "Nature Can Teach a Child What Teachers and Parents Cannot",
+        "date": "Wed, 11 Nov 2026 05:41:07 +0000",
+        "from": "Isha News <isha.offerings@sadhguru.org>"
       },
-      "newestDate": "Tue, 10 Nov 2026 03:38:10 +0000",
+      "newestDate": "Wed, 11 Nov 2026 05:41:07 +0000",
       "samples": [
         {
-          "id": "1a1c389040fb9cc9",
-          "subject": "Someone copied our product. It had made $4,003.",
-          "date": "Tue, 10 Nov 2026 03:38:10 +0000",
-          "from": "Keith Rumjahn from AI for Solopreneurs <rumjahn@substack.com>"
+          "id": "1a1c91fd05e8bcc4",
+          "subject": "Nature Can Teach a Child What Teachers and Parents Cannot",
+          "date": "Wed, 11 Nov 2026 05:41:07 +0000",
+          "from": "Isha News <isha.offerings@sadhguru.org>"
         },
         {
-          "id": "1a1c2fbc4d811fa2",
-          "subject": "First the stock market. Now the banks?",
-          "date": "Tue, 10 Nov 2026 01:00:52 +0000",
-          "from": "\"Felix & Winston 🐶\" <felix@goatacademy.org>"
+          "id": "1a1c9099b3ea72c0",
+          "subject": "THEY FOLLOW",
+          "date": "Wed, 11 Nov 2026 05:16:42 +0000",
+          "from": "DocFreemason <docfreemason@substack.com>"
         },
         {
-          "id": "1a1c2b0f39863af4",
-          "subject": "Peter Doocy leaves Ro Khanna SPEECHLESS live on Fox News - Rains on his TDS parade",
-          "date": "Mon, 9 Nov 2026 23:30:36 +0000",
+          "id": "1a1c7e56888a1a81",
+          "subject": "Martha MacCallum makes pompous Democrat realize he’s an IDIOT live on air - Calls out his obvious Hegseth grudge",
+          "date": "Tue, 10 Nov 2026 23:45:34 +0000",
           "from": "PolitiBrawl <politibrawl@substack.com>"
         },
         {
-          "id": "1a1c1f5b370c90c7",
-          "subject": "AI software development: how far has it actually come?",
-          "date": "Mon, 9 Nov 2026 20:17:47 +0000 (GMT)",
-          "from": "Alex Wang via LinkedIn <newsletters-noreply@linkedin.com>"
+          "id": "1a1c75eb62e79510",
+          "subject": "The AI bubble could burst.",
+          "date": "Tue, 10 Nov 2026 21:30:34 +0000",
+          "from": "Josh at Morningside <admin@news.morningside.ai>"
         }
       ]
     },
@@ -94,42 +94,42 @@
       "title": "Social",
       "name": "Socials",
       "counts": {
-        "azi": 0,
-        "24h": 2,
-        "7z": 33,
-        "30z": 62
+        "azi": 3,
+        "24h": 7,
+        "7z": 35,
+        "30z": 67
       },
       "newest": {
-        "id": "1a1bf6a36d739c09",
-        "subject": "1 event happening tomorrow",
-        "date": "Mon, 09 Nov 2026 08:26:11 +0000 (UTC)",
-        "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
+        "id": "1a1c90abef0e7a2d",
+        "subject": "Weekly digest for Wed, Nov 4 2026",
+        "date": "Wed, 11 Nov 2026 05:18:06 +0000 (UTC)",
+        "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
       },
-      "newestDate": "Mon, 09 Nov 2026 08:26:11 +0000 (UTC)",
+      "newestDate": "Wed, 11 Nov 2026 05:18:06 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a1bf6a36d739c09",
-          "subject": "1 event happening tomorrow",
-          "date": "Mon, 09 Nov 2026 08:26:11 +0000 (UTC)",
-          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
+          "id": "1a1c90abef0e7a2d",
+          "subject": "Weekly digest for Wed, Nov 4 2026",
+          "date": "Wed, 11 Nov 2026 05:18:06 +0000 (UTC)",
+          "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a1bf607eafc91d4",
-          "subject": "Giurgiuvanu Mihai started following you",
-          "date": "Mon, 09 Nov 2026 08:15:33 +0000 (UTC)",
-          "from": "TikTok <notification@service.tiktok.com>"
+          "id": "1a1c9028a86d7775",
+          "subject": "Weekly digest for Wed, Nov 4 2026",
+          "date": "Wed, 11 Nov 2026 05:09:09 +0000 (UTC)",
+          "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a1be57a028714b1",
-          "subject": "27 new notifications since 5:25 am (Nov 8, 2026)",
-          "date": "Mon, 09 Nov 2026 03:26:15 +0000 (UTC)",
-          "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a1bce99e3e0f069",
-          "subject": "1 new notification since 10:46 pm (Nov 7, 2026)",
-          "date": "Sun, 08 Nov 2026 20:46:28 +0000 (UTC)",
+          "id": "1a1c8ffcdb2cd829",
+          "subject": "Weekly digest for Wed, Nov 4 2026",
+          "date": "Wed, 11 Nov 2026 05:06:07 +0000 (UTC)",
           "from": "\"AI Automation Vault (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a1c6e347b7ec265",
+          "subject": "Nate Herk posted \"Quick favor to ask... Glaido is live on Product Hunt today!\"",
+          "date": "Tue, 10 Nov 2026 19:15:45 +0000 (UTC)",
+          "from": "AI Automation Society <noreply@skool.com>"
         }
       ]
     },
@@ -138,42 +138,42 @@
       "title": "Newsletter",
       "name": "Newsletter",
       "counts": {
-        "azi": 15,
-        "24h": 39,
+        "azi": 9,
+        "24h": 52,
         "7z": 322,
-        "30z": 628
+        "30z": 675
       },
       "newest": {
-        "id": "1a1c4026e7545d09",
-        "subject": "Lead UX Designer IRC307741 at GlobalLogic",
-        "date": "Tue, 10 Nov 2026 05:50:55 +0000 (GMT)",
-        "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+        "id": "1a1c91fd05e8bcc4",
+        "subject": "Nature Can Teach a Child What Teachers and Parents Cannot",
+        "date": "Wed, 11 Nov 2026 05:41:07 +0000",
+        "from": "Isha News <isha.offerings@sadhguru.org>"
       },
-      "newestDate": "Tue, 10 Nov 2026 05:50:55 +0000 (GMT)",
+      "newestDate": "Wed, 11 Nov 2026 05:41:07 +0000",
       "samples": [
         {
-          "id": "1a1c4026e7545d09",
-          "subject": "Lead UX Designer IRC307741 at GlobalLogic",
-          "date": "Tue, 10 Nov 2026 05:50:55 +0000 (GMT)",
-          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+          "id": "1a1c91fd05e8bcc4",
+          "subject": "Nature Can Teach a Child What Teachers and Parents Cannot",
+          "date": "Wed, 11 Nov 2026 05:41:07 +0000",
+          "from": "Isha News <isha.offerings@sadhguru.org>"
         },
         {
-          "id": "1a1c391a85d72959",
-          "subject": "How is your Art Direction job search going?",
-          "date": "Tue, 10 Nov 2026 03:47:44 +0000 (UTC)",
-          "from": "Glassdoor Jobs <noreply@glassdoor.com>"
+          "id": "1a1c9191a5b61992",
+          "subject": "Anxietate și Kaizen",
+          "date": "Wed, 11 Nov 2026 05:33:47 +0000 (GMT)",
+          "from": "Mihai Svasta via LinkedIn <newsletters-noreply@linkedin.com>"
         },
         {
-          "id": "1a1c36544f3945b7",
-          "subject": "In Arena – Expozitia de final a proiectului european „Masks”, la Muzeul Taranului Roman",
-          "date": "Tue, 10 Nov 2026 02:59:15 +0000 (GMT)",
-          "from": "\"Cafenea   ☕️☕️☕️ via LinkedIn\" <newsletters-noreply@linkedin.com>"
+          "id": "1a1c90abef0e7a2d",
+          "subject": "Weekly digest for Wed, Nov 4 2026",
+          "date": "Wed, 11 Nov 2026 05:18:06 +0000 (UTC)",
+          "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a1c3263de83b3c0",
-          "subject": "SOTI has an opportunity for you. Apply Now.",
-          "date": "Tue, 10 Nov 2026 01:50:24 +0000 (UTC)",
-          "from": "Glassdoor Jobs <noreply@glassdoor.com>"
+          "id": "1a1c9028a86d7775",
+          "subject": "Weekly digest for Wed, Nov 4 2026",
+          "date": "Wed, 11 Nov 2026 05:09:09 +0000 (UTC)",
+          "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
         }
       ]
     },
@@ -185,16 +185,28 @@
         "azi": 0,
         "24h": 2,
         "7z": 16,
-        "30z": 36
+        "30z": 38
       },
       "newest": {
-        "id": "1a1bf93a688f3dac",
-        "subject": "New idea by TradingView — check it out",
-        "date": "Mon, 09 Nov 2026 09:11:26 -0000",
-        "from": "TradingView <noreply@tradingview.com>"
+        "id": "1a1c6c233d8d71bb",
+        "subject": "Anthropic IPO requests are open via xStocks",
+        "date": "Tue, 10 Nov 2026 18:39:37 +0000",
+        "from": "Kraken <no-reply@email.kraken.com>"
       },
-      "newestDate": "Mon, 09 Nov 2026 09:11:26 -0000",
+      "newestDate": "Tue, 10 Nov 2026 18:39:37 +0000",
       "samples": [
+        {
+          "id": "1a1c6c233d8d71bb",
+          "subject": "Anthropic IPO requests are open via xStocks",
+          "date": "Tue, 10 Nov 2026 18:39:37 +0000",
+          "from": "Kraken <no-reply@email.kraken.com>"
+        },
+        {
+          "id": "1a1c58874d5064ce",
+          "subject": "New idea by Cryptollica — check it out",
+          "date": "Tue, 10 Nov 2026 12:56:55 -0000",
+          "from": "TradingView <noreply@tradingview.com>"
+        },
         {
           "id": "1a1bf93a688f3dac",
           "subject": "New idea by TradingView — check it out",
@@ -206,33 +218,8 @@
           "subject": "New idea by Cryptollica — check it out",
           "date": "Mon, 09 Nov 2026 08:12:16 -0000",
           "from": "TradingView <noreply@tradingview.com>"
-        },
-        {
-          "id": "1a1b651661aef000",
-          "subject": "New idea by Cryptollica — check it out",
-          "date": "Sat, 07 Nov 2026 14:02:29 -0000",
-          "from": "TradingView <noreply@tradingview.com>"
-        },
-        {
-          "id": "1a1b5b028bba317f",
-          "subject": "Bitunix’s Latest Proof of Reserves Report Is Now Available",
-          "date": "Sat, 07 Nov 2026 11:06:21 +0000 (UTC)",
-          "from": "Bitunix <Noreply@bitunix.com>"
         }
       ]
-    },
-    {
-      "key": "personal",
-      "title": "Personal",
-      "name": "Personal",
-      "counts": {
-        "azi": 0,
-        "24h": 0,
-        "7z": 0,
-        "30z": 0
-      },
-      "newest": null,
-      "newestDate": null
     },
     {
       "key": "actiune",
@@ -266,18 +253,30 @@
       "name": "Optimus CD",
       "counts": {
         "azi": 0,
-        "24h": 5,
+        "24h": 2,
         "7z": 18,
-        "30z": 1030
+        "30z": 1015
       },
       "newest": {
-        "id": "1a1c1d683228380c",
-        "subject": "[apvizual-max/hermes-agent-temp] Run failed: OSV-Scanner - main (12a9b35)",
-        "date": "Mon, 09 Nov 2026 11:43:42 -0800",
+        "id": "1a1c5f7dbd814a47",
+        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (5bff5a0)",
+        "date": "Tue, 10 Nov 2026 06:58:36 -0800",
         "from": "apvizual-max <notifications@github.com>"
       },
-      "newestDate": "Mon, 09 Nov 2026 11:43:42 -0800",
+      "newestDate": "Tue, 10 Nov 2026 06:58:36 -0800",
       "samples": [
+        {
+          "id": "1a1c5f7dbd814a47",
+          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (5bff5a0)",
+          "date": "Tue, 10 Nov 2026 06:58:36 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
+        {
+          "id": "1a1c54008deca022",
+          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
+          "date": "Tue, 10 Nov 2026 03:37:49 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
         {
           "id": "1a1c1d683228380c",
           "subject": "[apvizual-max/hermes-agent-temp] Run failed: OSV-Scanner - main (12a9b35)",
@@ -289,27 +288,24 @@
           "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (b344d75)",
           "date": "Mon, 09 Nov 2026 08:30:53 -0800",
           "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a1c02d9aa07fd40",
-          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
-          "date": "Mon, 09 Nov 2026 03:59:35 -0800",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a1bfe6b9ba4abec",
-          "subject": "[apvizual-max/hermes-agent-temp] Run failed: CI - main (12a9b35)",
-          "date": "Mon, 09 Nov 2026 02:42:10 -0800",
-          "from": "apvizual-max <notifications@github.com>"
         }
       ]
     }
   ],
-  "missing": [],
+  "missing": [
+    {
+      "key": "personal",
+      "title": "Personal",
+      "aliases": [
+        "MAVIS/Personal",
+        "Personal"
+      ]
+    }
+  ],
   "totals": {
-    "azi": 37,
-    "24h": 105,
-    "7z": 759,
-    "30z": 2458
+    "azi": 19,
+    "24h": 122,
+    "7z": 768,
+    "30z": 2536
   }
 }
