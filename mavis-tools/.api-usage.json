@@ -1,11 +1,10 @@
 {
-  "_nota": "Rulare 2026-11-11 (raport zilnic). Contor pornit de la zero. `report-filter-state.js` a rulat de doua ori (28 + 29): a doua rulare adauga sonda de scope pe token (1 cerere) — de aceea 57, nu 29. `tmp-hipo-body.js` = 1 cerere (corpul complet al unui mesaj trunchiat, ca sa nu clasific greșit alerta Hipo).",
+  "_nota": "Rulare 2026-11-11 (raport zilnic, re-rulare la 06:06 UTC). Contor pornit de la zero.",
   "report-folder-discover.js": 5,
   "report-inbox-counts.js": 7,
   "report-mail-count.js": 61,
-  "report-simulate-sort.js": 20,
-  "tmp-hipo-body.js": 1,
-  "report-filter-state.js": 57,
-  "report-build.js": 4,
-  "tmp-verify-upload.js": 3
+  "report-simulate-sort.js": 23,
+  "report-filter-state.js": 29,
+  "report-build.js": 1,
+  "report-verify-upload.js": 1
 }

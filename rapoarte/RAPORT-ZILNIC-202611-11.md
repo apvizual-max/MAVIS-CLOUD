@@ -1,7 +1,7 @@
 # Raport zilnic — miercuri 11 noiembrie 2026
 
-> Generat de Mavis Cloud · 18 mesaje noi măsurate azi (00:00–08:51 EEST) · 65 joburi analizate
-> Cota Google: **157 cereri** (plafon 200 — **în limita plafonului**). Zero scrieri pe Gmail; tot consumul a fost măsurare și diagnostic. Detaliu în §5.
+> Generat de Mavis Cloud · 21 mesaje noi măsurate azi (00:00–09:09 EEST) · 65 joburi analizate
+> Cota Google: **126 cereri** (plafon 200 — **în limita plafonului**). Zero scrieri pe Gmail; tot consumul a fost măsurare și diagnostic. Detaliu în §5.
 > Cifra e măsurată **la scrierea raportului**; verificarea conținutului de pe Drive (citire înapoi, după upload) mai adaugă **1 cerere**.
 
 ---
@@ -9,20 +9,20 @@
 ## 1. Gmail — etichetele de categorie
 
 ### 1.1 Rezultatul scurt
-**Pe etichetele de categorie a intrat azi: 19 etichete.** În ultimele 24h: 122; în 7 zile: 768.
+**Pe etichetele de categorie a intrat azi: 23 etichete.** În ultimele 24h: 122; în 7 zile: 764.
 
-Azi au intrat **18 mesaje** în total, iar în inbox sunt **11**. **3 dintre ele nu au primit nicio etichetă de categorie** (nu se potrivesc niciunui filtru de categorie — deci rămân în inbox, neetichetate).
+Azi au intrat **21 mesaje** în total, iar în inbox sunt **14**. **3 dintre ele nu au primit nicio etichetă de categorie** (nu se potrivesc niciunui filtru de categorie — deci rămân în inbox, neetichetate).
 
-> **19 etichete pe 15 mesaje** — 4 mesaje primesc două etichete de categorie (ex. o alertă de job care intră și la „Joburi" și la „Newsletter"). De aceea suma pe etichete e mai mare decât numărul de mesaje distincte.
+> **23 etichete pe 18 mesaje** — 5 mesaje primesc două etichete de categorie (ex. o alertă de job care intră și la „Joburi" și la „Newsletter"). De aceea suma pe etichete e mai mare decât numărul de mesaje distincte.
 
 ### 1.2 Măsurătoarea pe etichete (numărare exactă, cu paginare)
 
 | Etichetă | azi | 24h | 7z | 30z | Ultimul mesaj etichetat |
 |---|---|---|---|---|---|
-| `MAVIS/Joburi` | 5 | 40 | 266 | 525 | Wed, 11 Nov 2026 |
+| `MAVIS/Joburi` | 8 | 40 | 267 | 528 | Wed, 11 Nov 2026 |
 | `AI Folder/AI si Comunitati` | 2 | 19 | 111 | 216 | Wed, 11 Nov 2026 |
-| `Socials` | 3 | 7 | 35 | 67 | Wed, 11 Nov 2026 |
-| `Newsletter` | 9 | 52 | 322 | 675 | Wed, 11 Nov 2026 |
+| `Socials` | 3 | 7 | 32 | 67 | Wed, 11 Nov 2026 |
+| `Newsletter` | 10 | 52 | 320 | 676 | Wed, 11 Nov 2026 |
 | `Finante` | 0 | 2 | 16 | 38 | Tue, 10 Nov 2026 |
 | `De raspuns` | 0 | 0 | 0 | 0 | n/a |
 | `Facturi si Conturi` | 0 | 0 | 0 | 0 | n/a |
@@ -42,7 +42,7 @@ from:{jooble bestjobs hipo indeed jobleads linkedin} OR subject:{job angajare va
 
 #### 6 filtre FUNCȚIONEAZĂ
 
-**6 dintre 7 filtre lovesc efectiv mesaje.** `from:{jooble bestjobs hipo indeed jobleads linkedi…` → **1109** mesaje în 30 de zile, etichetează `joburi`; `from:{substack goatacademy aiautomationsociety sad…` → **435** mesaje în 30 de zile, etichetează `ai`; `from:{skool facebook instagram pinterest tiktok po…` → **137** mesaje în 30 de zile, etichetează `social`; `from:{noreply no-reply newsletter digest mail@ inf…` → **1290** mesaje în 30 de zile, etichetează `newsletter`; `from:{kraken tradingview bitunix coinbase binance}…` → **43** mesaje în 30 de zile, etichetează `finante`; `from:(notifications@github.com OR *jules*) OR subj…` → **1006** mesaje în 30 de zile, etichetează `agenti`
+**6 dintre 7 filtre lovesc efectiv mesaje.** `from:{jooble bestjobs hipo indeed jobleads linkedi…` → **1112** mesaje în 30 de zile, etichetează `joburi`; `from:{substack goatacademy aiautomationsociety sad…` → **435** mesaje în 30 de zile, etichetează `ai`; `from:{skool facebook instagram pinterest tiktok po…` → **137** mesaje în 30 de zile, etichetează `social`; `from:{noreply no-reply newsletter digest mail@ inf…` → **1291** mesaje în 30 de zile, etichetează `newsletter`; `from:{kraken tradingview bitunix coinbase binance}…` → **43** mesaje în 30 de zile, etichetează `finante`; `from:(notifications@github.com OR *jules*) OR subj…` → **1006** mesaje în 30 de zile, etichetează `agenti`
 
 
 **Cele 1 filtre cu criteriu care nu lovesc niciun mesaj în 30 de zile** — cauza e calculată per filtru, nu spusă din memorie:
@@ -55,45 +55,48 @@ from:{jooble bestjobs hipo indeed jobleads linkedin} OR subject:{job angajare va
 
 **De ce nu le-am reparat azi:** scope-ul `gmail.settings.basic` **e acordat** (verificat live azi pe token, 29 scope-uri) — deci repararea se poate face și din cloud, prin **DELETE + CREATE** (`filters.update`/PUT → 404, `filters.patch`/PATCH → 404 „Method not found").
 
-**Inboxul nu se golește.** Măsurat pe cele 18 mesaje de azi, etichetele lor reale: **11 sunt încă în INBOX**, dar **doar 2 au rămas UNREAD**. Deci filtrele **curăță „necitit"**, dar **nu scoate mesajele din inbox**:
+**Inboxul nu se golește.** Măsurat pe cele 21 mesaje de azi, etichetele lor reale: **14 sunt încă în INBOX**, dar **doar 2 au rămas UNREAD**. Deci filtrele **curăță „necitit"**, dar **nu scoate mesajele din inbox**:
 
 | Fereastră | În inbox | În toate stările |
 |---|---|---|
-| azi | 11 | 18 |
-| 24h | 51 | 85 |
-| 7z | 390 | 557 |
+| azi | 14 | 21 |
+| 24h | 51 | 84 |
+| 7z | 388 | 555 |
 
-**~390 mesaje stau în inbox într-o săptămână** (~56/zi).
+**~388 mesaje stau în inbox într-o săptămână** (~55/zi).
 
 ### 1.4 Cum ar fi fost sortate mesajele de azi
 
-Simulare pe cele 18 mesaje de azi, cu **aceleași criterii** ale filtrelor (fără scriere):
+Simulare pe cele 21 mesaje de azi, cu **aceleași criterii** ale filtrelor (fără scriere):
 
 | Categorie | Mesaje azi |
 |---|---|
-| `MAVIS/Joburi` | 5 |
+| `MAVIS/Joburi` | 8 |
 | `AI Folder/AI si Comunitati` | 3 |
 | `Socials` | 3 |
-| `Newsletter` | 9 |
+| `Newsletter` | 10 |
 | `Finante` | 0 |
 | `De raspuns` | 0 |
 | `Facturi si Conturi` | 0 |
 | `Optimus CD` | 0 |
 | *niciun filtru se potrivește* | 3 |
 
-> Unele mesaje se potrivesc la 2 filtre (ex. "Joburi" + "Newsletter" de la LinkedIn), deci suma poate depăși 18.
+> Unele mesaje se potrivesc la 2 filtre (ex. "Joburi" + "Newsletter" de la LinkedIn), deci suma poate depăși 21.
 
 **Observație:** **0 mesaje** de azi sunt notificări ale agenților tăi (Jules și GitHub Actions pe repo-urile proprii). Categoria dedicata lor e `Optimus CD`, care a primit 0 mesaje azi, iar filtrul ei functioneaza efectiv. In rest, **6 din 8 categorii** primesc mesaje, iar 2 nu primesc.
 
 
 ### 1.5 Mesajele care chiar necesită răspuns
 
-Clasificarea e făcută din date, nu dintr-o listă scrisă cu mâna: 0 cer răspuns explicit, 3 cer o decizie, 3 sunt alerte de job care nu ating profilul tău, 12 sunt newsletter/promoție, 0 sunt zgomot de pipeline.
+Clasificarea e făcută din date, nu dintr-o listă scrisă cu mâna: 0 cer răspuns explicit, 6 cer o decizie, 3 sunt alerte de job care nu ating profilul tău, 12 sunt newsletter/promoție, 0 sunt zgomot de pipeline.
 
 **Niciun mesaj nu cere explicit un răspuns.**
 
 **Ceres o decizie sau o acțiune:**
 
+- **Bestjobs** — 05:54 UTC. *Because you searched for design graphic bucuresti jobs* _(alerta de job cu rol de design)_ — Because you searched for design graphic bucuresti jobs Top jobs according to your activity: CV entries, job applications and job searches. Hi there, Alexandru Popescu ! Bestie, your career friend, is 
+- **LinkedIn Job Alerts** — 05:50 UTC. *Uzum Team is hiring: Графический дизайнер Uzum Holding* _(alerta de job cu rol de design)_ — Uzum Team Графический дизайнер Uzum Holding: Telegram WhatsAppКого мы ищем:Ищем графического… Your job alert for Graphic Designer Графический дизайнер Uzum Holding Uzum Team Sector 3 See all jobs Mana
+- **Bestjobs** — 05:49 UTC. *Job offers that fit your profile* _(alerta de job cu rol de design)_ — Job offers that fit your profile Top jobs according to your activity: CV entries, job applications and job searches. Hi there, Alexandru Popescu ! Bestie, your career friend, is on WhatsApp Get matchi
 - **Jooble** — 04:51 UTC. *4PSA caută UI/UX Designer și 101 mai multe oferte noi de muncă* _(alerta de job cu rol de design)_ — LT-1 new concept 96 Anunțurile dvs. zilnice de oferte de muncă pentru 11 noiembrie, 2026 Verificați ofertele noi de muncă pe care le-am găsit pentru dvs. astăzi. Afișați toate ofertele noi de muncă (1
 - **Google** — 04:09 UTC. *Security alert* _(alerta de securitate — cere verificare umana)_ — You allowed Antigravity for Gmail access to some of your Google Account data apvizual@gmail.com If you didn't allow Antigravity for Gmail access to some of your Google Account data, someone else may b
 - **JobLeads** — 00:04 UTC. *Your skills + this role = Senior Graphic Designer for Brand, Campaigns & Experiences, Greater London* _(alerta de job cu rol de design)_ — 96 Don't miss your top job match today, Alexandru! Don't miss your top job match today, Alexandru! Your resume. Your goals. One perfect match. Senior Graphic Designer for Brand, Campaigns & Experience
@@ -305,27 +308,24 @@ Surse: **IQads** (tabloul AdJob activ, citit azi) + **designproject.io** (Român
 
 ## 5. Ce n-a mers, măsurat
 
-1. **2 din 8 categorii nu mai primesc nimic** (2 n-a fost folosită niciodată). Cauza pentru 2 dintre ele: **nu au filtru creat** (`De raspuns`, `Facturi si Conturi`) — deci nimic nu le poate eticheta, oricare ar fi criteriul. Starea filtrelor, masurata azi: **6 functioneaza, 1 sunt nefunctionale** — cauza, măsurată per filtru: 0 din 1 au criteriu de tip `from:(...)` (paranteze = ȘI, acolade = SAU); restul au criteriu valid (OR explicit) și `addLabelIds` corect, dar nu a venit niciun mail de la aceste surse în fereastra măsurată. ~390 mesaje/7 zile stau in inbox.
+1. **2 din 8 categorii nu mai primesc nimic** (2 n-a fost folosită niciodată). Cauza pentru 2 dintre ele: **nu au filtru creat** (`De raspuns`, `Facturi si Conturi`) — deci nimic nu le poate eticheta, oricare ar fi criteriul. Starea filtrelor, masurata azi: **6 functioneaza, 1 sunt nefunctionale** — cauza, măsurată per filtru: 0 din 1 au criteriu de tip `from:(...)` (paranteze = ȘI, acolade = SAU); restul au criteriu valid (OR explicit) și `addLabelIds` corect, dar nu a venit niciun mail de la aceste surse în fereastra măsurată. ~388 mesaje/7 zile stau in inbox.
 2. **designproject.io servește descrieri foarte inegale** (2094–30619 de caractere pe cele 26 de joburi, măsurat azi). Cele mai lungi sunt rescrise de AI și injectează cuvinte-cheie care ridică axele — vezi §6.2.
 3. **Celelalte două câmpuri de engagement ale designproject.io sunt inutilizabile.** `employmentType` din JSON-LD spune `FULL_TIME` pentru 26 din 26, iar badge-ul din listing spune "Full-time" pentru 26 din 26. Singura sură corectă e linia **"Job Type:"** din descriere — prezentă la 9 din 26. Am folosit asta.
 4. **Paginatia IQads nu funcționează.** `?page=2` și `?page=3` servesc exact pagina 0 (aceleași 39 de linkuri — verificat azi pe 0, 2, 3). Catalogul complet e pe pagina 0 — nu iterez pagini.
-5. **Cota Google: 157 cereri pe 200** (în limita plafonului). Consumul pe etape:
+5. **Cota Google: 126 cereri pe 200** (în limita plafonului). Consumul pe etape:
 
 | Etapă | Cereri |
 |---|---|
 | `report-mail-count.js` | 61 |
-| `report-filter-state.js` | 57 |
-| `report-simulate-sort.js` | 20 |
+| `report-filter-state.js` | 29 |
+| `report-simulate-sort.js` | 23 |
 | `report-inbox-counts.js` | 7 |
 | `report-folder-discover.js` | 5 |
-| `report-build.js` | 4 |
-| `tmp-verify-upload.js` | 2 |
-| `tmp-hipo-body.js` | 1 |
-| **total** | **157** |
+| **total** | **126** |
 
-> Rulare 2026-11-11 (raport zilnic). Contor pornit de la zero. `report-filter-state.js` a rulat de doua ori (28 + 29): a doua rulare adauga sonda de scope pe token (1 cerere) — de aceea 57, nu 29. `tmp-hipo-body.js` = 1 cerere (corpul complet al unui mesaj trunchiat, ca sa nu clasific greșit alerta Hipo).
+> Rulare 2026-11-11 (raport zilnic, re-rulare la 06:06 UTC). Contor pornit de la zero.
 
-Ce a consumat cel mai mult: corpurile complete ale mesajelor de azi (18) — fără corp, nu se poate distinge un mesaj care cere răspuns de o alertă automată. **Zero scrieri pe Gmail** — niciun mail trimis, marcat sau arhivat, niciun filtru modificat.
+Ce a consumat cel mai mult: corpurile complete ale mesajelor de azi (21) — fără corp, nu se poate distinge un mesaj care cere răspuns de o alertă automată. **Zero scrieri pe Gmail** — niciun mail trimis, marcat sau arhivat, niciun filtru modificat.
 
 ---
 

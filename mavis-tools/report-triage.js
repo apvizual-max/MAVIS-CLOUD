@@ -16,11 +16,18 @@
 const fs = require('fs');
 
 // ---- profilul de căutare al lui Alex (rol + piață) ----
+// MĂSURAT 2026-11-11: alerta LinkedIn „Uzum Team is hiring: Графический дизайнер"
+// era clasificată „nu atinge profilul de design" — motiv FALS: rolul E un graphic
+// designer, dar anunțul e în rusonește, iar lista de cuvinte-cheie era doar engleză.
+// Regula: semnalul decisiv e în SUBIECT, deci detectorul trebuie să acopere și
+// limba în care e scris rolul — altfel regula ratează exact rolurile de design.
 const DESIGN_KW = [
   'art director', 'creative director', 'creative lead', 'art mid', 'head of creative',
   'graphic design', 'graphic designer', 'senior graphic', 'visual design', 'visual designer',
   'brand designer', 'product designer', 'ui/ux', 'ux/ui', 'ux designer', 'ui designer',
   'content designer', 'creative designer', 'design', 'creativ',
+  // rusonește (LinkedIn Job Alerts vin în limba anunțului)
+  'графический дизайнер', 'графического дизайнера', 'графический дизайнер',
 ];
 const LOC_KW = ['bucuresti', 'bucharest', 'ilfov', 'remote', 'cluj', 'iasi', 'timisoara', 'brasov'];
 

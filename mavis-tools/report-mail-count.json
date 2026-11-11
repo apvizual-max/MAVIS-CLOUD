@@ -6,42 +6,42 @@
       "title": "Joburi",
       "name": "MAVIS/Joburi",
       "counts": {
-        "azi": 5,
+        "azi": 8,
         "24h": 40,
-        "7z": 266,
-        "30z": 525
+        "7z": 267,
+        "30z": 528
       },
       "newest": {
-        "id": "1a1c9191a5b61992",
-        "subject": "Anxietate și Kaizen",
-        "date": "Wed, 11 Nov 2026 05:33:47 +0000 (GMT)",
-        "from": "Mihai Svasta via LinkedIn <newsletters-noreply@linkedin.com>"
+        "id": "1a1c92c22a1e783e",
+        "subject": "Because you searched for design graphic bucuresti jobs",
+        "date": "Wed, 11 Nov 2026 07:54:11 +0200",
+        "from": "Bestjobs <contact@bestjobs.eu>"
       },
-      "newestDate": "Wed, 11 Nov 2026 05:33:47 +0000 (GMT)",
+      "newestDate": "Wed, 11 Nov 2026 07:54:11 +0200",
       "samples": [
+        {
+          "id": "1a1c92c22a1e783e",
+          "subject": "Because you searched for design graphic bucuresti jobs",
+          "date": "Wed, 11 Nov 2026 07:54:11 +0200",
+          "from": "Bestjobs <contact@bestjobs.eu>"
+        },
+        {
+          "id": "1a1c928cb59ac9f4",
+          "subject": "Uzum Team is hiring: Графический дизайнер Uzum Holding",
+          "date": "Wed, 11 Nov 2026 05:50:55 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+        },
+        {
+          "id": "1a1c92755a873c4e",
+          "subject": "Job offers that fit your profile",
+          "date": "Wed, 11 Nov 2026 07:49:11 +0200",
+          "from": "Bestjobs <contact@bestjobs.eu>"
+        },
         {
           "id": "1a1c9191a5b61992",
           "subject": "Anxietate și Kaizen",
           "date": "Wed, 11 Nov 2026 05:33:47 +0000 (GMT)",
           "from": "Mihai Svasta via LinkedIn <newsletters-noreply@linkedin.com>"
-        },
-        {
-          "id": "1a1c8f2b211a121b",
-          "subject": "4PSA caută UI/UX Designer și 101 mai multe oferte noi de muncă",
-          "date": "Wed, 11 Nov 2026 04:51:51 +0000",
-          "from": "Jooble <subscribe@ro.jooble.org>"
-        },
-        {
-          "id": "1a1c8df76910df3f",
-          "subject": "Alex - 36 Joburi noi adaugate pentru tine pe hipo.ro",
-          "date": "Wed, 11 Nov 2026 06:30:48 +0200",
-          "from": "\"Joburi Hipo.ro\" <joburi@alertele.hipo.ro>"
-        },
-        {
-          "id": "1a1c8ca81065e4ae",
-          "subject": "🔔 Cosmoworker caută Top - Lucrător depozit - Colectare și ambalare comenzi  și 84 mai multe oferte noi de muncă",
-          "date": "Wed, 11 Nov 2026 04:07:56 +0000",
-          "from": "Jooble <subscribe@ro.jooble.org>"
         }
       ]
     },
@@ -96,7 +96,7 @@
       "counts": {
         "azi": 3,
         "24h": 7,
-        "7z": 35,
+        "7z": 32,
         "30z": 67
       },
       "newest": {
@@ -138,19 +138,25 @@
       "title": "Newsletter",
       "name": "Newsletter",
       "counts": {
-        "azi": 9,
+        "azi": 10,
         "24h": 52,
-        "7z": 322,
-        "30z": 675
+        "7z": 320,
+        "30z": 676
       },
       "newest": {
-        "id": "1a1c91fd05e8bcc4",
-        "subject": "Nature Can Teach a Child What Teachers and Parents Cannot",
-        "date": "Wed, 11 Nov 2026 05:41:07 +0000",
-        "from": "Isha News <isha.offerings@sadhguru.org>"
+        "id": "1a1c928cb59ac9f4",
+        "subject": "Uzum Team is hiring: Графический дизайнер Uzum Holding",
+        "date": "Wed, 11 Nov 2026 05:50:55 +0000 (GMT)",
+        "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
       },
-      "newestDate": "Wed, 11 Nov 2026 05:41:07 +0000",
+      "newestDate": "Wed, 11 Nov 2026 05:50:55 +0000 (GMT)",
       "samples": [
+        {
+          "id": "1a1c928cb59ac9f4",
+          "subject": "Uzum Team is hiring: Графический дизайнер Uzum Holding",
+          "date": "Wed, 11 Nov 2026 05:50:55 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+        },
         {
           "id": "1a1c91fd05e8bcc4",
           "subject": "Nature Can Teach a Child What Teachers and Parents Cannot",
@@ -168,12 +174,6 @@
           "subject": "Weekly digest for Wed, Nov 4 2026",
           "date": "Wed, 11 Nov 2026 05:18:06 +0000 (UTC)",
           "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a1c9028a86d7775",
-          "subject": "Weekly digest for Wed, Nov 4 2026",
-          "date": "Wed, 11 Nov 2026 05:09:09 +0000 (UTC)",
-          "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
         }
       ]
     },
@@ -303,9 +303,9 @@
     }
   ],
   "totals": {
-    "azi": 19,
+    "azi": 23,
     "24h": 122,
-    "7z": 768,
-    "30z": 2536
+    "7z": 764,
+    "30z": 2540
   }
 }

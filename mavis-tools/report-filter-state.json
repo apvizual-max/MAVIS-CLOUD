@@ -116,8 +116,8 @@
       "id": "ANe1Bmgu_4pn0Q3f-3dPwYaSEJfLoKVPZ4svwJZZnDsOWQ",
       "query": "from:{jooble bestjobs hipo indeed jobleads linkedin} OR subject:{job angajare vacanta oportunitate}",
       "fixedQuery": "from:{jooble bestjobs hipo indeed jobleads linkedin} OR subject:{job angajare vacanta oportunitate}",
-      "matchesAsIs": 1109,
-      "matchesFixed": 1109,
+      "matchesAsIs": 1112,
+      "matchesFixed": 1112,
       "categories": [
         "joburi"
       ]
@@ -146,8 +146,8 @@
       "id": "ANe1BmhvRgLhU5cyxG-jCADLUhXt5C_29MotSxK2SlilOQ",
       "query": "from:{noreply no-reply newsletter digest mail@ info@ news@ updates@}",
       "fixedQuery": "from:{noreply no-reply newsletter digest mail@ info@ news@ updates@}",
-      "matchesAsIs": 1290,
-      "matchesFixed": 1290,
+      "matchesAsIs": 1291,
+      "matchesFixed": 1291,
       "categories": [
         "newsletter"
       ]
@@ -195,7 +195,7 @@
         "categories": [
           "joburi"
         ],
-        "matches": 1109
+        "matches": 1112
       },
       {
         "id": "ANe1BmhfBNF17H3V8yb39Uc-EEym8olEBnbQQyNR-Utj1w",
@@ -216,7 +216,7 @@
         "categories": [
           "newsletter"
         ],
-        "matches": 1290
+        "matches": 1291
       },
       {
         "id": "ANe1BmhiLu_ahhYfNmDqesTn0hLQGeoXBzHRaktmyFLt1Q",
