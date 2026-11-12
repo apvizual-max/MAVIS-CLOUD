@@ -116,8 +116,8 @@
       "id": "ANe1Bmgu_4pn0Q3f-3dPwYaSEJfLoKVPZ4svwJZZnDsOWQ",
       "query": "from:{jooble bestjobs hipo indeed jobleads linkedin} OR subject:{job angajare vacanta oportunitate}",
       "fixedQuery": "from:{jooble bestjobs hipo indeed jobleads linkedin} OR subject:{job angajare vacanta oportunitate}",
-      "matchesAsIs": 1112,
-      "matchesFixed": 1112,
+      "matchesAsIs": 1126,
+      "matchesFixed": 1126,
       "categories": [
         "joburi"
       ]
@@ -136,8 +136,8 @@
       "id": "ANe1Bmhr0TFhSeF75mv4H0xOCCEIxw7k6PTf2dl_5RCoOA",
       "query": "from:{skool facebook instagram pinterest tiktok polibrawl}",
       "fixedQuery": "from:{skool facebook instagram pinterest tiktok polibrawl}",
-      "matchesAsIs": 137,
-      "matchesFixed": 137,
+      "matchesAsIs": 140,
+      "matchesFixed": 140,
       "categories": [
         "social"
       ]
@@ -146,8 +146,8 @@
       "id": "ANe1BmhvRgLhU5cyxG-jCADLUhXt5C_29MotSxK2SlilOQ",
       "query": "from:{noreply no-reply newsletter digest mail@ info@ news@ updates@}",
       "fixedQuery": "from:{noreply no-reply newsletter digest mail@ info@ news@ updates@}",
-      "matchesAsIs": 1291,
-      "matchesFixed": 1291,
+      "matchesAsIs": 1309,
+      "matchesFixed": 1309,
       "categories": [
         "newsletter"
       ]
@@ -166,8 +166,8 @@
       "id": "ANe1BmjB_Jj9yzn7W6F9QE45lTE3LQOZJwzcBLE36OAxfQ",
       "query": "from:(notifications@github.com OR *jules*) OR subject:(Jules OR GitHub OR \"apvizual-max\")",
       "fixedQuery": "from:{notifications@github.com OR *jules*} OR subject:{Jules OR GitHub OR \"apvizual-max\"}",
-      "matchesAsIs": 1006,
-      "matchesFixed": 1006,
+      "matchesAsIs": 999,
+      "matchesFixed": 999,
       "categories": [
         "agenti"
       ]
@@ -195,7 +195,7 @@
         "categories": [
           "joburi"
         ],
-        "matches": 1112
+        "matches": 1126
       },
       {
         "id": "ANe1BmhfBNF17H3V8yb39Uc-EEym8olEBnbQQyNR-Utj1w",
@@ -209,14 +209,14 @@
         "categories": [
           "social"
         ],
-        "matches": 137
+        "matches": 140
       },
       {
         "id": "ANe1BmhvRgLhU5cyxG-jCADLUhXt5C_29MotSxK2SlilOQ",
         "categories": [
           "newsletter"
         ],
-        "matches": 1291
+        "matches": 1309
       },
       {
         "id": "ANe1BmhiLu_ahhYfNmDqesTn0hLQGeoXBzHRaktmyFLt1Q",
@@ -230,7 +230,7 @@
         "categories": [
           "agenti"
         ],
-        "matches": 1006
+        "matches": 999
       }
     ]
   }

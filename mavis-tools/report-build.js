@@ -574,7 +574,11 @@ top.forEach((j, i) => {
 md += '\n';
 for (const j of top) md += `- ${j.company} :: ${j.role} — ${j.url}\n`;
 
-const topDesign = allSections.filter(j => isDesignRole(j.role)).slice(0, 5);
+// Același criteriu ca la `top`: neexpirații primii. Altfel un job expirat cu
+// scor mare (ex. E.ON 10) apărea în top-ul de design pe poziția 1, deși
+// anunțul nu mai e aplicabil — contrazicea regula scrisă chiar deasupra.
+const liveFirst = (arr) => [...arr.filter(j => !j.expired), ...arr.filter(j => j.expired)];
+const topDesign = liveFirst(allSections.filter(j => isDesignRole(j.role))).slice(0, 5);
 const nonDesignInTop = top.filter(j => !isDesignRole(j.role)).length;
 md += `
 `;
@@ -690,7 +694,7 @@ if (usageTotal > 200) {
 md += `
 ---
 
-## 6. Două semnalări ale motorului de scoring (portul rămâne fidel — decizia e a ta)
+## 6. Semnalări ale motorului de scoring (portul rămâne fidel — decizia e a ta)
 
 ### 6.1 "remote" pozitiv fals — ${sc.remoteFalsePositives.length} joburi
 
@@ -712,7 +716,58 @@ for (const j of sc.axisFromProse) {
 }
 md += `
 **Ce propun:** ca \`D\` să se calculeze din **titlul rolului**, nu din textul anunțului, sau măcar ca un rol să poată intra într-o secțiune doar dacă titlul conține o cheie de design. E o decizie de motor — nu am atins \`scoring.gs\` fără acordul tău.
+`;
 
+// ---- 6.3: roluri drop-uite într-o disciplină pe care PROFILUL o declară ----
+// Măsurat 2026-11-12: singura postare nouă a zilei (IQads #24013 DTP Specialist @
+// Fieldstar) a fost drop-uită de circuit breaker („disciplina nu se potrivește
+// niciunui tier"), DEȘI `scoring.gs` declară în profil `prepress: 10` ani. ⇒ drop-ul
+// ascunde un lead relevant. Diagnosticul se CALCULEAZA (titlu + specializare, nu
+// prosa — altfel inflăm, vezi §6.2), pe listele de discipline ale profilului.
+const PROFILE_DISCIPLINES = [
+  { key: 'prepress', label: 'prepress / DTP', years: 10, kw: ['dtp', 'prepress', 'productie publicitara', 'tipografie'] },
+  { key: 'photo', label: 'fotografie', years: 5, kw: ['fotograf', 'fotografie', 'photo', 'retouch'] },
+  { key: 'video', label: 'video / motion', years: 5, kw: ['video', 'videograf', 'motion', 'animatie'] },
+  { key: 'uiux', label: 'UI/UX', years: 5, kw: ['ui/ux', 'ux/ui', 'ui designer', 'ux designer', 'user interface', 'user experience', 'interaction designer', 'web design'] },
+  { key: 'artDirection', label: 'art direction', years: 15, kw: ['art director', 'creative director', 'art mid', 'creative lead'] },
+  { key: 'graphicDesign', label: 'graphic design', years: 20, kw: ['graphic', 'grafica', 'grafică', 'webdesign'] },
+  { key: 'ai', label: 'AI', years: 4, kw: ['ai designer', 'ai creative', 'generative', 'prompt engineer'] },
+];
+const hasWordRx = (text, w) => {
+  const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])', 'i').test(String(text || ''));
+};
+const disciplineOf = (d) => {
+  const hay = [d.role, ...(d.special || [])].join(' ');
+  for (const p of PROFILE_DISCIPLINES) {
+    for (const k of p.kw) if (hasWordRx(hay, k)) return { ...p, hit: k };
+  }
+  return null;
+};
+const hiddenLeads = (sc.dropped || [])
+  .filter(d => /disciplina nu se potrivește/i.test(d.reason || ''))
+  .map(d => ({ ...d, disc: disciplineOf(d) }))
+  .filter(x => x.disc);
+
+if (hiddenLeads.length) {
+  md += `
+### 6.3 Roluri drop-uite într-o disciplină din profilul tău — ${hiddenLeads.length} joburi
+
+| Rol | Companie | Locație | Disciplina din profil | Cheia găsită | De ce a fost drop-uit |
+|---|---|---|---|---|---|
+`;
+  for (const j of hiddenLeads) {
+    md += `| ${cell(j.role)} | ${cell(j.company)} | ${cell(j.loc || 'neprecizată')} | **${j.disc.label}** (${j.disc.years} ani în profil) | \`${j.disc.hit}\` | ${cell(j.reason)} |\n`;
+  }
+  const missingDisciplines = [...new Set(hiddenLeads.map(j => j.disc.label))];
+  md += `
+Motorul are chei de **design** (\`graphic designer\`, \`dtp designer\`…) și de **media** (\`photographer\`, \`video editor\`…), dar **nu are cheie pentru ${missingDisciplines.join(', ')}** — deși profilul din \`scoring.gs\` declară ani în ele (${hiddenLeads.map(j => `${j.disc.label}: ${j.disc.years} ani`).join(', ')}). Un rol dintr-o disciplină în care ai experiență ajunge, așadar, să fie drop-uit ca „disciplină care nu se potrivește niciunui tier".
+
+**Ce propun (o linie, decizia e a ta):** adaugă cheile lipsă în tier 2 (Core Design) sau tier 3 (Media Production). **Nu am atins \`scoring.gs\`** — portul e fidel prin design. Până când se hotără, rolurile stau aici, vizibile, nu pierdute.
+`;
+}
+
+md += `
 ---
 
 ## 7. Fișiere

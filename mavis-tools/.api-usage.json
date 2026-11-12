@@ -1,10 +1,10 @@
 {
-  "_nota": "Rulare 2026-11-11 (raport zilnic, re-rulare la 06:06 UTC). Contor pornit de la zero.",
+  "_nota": "Rulare 2026-11-12 (raport zilnic). Contor pornit de la zero.",
   "report-folder-discover.js": 5,
   "report-inbox-counts.js": 7,
   "report-mail-count.js": 61,
-  "report-simulate-sort.js": 23,
-  "report-filter-state.js": 29,
-  "report-build.js": 1,
-  "report-verify-upload.js": 1
+  "report-simulate-sort.js": 18,
+  "report-filter-state.js": 27,
+  "report-build.js": 6,
+  "report-verify-upload.js": 2
 }

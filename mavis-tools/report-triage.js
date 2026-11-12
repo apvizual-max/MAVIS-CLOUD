@@ -21,13 +21,29 @@ const fs = require('fs');
 // designer, dar anunțul e în rusonește, iar lista de cuvinte-cheie era doar engleză.
 // Regula: semnalul decisiv e în SUBIECT, deci detectorul trebuie să acopere și
 // limba în care e scris rolul — altfel regula ratează exact rolurile de design.
+//
+// MĂSURAT 2026-11-12: detectorul era MULT mai îngust decât motorul de scoring.
+// `scoring.gs` are tier 3 „Media Production" (photographer, video editor, motion
+// designer, content creator) și tier 4 „Emerging Sectors" (ai designer, prompt
+// engineer), iar lista de aici le ignora ⇒ alertele cu roluri foto/video (Alex: 5
+// ani foto/video) și pe cele în română („Digital & Graphic Production Specialist",
+// „Grafică / Webdesign / DTP") erau clasificate „nu atinge profilul de design".
+// ⇒ detectorul trebuie să cuprindă ACELAȘI discipline pe care le punctează motorul,
+// plus formele românești ale titlurilor de rol.
 const DESIGN_KW = [
   'art director', 'creative director', 'creative lead', 'art mid', 'head of creative',
   'graphic design', 'graphic designer', 'senior graphic', 'visual design', 'visual designer',
   'brand designer', 'product designer', 'ui/ux', 'ux/ui', 'ux designer', 'ui designer',
   'content designer', 'creative designer', 'design', 'creativ',
+  // tier 3 — Media Production (aceleași discipline ca scoring.gs)
+  'photographer', 'photography', 'fotograf', 'videograf', 'video editor',
+  'motion designer', 'motion graphics', 'content creator', 'ugc',
+  // tier 4 — Emerging Sectors (AI, direcția lui Alex)
+  'ai designer', 'ai creative', 'prompt engineer',
+  // forme românești / titluri de rol din alertele locale
+  'grafică', 'grafica', 'webdesign', 'dtp', 'graphic production',
   // rusonește (LinkedIn Job Alerts vin în limba anunțului)
-  'графический дизайнер', 'графического дизайнера', 'графический дизайнер',
+  'графический дизайнер', 'графического дизайнера',
 ];
 const LOC_KW = ['bucuresti', 'bucharest', 'ilfov', 'remote', 'cluj', 'iasi', 'timisoara', 'brasov'];
 
@@ -64,6 +80,16 @@ const IDENTITY_CHECK = /your name is on a paper|confirm (this|that) (paper|is)|i
 const SECURITY_FROM = /accounts\.google\.com|@google\.com|security|alert@/i;
 const SECURITY_SUBJECT = /security alert|security incident|incident de securitate|alerta de securitate|new sign[ -]?in|new device|dispozitiv nou|someone may be trying|acces neautorizat|action required|critical risk|connected a new app|mfa is disabled|immediate remediation/i;
 const SECURITY_TEXT = /security alert|security incident|alerta de securitate|new sign[ -]?in|new device|dispozitiv nou|someone may be trying|acces neautorizat|verifica.*activit|check activity|secure your account|gained access to certain user data|may have affected your data|is this you|immediate remediation|mfa is disabled/i;
+// ---- CONTUL/ABONAMENTUL CERE ACȚIUNE (facturare, suspendare) ----
+// MĂSURAT 2026-11-12: „Your Project: Sentinel Prime is at risk of suspension"
+// (Google Cloud, 11.11 19:05 UTC) a fost clasificat `fyi` — „fara semnal de
+// actiune" — deși corpul începe cu „Action required" și spune că proiectul poate
+// fi suspendat. Motivul: SUBIECTUL nu conține cuvintele din SECURITY_SUBJECT
+// („action required" era în corp), deci regula nu s-a declanșat. Emailul pereche
+// („Action required: your billing account … is past due") a fost prins, dar cu
+// motivul greșit („alerta de securitate" — e facturare, nu incident de securitate).
+// ⇒ regula se declanșează pe ACȚIUNEA cerută, pe oricare dintre cele două forme.
+const ACCOUNT_CRITICAL_SUBJECT = /at risk of suspension|risk of suspension|will be suspended|is past due|past due|billing account|account (is|has been) (suspended|deactivated)|subscription (will|is) (expire|cancel)|project .* (suspended|deactivated)/i;
 // ---- CI / workflow esuat: cere actiune, chiar daca e "zgomot de pipeline" ----
 const CI_FAIL_SUBJECT = /\brun failed\b|workflow.*fail|\bfailed\b|\bfailure\b|build failed|eroare/i;
 const CI_FROM = /notifications@github\.com|githubactions|@github\.com/i;
@@ -240,6 +266,10 @@ function triage(rows) {
     let cls, why;
     if (IDENTITY_CHECK.test(headText) && !SECURITY_SUBJECT.test(subj)) {
       cls = 'needs-action'; why = 'cer confirmare umana de identitate — verifica inainte sa raspunzi';
+    } else if (ACCOUNT_CRITICAL_SUBJECT.test(subj)) {
+      // facturare / suspendare / inchidere de cont-proiect: cere omul, dar NU e
+      // incident de securitate (motivul „alerta de securitate" era imprecis).
+      cls = 'needs-action'; why = 'contul/proiectul cere o actiune (facturare / suspendare)';
     } else if ((SECURITY_FROM.test(from) && SECURITY_TEXT.test(text)) || SECURITY_SUBJECT.test(subj)) {
       cls = 'needs-action'; why = 'alerta de securitate — cere verificare umana';
     } else if (CI_FROM.test(from) && CI_FAIL_SUBJECT.test(subj)) {
