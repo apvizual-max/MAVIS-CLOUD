@@ -615,7 +615,7 @@ const totalNew = gn.newIqads.length + gn.newDesignproject.length;
 if (totalNew === 0) {
   md += `**Concluzie:** **nicio postare nouă față de ultima rulare.** Piața nu a produs nimic nou relevant azi.\n\n`;
 } else {
-  md += `**Concluzie:** ${totalNew} postare${totalNew > 1 ? 'ri' : ''} nou${totalNew > 1 ? 'e' : ''} de la ultima rulare.\n\n`;
+  md += `**Concluzie:** ${plural(totalNew, 'postare nouă', 'postări noi', 'postări noi')} de la ultima rulare.\n\n`;
 }
 if (sc.stats.newJobs) md += `Ce nu a mai apărut în raportul anterior, dar există în catalog (${sc.stats.newJobs} la număr, toate cu ✅ în tabele):\n\n`;
 for (const j of newJobs.slice(0, 25)) {
