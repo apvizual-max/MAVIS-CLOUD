@@ -136,6 +136,16 @@ function hasWord(text, w) {
 }
 function hasAny(text, list) { return list.some(k => hasWord(text, k)); }
 
+/**
+ * Scoate din text boilerplate-ul de SETĂRI al platformelor de job — adică
+ * filtrele candidatului, nu rolurile oferite. Măsurat 2026-11-14 (alerta eJobs).
+ */
+function stripSettingsBoilerplate(t) {
+  return String(t || '')
+    .replace(/Joburi în Niveluri carieră:[\s\S]*?Departamente:[^;]*;?/gi, ' ')
+    .replace(/Departamente:[^;]*;?/gi, ' ');
+}
+
 /** Extrage numele de afisare din headerul From. */
 function displayName(from) {
   const m = (from || '').match(/^\s*"?([^"<]*?)"?\s*</);
@@ -251,7 +261,15 @@ function triage(rows) {
     // ATENTIE: fără \\b după „caută" — \\b e bazat pe ASCII, deci nu există
     // graniță de cuvânt între „ă" și spațiu, și expresia nu s-ar potrivi NICIODATĂ.
     const namesSpecificJob = /caut[ăa]|is hiring|new jobs similar to|job (you may be|at) |you may be interested/i.test(subj);
-    const designText = namesSpecificJob ? subj : text;
+    // BOILERPLATE DE SETARI (măsurat 2026-11-14): alerta eJobs tipărește la
+    // final filtrele CANDIDATULUI („Joburi în Niveluri carieră: ...; Orașe: ...;
+    // Departamente: Marketing, Altele, Publicitate, Grafică / Webdesign / DTP;").
+    // Acelea NU sunt rolurile din alertă. Măsurat azi: „2 joburi noi azi"
+    // (Unity Developer + Business Manager - Architects & Designers) era
+    // clasificată „alerta de job cu rol de design" DOAR din „Grafică / Webdesign
+    // / DTP" ⇒ fals pozitiv sistematic pe TOATE alertele eJobs cu filtre de
+    // departament. Se curăță textul ÎNAINTE de verificarea relevanței.
+    const designText = namesSpecificJob ? subj : stripSettingsBoilerplate(text);
     const isDesign = hasAny(designText, DESIGN_KW);
     const isLoc = hasAny(text, LOC_KW);
     // Orice email de la o platforma de job e alerta de job (si NICIODATA

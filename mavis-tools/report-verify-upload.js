@@ -57,7 +57,7 @@ const LOCAL = process.argv[3];
   // cifrele-cheie, citite din continutul de pe Drive (nu din memorie)
   const checks = [
     ['mesaje azi', /Azi au intrat \*\*(\d+) mesaje\*\*/],
-    ['etichete azi', /Pe etichetele de categorie a intrat azi: (\d+) etichete/],
+    ['etichete azi', /Pe etichetele de categorie a intrat azi: (\d+) (?:mesaje|etichete)/],
     ['joburi analizate', /\*\*(\d+) joburi analizate\*\*/],
     ['cota', /Cota Google: \*\*(\d+) cereri\*\*/],
   ];

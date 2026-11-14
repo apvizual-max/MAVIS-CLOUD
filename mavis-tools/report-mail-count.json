@@ -1,46 +1,46 @@
 {
-  "today": "2026/11/13",
+  "today": "2026/11/14",
   "labels": [
     {
       "key": "joburi",
       "title": "Joburi",
       "name": "MAVIS/Joburi",
       "counts": {
-        "azi": 12,
-        "24h": 43,
-        "7z": 271,
-        "30z": 619
+        "azi": 6,
+        "24h": 40,
+        "7z": 273,
+        "30z": 659
       },
       "newest": {
-        "id": "1a1d375859d80535",
-        "subject": "Senior art/creative  graphic designer job at New View SRL - Actively recruiting",
-        "date": "Fri, 13 Nov 2026 05:50:56 +0000 (GMT)",
-        "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+        "id": "1a1d8846e05decab",
+        "subject": "Because you searched for graphic design, bucharest jobs",
+        "date": "Sat, 14 Nov 2026 07:25:11 +0200",
+        "from": "Bestjobs <contact@bestjobs.eu>"
       },
-      "newestDate": "Fri, 13 Nov 2026 05:50:56 +0000 (GMT)",
+      "newestDate": "Sat, 14 Nov 2026 07:25:11 +0200",
       "samples": [
         {
-          "id": "1a1d375859d80535",
-          "subject": "Senior art/creative  graphic designer job at New View SRL - Actively recruiting",
-          "date": "Fri, 13 Nov 2026 05:50:56 +0000 (GMT)",
-          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
-        },
-        {
-          "id": "1a1d3749dc46ef9a",
-          "subject": "11 graphic design, bucharest jobs available on bestjobs",
-          "date": "Fri, 13 Nov 2026 07:49:11 +0200",
+          "id": "1a1d8846e05decab",
+          "subject": "Because you searched for graphic design, bucharest jobs",
+          "date": "Sat, 14 Nov 2026 07:25:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a1d366ec0d919f8",
-          "subject": "Candidates like you applied for these jobs",
-          "date": "Fri, 13 Nov 2026 07:34:11 +0200",
+          "id": "1a1d878c9933a948",
+          "subject": "8 new jobs for you: design graphic bucuresti",
+          "date": "Sat, 14 Nov 2026 07:12:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a1d33fc39fee9c7",
-          "subject": "Casier - Bucuresti la NORMAL Romania. Încă 15 locuri de muncă în București, Ilfov",
-          "date": "Fri, 13 Nov 2026 04:52:12 +0000",
+          "id": "1a1d8654882588d6",
+          "subject": "Accenture Global caută Graphics Engineer și 102 mai multe oferte noi de muncă",
+          "date": "Sat, 14 Nov 2026 04:51:18 +0000",
+          "from": "Jooble <subscribe@ro.jooble.org>"
+        },
+        {
+          "id": "1a1d8479b7bd2129",
+          "subject": "Responsabil Customer Care si Administrativ la ENGIE. Încă 19 locuri de muncă în București, Ilfov",
+          "date": "Sat, 14 Nov 2026 04:18:53 +0000",
           "from": "Indeed <donotreply@jobalert.indeed.com>"
         }
       ]
@@ -50,42 +50,42 @@
       "title": "AI si comunitati",
       "name": "AI Folder/AI si Comunitati",
       "counts": {
-        "azi": 8,
-        "24h": 20,
-        "7z": 103,
-        "30z": 248
+        "azi": 1,
+        "24h": 19,
+        "7z": 105,
+        "30z": 267
       },
       "newest": {
-        "id": "1a1d35f88f27179e",
-        "subject": "Free report: how creatives are using AI✨",
-        "date": "Fri, 13 Nov 2026 05:26:55 +0000",
-        "from": "Envato <news@m.elements.envato.com>"
+        "id": "1a1d79511a26c447",
+        "subject": "Last Seats.",
+        "date": "Sat, 14 Nov 2026 01:02:09 +0000",
+        "from": "\"Felix & Winston 🐶\" <felix@goatacademy.org>"
       },
-      "newestDate": "Fri, 13 Nov 2026 05:26:55 +0000",
+      "newestDate": "Sat, 14 Nov 2026 01:02:09 +0000",
       "samples": [
         {
-          "id": "1a1d35f88f27179e",
-          "subject": "Free report: how creatives are using AI✨",
-          "date": "Fri, 13 Nov 2026 05:26:55 +0000",
-          "from": "Envato <news@m.elements.envato.com>"
-        },
-        {
-          "id": "1a1d34de89b2c003",
-          "subject": "Ruben Dominguez posted new notes",
-          "date": "Fri, 13 Nov 2026 05:07:39 +0000",
-          "from": "Substack <no-reply@substack.com>"
-        },
-        {
-          "id": "1a1d33f426753d2f",
-          "subject": "Human Intelligence caută AI Creative Specialist | Graphic Design, Video, Websites & Digital Media și 102 mai multe oferte noi de muncă",
-          "date": "Fri, 13 Nov 2026 04:51:40 +0000",
-          "from": "Jooble <subscribe@ro.jooble.org>"
-        },
-        {
-          "id": "1a1d2a46bf84a085",
-          "subject": "When should you stop holding?",
-          "date": "Fri, 13 Nov 2026 02:02:03 +0000",
+          "id": "1a1d79511a26c447",
+          "subject": "Last Seats.",
+          "date": "Sat, 14 Nov 2026 01:02:09 +0000",
           "from": "\"Felix & Winston 🐶\" <felix@goatacademy.org>"
+        },
+        {
+          "id": "1a1d7315c4784b7a",
+          "subject": "Where the Hell Are the Republicans We Elected?",
+          "date": "Fri, 13 Nov 2026 23:02:04 +0000",
+          "from": "PolitiBrawl <politibrawl@substack.com>"
+        },
+        {
+          "id": "1a1d6149f6578952",
+          "subject": "You're paying for AI tools that have free twins. Here are 14.",
+          "date": "Fri, 13 Nov 2026 18:03:57 +0000",
+          "from": "Hyperautomation AI Report <hyperautomationaireport@mail.beehiiv.com>"
+        },
+        {
+          "id": "1a1d5da8ecdd8335",
+          "subject": "AI can write anything…except something worth reading.",
+          "date": "Fri, 13 Nov 2026 17:00:32 +0000 (UTC)",
+          "from": "Medium <noreply@medium.com>"
         }
       ]
     },
@@ -95,41 +95,41 @@
       "name": "Socials",
       "counts": {
         "azi": 0,
-        "24h": 6,
-        "7z": 34,
-        "30z": 79
+        "24h": 3,
+        "7z": 32,
+        "30z": 82
       },
       "newest": {
-        "id": "1a1d049ecb200a33",
-        "subject": "31 new notifications since 5:03 pm (Nov 11, 2026)",
-        "date": "Thu, 12 Nov 2026 15:04:26 +0000 (UTC)",
+        "id": "1a1d571283e6dae1",
+        "subject": "15 new notifications since 5:05 pm (Nov 12, 2026)",
+        "date": "Fri, 13 Nov 2026 15:05:25 +0000 (UTC)",
         "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
       },
-      "newestDate": "Thu, 12 Nov 2026 15:04:26 +0000 (UTC)",
+      "newestDate": "Fri, 13 Nov 2026 15:05:25 +0000 (UTC)",
       "samples": [
+        {
+          "id": "1a1d571283e6dae1",
+          "subject": "15 new notifications since 5:05 pm (Nov 12, 2026)",
+          "date": "Fri, 13 Nov 2026 15:05:25 +0000 (UTC)",
+          "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a1d3f720dc60765",
+          "subject": "1 event happening tomorrow",
+          "date": "Fri, 13 Nov 2026 08:12:30 +0000 (UTC)",
+          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a1d3c9df710426b",
+          "subject": "👑 Prince Hamdan 🇦🇪 sent you a message",
+          "date": "Fri, 13 Nov 2026 07:23:04 +0000 (UTC)",
+          "from": "\"👑 Prince Hamdan 🇦🇪 on TikTok\" <notification@service.tiktok.com>"
+        },
         {
           "id": "1a1d049ecb200a33",
           "subject": "31 new notifications since 5:03 pm (Nov 11, 2026)",
           "date": "Thu, 12 Nov 2026 15:04:26 +0000 (UTC)",
           "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a1cfe2b41c4da37",
-          "subject": "2 new notifications since 3:01 pm (Nov 11, 2026)",
-          "date": "Thu, 12 Nov 2026 13:11:42 +0000 (UTC)",
-          "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a1cf008b4a7f4d5",
-          "subject": "1 event happening tomorrow",
-          "date": "Thu, 12 Nov 2026 09:04:41 +0000 (UTC)",
-          "from": "\"Project 720 (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a1cefdb3865ea76",
-          "subject": "1 event happening tomorrow",
-          "date": "Thu, 12 Nov 2026 09:01:33 +0000 (UTC)",
-          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
         }
       ]
     },
@@ -138,42 +138,42 @@
       "title": "Newsletter",
       "name": "Newsletter",
       "counts": {
-        "azi": 14,
-        "24h": 60,
-        "7z": 309,
-        "30z": 791
+        "azi": 1,
+        "24h": 41,
+        "7z": 300,
+        "30z": 832
       },
       "newest": {
-        "id": "1a1d375859d80535",
-        "subject": "Senior art/creative  graphic designer job at New View SRL - Actively recruiting",
-        "date": "Fri, 13 Nov 2026 05:50:56 +0000 (GMT)",
-        "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+        "id": "1a1d7c4a5c759046",
+        "subject": "Allianz has an opportunity for you. Apply Now.",
+        "date": "Sat, 14 Nov 2026 01:55:50 +0000 (UTC)",
+        "from": "Glassdoor Jobs <noreply@glassdoor.com>"
       },
-      "newestDate": "Fri, 13 Nov 2026 05:50:56 +0000 (GMT)",
+      "newestDate": "Sat, 14 Nov 2026 01:55:50 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a1d375859d80535",
-          "subject": "Senior art/creative  graphic designer job at New View SRL - Actively recruiting",
-          "date": "Fri, 13 Nov 2026 05:50:56 +0000 (GMT)",
-          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+          "id": "1a1d7c4a5c759046",
+          "subject": "Allianz has an opportunity for you. Apply Now.",
+          "date": "Sat, 14 Nov 2026 01:55:50 +0000 (UTC)",
+          "from": "Glassdoor Jobs <noreply@glassdoor.com>"
         },
         {
-          "id": "1a1d35f88f27179e",
-          "subject": "Free report: how creatives are using AI✨",
-          "date": "Fri, 13 Nov 2026 05:26:55 +0000",
-          "from": "Envato <news@m.elements.envato.com>"
+          "id": "1a1d7524d2be2e2d",
+          "subject": "134 people viewed your profile",
+          "date": "Fri, 13 Nov 2026 23:50:57 +0000 (GMT)",
+          "from": "LinkedIn <messages-noreply@linkedin.com>"
         },
         {
-          "id": "1a1d34de89b2c003",
-          "subject": "Ruben Dominguez posted new notes",
-          "date": "Fri, 13 Nov 2026 05:07:39 +0000",
-          "from": "Substack <no-reply@substack.com>"
+          "id": "1a1d6fd0ffff9a29",
+          "subject": "Why Jensen Huang’s Firing Couldn’t Happen To Mark Zuckerberg—Or Many Other Tech Titans",
+          "date": "Fri, 13 Nov 2026 22:17:50 +0000 (GMT)",
+          "from": "Forbes via LinkedIn <newsletters-noreply@linkedin.com>"
         },
         {
-          "id": "1a1d34732e74a5df",
-          "subject": "⚡ Beat the holiday shipping rush: 20% OFF inside",
-          "date": "Fri, 13 Nov 2026 05:00:09 +0000",
-          "from": "PhiMolds <info@phimolds.com>"
+          "id": "1a1d6e46aa3f3d60",
+          "subject": "Alexandru, your Position is added! Take these next steps for more success.",
+          "date": "Fri, 13 Nov 2026 21:50:56 +0000 (GMT)",
+          "from": "LinkedIn <notifications-noreply@linkedin.com>"
         }
       ]
     },
@@ -183,40 +183,40 @@
       "name": "Finante",
       "counts": {
         "azi": 0,
-        "24h": 5,
-        "7z": 12,
-        "30z": 43
+        "24h": 4,
+        "7z": 15,
+        "30z": 47
       },
       "newest": {
-        "id": "1a1d12631a4199b0",
-        "subject": "Access capital. Keep your crypto.",
-        "date": "Thu, 12 Nov 2026 19:05:01 +0000",
-        "from": "Kraken <no-reply@email.kraken.com>"
+        "id": "1a1d53409d7cfd97",
+        "subject": "Crypto’s Equity Exposure: Bitcoin, Ether and the US Trading Clock",
+        "date": "Fri, 13 Nov 2026 14:58:38 +0100",
+        "from": "Sentora Research <info@sentora.com>"
       },
-      "newestDate": "Thu, 12 Nov 2026 19:05:01 +0000",
+      "newestDate": "Fri, 13 Nov 2026 14:58:38 +0100",
       "samples": [
         {
-          "id": "1a1d12631a4199b0",
-          "subject": "Access capital. Keep your crypto.",
-          "date": "Thu, 12 Nov 2026 19:05:01 +0000",
-          "from": "Kraken <no-reply@email.kraken.com>"
+          "id": "1a1d53409d7cfd97",
+          "subject": "Crypto’s Equity Exposure: Bitcoin, Ether and the US Trading Clock",
+          "date": "Fri, 13 Nov 2026 14:58:38 +0100",
+          "from": "Sentora Research <info@sentora.com>"
         },
         {
-          "id": "1a1cfb3d15930a0c",
+          "id": "1a1d4943316a7c5a",
           "subject": "New idea by Cryptollica — check it out",
-          "date": "Thu, 12 Nov 2026 12:20:29 -0000",
+          "date": "Fri, 13 Nov 2026 11:03:41 -0000",
           "from": "TradingView <noreply@tradingview.com>"
         },
         {
-          "id": "1a1cf9dc7cefe95f",
+          "id": "1a1d426b581d1387",
           "subject": "New idea by Cryptollica — check it out",
-          "date": "Thu, 12 Nov 2026 11:56:25 -0000",
+          "date": "Fri, 13 Nov 2026 09:04:25 -0000",
           "from": "TradingView <noreply@tradingview.com>"
         },
         {
-          "id": "1a1cf61eef2f9dae",
-          "subject": "New idea by TradingView — check it out",
-          "date": "Thu, 12 Nov 2026 10:51:03 -0000",
+          "id": "1a1d3c55a1827fd8",
+          "subject": "New idea by Cryptollica — check it out",
+          "date": "Fri, 13 Nov 2026 07:18:03 -0000",
           "from": "TradingView <noreply@tradingview.com>"
         }
       ]
@@ -255,16 +255,28 @@
         "azi": 0,
         "24h": 2,
         "7z": 18,
-        "30z": 1008
+        "30z": 1009
       },
       "newest": {
-        "id": "1a1d05a2104c209f",
-        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (a10b344)",
-        "date": "Thu, 12 Nov 2026 07:22:09 -0800",
+        "id": "1a1d55a64bb5fd8d",
+        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (95f8c55)",
+        "date": "Fri, 13 Nov 2026 06:40:32 -0800",
         "from": "apvizual-max <notifications@github.com>"
       },
-      "newestDate": "Thu, 12 Nov 2026 07:22:09 -0800",
+      "newestDate": "Fri, 13 Nov 2026 06:40:32 -0800",
       "samples": [
+        {
+          "id": "1a1d55a64bb5fd8d",
+          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (95f8c55)",
+          "date": "Fri, 13 Nov 2026 06:40:32 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
+        {
+          "id": "1a1d4a90f0d0a6d3",
+          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
+          "date": "Fri, 13 Nov 2026 03:26:48 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
         {
           "id": "1a1d05a2104c209f",
           "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (a10b344)",
@@ -275,18 +287,6 @@
           "id": "1a1cf922aaddc5a7",
           "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
           "date": "Thu, 12 Nov 2026 03:43:44 -0800",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a1cb03f66f97f5c",
-          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (aa6dbfa)",
-          "date": "Wed, 11 Nov 2026 06:29:55 -0800",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a1ca591d0d164ba",
-          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
-          "date": "Wed, 11 Nov 2026 03:23:19 -0800",
           "from": "apvizual-max <notifications@github.com>"
         }
       ]
@@ -303,9 +303,9 @@
     }
   ],
   "totals": {
-    "azi": 34,
-    "24h": 136,
-    "7z": 747,
-    "30z": 2788
+    "azi": 8,
+    "24h": 109,
+    "7z": 743,
+    "30z": 2896
   }
 }
