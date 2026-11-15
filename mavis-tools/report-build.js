@@ -40,15 +40,22 @@ const tri = triage(sim.rows || []);
 // consumul real de cereri Google, acumulat de kit.js la iesirea fiecarui script
 let usage = {};
 try { usage = JSON.parse(fs.readFileSync(path.join(DIR, '.api-usage.json'), 'utf8')); } catch (e) {}
+// Randurile pentru build si verificare se calculeaza SEPARAT: contorul le scrie
+// la iesirea fiecarui proces, deci la generare ele nu sunt (inca) in fisier.
+// Fara asta, tabelul nu se aduna cu totalul (masurat 15.11: 137 in tabel, 140 total).
+const VERIFY_COST = 1; // verificarea livrarii: 1 cerere (drive.files.get alt=media)
+const num = k => (usage[k] && typeof usage[k] === 'number') ? usage[k] : 0;
 const usageRows = Object.entries(usage)
-  .filter(([k, v]) => !k.startsWith('_') && typeof v === 'number')
+  .filter(([k, v]) => !k.startsWith('_') && k !== 'report-build.js' && k !== 'report-verify-upload.js' && typeof v === 'number')
   .sort((a, b) => b[1] - a[1]);
 const usageMeasured = usageRows.reduce((a, b) => a + b[1], 0);
 // upload-ul raportului costa: search + upload/replace + verificare = 3 cereri.
 // In modul --file-id=<ID> (raport deja creat) e un singur PATCH = 1 cerere
 // (raspunsul lui include name/mimeType/size/parents -> e si verificarea).
 const UPLOAD_COST = (process.argv.find(a => a.startsWith('--file-id=')) || '').trim() ? 1 : 3;
-const usageTotal = usageMeasured + UPLOAD_COST;
+const buildRow = num('report-build.js') + UPLOAD_COST;
+const verifyRow = num('report-verify-upload.js') + VERIFY_COST;
+const usageTotal = usageMeasured + buildRow + verifyRow;
 const usageNote = usage._nota || '';
 
 const pad = (s, n) => { s = String(s); while (s.length < n) s += ' '; return s; };
@@ -59,8 +66,13 @@ const MONTHS = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'i
 const d = new Date(DATE + 'T12:00:00Z');
 const dayName = ZI[d.getUTCDay()];
 // Romania: EEST (UTC+3) pana pe 25.10.2026, cand se trece la EET (UTC+2).
-const eest = new Date(Date.now() + 3 * 3600 * 1000);
-const windowEnd = String(eest.getUTCHours()).padStart(2, '0') + ':' + String(eest.getUTCMinutes()).padStart(2, '0');
+// Masurat 15.11: eticheta raportului spunea "EEST" cu fereastra calculata cu +3,
+// desi Romania e deja pe EET => fereastra si eticheta erau cu o ora gresite.
+const isEET = DATE >= '2026-10-25';
+const tzOffset = isEET ? 2 : 3;
+const tzName = isEET ? 'EET' : 'EEST';
+const localNow = new Date(Date.now() + tzOffset * 3600 * 1000);
+const windowEnd = String(localNow.getUTCHours()).padStart(2, '0') + ':' + String(localNow.getUTCMinutes()).padStart(2, '0');
 
 const daysBetween = (a, b) => Math.round((b - a) / 86400000);
 const parseDate = s => { const t = Date.parse(s || ''); return isNaN(t) ? null : new Date(t); };
@@ -245,10 +257,11 @@ const expiredInAmanzat = sc.amanzat.filter(j => j.expired).length;
 // plural corect
 const plural = (n, one, few, many) => n === 1 ? one : (n >= 2 && n <= 19 ? few : many);
 
+
 // ---------------- raport ----------------
 let md = `# Raport zilnic — ${dayName} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}
 
-> Generat de Mavis Cloud · ${sim.total} mesaje noi măsurate azi (00:00–${windowEnd} EEST) · ${sc.stats.total} joburi analizate
+> Generat de Mavis Cloud · ${sim.total} mesaje noi măsurate azi (00:00–${windowEnd} ${tzName}) · ${sc.stats.total} joburi analizate
 > Cota Google: **${usageTotal} cereri** (plafon 200${usageTotal > 200 ? ` — **depășit cu ${usageTotal - 200}**` : usageTotal === 200 ? ` — **exact pe plafon**` : ` — **în limita plafonului**`}). Zero scrieri pe Gmail; tot consumul a fost măsurare și diagnostic. Detaliu în §5.
 > Cifra e măsurată **la scrierea raportului**; verificarea conținutului de pe Drive (citire înapoi, după upload) mai adaugă **1 cerere**.
 
@@ -333,6 +346,11 @@ if (filterState) {
   for (const t of ft) { t.categories = (rowById[t.id] || {}).categories || []; }
   const working = ft.filter(x => x.matchesAsIs > 0);
   const dead = ft.filter(x => x.matchesAsIs === 0);
+  // plural cu gen + acordul verbului: masurat 15.11 ("Cele 1 filtre ... lovesc"
+  // -> "Filtrul ... nu lovește"). n=1 e cazul real: mereu un singur filtru mort.
+  const deadHeading = dead.length === 1
+    ? '**Filtrul cu criteriu care nu lovește niciun mesaj în 30 de zile**'
+    : `**Cele ${dead.length} ${dead.length >= 20 ? 'de ' : ''}filtre cu criteriu care nu lovesc niciun mesaj în 30 de zile**`;
 
   // CAUZA se CALCULEAZA per filtru, din date. Măsurat 2026-11-11: textul
   // vechi spunea mereu „paranteze în loc de acolade" și „addLabelIds e vid" —
@@ -366,7 +384,7 @@ if (filterState) {
   if (dead.length) {
     const deadFixed = dead.reduce((a, x) => a + (x.matchesFixed || 0), 0);
     md += `
-**Cele ${dead.length} filtre cu criteriu care nu lovesc niciun mesaj în 30 de zile** — cauza e calculată per filtru, nu spusă din memorie:
+${deadHeading} — cauza e calculată per filtru, nu spusă din memorie:
 
 | Filtru | cum e scris acum | cum ar trebui scris (\`{}\`) | cauza |
 |---|---|---|---|
@@ -661,7 +679,7 @@ if (daysOff !== null) {
     : deadParen === deadTests.length
       ? ` — toate folosesc \`from:(...)\` unde Gmail cere \`from:{...}\` (paranteze = ȘI, acolade = SAU), deci nu pot lovi niciun mesaj${deadSum ? `; cu acoladele ar fi prins ${deadSum} mesaje in 30 de zile` : ''}`
       : ` — cauza, măsurată per filtru: ${deadParen} din ${deadTests.length} au criteriu de tip \`from:(...)\` (paranteze = ȘI, acolade = SAU)${deadSum ? `; rescrierea cu \`{}\` ar aduce ${deadSum} mesaje in 30 de zile` : ''}; restul au criteriu valid (OR explicit) și \`addLabelIds\` corect, dar nu a venit niciun mail de la aceste surse în fereastra măsurată`;
-  md += ` Starea filtrelor, masurata azi: **${workingCount} functioneaza, ${brokenCount} sunt nefunctionale**${deadCauseTxt}. ~${inboxCounts['7d_inbox']} mesaje/7 zile stau in inbox.\n`;
+  md += ` Starea filtrelor, masurata azi: **${workingCount} functioneaza**${brokenCount ? `, ${brokenCount} ${brokenCount === 1 ? 'este nefunctional' : 'sunt nefunctionale'}` : ''}${deadCauseTxt}. ~${inboxCounts['7d_inbox']} mesaje/7 zile stau in inbox.\n`;
 }
 if (dpP && !dpP.error) {
   md += `2. **designproject.io servește descrieri foarte inegale** (${dpP.jdLenMin}–${dpP.jdLenMax} de caractere pe cele ${dpP.count} de joburi, măsurat azi). Cele mai lungi sunt rescrise de AI și injectează cuvinte-cheie care ridică axele — vezi §6.2.\n`;
@@ -679,7 +697,8 @@ md += `5. **Cota Google: ${usageTotal} cereri pe 200**${usageTotal > 200 ? ` (**
 md += '| Etapă | Cereri |\n|---|---|\n';
 // report-build.js apare in contor cu cererile deja facute; upload-ul de dupa
 // generare intra in aceeasi linie, ca sa nu apara de doua ori.
-md += usageRows.map(([k, v]) => `| \`${k}\` | ${k === 'report-build.js' ? v + UPLOAD_COST : v} |`).join('\n') + '\n';
+md += usageRows.map(([k, v]) => `| \`${k}\` | ${v} |`).join('\n') + '\n';
+md += `| \`report-build.js\` | ${buildRow} |\n| \`report-verify-upload.js\` | ${verifyRow} |\n`;
 md += `| **total** | **${usageTotal}** |\n\n`;
 md += `> ${usageNote || 'Contorul măsoară cererile efective făcute de fiecare script.'}\n\n`;
 if (usageTotal > 200) {

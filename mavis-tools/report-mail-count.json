@@ -1,47 +1,47 @@
 {
-  "today": "2026/11/14",
+  "today": "2026/11/15",
   "labels": [
     {
       "key": "joburi",
       "title": "Joburi",
       "name": "MAVIS/Joburi",
       "counts": {
-        "azi": 6,
-        "24h": 40,
-        "7z": 273,
-        "30z": 659
+        "azi": 10,
+        "24h": 34,
+        "7z": 272,
+        "30z": 694
       },
       "newest": {
-        "id": "1a1d8846e05decab",
-        "subject": "Because you searched for graphic design, bucharest jobs",
-        "date": "Sat, 14 Nov 2026 07:25:11 +0200",
+        "id": "1a1ddce58169c5d8",
+        "subject": "8 design graphic bucuresti jobs available on bestjobs",
+        "date": "Sun, 15 Nov 2026 08:04:11 +0200",
         "from": "Bestjobs <contact@bestjobs.eu>"
       },
-      "newestDate": "Sat, 14 Nov 2026 07:25:11 +0200",
+      "newestDate": "Sun, 15 Nov 2026 08:04:11 +0200",
       "samples": [
         {
-          "id": "1a1d8846e05decab",
-          "subject": "Because you searched for graphic design, bucharest jobs",
-          "date": "Sat, 14 Nov 2026 07:25:11 +0200",
+          "id": "1a1ddce58169c5d8",
+          "subject": "8 design graphic bucuresti jobs available on bestjobs",
+          "date": "Sun, 15 Nov 2026 08:04:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a1d878c9933a948",
-          "subject": "8 new jobs for you: design graphic bucuresti",
-          "date": "Sat, 14 Nov 2026 07:12:11 +0200",
+          "id": "1a1ddc2382147df9",
+          "subject": "Prohuman Romania Junior Graphic Designer | eCommerce | 1-Year Contract",
+          "date": "Sun, 15 Nov 2026 05:50:55 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+        },
+        {
+          "id": "1a1ddc1e09708733",
+          "subject": "10 graphic design, bucharest jobs available on bestjobs",
+          "date": "Sun, 15 Nov 2026 07:50:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a1d8654882588d6",
-          "subject": "Accenture Global caută Graphics Engineer și 102 mai multe oferte noi de muncă",
-          "date": "Sat, 14 Nov 2026 04:51:18 +0000",
-          "from": "Jooble <subscribe@ro.jooble.org>"
-        },
-        {
-          "id": "1a1d8479b7bd2129",
-          "subject": "Responsabil Customer Care si Administrativ la ENGIE. Încă 19 locuri de muncă în București, Ilfov",
-          "date": "Sat, 14 Nov 2026 04:18:53 +0000",
-          "from": "Indeed <donotreply@jobalert.indeed.com>"
+          "id": "1a1dda7e8f9c2953",
+          "subject": "Job offers that fit your profile",
+          "date": "Sun, 15 Nov 2026 07:22:11 +0200",
+          "from": "Bestjobs <contact@bestjobs.eu>"
         }
       ]
     },
@@ -50,42 +50,42 @@
       "title": "AI si comunitati",
       "name": "AI Folder/AI si Comunitati",
       "counts": {
-        "azi": 1,
-        "24h": 19,
-        "7z": 105,
-        "30z": 267
+        "azi": 2,
+        "24h": 15,
+        "7z": 108,
+        "30z": 282
       },
       "newest": {
-        "id": "1a1d79511a26c447",
-        "subject": "Last Seats.",
-        "date": "Sat, 14 Nov 2026 01:02:09 +0000",
-        "from": "\"Felix & Winston 🐶\" <felix@goatacademy.org>"
+        "id": "1a1dce18b370a96b",
+        "subject": "There are 5 new jobs matching your saved search for November 14: AI Designer",
+        "date": "Sun, 15 Nov 2026 02:45:30 +0100",
+        "from": "JobLeads <mailer@jobleads.com>"
       },
-      "newestDate": "Sat, 14 Nov 2026 01:02:09 +0000",
+      "newestDate": "Sun, 15 Nov 2026 02:45:30 +0100",
       "samples": [
         {
-          "id": "1a1d79511a26c447",
-          "subject": "Last Seats.",
-          "date": "Sat, 14 Nov 2026 01:02:09 +0000",
-          "from": "\"Felix & Winston 🐶\" <felix@goatacademy.org>"
+          "id": "1a1dce18b370a96b",
+          "subject": "There are 5 new jobs matching your saved search for November 14: AI Designer",
+          "date": "Sun, 15 Nov 2026 02:45:30 +0100",
+          "from": "JobLeads <mailer@jobleads.com>"
         },
         {
-          "id": "1a1d7315c4784b7a",
-          "subject": "Where the Hell Are the Republicans We Elected?",
-          "date": "Fri, 13 Nov 2026 23:02:04 +0000",
-          "from": "PolitiBrawl <politibrawl@substack.com>"
+          "id": "1a1dca4e2b2db8aa",
+          "subject": "Ultimate TRINITY OF TRUTH",
+          "date": "Sun, 15 Nov 2026 00:39:05 +0000",
+          "from": "Ken wheeler from Ken Theoria Apophasis Substack <kenwheeler@substack.com>"
         },
         {
-          "id": "1a1d6149f6578952",
-          "subject": "You're paying for AI tools that have free twins. Here are 14.",
-          "date": "Fri, 13 Nov 2026 18:03:57 +0000",
-          "from": "Hyperautomation AI Report <hyperautomationaireport@mail.beehiiv.com>"
+          "id": "1a1dc0ac1b6db001",
+          "subject": "Puffy AI Image Designer",
+          "date": "Sat, 14 Nov 2026 21:50:54 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
         },
         {
-          "id": "1a1d5da8ecdd8335",
-          "subject": "AI can write anything…except something worth reading.",
-          "date": "Fri, 13 Nov 2026 17:00:32 +0000 (UTC)",
-          "from": "Medium <noreply@medium.com>"
+          "id": "1a1db2f0b45b6094",
+          "subject": "Puffy AI Image Designer",
+          "date": "Sat, 14 Nov 2026 17:50:55 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
         }
       ]
     },
@@ -95,41 +95,41 @@
       "name": "Socials",
       "counts": {
         "azi": 0,
-        "24h": 3,
-        "7z": 32,
-        "30z": 82
+        "24h": 4,
+        "7z": 33,
+        "30z": 86
       },
       "newest": {
-        "id": "1a1d571283e6dae1",
-        "subject": "15 new notifications since 5:05 pm (Nov 12, 2026)",
-        "date": "Fri, 13 Nov 2026 15:05:25 +0000 (UTC)",
+        "id": "1a1da68b41f72990",
+        "subject": "18 new notifications since 5:06 pm (Nov 13, 2026)",
+        "date": "Sat, 14 Nov 2026 14:14:17 +0000 (UTC)",
         "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
       },
-      "newestDate": "Fri, 13 Nov 2026 15:05:25 +0000 (UTC)",
+      "newestDate": "Sat, 14 Nov 2026 14:14:17 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a1d571283e6dae1",
-          "subject": "15 new notifications since 5:05 pm (Nov 12, 2026)",
-          "date": "Fri, 13 Nov 2026 15:05:25 +0000 (UTC)",
+          "id": "1a1da68b41f72990",
+          "subject": "18 new notifications since 5:06 pm (Nov 13, 2026)",
+          "date": "Sat, 14 Nov 2026 14:14:17 +0000 (UTC)",
           "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a1d3f720dc60765",
+          "id": "1a1d9212e364d8d1",
           "subject": "1 event happening tomorrow",
-          "date": "Fri, 13 Nov 2026 08:12:30 +0000 (UTC)",
+          "date": "Sat, 14 Nov 2026 08:16:31 +0000 (UTC)",
           "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a1d3c9df710426b",
+          "id": "1a1d91ac27e0d282",
           "subject": "👑 Prince Hamdan 🇦🇪 sent you a message",
-          "date": "Fri, 13 Nov 2026 07:23:04 +0000 (UTC)",
+          "date": "Sat, 14 Nov 2026 08:09:31 +0000 (UTC)",
           "from": "\"👑 Prince Hamdan 🇦🇪 on TikTok\" <notification@service.tiktok.com>"
         },
         {
-          "id": "1a1d049ecb200a33",
-          "subject": "31 new notifications since 5:03 pm (Nov 11, 2026)",
-          "date": "Thu, 12 Nov 2026 15:04:26 +0000 (UTC)",
-          "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
+          "id": "1a1d8f6e980dc5f9",
+          "subject": "1 new notification since 1:25 am (Nov 13, 2026)",
+          "date": "Sat, 14 Nov 2026 07:30:22 +0000 (UTC)",
+          "from": "\"ZAVANT University (Skool)\" <noreply@skool.com>"
         }
       ]
     },
@@ -138,42 +138,42 @@
       "title": "Newsletter",
       "name": "Newsletter",
       "counts": {
-        "azi": 1,
-        "24h": 41,
-        "7z": 300,
-        "30z": 832
+        "azi": 4,
+        "24h": 31,
+        "7z": 302,
+        "30z": 864
       },
       "newest": {
-        "id": "1a1d7c4a5c759046",
-        "subject": "Allianz has an opportunity for you. Apply Now.",
-        "date": "Sat, 14 Nov 2026 01:55:50 +0000 (UTC)",
-        "from": "Glassdoor Jobs <noreply@glassdoor.com>"
+        "id": "1a1ddc2382147df9",
+        "subject": "Prohuman Romania Junior Graphic Designer | eCommerce | 1-Year Contract",
+        "date": "Sun, 15 Nov 2026 05:50:55 +0000 (GMT)",
+        "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
       },
-      "newestDate": "Sat, 14 Nov 2026 01:55:50 +0000 (UTC)",
+      "newestDate": "Sun, 15 Nov 2026 05:50:55 +0000 (GMT)",
       "samples": [
         {
-          "id": "1a1d7c4a5c759046",
+          "id": "1a1ddc2382147df9",
+          "subject": "Prohuman Romania Junior Graphic Designer | eCommerce | 1-Year Contract",
+          "date": "Sun, 15 Nov 2026 05:50:55 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+        },
+        {
+          "id": "1a1dd545d4f26123",
+          "subject": "Junior Graphic Designer | eCommerce | 1-Year Contract       job at Prohuman Romania - Actively recruiting",
+          "date": "Sun, 15 Nov 2026 03:50:55 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+        },
+        {
+          "id": "1a1dce9ba98f160c",
           "subject": "Allianz has an opportunity for you. Apply Now.",
-          "date": "Sat, 14 Nov 2026 01:55:50 +0000 (UTC)",
+          "date": "Sun, 15 Nov 2026 01:54:26 +0000 (UTC)",
           "from": "Glassdoor Jobs <noreply@glassdoor.com>"
         },
         {
-          "id": "1a1d7524d2be2e2d",
-          "subject": "134 people viewed your profile",
-          "date": "Fri, 13 Nov 2026 23:50:57 +0000 (GMT)",
-          "from": "LinkedIn <messages-noreply@linkedin.com>"
-        },
-        {
-          "id": "1a1d6fd0ffff9a29",
-          "subject": "Why Jensen Huang’s Firing Couldn’t Happen To Mark Zuckerberg—Or Many Other Tech Titans",
-          "date": "Fri, 13 Nov 2026 22:17:50 +0000 (GMT)",
-          "from": "Forbes via LinkedIn <newsletters-noreply@linkedin.com>"
-        },
-        {
-          "id": "1a1d6e46aa3f3d60",
-          "subject": "Alexandru, your Position is added! Take these next steps for more success.",
-          "date": "Fri, 13 Nov 2026 21:50:56 +0000 (GMT)",
-          "from": "LinkedIn <notifications-noreply@linkedin.com>"
+          "id": "1a1dce6829415fb7",
+          "subject": "Prohuman Romania Junior Graphic Designer | eCommerce | 1-Year Contract",
+          "date": "Sun, 15 Nov 2026 01:50:56 +0000 (GMT)",
+          "from": "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
         }
       ]
     },
@@ -183,8 +183,8 @@
       "name": "Finante",
       "counts": {
         "azi": 0,
-        "24h": 4,
-        "7z": 15,
+        "24h": 0,
+        "7z": 13,
         "30z": 47
       },
       "newest": {
@@ -255,16 +255,28 @@
         "azi": 0,
         "24h": 2,
         "7z": 18,
-        "30z": 1009
+        "30z": 1011
       },
       "newest": {
-        "id": "1a1d55a64bb5fd8d",
-        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (95f8c55)",
-        "date": "Fri, 13 Nov 2026 06:40:32 -0800",
+        "id": "1a1da476fcbbc878",
+        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (54c7aef)",
+        "date": "Sat, 14 Nov 2026 05:37:56 -0800",
         "from": "apvizual-max <notifications@github.com>"
       },
-      "newestDate": "Fri, 13 Nov 2026 06:40:32 -0800",
+      "newestDate": "Sat, 14 Nov 2026 05:37:56 -0800",
       "samples": [
+        {
+          "id": "1a1da476fcbbc878",
+          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (54c7aef)",
+          "date": "Sat, 14 Nov 2026 05:37:56 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
+        {
+          "id": "1a1d9acd5e4d4195",
+          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
+          "date": "Sat, 14 Nov 2026 02:49:04 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
         {
           "id": "1a1d55a64bb5fd8d",
           "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (95f8c55)",
@@ -275,18 +287,6 @@
           "id": "1a1d4a90f0d0a6d3",
           "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
           "date": "Fri, 13 Nov 2026 03:26:48 -0800",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a1d05a2104c209f",
-          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (a10b344)",
-          "date": "Thu, 12 Nov 2026 07:22:09 -0800",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a1cf922aaddc5a7",
-          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
-          "date": "Thu, 12 Nov 2026 03:43:44 -0800",
           "from": "apvizual-max <notifications@github.com>"
         }
       ]
@@ -303,9 +303,9 @@
     }
   ],
   "totals": {
-    "azi": 8,
-    "24h": 109,
-    "7z": 743,
-    "30z": 2896
+    "azi": 16,
+    "24h": 86,
+    "7z": 746,
+    "30z": 2984
   }
 }
