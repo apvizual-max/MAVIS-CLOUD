@@ -51,9 +51,14 @@ de aici:
 
 | Se taie | Unde trăiește după tăiere |
 |---|---|
-| `raport-zilnic-istoric`: secțiunea `## 2026-11-11` comprimată | arhiva de azi + raportul din 11.11 + git |
 | `raport-zilnic-istoric`: se adaugă `## 2026-11-16` | topic |
 | `raport-calitate-verificare`: se adaugă regulile 19–20 | topic |
 | `raport-zilnic-pipeline`: pointer de azi | topic + arhiva de azi |
+
+**Nicio comprimare astăzi** — topicul istoric avea **1.966 B liberi** (cumulul
+comprimărilor din 15.11: secțiunea `## 2026-11-04`, ~3,9 KB), deci loc pentru
+intrarea zilei fără să sacrifice nimic. Comprimarea secțiunii `## 2026-11-11` a
+**eșuat** (blocul lung nu se potrivește: textul live diferă de view și de arhivă)
+⇒ s-a reportat, nu s-a forțat prin tăiere parțială.
 
 **Regulă:** arhiva e append-only. Nu se șterge nimic din ea.
