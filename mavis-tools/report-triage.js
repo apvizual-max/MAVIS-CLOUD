@@ -64,6 +64,14 @@ const ROBOT_LOCAL = /^(no-?reply|do-?not-?reply|donotreply|noreply|notify|notifi
 // pe profilul altcuiva. Deci cere omul, dar NU e alerta de securitate.
 const IDENTITY_CHECK = /your name is on a paper|confirm (this|that) (paper|is)|is this (yours|you)|it'?s mine|this is not me|confirm (your|this) (email|phone|identity)/i;
 
+// ---- TEST DE AUTENTIFICARE (cod de verificare): cineva incearca sa intre ----
+// MĂSURAT 2026-11-16: „381878 is your verification code" (Slickdeals, 00:46 UTC)
+// a fost clasificat `fyi`/newsletter. E un test de acces: daca Alex NU l-a cerut,
+// atunci cineva incearca sa se logheze in contul lui. Fara semnal, era ascuns in
+// „fara actiune". Diferenta fata de IDENTITY_CHECK: acolo e confirmare de
+// PROPRIETATE a unei lucrari; aici e AUTENTIFICARE a unui cont.
+const AUTH_CHALLENGE = /is your[\s-]*(verification|security|login|one[\s-]*time)[\s-]*(code|passcode|password)|verification[\s-]*(code|passcode)|verify it'?s you|one[\s-]*time[\s-]*(code|passcode)|login[\s-]*(code|passcode)|security[\s-]*(code|passcode)|code to (sign|log)[\s-]*in/i;
+
 // ---- ALERTA DE SECURITATE: cere verificare umana, chiar daca vine de la robot ----
 // MĂSURAT 2026-10-29: „Notice of Security Incident" (Scribd, prin Epiq) — un
 // incident real de date, dar de la alt expeditor decât Google. Deci NU
@@ -290,6 +298,9 @@ function triage(rows) {
       cls = 'needs-action'; why = 'contul/proiectul cere o actiune (facturare / suspendare)';
     } else if ((SECURITY_FROM.test(from) && SECURITY_TEXT.test(text)) || SECURITY_SUBJECT.test(subj)) {
       cls = 'needs-action'; why = 'alerta de securitate — cere verificare umana';
+    } else if (AUTH_CHALLENGE.test(subj + ' ' + headText)) {
+      // test de autentificare: daca Alex nu l-a cerut, e tentativa de acces.
+      cls = 'needs-action'; why = 'cod de verificare (test de autentificare) — daca nu l-ai cerut tu, e tentativa de acces in cont';
     } else if (CI_FROM.test(from) && CI_FAIL_SUBJECT.test(subj)) {
       cls = 'needs-action'; why = 'workflow CI esuat — cere actiune';
     } else if (APPLIED_CONFIRM.test(subj + ' ' + headText)) {

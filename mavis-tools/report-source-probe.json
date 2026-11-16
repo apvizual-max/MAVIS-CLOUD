@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-15",
+  "date": "2026-11-16",
   "designproject": {
     "count": 25,
     "jdLenMin": 2094,
@@ -41,7 +41,7 @@
     }
   },
   "iqads": {
-    "catalogueLinks": 42,
+    "catalogueLinks": 41,
     "pagesTested": [
       0,
       2,

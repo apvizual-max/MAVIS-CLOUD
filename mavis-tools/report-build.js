@@ -292,7 +292,8 @@ Azi au intrat **${sim.total} mesaje** în total, iar în inbox sunt **${inboxCou
 
 const unclassified = sim.unmatched;
 if (unclassified > 0) {
-  md += ` **${unclassified} dintre ele nu au primit nicio etichetă de categorie**`;
+  // acord de plural + gen: "1 dintre ele nu a primit" vs "2 dintre ele nu au primit"
+  md += ` **${unclassified} dintre ele ${unclassified === 1 ? 'nu a primit' : 'nu au primit'} nicio etichetă de categorie**`;
   md += ` (nu se potrivesc niciunui filtru de categorie — deci rămân în inbox, neetichetate).`;
 }
 if (doubleLabeled > 0) {
