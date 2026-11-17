@@ -1,19 +1,19 @@
 {
-  "date": "2026-11-16",
+  "date": "2026-11-17",
   "designproject": {
-    "count": 25,
+    "count": 24,
     "jdLenMin": 2094,
     "jdLenMax": 30619,
     "employmentType": {
-      "FULL_TIME": 25
+      "FULL_TIME": 24
     },
     "jsonLdAllFullTime": true,
-    "badgeFullTime": 25,
-    "withJobTypeLine": 8,
+    "badgeFullTime": 24,
+    "withJobTypeLine": 7,
     "newestPostDate": "2026-11-05",
     "validThrough": {
-      "checked": 25,
-      "exact": 25,
+      "checked": 24,
+      "exact": 24,
       "offByOne": 0,
       "other": 0,
       "rule": "datePosted + 30 zile"
@@ -41,7 +41,7 @@
     }
   },
   "iqads": {
-    "catalogueLinks": 41,
+    "catalogueLinks": 42,
     "pagesTested": [
       0,
       2,
