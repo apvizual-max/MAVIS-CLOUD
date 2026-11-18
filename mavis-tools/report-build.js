@@ -36,6 +36,11 @@ let probe = null;
 try { probe = JSON.parse(fs.readFileSync(path.join(DIR, 'report-source-probe.json'), 'utf8')); } catch (e) {}
 let filterState = null;
 try { filterState = JSON.parse(fs.readFileSync(path.join(DIR, 'report-filter-state.json'), 'utf8')); } catch (e) {}
+// sonda etichetelor MAVIS/* necunoscute pentru taxonomie (18.11): o eticheta
+// noua, goala sau nu, trebuie SAU sa apara in raport. Fara asta, un mesaj pe
+// o eticheta nerezolvata ar disparea din cifre fara semn.
+let strayLabels = null;
+try { strayLabels = JSON.parse(fs.readFileSync(path.join(DIR, 'report-label-stray.json'), 'utf8')); } catch (e) {}
 const tri = triage(sim.rows || []);
 // consumul real de cereri Google, acumulat de kit.js la iesirea fiecarui script
 let usage = {};
@@ -213,7 +218,11 @@ if (filterState && Array.isArray(filterState.rows)) {
   for (const r of filterState.rows) {
     const cats = (r.addLabelIds || []).map(x => keyByLabelName[TAX.normalize(x)]).filter(Boolean);
     r.categories = cats;
-    r.functional = (r._matchesAsIs || 0) > 0 && cats.length > 0;
+    // `functional` vine DE LA SONDA (lovește mesaje ȘI adaugă etichetă de
+    // categorie). Nu îl suprascriem cu un proxy greșit: `_matchesAsIs` nu
+    // există în JSON-ul salvat ⇒ `(undefined || 0) > 0` ar face toate filtrele
+    // „nefuncționale" (măsurat 18.11).
+    r.functional = typeof r.functional === 'boolean' ? r.functional : ((r._matchesAsIs || 0) > 0 && cats.length > 0);
   }
 }
 
@@ -375,11 +384,17 @@ if (filterState) {
   if (joburi) md += ` Criteriul celui de joburi, citit live azi:\n\n\`\`\`\n${joburi.query}\n\`\`\`\n`;
 
   if (working.length) {
+    // Măsurat 18.11: „filtru funcțional" = lovește mesaje ȘI adaugă etichetă de
+    // categorie. cloudHQ lovește 1 mesaj în 30 de zile, dar ținta e
+    // `CATEGORY_PERSONAL`, care nu mai există ⇒ NU etichetează nimic. Numărat
+    // doar după „lovește", raportul spunea „7 filtre funcționează" (fals: 6).
+    const functionalW = working.filter(x => (x.categories || []).length > 0);
+    const noCatW = working.filter(x => !(x.categories || []).length);
     md += `
-#### ${working.length === 1 ? 'Un filtru FUNCȚIONEAZĂ' : working.length + ' filtre FUNCȚIONEAZĂ'}
+#### ${functionalW.length === 1 ? 'Un filtru FUNCȚIONEAZĂ' : functionalW.length + ' filtre FUNCȚIONEAZĂ'}
 
-**${working.length} dintre ${ft.length} filtre lovesc efectiv mesaje.** ${working.map(x => `\`${x.query.slice(0, 50)}${x.query.length > 50 ? '…' : ''}\` → **${x.matchesAsIs}** mesaje în 30 de zile, etichetează ${(x.categories || []).length ? (x.categories || []).map(c => `\`${c}\``).join(', ') : 'nicio etichetă de categorie'}`).join('; ')}
-
+**${functionalW.length} dintre ${ft.length} filtre lovesc efectiv mesaje ȘI pun etichetă de categorie.** ${functionalW.map(x => `\`${x.query.slice(0, 50)}${x.query.length > 50 ? '…' : ''}\` → **${x.matchesAsIs}** mesaje în 30 de zile, etichetează ${(x.categories || []).map(c => `\`${c}\``).join(', ')}`).join('; ')}
+${noCatW.length ? `\n> **${noCatW.length} ${noCatW.length === 1 ? 'filtru lovește mesaje, dar NU adaugă etichetă de categorie' : 'filtre lovesc mesaje, dar NU adaugă etichetă de categorie'}:** ${noCatW.map(x => `\`${x.query.slice(0, 50)}${x.query.length > 50 ? '…' : ''}\` → **${x.matchesAsIs}** mesaje în 30 de zile, ținta e \`${((rowById[x.id] || {}).addLabelIds || []).join('`, `') || 'niciuna'}\` — e etichetă de SISTEM a Gmail (nu una din categoriile tale) ⇒ mesajele rămân fără etichetă de categorie.`).join(' ')}\n` : ''}
 `;
   }
   if (dead.length) {
@@ -659,6 +674,16 @@ if (daysOff !== null) {
   }
   const brokenCount = filterState ? (filterState.tests || []).filter(x => !/^list:/i.test(x.query || '') && x.matchesAsIs === 0).length : 0;
   const workingCount = filterState ? (filterState.tests || []).filter(x => !/^list:/i.test(x.query || '') && x.matchesAsIs > 0).length : 0;
+  // functional = lovește mesaje ȘI adaugă etichetă de categorie (definiția sondei)
+  const functionalCount = filterState
+    ? (typeof filterState.functionalFilters === 'number'
+        ? filterState.functionalFilters
+        : (filterState.rows || []).filter(r => r.functional).length)
+    : workingCount;
+  const noCatFilters = filterState
+    ? (filterState.rows || []).filter(r => r.functional === false
+        && (filterState.tests || []).some(t => t.id === r.id && t.matchesAsIs > 0))
+    : [];
 
   const deadStaleN = deadRows.filter(l => l.newest).length;
   const deadNeverN = deadRows.length - deadStaleN;
@@ -680,7 +705,16 @@ if (daysOff !== null) {
     : deadParen === deadTests.length
       ? ` — toate folosesc \`from:(...)\` unde Gmail cere \`from:{...}\` (paranteze = ȘI, acolade = SAU), deci nu pot lovi niciun mesaj${deadSum ? `; cu acoladele ar fi prins ${deadSum} mesaje in 30 de zile` : ''}`
       : ` — cauza, măsurată per filtru: ${deadParen} din ${deadTests.length} au criteriu de tip \`from:(...)\` (paranteze = ȘI, acolade = SAU)${deadSum ? `; rescrierea cu \`{}\` ar aduce ${deadSum} mesaje in 30 de zile` : ''}; restul au criteriu valid (OR explicit) și \`addLabelIds\` corect, dar nu a venit niciun mail de la aceste surse în fereastra măsurată`;
-  md += ` Starea filtrelor, masurata azi: **${workingCount} functioneaza**${brokenCount ? `, ${brokenCount} ${brokenCount === 1 ? 'este nefunctional' : 'sunt nefunctionale'}` : ''}${deadCauseTxt}. ~${inboxCounts['7d_inbox']} mesaje/7 zile stau in inbox.\n`;
+  md += ` Starea filtrelor, masurata azi: **${functionalCount} functioneaza**${noCatFilters.length ? ` (${workingCount} filtre lovesc mesaje, dar ${noCatFilters.length === 1 ? 'unul' : noCatFilters.length + ' dintre ele'} nu adauga eticheta de categorie: ${noCatFilters.map(r => `\`${(r.addLabelIds || []).join('`, `') || 'nicio tinta'}\``).join(', ')} — e eticheta de SISTEM a Gmail, nu una din categoriile tale)` : ''}${brokenCount ? `, ${brokenCount} ${brokenCount === 1 ? 'este nefunctional' : 'sunt nefunctionale'}` : ''}${deadCauseTxt}. ~${inboxCounts['7d_inbox']} mesaje/7 zile stau in inbox.\n`;
+  // etichetele care NU mai exista / NU sunt in taxonomie: raportate, nu ascunse
+  const missingLbls = (strayLabels && strayLabels.missing) || (mailCount && mailCount.missing) || [];
+  const strayLbls = (strayLabels && strayLabels.stray) || [];
+  if (missingLbls.length || strayLbls.length) {
+    const parts = [];
+    if (missingLbls.length) parts.push(`categoriile \`${missingLbls.map(m => m.title).join('`, `')}\` **nu mai exista in Gmail** (rearanjare) — nu se mai pot masura si nu au filtru care sa le puna`);
+    if (strayLbls.length) parts.push(`etichete \`MAVIS/*\` necunoscute pentru taxonomie: ${strayLbls.map(s => `\`${s.name}\` — ${s.azi + s.s7 === 0 ? '**goala** (0 mesaje azi, 0 in 7 zile)' : `azi ${s.azi}, 7z ${s.s7}`}${s.aziFaraCategorie ? `, ${s.aziFaraCategorie} fara nicio categorie` : ''}`).join(', ')}`);
+    md += ` Etichete: ${parts.join('; ')}. Mesaje de azi rămase necategorizate din cauza lor: **${strayLabels && typeof strayLabels.orphanToday === 'number' ? strayLabels.orphanToday : 'n/măsurat'}**.\n`;
+  }
 }
 if (dpP && !dpP.error) {
   md += `2. **designproject.io servește descrieri foarte inegale** (${dpP.jdLenMin}–${dpP.jdLenMax} de caractere pe cele ${dpP.count} de joburi, măsurat azi). Cele mai lungi sunt rescrise de AI și injectează cuvinte-cheie care ridică axele — vezi §6.2.\n`;
@@ -804,6 +838,7 @@ const files = [
   ['mavis-tools/report-simulate-sort.json', 'simularea sortării + mesajele de azi'],
   ['mavis-tools/report-source-probe.json', 'sonda de surse (comportamentul iqads.ro / designproject.io, măsurat azi)'],
   ['mavis-tools/report-filter-state.json', 'starea filtrelor Gmail + testul paranteze-vs-acolade (măsurat azi)'],
+  ['mavis-tools/report-label-stray.json', 'etichetele `MAVIS/*` necunoscute pentru taxonomie + mesajele rămase necategorizate (măsurat azi)'],
   ['mavis-tools/report-triage.js', 'clasificatorul mesajelor (needs-reply / needs-action / fyi / noise)'],
   ['mavis-tools/taxonomy.js', 'sursa unică pentru numele etichetelor de categorie (rezolvate live, nu hardcodate)'],
 ];

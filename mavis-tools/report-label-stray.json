@@ -1,0 +1,24 @@
+{
+  "date": "2026/11/18",
+  "missing": [
+    {
+      "key": "personal",
+      "title": "Personal",
+      "aliases": [
+        "MAVIS/Personal",
+        "Personal"
+      ]
+    }
+  ],
+  "stray": [
+    {
+      "name": "MAVIS/Joburi/IQ Adds",
+      "id": "Label_32",
+      "azi": 0,
+      "s7": 0,
+      "aziFaraCategorie": 0
+    }
+  ],
+  "orphanToday": 0,
+  "orphanSamples": []
+}
