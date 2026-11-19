@@ -139,8 +139,13 @@ function parseJob(html) {
     process.stdout.write(`  ${id} ${p.company || '?'} | ${p.title || slug} | exp ${p.expiry} | tip ${p.jobType.join('/')} | niv ${p.level} | jd ${p.jd.length}c\n`);
     await new Promise(res => setTimeout(res, 450));
   }
-  fs.writeFileSync(OUT, JSON.stringify({ _meta: { scraped: SCRAPED_DATE, source: BASE + '/p/adjob', count: jobs.length }, jobs }, null, 2));
-  console.log('\nscrapat: ' + jobs.length + ' -> ' + OUT);
+  // MĂSURAT 2026-11-19: scriptul scria fișierul de DOUĂ ori (listare, apoi
+  // localizare) ⇒ un consumator care citea între cele două scrieri rămânea fără
+  // `companyCity` ⇒ joburi mutate greșit în „verdict amânat" (Cohn & Jansen a
+  // picat de la 9,6 la 8,0 într-o rulare). Fix: scrierea intermediară merge în
+  // fișier temporar, iar OUT apare doar la final (atomic, prin rename).
+  fs.writeFileSync(OUT + '.partial', JSON.stringify({ _meta: { scraped: SCRAPED_DATE, source: BASE + '/p/adjob', count: jobs.length, companyCityResolved: false }, jobs }, null, 2));
+  console.log('\nscrapat: ' + jobs.length + ' -> ' + OUT + '.partial (localizare in curs)');
 
   // ---- LOCALIZAREA, de pe pagina companiei ----
   // MĂSURAT 2026-11-08: multe anunturi IQads nu publică orasul. De exemplu
@@ -199,6 +204,11 @@ function parseJob(html) {
     await new Promise(res => setTimeout(res, 350));
   }
 
-  fs.writeFileSync(OUT, JSON.stringify({ _meta: { scraped: SCRAPED_DATE, source: BASE + '/p/adjob', count: jobs.length }, jobs }, null, 2));
-  console.log('rescris cu localizare: ' + OUT);
+  // scriere ATOMICA: fisierul final apare complet, cu markerul de localizare.
+  //(report-score.js refuza sa ruleze daca markerul lipseste — vezi acolo.)
+  const tmp = OUT + '.tmp';
+  fs.writeFileSync(tmp, JSON.stringify({ _meta: { scraped: SCRAPED_DATE, source: BASE + '/p/adjob', count: jobs.length, companyCityResolved: true }, jobs }, null, 2));
+  fs.renameSync(tmp, OUT);
+  try { fs.unlinkSync(OUT + '.partial'); } catch (e) {}
+  console.log('rescris cu localizare: ' + OUT + ' (companyCityResolved=true)');
 })();

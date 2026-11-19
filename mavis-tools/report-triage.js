@@ -47,6 +47,15 @@ const DESIGN_KW = [
 ];
 const LOC_KW = ['bucuresti', 'bucharest', 'ilfov', 'remote', 'cluj', 'iasi', 'timisoara', 'brasov'];
 
+// MĂSURAT 2026-11-19: „Design Engineer CATIA – Bumpers" (Segula Technologies)
+// a intrat în needs-action DOAR pentru că titlul conține cuvântul generic
+// „design" — e CAD MECANIC (bare de protecție auto), nu disciplina lui Alex.
+// ⇒ separăm cuvintele-cheie SPECIFICE de design (tier-urile din scoring.gs) de
+// cele generice („design", „creativ"), și excludem contextul mecanic/auto.
+const GENERIC_DESIGN = new Set(['design', 'creativ']);
+const DESIGN_KW_STRONG = DESIGN_KW.filter(k => !GENERIC_DESIGN.has(k));
+const MECH_DESIGN = /\b(catia|solidworks|creo|siemens nx|plm|automotive|industria auto|mecanic|mechanical|sheet metal|tooling|car body|bumpers?|proiectarea componentelor|bare de protectie)\b/i;
+
 // ---- zgomot cunoscut ----
 const NOISE_FROM = /github|jules|google-labs|actions@|sentinel|dependabot|coderabbit/i;
 // ---- promotii / marketing ----
@@ -278,7 +287,10 @@ function triage(rows) {
     // / DTP" ⇒ fals pozitiv sistematic pe TOATE alertele eJobs cu filtre de
     // departament. Se curăță textul ÎNAINTE de verificarea relevanței.
     const designText = namesSpecificJob ? subj : stripSettingsBoilerplate(text);
-    const isDesign = hasAny(designText, DESIGN_KW);
+    const strongDesign = hasAny(designText, DESIGN_KW_STRONG);
+    const genericDesign = hasAny(designText, [...GENERIC_DESIGN]);
+    // „design" singur, în context mecanic/auto ⇒ NU e rol de design.
+    const isDesign = strongDesign || (genericDesign && !MECH_DESIGN.test(text));
     const isLoc = hasAny(text, LOC_KW);
     // Orice email de la o platforma de job e alerta de job (si NICIODATA
     // needs-reply). Măsurat 2026-11-09: alerta LinkedIn „New jobs similar to

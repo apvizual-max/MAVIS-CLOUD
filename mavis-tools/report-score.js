@@ -209,7 +209,19 @@ function axisFromProse(job) {
 
 function loadJobs() {
   const out = [];
-  const iq = JSON.parse(fs.readFileSync(path.join(DIR, `jobs-iqads-${TODAY}.json`), 'utf8'));
+  const iqPath = path.join(DIR, `jobs-iqads-${TODAY}.json`);
+  const iq = JSON.parse(fs.readFileSync(iqPath, 'utf8'));
+  // MĂSURAT 2026-11-19: fisierul IQads se scrie de două ori (listare, apoi
+  // localizare pe pagina companiei). Citit la moment gresit => fara `companyCity`
+  // => joburi cu locatie reala ajung in „verdict amânat" si SCORUL lor scade
+  // (Cohn & Jansen: 9,6 -> 8,0). Deci: daca markerul de localizare lipseste,
+  // NU continuam cu cifre gresite — raportam si oprim.
+  if (!iq._meta || iq._meta.companyCityResolved !== true) {
+    console.error('EROARE: fisierul IQads nu e complet (lipseste markerul companyCityResolved).');
+    console.error('  Fisier: ' + iqPath);
+    console.error('  Ruleaza din nou scrapingul si asteapta scrierea finala (mesajul "rescris cu localizare") inainte de scorare.');
+    process.exit(2);
+  }
   for (const j of iq.jobs) {
     const L = iqadsLoc(j);
     out.push({
