@@ -1,47 +1,47 @@
 {
-  "today": "2026/11/19",
+  "today": "2026/11/20",
   "labels": [
     {
       "key": "joburi",
       "title": "Joburi",
       "name": "MAVIS/Joburi",
       "counts": {
-        "azi": 10,
-        "24h": 32,
-        "7z": 236,
-        "30z": 813
+        "azi": 8,
+        "24h": 34,
+        "7z": 226,
+        "30z": 846
       },
       "newest": {
-        "id": "1a1f26a6cac52069",
-        "subject": "🔔 Courier Driver caută Șofer de curierat în Berlin GLS / DPD Term Nelimitat und Bonus și 56 mai multe oferte noi de muncă",
-        "date": "Thu, 19 Nov 2026 06:07:03 +0000",
-        "from": "Jooble <subscribe@ro.jooble.org>"
+        "id": "1a1f783bc8a67784",
+        "subject": "8 design graphic bucuresti jobs available on bestjobs",
+        "date": "Fri, 20 Nov 2026 07:52:11 +0200",
+        "from": "Bestjobs <contact@bestjobs.eu>"
       },
-      "newestDate": "Thu, 19 Nov 2026 06:07:03 +0000",
+      "newestDate": "Fri, 20 Nov 2026 07:52:11 +0200",
       "samples": [
         {
-          "id": "1a1f26a6cac52069",
-          "subject": "🔔 Courier Driver caută Șofer de curierat în Berlin GLS / DPD Term Nelimitat und Bonus și 56 mai multe oferte noi de muncă",
-          "date": "Thu, 19 Nov 2026 06:07:03 +0000",
-          "from": "Jooble <subscribe@ro.jooble.org>"
-        },
-        {
-          "id": "1a1f2625f6119f7a",
-          "subject": "New design graphic bucuresti jobs available on bestjobs",
-          "date": "Thu, 19 Nov 2026 07:58:11 +0200",
+          "id": "1a1f783bc8a67784",
+          "subject": "8 design graphic bucuresti jobs available on bestjobs",
+          "date": "Fri, 20 Nov 2026 07:52:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a1f236d7367a9b5",
-          "subject": "These employers are looking for people like you",
-          "date": "Thu, 19 Nov 2026 07:10:11 +0200",
+          "id": "1a1f778568a7d020",
+          "subject": "Job offers that fit your profile",
+          "date": "Fri, 20 Nov 2026 07:40:11 +0200",
           "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a1f22f23302b477",
-          "subject": "GTA VI Could Be A Huge Pay Day For The Low-Profile Brothers Behind The Franchise",
-          "date": "Thu, 19 Nov 2026 05:02:17 +0000 (GMT)",
-          "from": "Forbes via LinkedIn <newsletters-noreply@linkedin.com>"
+          "id": "1a1f7666de3eb65d",
+          "subject": "București, Ilfov: Urmărește-ne la SIGNAL IDUNA",
+          "date": "Fri, 20 Nov 2026 05:20:46 +0000",
+          "from": "Indeed <donotreply@jobalert.indeed.com>"
+        },
+        {
+          "id": "1a1f75575fdc240b",
+          "subject": "In Arena – O noua intalnire din seria Conferintelor de la Sosea: Turme, piete si politici. Crizele si transformarile oieritului",
+          "date": "Fri, 20 Nov 2026 05:02:15 +0000 (GMT)",
+          "from": "\"Cafenea   ☕️☕️☕️ via LinkedIn\" <newsletters-noreply@linkedin.com>"
         }
       ]
     },
@@ -50,41 +50,41 @@
       "title": "AI si comunitati",
       "name": "AI Folder/AI si Comunitati",
       "counts": {
-        "azi": 4,
+        "azi": 3,
         "24h": 17,
-        "7z": 98,
-        "30z": 326
+        "7z": 94,
+        "30z": 343
       },
       "newest": {
-        "id": "1a1f161d8d452709",
-        "subject": "There are 5 new jobs matching your saved search for November 18: AI Designer",
-        "date": "Thu, 19 Nov 2026 02:18:03 +0100",
-        "from": "JobLeads <mailer@jobleads.com>"
+        "id": "1a1f78af507e5bfa",
+        "subject": "Anthropic Secretly Launched a NEW Token-Saving Mode in Claude Code",
+        "date": "Fri, 20 Nov 2026 06:00:41 +0000 (UTC)",
+        "from": "Jay E <robonuggets@mail.beehiiv.com>"
       },
-      "newestDate": "Thu, 19 Nov 2026 02:18:03 +0100",
+      "newestDate": "Fri, 20 Nov 2026 06:00:41 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a1f161d8d452709",
-          "subject": "There are 5 new jobs matching your saved search for November 18: AI Designer",
-          "date": "Thu, 19 Nov 2026 02:18:03 +0100",
-          "from": "JobLeads <mailer@jobleads.com>"
+          "id": "1a1f78af507e5bfa",
+          "subject": "Anthropic Secretly Launched a NEW Token-Saving Mode in Claude Code",
+          "date": "Fri, 20 Nov 2026 06:00:41 +0000 (UTC)",
+          "from": "Jay E <robonuggets@mail.beehiiv.com>"
         },
         {
-          "id": "1a1f1612153279c3",
-          "subject": "What if all your stocks were sold tonight?",
-          "date": "Thu, 19 Nov 2026 01:13:14 +0000",
+          "id": "1a1f75ab63438a41",
+          "subject": "Ruben Dominguez and Aakash Gupta posted new notes",
+          "date": "Fri, 20 Nov 2026 05:07:59 +0000",
+          "from": "Substack <no-reply@substack.com>"
+        },
+        {
+          "id": "1a1f67b03369317f",
+          "subject": "the information trap",
+          "date": "Fri, 20 Nov 2026 01:00:56 +0000",
           "from": "\"Felix & Winston 🐶\" <felix@goatacademy.org>"
         },
         {
-          "id": "1a1f11dea53e80cc",
-          "subject": "What if all your stocks were sold tonight?",
-          "date": "Thu, 19 Nov 2026 00:02:59 +0000",
-          "from": "\"Felix & Winston 🐶\" <felix@goatacademy.org>"
-        },
-        {
-          "id": "1a1f11b8d6de8fd7",
-          "subject": "Markwayne Mullin humiliates Dem buffoon Shri Thanedar for being late, then asking the most stupid question",
-          "date": "Wed, 18 Nov 2026 23:49:19 +0000",
+          "id": "1a1f6244a42abcc5",
+          "subject": "Brave reporter faces felony charges after exposing Minnesota voting fraud",
+          "date": "Thu, 19 Nov 2026 23:15:41 +0000",
           "from": "PolitiBrawl <politibrawl@substack.com>"
         }
       ]
@@ -94,42 +94,42 @@
       "title": "Social",
       "name": "Socials",
       "counts": {
-        "azi": 1,
-        "24h": 6,
-        "7z": 36,
-        "30z": 109
+        "azi": 0,
+        "24h": 4,
+        "7z": 34,
+        "30z": 113
       },
       "newest": {
-        "id": "1a1f242372bc4561",
-        "subject": "Weekly digest for Thu, Nov 12 2026",
-        "date": "Thu, 19 Nov 2026 05:23:07 +0000 (UTC)",
-        "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
+        "id": "1a1f403294a48121",
+        "subject": "31 new notifications since 3:39 pm (Nov 18, 2026)",
+        "date": "Thu, 19 Nov 2026 13:33:29 +0000 (UTC)",
+        "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
       },
-      "newestDate": "Thu, 19 Nov 2026 05:23:07 +0000 (UTC)",
+      "newestDate": "Thu, 19 Nov 2026 13:33:29 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a1f242372bc4561",
-          "subject": "Weekly digest for Thu, Nov 12 2026",
-          "date": "Thu, 19 Nov 2026 05:23:07 +0000 (UTC)",
-          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a1eee09dce378dc",
-          "subject": "Adam Luke posted \"🎉 FREE TRIAL (48 HOURS ONLY)\"",
-          "date": "Wed, 18 Nov 2026 13:37:39 +0000 (UTC)",
-          "from": "AI Automation Vault <noreply@skool.com>"
-        },
-        {
-          "id": "1a1eed76f15f94f9",
-          "subject": "22 new notifications since 4:40 pm (Nov 17, 2026)",
-          "date": "Wed, 18 Nov 2026 13:27:37 +0000 (UTC)",
+          "id": "1a1f403294a48121",
+          "subject": "31 new notifications since 3:39 pm (Nov 18, 2026)",
+          "date": "Thu, 19 Nov 2026 13:33:29 +0000 (UTC)",
           "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a1edcafe477603a",
+          "id": "1a1f2f91f29bb841",
           "subject": "1 event happening tomorrow",
-          "date": "Wed, 18 Nov 2026 08:34:25 +0000 (UTC)",
+          "date": "Thu, 19 Nov 2026 08:42:54 +0000 (UTC)",
           "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a1f2e33345fac9c",
+          "subject": "1 event happening tomorrow",
+          "date": "Thu, 19 Nov 2026 08:18:57 +0000 (UTC)",
+          "from": "\"ZAVANT University (Skool)\" <noreply@skool.com>"
+        },
+        {
+          "id": "1a1f2c25c73eb1ff",
+          "subject": "2 new notifications since 5:14 am (Nov 18, 2026)",
+          "date": "Thu, 19 Nov 2026 07:43:04 +0000 (UTC)",
+          "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
         }
       ]
     },
@@ -138,42 +138,42 @@
       "title": "Newsletter",
       "name": "Newsletter",
       "counts": {
-        "azi": 5,
-        "24h": 45,
-        "7z": 281,
-        "30z": 1012
+        "azi": 6,
+        "24h": 49,
+        "7z": 269,
+        "30z": 1061
       },
       "newest": {
-        "id": "1a1f242372bc4561",
-        "subject": "Weekly digest for Thu, Nov 12 2026",
-        "date": "Thu, 19 Nov 2026 05:23:07 +0000 (UTC)",
-        "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
+        "id": "1a1f78af507e5bfa",
+        "subject": "Anthropic Secretly Launched a NEW Token-Saving Mode in Claude Code",
+        "date": "Fri, 20 Nov 2026 06:00:41 +0000 (UTC)",
+        "from": "Jay E <robonuggets@mail.beehiiv.com>"
       },
-      "newestDate": "Thu, 19 Nov 2026 05:23:07 +0000 (UTC)",
+      "newestDate": "Fri, 20 Nov 2026 06:00:41 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a1f242372bc4561",
-          "subject": "Weekly digest for Thu, Nov 12 2026",
-          "date": "Thu, 19 Nov 2026 05:23:07 +0000 (UTC)",
-          "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
+          "id": "1a1f78af507e5bfa",
+          "subject": "Anthropic Secretly Launched a NEW Token-Saving Mode in Claude Code",
+          "date": "Fri, 20 Nov 2026 06:00:41 +0000 (UTC)",
+          "from": "Jay E <robonuggets@mail.beehiiv.com>"
         },
         {
-          "id": "1a1f22f23302b477",
-          "subject": "GTA VI Could Be A Huge Pay Day For The Low-Profile Brothers Behind The Franchise",
-          "date": "Thu, 19 Nov 2026 05:02:17 +0000 (GMT)",
+          "id": "1a1f75ab63438a41",
+          "subject": "Ruben Dominguez and Aakash Gupta posted new notes",
+          "date": "Fri, 20 Nov 2026 05:07:59 +0000",
+          "from": "Substack <no-reply@substack.com>"
+        },
+        {
+          "id": "1a1f75575fdc240b",
+          "subject": "In Arena – O noua intalnire din seria Conferintelor de la Sosea: Turme, piete si politici. Crizele si transformarile oieritului",
+          "date": "Fri, 20 Nov 2026 05:02:15 +0000 (GMT)",
+          "from": "\"Cafenea   ☕️☕️☕️ via LinkedIn\" <newsletters-noreply@linkedin.com>"
+        },
+        {
+          "id": "1a1f75572ab10a8a",
+          "subject": "Anthropic Opened Trading Today At $111.50. Here's How Day One Went.",
+          "date": "Fri, 20 Nov 2026 05:02:14 +0000 (GMT)",
           "from": "Forbes via LinkedIn <newsletters-noreply@linkedin.com>"
-        },
-        {
-          "id": "1a1f22ea8090227a",
-          "subject": "Cea mai mare pierdere a mea nu apărea în nicio agendă",
-          "date": "Thu, 19 Nov 2026 05:01:46 +0000 (GMT)",
-          "from": "Ana Adina Dragoi via LinkedIn <newsletters-noreply@linkedin.com>"
-        },
-        {
-          "id": "1a1f1f04c38dd4c2",
-          "subject": "🛍️ Beyond the First Purchase: Building Brands That Last.",
-          "date": "Thu, 19 Nov 2026 03:53:39 +0000",
-          "from": "Dribbble <no-reply@n.dribbble.com>"
         }
       ]
     },
@@ -182,41 +182,41 @@
       "title": "Finante",
       "name": "Finante",
       "counts": {
-        "azi": 0,
-        "24h": 3,
-        "7z": 22,
-        "30z": 60
+        "azi": 1,
+        "24h": 11,
+        "7z": 28,
+        "30z": 71
       },
       "newest": {
-        "id": "1a1eea534acf0fa5",
-        "subject": "New idea by BtheTrade — check it out",
-        "date": "Wed, 18 Nov 2026 12:32:46 -0000",
-        "from": "TradingView <noreply@tradingview.com>"
+        "id": "1a1f75572ab10a8a",
+        "subject": "Anthropic Opened Trading Today At $111.50. Here's How Day One Went.",
+        "date": "Fri, 20 Nov 2026 05:02:14 +0000 (GMT)",
+        "from": "Forbes via LinkedIn <newsletters-noreply@linkedin.com>"
       },
-      "newestDate": "Wed, 18 Nov 2026 12:32:46 -0000",
+      "newestDate": "Fri, 20 Nov 2026 05:02:14 +0000 (GMT)",
       "samples": [
         {
-          "id": "1a1eea534acf0fa5",
+          "id": "1a1f75572ab10a8a",
+          "subject": "Anthropic Opened Trading Today At $111.50. Here's How Day One Went.",
+          "date": "Fri, 20 Nov 2026 05:02:14 +0000 (GMT)",
+          "from": "Forbes via LinkedIn <newsletters-noreply@linkedin.com>"
+        },
+        {
+          "id": "1a1f546ca48d21dd",
           "subject": "New idea by BtheTrade — check it out",
-          "date": "Wed, 18 Nov 2026 12:32:46 -0000",
+          "date": "Thu, 19 Nov 2026 19:26:59 -0000",
           "from": "TradingView <noreply@tradingview.com>"
         },
         {
-          "id": "1a1ee65b928ec0ab",
-          "subject": "New idea by Cryptollica — check it out",
-          "date": "Wed, 18 Nov 2026 11:23:22 -0000",
-          "from": "TradingView <noreply@tradingview.com>"
-        },
-        {
-          "id": "1a1edb06a0e7ad83",
-          "subject": "$10,000 funded account, one-time $90 fee",
-          "date": "Wed, 18 Nov 2026 08:05:22 +0000",
+          "id": "1a1f533817732bf3",
+          "subject": "How much can you borrow?",
+          "date": "Thu, 19 Nov 2026 19:05:55 +0000",
           "from": "Kraken <no-reply@email.kraken.com>"
         },
         {
-          "id": "1a1e9facd97aac56",
+          "id": "1a1f51ed047d0390",
           "subject": "New idea by BtheTrade — check it out",
-          "date": "Tue, 17 Nov 2026 14:48:09 -0000",
+          "date": "Thu, 19 Nov 2026 18:43:19 -0000",
           "from": "TradingView <noreply@tradingview.com>"
         }
       ]
@@ -253,40 +253,40 @@
       "name": "Optimus CD",
       "counts": {
         "azi": 0,
-        "24h": 2,
-        "7z": 17,
-        "30z": 1018
+        "24h": 3,
+        "7z": 18,
+        "30z": 1021
       },
       "newest": {
-        "id": "1a1ef563543fb89d",
-        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (f4e8a91)",
-        "date": "Wed, 18 Nov 2026 07:46:05 -0800",
-        "from": "apvizual-max <notifications@github.com>"
+        "id": "1a1f5807a1804b33",
+        "subject": "Jules on OPTIMUS-Backbone",
+        "date": "Thu, 19 Nov 2026 12:29:57 -0800",
+        "from": "Etai Gabbai <etai.gabbai@gmail.com>"
       },
-      "newestDate": "Wed, 18 Nov 2026 07:46:05 -0800",
+      "newestDate": "Thu, 19 Nov 2026 12:29:57 -0800",
       "samples": [
+        {
+          "id": "1a1f5807a1804b33",
+          "subject": "Jules on OPTIMUS-Backbone",
+          "date": "Thu, 19 Nov 2026 12:29:57 -0800",
+          "from": "Etai Gabbai <etai.gabbai@gmail.com>"
+        },
+        {
+          "id": "1a1f480ca0f136a1",
+          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (9b7b05d)",
+          "date": "Thu, 19 Nov 2026 07:50:43 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
+        {
+          "id": "1a1f3ae7b8e5184d",
+          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
+          "date": "Thu, 19 Nov 2026 04:00:59 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
         {
           "id": "1a1ef563543fb89d",
           "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (f4e8a91)",
           "date": "Wed, 18 Nov 2026 07:46:05 -0800",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a1ee8daf6cc6373",
-          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
-          "date": "Wed, 18 Nov 2026 04:07:04 -0800",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a1ea44a4fa8e0a0",
-          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (cb14f49)",
-          "date": "Tue, 17 Nov 2026 08:08:48 -0800",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a1e97456e956ae2",
-          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
-          "date": "Tue, 17 Nov 2026 04:20:47 -0800",
           "from": "apvizual-max <notifications@github.com>"
         }
       ]
@@ -303,9 +303,9 @@
     }
   ],
   "totals": {
-    "azi": 20,
-    "24h": 105,
-    "7z": 690,
-    "30z": 3338
+    "azi": 18,
+    "24h": 118,
+    "7z": 669,
+    "30z": 3455
   }
 }
