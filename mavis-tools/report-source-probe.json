@@ -1,7 +1,23 @@
 {
-  "date": "2026-11-20",
+  "date": "2026-11-21",
   "designproject": {
-    "error": "ENOENT: no such file or directory, open '/run/csi/mount-root/nas/eab0d61a99b6696edb3d2aff87b585e8/Mavis/mavis-tools/jobs-designproject-2026-11-20.json'",
+    "count": 21,
+    "jdLenMin": 3096,
+    "jdLenMax": 30619,
+    "employmentType": {
+      "FULL_TIME": 21
+    },
+    "jsonLdAllFullTime": true,
+    "badgeFullTime": 21,
+    "withJobTypeLine": 7,
+    "newestPostDate": "2026-11-05",
+    "validThrough": {
+      "checked": 21,
+      "exact": 21,
+      "offByOne": 0,
+      "other": 0,
+      "rule": "datePosted + 30 zile"
+    },
     "pagination": {
       "pagesTested": [
         0,
@@ -25,7 +41,7 @@
     }
   },
   "iqads": {
-    "catalogueLinks": 44,
+    "catalogueLinks": 45,
     "pagesTested": [
       0,
       2,

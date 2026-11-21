@@ -116,8 +116,8 @@
       "id": "ANe1Bmgu_4pn0Q3f-3dPwYaSEJfLoKVPZ4svwJZZnDsOWQ",
       "query": "from:{jooble bestjobs hipo indeed jobleads linkedin} OR subject:{job angajare vacanta oportunitate}",
       "fixedQuery": "from:{jooble bestjobs hipo indeed jobleads linkedin} OR subject:{job angajare vacanta oportunitate}",
-      "matchesAsIs": 1077,
-      "matchesFixed": 1077,
+      "matchesAsIs": 1071,
+      "matchesFixed": 1071,
       "categories": [
         "joburi"
       ]
@@ -126,8 +126,8 @@
       "id": "ANe1BmhfBNF17H3V8yb39Uc-EEym8olEBnbQQyNR-Utj1w",
       "query": "from:{substack goatacademy aiautomationsociety sadhguru beehiiv twine} OR subject:{AI artificial intelligence}",
       "fixedQuery": "from:{substack goatacademy aiautomationsociety sadhguru beehiiv twine} OR subject:{AI artificial intelligence}",
-      "matchesAsIs": 431,
-      "matchesFixed": 431,
+      "matchesAsIs": 424,
+      "matchesFixed": 424,
       "categories": [
         "ai"
       ]
@@ -136,8 +136,8 @@
       "id": "ANe1Bmhr0TFhSeF75mv4H0xOCCEIxw7k6PTf2dl_5RCoOA",
       "query": "from:{skool facebook instagram pinterest tiktok polibrawl}",
       "fixedQuery": "from:{skool facebook instagram pinterest tiktok polibrawl}",
-      "matchesAsIs": 133,
-      "matchesFixed": 133,
+      "matchesAsIs": 132,
+      "matchesFixed": 132,
       "categories": [
         "social"
       ]
@@ -146,8 +146,8 @@
       "id": "ANe1BmhvRgLhU5cyxG-jCADLUhXt5C_29MotSxK2SlilOQ",
       "query": "from:{noreply no-reply newsletter digest mail@ info@ news@ updates@}",
       "fixedQuery": "from:{noreply no-reply newsletter digest mail@ info@ news@ updates@}",
-      "matchesAsIs": 1308,
-      "matchesFixed": 1308,
+      "matchesAsIs": 1301,
+      "matchesFixed": 1301,
       "categories": [
         "newsletter"
       ]
@@ -166,8 +166,8 @@
       "id": "ANe1BmjB_Jj9yzn7W6F9QE45lTE3LQOZJwzcBLE36OAxfQ",
       "query": "from:(notifications@github.com OR *jules*) OR subject:(Jules OR GitHub OR \"apvizual-max\")",
       "fixedQuery": "from:{notifications@github.com OR *jules*} OR subject:{Jules OR GitHub OR \"apvizual-max\"}",
-      "matchesAsIs": 1015,
-      "matchesFixed": 1015,
+      "matchesAsIs": 822,
+      "matchesFixed": 822,
       "categories": [
         "agenti"
       ]
@@ -195,28 +195,28 @@
         "categories": [
           "joburi"
         ],
-        "matches": 1077
+        "matches": 1071
       },
       {
         "id": "ANe1BmhfBNF17H3V8yb39Uc-EEym8olEBnbQQyNR-Utj1w",
         "categories": [
           "ai"
         ],
-        "matches": 431
+        "matches": 424
       },
       {
         "id": "ANe1Bmhr0TFhSeF75mv4H0xOCCEIxw7k6PTf2dl_5RCoOA",
         "categories": [
           "social"
         ],
-        "matches": 133
+        "matches": 132
       },
       {
         "id": "ANe1BmhvRgLhU5cyxG-jCADLUhXt5C_29MotSxK2SlilOQ",
         "categories": [
           "newsletter"
         ],
-        "matches": 1308
+        "matches": 1301
       },
       {
         "id": "ANe1BmhiLu_ahhYfNmDqesTn0hLQGeoXBzHRaktmyFLt1Q",
@@ -230,7 +230,7 @@
         "categories": [
           "agenti"
         ],
-        "matches": 1015
+        "matches": 822
       },
       {
         "id": "ANe1Bmgse7Rs3B9Rf2LfwU9-2tSUxqia4JE5xzjSzcFX5g",
