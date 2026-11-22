@@ -30,7 +30,15 @@ const argOf = (f, d) => { const i = args.indexOf(f); return i >= 0 ? args[i + 1]
 const DATE = args.find(a => /^\d{4}-\d{2}-\d{2}$/.test(a));
 const FILE_ID = (args.find(a => a.startsWith('--file-id=')) || '').split('=')[1] || '';
 const DRY = args.includes('--dry-run');
-const FOLDER = argOf('--folder', '1sAs2ktJhGanKeGv87LIxkTD34S7P5XvT');
+// Folderul de livrare: argument, sau ce a descoperit report-folder-discover.js
+// (pe cale). Fara id hardcodat — un id stărit face cautarea sa nimiceasca.
+let FOLDER = argOf('--folder', '');
+if (!FOLDER) {
+  try {
+    FOLDER = JSON.parse(fs.readFileSync(path.join(DIR, 'report-folder.json'), 'utf8')).id || '';
+  } catch (e) { FOLDER = ''; }
+}
+if (!FOLDER) { console.error('!! folderul de livrare e necunoscut: ruleaza report-folder-discover.js <cale> sau da --folder=<id>'); process.exit(2); }
 
 if (!DATE) { console.error('usage: report-refresh-files.js <YYYY-MM-DD> [--file-id=<ID>] [--dry-run]'); process.exit(1); }
 
@@ -43,7 +51,12 @@ function measuredUsage() {
   try { usage = JSON.parse(fs.readFileSync(path.join(DIR, '.api-usage.json'), 'utf8')); } catch (e) {}
   const rows = Object.entries(usage)
     .filter(([n, v]) => !n.startsWith('_') && typeof v === 'number' && v > 0 && n !== 'report-refresh-files.js');
-  return { rows, total: rows.reduce((a, [, v]) => a + v, 0) };
+  return {
+    rows,
+    total: rows.reduce((a, [, v]) => a + v, 0),
+    // câte cereri a consumat deja acest script în ziua asta (încercări anterioare)
+    self: (usage['report-refresh-files.js'] && typeof usage['report-refresh-files.js'] === 'number') ? usage['report-refresh-files.js'] : 0,
+  };
 }
 
 /**
@@ -52,7 +65,7 @@ function measuredUsage() {
  * @param {number} refreshCost cererile Google ale acestei rulări (măsurate)
  */
 function patchReport(md, refreshCost) {
-  const { rows, total } = measuredUsage();
+  const { rows, total, self } = measuredUsage();
   const newTotal = total + refreshCost;
 
   const sc = JSON.parse(fs.readFileSync(path.join(DIR, `scoring-result-${DATE}.json`), 'utf8'));
@@ -72,6 +85,50 @@ function patchReport(md, refreshCost) {
   out = out.replace(/\| Etapă \| Cereri \|\n\|---\|---\|\n[\s\S]*?\| \*\*total\*\* \| \*\*\d+\*\* \|/, table);
   out = out.replace(/^> Cota Google: \*\*\d+ cereri\*\*/m, `> Cota Google: **${newTotal} cereri**`);
   out = out.replace(/\*\*Cota Google: \d+ cereri pe 200\*\*/, `**Cota Google: ${newTotal} cereri pe 200**`);
+
+  // --- proză statică care contrazice cifra măsurată (defect 22.11) ---
+  // Antetul spunea că verificarea de pe Drive „mai adaugă 1 cerere", dar
+  // usageTotal include deja VERIFY_COST=1 → implying 124 când ledgerul spune
+  // 123. Se corectează cu aceeași formulare ca la sursă.
+  out = out.replace(
+    /^> Cifra e măsurată \*\*la scrierea raportului\*\*; verificarea conținutului de pe Drive \(citire înapoi, după upload\) mai adaugă \*\*1 cerere\*\*\.$/m,
+    '> Cifra e măsurată **la scrierea raportului** și **include** verificarea de pe Drive (citirea înapoi, după upload) — deci e cifra finală a rulării, nu una care mai crește după.');
+  // „Verificat pe 4 ferestre" — numărul ferestrelor vine din lista unică.
+  out = out.replace(
+    /Verificat pe \d+ ferestre\.?/g,
+    `Verificat pe ${RF.WINDOWS.length} ferestre (${RF.WINDOWS.join(', ')}).`);
+
+  // --- proză statică cu conținut greșit sau depășit (defecte 22.11) ---
+  // Exemplul hardcodat din §1.1 spunea „o alertă de job care intră și la
+  // „Joburi" și la „Newsletter"" — azi e fals (singurul mesaj cu 2 etichete
+  // e unul AI + Newsletter). Exemplul nu se deduce din date ⇒ se scoate.
+  out = out.replace(
+    /\s*\(ex\. o alertă de job care intră și la „Joburi" și la „Newsletter"\)/g,
+    ' (ex. un mesaj care primește două etichete de categorie)');
+  // „din care 15 cu verdict amânat" — cei 15 sunt ÎN cei 36 păstrați (§2.5),
+  // nu în cei 28 drop-uri. Referința era greșită.
+  out = out.replace(
+    /28 drop-uri, din care \*\*15 cu verdict amânat\*\*/g,
+    '28 drop-uri, plus **15 cu verdict amânat**');
+  // „Trei mecanisme, măsurate pe 05.11" e static de 18 rapoarte — se marchează
+  // explicit ca măsurătoare de referință, nu de azi.
+  out = out.replace(
+    /\*\*Trei mecanisme, măsurate pe 05\.11:\*\*/g,
+    '**Trei mecanisme, măsurate pe 05.11** (măsurătoare de referință, nu de azi):');
+  // Lungimea descrierilor e măsurată de sondă, pe parse-ul ei — diferă de
+  // fișierul arhivat (entități decodate). Se spune de unde vine cifra.
+  out = out.replace(
+    /(de caractere pe cele \d+ de joburi), măsurat azi\)/g,
+    '$1, măsurat azi pe pagina live de sondă)');
+  // Nume de etichete scrise cu mâna în proză (defect 8) — se elimină: numele
+  // se rezolvă live prin taxonomy.js, în tabel; în proză n-are rost.
+  out = out.replace(
+    /\(ex\. "Joburi" \+ "Newsletter" de la LinkedIn\)/g,
+    '(ex. două categorii de același tip)');
+  // „de pe site" — listarea globală are postări mai noi decât listările folosite.
+  out = out.replace(
+    /cel mai recent de pe site e din/g,
+    'cel mai recent pe listările folosite (România/București) e din');
   return { out, newTotal };
 }
 
@@ -90,8 +147,11 @@ function patchReport(md, refreshCost) {
   // 2. cererile acestei rulări: făcute deja (căutare) + cele rămase
   //    (1 PATCH upload + 1 GET de verificare). Numărate, nu ghicite.
   const done = k.CALL_STATE.calls;
-  const plannedAfter = 2;
-  const refreshCost = done + plannedAfter;
+  const plannedAfter = 2; // 1 PATCH (upload) + 1 GET (verificare pe continut)
+  // rândul acestui script include și cererile consumate de încercările
+  // anterioare ale zilei (ledgerul e acumulativ) — altfel raportul ar
+  // subnumăra contorul final cu exact atâtea cereri câte au fost irosite.
+  const refreshCost = measuredUsage().self + done + plannedAfter;
 
   const md = fs.readFileSync(LOCAL, 'utf8');
   const { out, newTotal } = patchReport(md, refreshCost);

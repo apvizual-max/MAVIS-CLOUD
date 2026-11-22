@@ -23,7 +23,21 @@ const RF = require('./report-files.js');
 const DIR = __dirname;
 const DATE = process.argv[2] || new Date().toISOString().slice(0, 10);
 const COMPACT = DATE.replace(/-/g, '');
-const FOLDER_ID = process.argv[3] || '1sAs2ktJhGanKeGv87LIxkTD34S7P5XvT';
+// Folderul de livrare: din argument, sau din ce a descoperit
+// report-folder-discover.js (pe CALE). Nu există id default hardcodat —
+// un id stărit e exact felul de eroare care face ca livrarea să nu ajungă
+// acolo unde se caută (22.11.2026: id-ul default nu mai era folderul țintă).
+let FOLDER_ID = process.argv[3] || '';
+if (!FOLDER_ID) {
+  try {
+    const fd = JSON.parse(fs.readFileSync(path.join(DIR, 'report-folder.json'), 'utf8'));
+    FOLDER_ID = fd.id || '';
+  } catch (e) { FOLDER_ID = ''; }
+}
+if (!FOLDER_ID) {
+  console.error('!! FOLDER_ID necunoscut: ruleaza report-folder-discover.js <cale> sau da id-ul ca argument.');
+  process.exit(2);
+}
 const REPO_OUT = path.join(DIR, '..', 'rapoarte', `RAPORT-ZILNIC-${COMPACT.slice(0, 6)}-${COMPACT.slice(6)}.md`);
 
 const R = f => JSON.parse(fs.readFileSync(path.join(DIR, f), 'utf8'));
@@ -55,13 +69,20 @@ try {
     unmatched: sim.unmatched,
     counts: sim.counts,
     triage: tri.counts,
+    // unread: §1.3 spune câte mesaje au rămas UNREAD — până acum cifra nu avea
+    // sursă în repo (era nevoie de dumpul, care e gitignored).
+    unread: (sim.rows || []).filter(r => (r.labels || []).includes('UNREAD')).length,
     bodyCap: sim.bodyCap,
     nota: 'fără corpuri/subiecte/expedenți — conținut personal nu intră în repo public',
   }, null, 2));
 } catch (e) { console.log('!! companion de clasificare nescris: ' + e.message); }
 // consumul real de cereri Google, acumulat de kit.js la iesirea fiecarui script
 let usage = {};
-try { usage = JSON.parse(fs.readFileSync(path.join(DIR, '.api-usage.json'), 'utf8')); } catch (e) {}
+// Ledger corupt = contor NECUNOSCUT. Nu se raporteaza 0 (ar insemna "am
+// masurat 0 cereri"); se raporteaza ca atare.
+let usageError = null;
+try { usage = JSON.parse(fs.readFileSync(path.join(DIR, '.api-usage.json'), 'utf8')); }
+catch (e) { usage = {}; usageError = e.message; }
 // Randurile pentru build si verificare se calculeaza SEPARAT: contorul le scrie
 // la iesirea fiecarui proces, deci la generare ele nu sunt (inca) in fisier.
 // Fara asta, tabelul nu se aduna cu totalul (masurat 15.11: 137 in tabel, 140 total).
@@ -77,11 +98,46 @@ const usageMeasured = usageRows.reduce((a, b) => a + b[1], 0);
 const UPLOAD_COST = (process.argv.find(a => a.startsWith('--file-id=')) || '').trim() ? 1 : 3;
 const buildRow = num('report-build.js') + UPLOAD_COST;
 const verifyRow = num('report-verify-upload.js') + VERIFY_COST;
-const usageTotal = usageMeasured + buildRow + verifyRow;
+// Ledger corupt => cota e NECUNOSCUTA, nu 0. "4 cereri" ar fi un zero mascat.
+const usageKnown = !usageError;
+const usageTotal = usageKnown ? (usageMeasured + buildRow + verifyRow) : null;
+const usageText = usageKnown ? `${usageTotal} cereri` : 'n/măsurată';
+const usageCap = usageKnown
+  ? (usageTotal > 200 ? ` — **depășit cu ${usageTotal - 200}**` : usageTotal === 200 ? ` — **exact pe plafon**` : ` — **în limita plafonului**`)
+  : ` — **ledgerul de consum nu se poate citi: ${usageError}**`;
 const usageNote = usage._nota || '';
 
 const pad = (s, n) => { s = String(s); while (s.length < n) s += ' '; return s; };
 const cell = s => String(s == null ? '' : s).replace(/\|/g, '/').replace(/\n/g, ' ');
+// ferestrele de măsurare ale tabelului de etichete — SUNT DECLARATE AICI, ca
+// numărul lor să fie calculat, nu scris cu mâna în proză (22.11: proza spunea
+// „Verificat pe 4 ferestre", iar tabelul avea 4 coloane — azi e adevărat, dar
+// numai cât timp cineva nu schimbă ferestrele fără să schimbe și proza).
+const WINDOWS = RF.WINDOWS;
+
+// „Remote" NU e „eligible din țara mea". Pentru fiecare job remote se caută
+// DOVEZILE publicate de anunț: țări eligibile, sponsorizare de viză, fus orar.
+// Absența lor se spune explicit, nu se presupune. Măsurat 22.11.2026: niciun
+// job din Top-5 nu publica toate trei.
+const ELIG = {
+  tari: /eligible (?:countries|locations|applicants)|eligible in|open to (?:candidates|applicants) in|applicants? (?:from|in) [A-Z][a-z]+ countries|countries (?:such as|including)|we(?:'re| are) hiring (?:from|in)/i,
+  visa: /visa sponsorship|visa sponsor(?:ship)? support|we sponsor[^.]{0,40}visa|visa support|relocation (?:package|support)|work permit sponsorship/i,
+  fus: /time ?zones?|\bCET\b|\bCEST\b|\bEET\b|\bEEST\b|hours? of overlap|overlap with [A-Z]{2,4}/,
+};
+const eligText = (j) => {
+  const jd = String(j.jd || '');
+  const t = ELIG.tari.test(jd) ? '✓' : '—';
+  const v = ELIG.visa.test(jd) ? '✓' : '—';
+  const f = ELIG.fus.test(jd) ? '✓' : '—';
+  return `țări: ${t} · viză: ${v} · fus: ${f}`;
+};
+const eligLine = (jobs, titlu) => {
+  const rem = (jobs || []).filter(j => j.L === 10);
+  if (!rem.length) return '';
+  let out = `\n**${titlu}** — „remote" nu înseamnă „eligible din țara mea": verifică explicit țările eligibile, clauza de sponsorizare de viză și fusul orar. Dovezi publicate de anunț:\n\n`;
+  for (const j of rem) out += `- ${cell(j.role)} @ ${cell(j.company)} — ${eligText(j)}\n`;
+  return out;
+};
 
 const ZI = ['duminică', 'luni', 'marți', 'miercuri', 'joi', 'vineri', 'sâmbătă'];
 const MONTHS = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'];
@@ -273,8 +329,12 @@ const msgTime = r => { const t = parseGmailDate(r.date); if (!t) return r.date.s
 // impartirea pe surse se masoara din fisierele RAW (ce a fost scanat),
 // nu din cele pastrate — altfel "72 analizate" si "24+12 pastrate" se contrazic.
 const srcTotal = {};
+const srcTotalError = [];
 for (const [file, key] of [['jobs-iqads-' + DATE + '.json', 'IQads'], ['jobs-designproject-' + DATE + '.json', 'designproject.io']]) {
-  try { srcTotal[key] = JSON.parse(fs.readFileSync(path.join(DIR, file), 'utf8')).jobs.length; } catch (e) { srcTotal[key] = 0; }
+  // Zero mascat e mai periculos decat eroarea: daca setul de joburi lipseste
+  // sau nu se parseaza, se RAPORTEAZA, nu se cere "0" ca si cum ar fi masurat.
+  try { srcTotal[key] = JSON.parse(fs.readFileSync(path.join(DIR, file), 'utf8')).jobs.length; }
+  catch (e) { srcTotal[key] = 0; srcTotalError.push(`${file}: ${e.message}`); }
 }
 const srcKept = {};
 for (const j of allSections) srcKept[j.src] = (srcKept[j.src] || 0) + 1;
@@ -288,8 +348,8 @@ const plural = (n, one, few, many) => n === 1 ? one : (n >= 2 && n <= 19 ? few :
 let md = `# Raport zilnic — ${dayName} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}
 
 > Generat de Mavis Cloud · ${sim.total} mesaje noi măsurate azi (00:00–${windowEnd} ${tzName}) · ${sc.stats.total} joburi analizate
-> Cota Google: **${usageTotal} cereri** (plafon 200${usageTotal > 200 ? ` — **depășit cu ${usageTotal - 200}**` : usageTotal === 200 ? ` — **exact pe plafon**` : ` — **în limita plafonului**`}). Zero scrieri pe Gmail; tot consumul a fost măsurare și diagnostic. Detaliu în §5.
-> Cifra e măsurată **la scrierea raportului**; verificarea conținutului de pe Drive (citire înapoi, după upload) mai adaugă **1 cerere**.
+> Cota Google: **${usageText}** (plafon 200${usageCap}). Zero scrieri pe Gmail; tot consumul a fost măsurare și diagnostic. Detaliu în §5.
+> Cifra e măsurată **la scrierea raportului** și **include** verificarea de pe Drive (citirea înapoi, după upload) — deci e cifra finală a rulării, nu una care mai crește după.
 
 ---
 
@@ -323,18 +383,18 @@ if (unclassified > 0) {
   md += ` (nu se potrivesc niciunui filtru de categorie — deci rămân în inbox, neetichetate).`;
 }
 if (doubleLabeled > 0) {
-  md += `\n\n> **${mailCount.totals.azi} etichete pe ${labeledDistinct} mesaje** — ${doubleLabeled} mesaj${doubleLabeled === 1 ? ' primește' : 'e primesc'} două etichete de categorie (ex. o alertă de job care intră și la „Joburi" și la „Newsletter"). De aceea suma pe etichete e mai mare decât numărul de mesaje distincte.`;
+  md += `\n\n> **${mailCount.totals.azi} etichete pe ${labeledDistinct} mesaje** — ${doubleLabeled} mesaj${doubleLabeled === 1 ? ' primește' : 'e primesc'} două etichete de categorie (ex. un mesaj care primește două etichete de categorie). De aceea suma pe etichete e mai mare decât numărul de mesaje distincte.`;
 }
 md += `
 
 ### 1.2 Măsurătoarea pe etichete (numărare exactă, cu paginare)
 
-| Etichetă | azi | 24h | 7z | 30z | Ultimul mesaj etichetat |
-|---|---|---|---|---|---|
+| Etichetă | ${WINDOWS.join(' | ')} | Ultimul mesaj etichetat |
+|${Array(WINDOWS.length + 2).fill('---').join('|')}|
 `;
 for (const l of mailCount.labels) {
   const c = l.counts;
-  md += `| \`${l.name}\` | ${c.azi} | ${c['24h']} | ${c['7z']} | ${c['30z']} | ${l.newestDate ? l.newestDate.slice(0, 16) : 'n/a'} |\n`;
+  md += `| \`${l.name}\` | ${WINDOWS.map(w => c[w]).join(' | ')} | ${l.newestDate ? l.newestDate.slice(0, 16) : 'n/a'} |\n`;
 }
 md += `
 `;
@@ -355,7 +415,7 @@ if (newestLabel && daysOff !== null) {
 } else {
   md += `**Concluzie:** nu s-a putut stabili când a fost etichetat ultimul mesaj (lipsesc datele).\n\n`;
 }
-md += `> Zero pe o fereastră nu înseamnă "etichetă goală" — înseamnă "eticheta nu mai primește nimic". Verificat pe 4 ferestre.
+md += `> Zero pe o fereastră nu înseamnă "etichetă goală" — înseamnă "eticheta nu mai primește nimic". Verificat pe ${WINDOWS.length} ferestre (${WINDOWS.join(', ')}).
 
 ### 1.3 Filtrele, măsurate azi
 
@@ -472,7 +532,7 @@ Simulare pe cele ${sim.total} mesaje de azi, cu **aceleași criterii** ale filtr
 for (const nm of liveLabelNames) md += `| \`${nm}\` | ${simCount(nm)} |\n`;
 md += `| *niciun filtru se potrivește* | ${sim.unmatched} |
 
-> Unele mesaje se potrivesc la 2 filtre (ex. "Joburi" + "Newsletter" de la LinkedIn), deci suma poate depăși ${sim.total}.
+> Unele mesaje se potrivesc la 2 filtre (ex. două categorii de același tip), deci suma poate depăși ${sim.total}.
 
 **Observație:** **${tri.counts.noise} mesaje** de azi sunt notificări ale agenților tăi (Jules și GitHub Actions pe repo-urile proprii). Categoria dedicata lor e \`${agentsLabel || 'nerezolvata'}\`${agentsLabel ? `, care a primit ${agentsAzi} mesaj${agentsAzi === 1 ? '' : 'e'} azi, iar filtrul ei functioneaza efectiv` : ''}. In rest, **${aliveRows.length} din ${totalCats} categorii** primesc mesaje${deadRows.length ? `, iar ${deadRows.length} nu primesc` : ''}.
 
@@ -575,7 +635,7 @@ if (leadsError) {
 md += `---
 ## 2. Joburi — scorate cu \`ALEX-KIT/scoring.gs\`
 
-**${sc.stats.total} joburi analizate** (IQads ${srcTotal['IQads'] || 0} + designproject.io ${srcTotal['designproject.io'] || 0}) → ${sc.stats.kept} păstrate în tabele, ${sc.stats.dropped} drop-uri, din care **${sc.stats.amanzat} cu verdict amânat** (locația nu e publicată de sursă). **${sc.stats.newJobs} ${plural(sc.stats.newJobs, 'job nou', 'joburi noi', 'joburi noi')}** față de ${sc.prevDate || 'raportul anterior'}.
+**${sc.stats.total} joburi analizate** (IQads ${srcTotal['IQads'] || 0} + designproject.io ${srcTotal['designproject.io'] || 0}) → ${sc.stats.kept} păstrate în tabele, ${sc.stats.dropped} drop-uri, plus **${sc.stats.amanzat} cu verdict amânat** (locația nu e publicată de sursă). **${sc.stats.newJobs} ${plural(sc.stats.newJobs, 'job nou', 'joburi noi', 'joburi noi')}** față de ${sc.prevDate || 'raportul anterior'}.
 
 Surse: **IQads** (tabloul AdJob activ, citit azi) + **designproject.io** (România + București).
 
@@ -604,10 +664,13 @@ md += `\n### 2.5 Verdict amânat — locația nu e publicată de sursă (${sc.st
 md += '| Scor | Rol | Companie | Locație | Engagement | Expirare | Nou |\n|---|---|---|---|---|---|---|\n';
 for (const j of sc.amanzat) md += `| ${j.score} | ${cell(j.role)} | ${cell(j.company)} | neprecizată de sursă | ${cell(j.eng)} | ${j.expiry ? j.expiry.slice(0, 10) + (j.expired ? ' ⛔' : '') : '—'} | ${j.isNew ? ' ✅' : ''} |\n`;
 md += `\n**Dintre astea, ${amanzatNew.length} sunt noi.** Nu le-am dat verdict de locație pentru că anunțul nu o spune — să le verifici pe cele care te interesează:\n\n`;
-for (const j of sc.amanzat.slice(0, 8)) md += `- ${cell(j.role)} — ${cell(j.company)} (${j.src}) — ${j.url}\n`;
+// link pentru FIECARE job amanat (nu doar primele 8): URL-ul e in JSON-ul
+// din repo, deci nu costa nimic sa-l livrezi (22.11: lipseau 35 de linkuri).
+for (const j of sc.amanzat) md += `- ${cell(j.role)} — ${cell(j.company)} (${j.src}) — ${j.url}\n`;
 md += `\n### 2.6 Drop-uri (circuit breaker) — ${sc.stats.dropped}\n\n`;
 md += '| Rol | Companie | Motiv | Nou |\n|---|---|---|---|\n';
 for (const j of sc.dropped) md += `| ${cell(j.role)} | ${cell(j.company)} | ${cell(j.reason.replace('CIRCUIT BREAKER: ', ''))} | ${!j.inPrevSet ? ' ✅' : ''} |\n`;
+for (const j of sc.dropped) md += `- ${cell(j.role)} — ${cell(j.company)} (${j.src}) — ${j.url}\n`;
 
 md += `
 ---
@@ -624,6 +687,7 @@ top.forEach((j, i) => {
 });
 md += '\n';
 for (const j of top) md += `- ${j.company} :: ${j.role} — ${j.url}\n`;
+md += eligLine(top, 'Dovezi de eligibilitate — Top 5 după scor');
 
 // Același criteriu ca la `top`: neexpirații primii. Altfel un job expirat cu
 // scor mare (ex. E.ON 10) apărea în top-ul de design pe poziția 1, deși
@@ -656,7 +720,7 @@ md += `
 | Sursă | Cum am măsurat | Rezultat |
 |---|---|---|
 | **IQads** | ID-ul ad-ului crește monoton cu postarea. Cel mai mare ID din setul de ieri: **${gn.maxPrevIqadsId}** | **${gn.newIqads.length} ${plural(gn.newIqads.length,'anunț nou','anunțuri noi','anunțuri noi')}** |
-| **designproject.io** | data de publicare vs. ultima rulare | **${gn.newDesignproject.length} ${plural(gn.newDesignproject.length,'anunt nou','anunțuri noi','anunțuri noi')}** — cel mai recent de pe site e din **${gn.newestDesignprojectDate}** |
+| **designproject.io** | data de publicare vs. ultima rulare | **${gn.newDesignproject.length} ${plural(gn.newDesignproject.length,'anunt nou','anunțuri noi','anunțuri noi')}** — cel mai recent pe listările folosite (România/București) e din **${gn.newestDesignprojectDate}** |
 
 `;
 for (const j of gn.newIqads) md += `- **IQads #${j.id}** — ${cell(j.role)} @ ${cell(j.company)} (expiră ${j.expiry}) — ${j.url}\n`;
@@ -734,7 +798,7 @@ if (daysOff !== null) {
   }
 }
 if (dpP && !dpP.error) {
-  md += `2. **designproject.io servește descrieri foarte inegale** (${dpP.jdLenMin}–${dpP.jdLenMax} de caractere pe cele ${dpP.count} de joburi, măsurat azi). Cele mai lungi sunt rescrise de AI și injectează cuvinte-cheie care ridică axele — vezi §6.2.\n`;
+  md += `2. **designproject.io servește descrieri foarte inegale** (${dpP.jdLenMin}–${dpP.jdLenMax} de caractere pe cele ${dpP.count} de joburi, măsurat azi pe pagina live de sondă). Cele mai lungi sunt rescrise de AI și injectează cuvinte-cheie care ridică axele — vezi §6.2.\n`;
   md += `3. **Celelalte două câmpuri de engagement ale designproject.io sunt inutilizabile.** \`employmentType\` din JSON-LD spune \`FULL_TIME\` pentru ${dpP.employmentType.FULL_TIME || 0} din ${dpP.count}, iar badge-ul din listing spune "Full-time" pentru ${dpP.badgeFullTime} din ${dpP.count}. Singura sură corectă e linia **"Job Type:"** din descriere — prezentă la ${dpP.withJobTypeLine} din ${dpP.count}. Am folosit asta.\n`;
 } else {
   md += `2. *(Sonda de surse nu a rulat azi — cifrele despre designproject.io lipsesc.)*\n`;
@@ -745,15 +809,15 @@ if (iqP && !iqP.error) {
 } else {
   md += `4. *(Sonda de surse nu a rulat azi — verificarea paginatiei IQads lipseste.)*\n`;
 }
-md += `5. **Cota Google: ${usageTotal} cereri pe 200**${usageTotal > 200 ? ` (**depășit cu ${usageTotal - 200}**)` : usageTotal === 200 ? ' (**exact pe plafon**)' : ' (în limita plafonului)'}. Consumul pe etape:\n\n`;
+md += `5. **Cota Google: ${usageText} pe 200**${usageKnown ? (usageTotal > 200 ? ` (**depășit cu ${usageTotal - 200}**)` : usageTotal === 200 ? ' (**exact pe plafon**)' : ' (în limita plafonului)') : ` (**ledgerul de consum nu se poate citi: ${usageError}**)`}. Consumul pe etape:\n\n`;
 md += '| Etapă | Cereri |\n|---|---|\n';
 // report-build.js apare in contor cu cererile deja facute; upload-ul de dupa
 // generare intra in aceeasi linie, ca sa nu apara de doua ori.
 md += usageRows.map(([k, v]) => `| \`${k}\` | ${v} |`).join('\n') + '\n';
 md += `| \`report-build.js\` | ${buildRow} |\n| \`report-verify-upload.js\` | ${verifyRow} |\n`;
-md += `| **total** | **${usageTotal}** |\n\n`;
+md += `| **total** | **${usageKnown ? usageTotal : 'n/măsurat'}** |\n\n`;
 md += `> ${usageNote || 'Contorul măsoară cererile efective făcute de fiecare script.'}\n\n`;
-if (usageTotal > 200) {
+if (usageKnown && usageTotal > 200) {
   // explicatia depunerii peste plafon se calculeaza din consumul real, pe etape
   const diagRows = usageRows.filter(r => ['inline', 'readbodies.js', 'extract.js'].includes(r[0]));
   const diagTotal = diagRows.reduce((a, r) => a + r[1], 0);
@@ -773,10 +837,26 @@ md += `
 |---|---|---|---|
 `;
 for (const j of sc.remoteFalsePositives) md += `| ${cell(j.role)} | ${cell(j.company)} | ${j.remoteFalsePositive.kind}: \`${j.remoteFalsePositive.hit}\` | ${j.L} |\n`;
+// Corecția per job se CALCULEAZĂ (L corectat + diferența în puncte), nu se
+// scrie cu mâna: 22.11 proza spunea "8 sau -5 ... 0.4 puncte" cu cifre fixe,
+// corecte doar pentru jobul de azi. Măsurat 23.11: `LCorectat` și
+// `deltaPuncte` vin din scoring-result, unde sunt calculate prin port.
+const fps = sc.remoteFalsePositives || [];
+const fpsMeasured = fps.filter(j => j.remoteFalsePositive && j.remoteFalsePositive.LCorectat != null);
 md += `
-"Remote" apare în text, dar jobul **nu** e remote. \`L\` ar trebui să fie 8 (București) sau -5 (necunoscut), nu 10. Diferență: **0.4 puncte** per job. Nu am atins motorul — portul e fidel prin design.
-
-**Trei mecanisme, măsurate pe 05.11:** (1) **negatie** — anunțul spune exact contrariul; (2) **eticheta** — linia \`Remote Status: Hybrid\` e citită ca remote; (3) **cultura** — „distributed team setting", „we are a global team", jobul fiind on-site într-un oraș anume.
+`;
+if (!fps.length) {
+  md += `Niciun job cu „remote" pozitiv fals azi.\n\n`;
+} else if (fpsMeasured.length === fps.length) {
+  const parts = fps.map(j => {
+    const c = j.remoteFalsePositive;
+    return `\`${cell(j.role)}\` @ ${cell(j.company)}: \`L\` ar fi **${c.LCorectat}**, nu ${j.L} — diferență **${c.deltaPuncte} puncte**`;
+  });
+  md += `"Remote" apare în text, dar jobul **nu** e remote. ${parts.join('; ')}. Nu am atins motorul — portul e fidel prin design.\n\n`;
+} else {
+  md += `"Remote" apare în text, dar jobul **nu** e remote. Corecția per job nu e calculată în \`scoring-result\` (câmpul \`LCorectat\` lipsește) — deci nu o scriu cu mâna aici.\n\n`;
+}
+md += `**Trei mecanisme, măsurate pe 05.11** (măsurătoare de referință, nu de azi): (1) **negatie** — anunțul spune exact contrariul; (2) **eticheta** — linia \`Remote Status: Hybrid\` e citită ca remote; (3) **cultura** — „distributed team setting", „we are a global team", jobul fiind on-site într-un oraș anume.
 
 ### 6.2 Axa D ridicată de prosa, nu de titlu — ${sc.axisFromProse.length} joburi (${sc.axisFromProse.reduce((a, x) => a + x.flags.length, 0)} semnalări)
 

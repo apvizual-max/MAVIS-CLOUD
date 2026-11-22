@@ -9,7 +9,10 @@ const fs = require('fs');
 const path = require('path');
 const { loadEngine } = require('./score-port.js');
 
-const SET = process.argv[2] || path.join(__dirname, 'jobs-2026-10-22.json');
+// setul normalizat al zilei (scris de `report-score.js --save-set`) — implicit,
+// nu o dată statică: altfel rularea fără argumente lovește mereu 22.10.
+const TODAY = new Date().toISOString().slice(0, 10);
+const SET = process.argv[2] || path.join(__dirname, `jobs-${TODAY}.json`);
 const data = JSON.parse(fs.readFileSync(SET, 'utf8'));
 const jobs = data.jobs.map((j) => ({
   company: j.company, role: j.role, location: j.loc, engage: j.eng, jd: j.jd, notes: j.notes,
@@ -94,5 +97,12 @@ const out = {
   dropped: A.dropped,
   aiBugImpact: { moved, keptFidel: A.kept.length, keptFixed: B.kept.length },
 };
-fs.writeFileSync(path.join(__dirname, 'scoring-result-2026-10-22.json'), JSON.stringify(out, null, 2));
-console.log('\n-> mavis-tools/scoring-result-2026-10-22.json');
+// MĂSURAT 22.11.2026: ieșirea avea numele HARDCODAT `scoring-result-2026-10-22.json`,
+// oricare ar fi fost setul dat. Deci rularea cu setul de azi NU producea
+// scoring-result-<azi>.json și SĂRPA istoricul din 22.10. Numele se deduce
+// ACUM din setul însuși (`_meta.date`) — sursa de adevăr, nu o cifră statică.
+const SET_DATE = (data._meta && data._meta.date) ? data._meta.date
+  : ((SET.match(/(\d{4}-\d{2}-\d{2})/) || [, ''])[1] || '');
+const OUTJSON = path.join(__dirname, `scoring-result-${SET_DATE}.json`);
+fs.writeFileSync(OUTJSON, JSON.stringify(out, null, 2));
+console.log('\n-> ' + OUTJSON);

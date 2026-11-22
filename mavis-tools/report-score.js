@@ -134,6 +134,14 @@ function remoteFalsePositive(jd, loc, L) {
   const label = jd.match(/Remote Status:\s*Hybrid/gi);
   if (label) return { kind: 'eticheta', hit: label[0].trim() };
   if (L === 10) {
+    // remote PARȚIAL: WFH / „work from home" menționat, dar jobul nu e remote
+    // integral (ex. „L-J de la birou / Vineri: WFH"). Măsurat 22.11.2026: 3 joburi
+    // cu L=10 (Confident Communications) scăpau de detector, pentru că niciun
+    // cuvânt-cheie de „cultură" nu apărea — motorul vedea 'wfh'.
+    const partial = jd.match(/\b(wfh|work from home)\b/gi);
+    if (partial && !/fully\s*remote|100%\s*remote|remote[- ]first|fully remote position/i.test(jd)) {
+      return { kind: 'remote-partial', hit: partial[0].trim() };
+    }
     // regimul declarat e on-site sau hybrid, dar motorul a citit L=10
     const declared = jd.match(/Remote Status:\s*(on-?site|hybrid)/gi);
     if (declared) return { kind: 'regim-declarat', hit: declared[0].trim() };
@@ -155,6 +163,33 @@ function remoteFalsePositive(jd, loc, L) {
     }
   }
   return null;
+}
+
+/**
+ * L corectat pentru un fals pozitiv „remote" — MĂSURAT, nu scris cu mâna.
+ *
+ * Măsurat 22.11.2026: proza raportului (§6.1) spunea „Diferență: 0.4 puncte"
+ * cu cifra fixă, iar „ar trebui să fie 8 sau -5" — corecte pentru jobul de azi,
+ * dar false pentru orice alt job (cu 0 false pozitivi, proza ar fi tot aceeași).
+ *
+ * Motorul NU se schimbă: îl întrebăm, nu-l corectăm. Îi dăm același anunț cu
+ * declansatorul de „remote" neutralizat și citim ce L ar rezulta prin port.
+ * Ponderea L vine din motor (ALEX.weights.L), nu din memorie.
+ */
+function correctedRemoteL(eng, j, LCurent) {
+  const jd = String(j.jd || '');
+  const neutral = jd.replace(
+    /\b(distributed|anywhere|global team|fully\s+remote|remote|work from home|wfh)\b/gi,
+    'onsite');
+  const r = eng.scoreJob(j.company, j.role, j.loc, j.eng, neutral, '');
+  const L = r.dropped ? -5 : r.L;
+  const wL = (eng.ALEX && eng.ALEX.weights && eng.ALEX.weights.L) || 0.2;
+  return {
+    L,
+    score: r.dropped ? null : r.score,
+    section: r.dropped ? null : r.section,
+    deltaPuncte: Math.round(((LCurent - L) * wL) * 100) / 100,
+  };
 }
 
 /**
@@ -326,7 +361,10 @@ function main() {  const eng = loadEngine();
                    loc: j.loc, locWhy: j.locWhy, eng: j.eng, engWhy: j.engWhy || null, special: j.special || null, salary: j.salary || null,
                    inPrevSet: prevKeys.has(key(j)), inPrevScored: prevScored.has(key(j)), jd: j.jd };
     const fp = remoteFalsePositive(j.jd, j.loc, r.L);
-    if (fp) meta.remoteFalsePositive = fp;
+    if (fp) {
+      const c = correctedRemoteL(eng, j, r.L);
+      meta.remoteFalsePositive = { ...fp, LCorectat: c.L, deltaPuncte: c.deltaPuncte, scoreCorectat: c.score };
+    }
     if (r.dropped) { dropped.push({ ...r, ...meta, reasonFixed: rf.dropped ? rf.reason : null }); continue; }
     const row = { ...r, ...meta, scoreFixed: rf.dropped ? null : rf.score,
       sectionFixed: rf.dropped ? null : rf.section, isNew: !prevKeys.has(key(j)) };

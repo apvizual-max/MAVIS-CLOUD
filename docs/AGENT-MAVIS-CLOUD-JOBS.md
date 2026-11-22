@@ -43,7 +43,7 @@ PIPELINE (mavis-tools/, în această ordine):
 5. `report-folder-discover.js` → folderul țintă pe Drive
 6. `report-label-stray.js` → etichetele necunoscute pentru taxonomie
 7. `scrape-iqads.js` + `scrape-designproject.js` → `jobs-*.json` (text integral)
-8. `score-run.js` cu `ALEX-KIT/scoring.gs` → `scoring-result-<data>.json`
+8. `report-score.js` cu `ALEX-KIT/scoring.gs` → `scoring-result-<data>.json`
 9. `report-build.js` → raportul din JSON-urile de mai sus
 10. `report-verify-upload.js` → upload + citire înapoi pe Drive
 11. `report-triage.js` → clasificarea mesajelor (needs-reply / needs-action / fyi / noise)

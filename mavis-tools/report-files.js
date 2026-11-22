@@ -29,6 +29,13 @@ const path = require('path');
 
 const REPO = path.join(__dirname, '..');
 
+// Fereastra de măsurare a etichetelor — SINGURA sursă. Declared aici, ca
+// numărul de ferestre să fie calculat în ambele locuri unde apare (tabelul
+// §1.2 și proza de sub el). 22.11.2026: proza spunea „Verificat pe 4 ferestre"
+// cu cifra scrisă de mână, iar tabelul avea 4 coloane — azi e adevărat, dar
+// numai cât timp cineva nu schimbă ferestrele fără să schimbe și proza.
+const WINDOWS = ['azi', '24h', '7z', '30z'];
+
 /**
  * @param {object} o
  * @param {string} o.date      data rulării (YYYY-MM-DD)
@@ -74,7 +81,7 @@ function render(opts) {
   return lines.join('\n');
 }
 
-module.exports = { artifacts, render, REPO };
+module.exports = { artifacts, render, REPO, WINDOWS };
 
 if (require.main === module) {
   const date = process.argv[2] || new Date().toISOString().slice(0, 10);

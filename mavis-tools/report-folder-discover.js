@@ -54,6 +54,16 @@ function splitPath(p) {
   }
 
   console.log('\nFOLDER_ID=' + current.id);
+  // ID-ul gasit se scrine, ca nimeni sa nu hardcodeze un id de folder
+  // (22.11.2026: report-build.js avea un id default STALE, care nu mai era
+  // folderul de livrare — cautarea raportului nimicea acolo).
+  try {
+    require('fs').writeFileSync(require('path').join(__dirname, 'report-folder.json'), JSON.stringify({
+      path: target.join('/'), id: current.id, name: current.name,
+      measuredAt: new Date().toISOString(), note: 'descoperit pe cale, nu hardcodat',
+    }, null, 2));
+    console.log('scris: mavis-tools/report-folder.json');
+  } catch (e) { console.log('!! report-folder.json nescris: ' + e.message); }
 
   // cate fisiere markdown exista deja acolo (nu facem nimic, doar vedem)
   const md = await k.drive.list(

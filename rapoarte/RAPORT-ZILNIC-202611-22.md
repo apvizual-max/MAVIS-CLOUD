@@ -1,8 +1,8 @@
 # Raport zilnic — duminică 22 noiembrie 2026
 
 > Generat de Mavis Cloud · 12 mesaje noi măsurate azi (00:00–09:32 EET) · 64 joburi analizate
-> Cota Google: **123 cereri** (plafon 200 — **în limita plafonului**). Zero scrieri pe Gmail; tot consumul a fost măsurare și diagnostic. Detaliu în §5.
-> Cifra e măsurată **la scrierea raportului**; verificarea conținutului de pe Drive (citire înapoi, după upload) mai adaugă **1 cerere**.
+> Cota Google: **141 cereri** (plafon 200 — **în limita plafonului**). Zero scrieri pe Gmail; tot consumul a fost măsurare și diagnostic. Detaliu în §5.
+> Cifra e măsurată **la scrierea raportului** și **include** verificarea de pe Drive (citirea înapoi, după upload) — deci e cifra finală a rulării, nu una care mai crește după.
 
 ---
 
@@ -13,7 +13,7 @@
 
 Azi au intrat **12 mesaje** în total, iar în inbox sunt **8**. **1 dintre ele nu a primit nicio etichetă de categorie** (nu se potrivesc niciunui filtru de categorie — deci rămân în inbox, neetichetate).
 
-> **12 etichete pe 11 mesaje** — 1 mesaj primește două etichete de categorie (ex. o alertă de job care intră și la „Joburi" și la „Newsletter"). De aceea suma pe etichete e mai mare decât numărul de mesaje distincte.
+> **12 etichete pe 11 mesaje** — 1 mesaj primește două etichete de categorie (ex. un mesaj care primește două etichete de categorie). De aceea suma pe etichete e mai mare decât numărul de mesaje distincte.
 
 ### 1.2 Măsurătoarea pe etichete (numărare exactă, cu paginare)
 
@@ -30,7 +30,7 @@ Azi au intrat **12 mesaje** în total, iar în inbox sunt **8**. **1 dintre ele 
 
 **Concluzie:** 6 categorii primesc mesaje (`MAVIS/Joburi`, `AI Folder/AI si Comunitati`, `Socials`, `Newsletter`, `Finante`, `Optimus CD`); 2 categorii n-a fost folosită niciodată (0 pe 30 de zile, fără istoric) (`De raspuns`, `Facturi si Conturi`).
 
-> Zero pe o fereastră nu înseamnă "etichetă goală" — înseamnă "eticheta nu mai primește nimic". Verificat pe 4 ferestre.
+> Zero pe o fereastră nu înseamnă "etichetă goală" — înseamnă "eticheta nu mai primește nimic". Verificat pe 4 ferestre (azi, 24h, 7z, 30z). (azi, 24h, 7z, 30z). (azi, 24h, 7z, 30z).
 
 ### 1.3 Filtrele, măsurate azi
 
@@ -73,7 +73,7 @@ Simulare pe cele 12 mesaje de azi, cu **aceleași criterii** ale filtrelor (făr
 | `Optimus CD` | 0 |
 | *niciun filtru se potrivește* | 1 |
 
-> Unele mesaje se potrivesc la 2 filtre (ex. "Joburi" + "Newsletter" de la LinkedIn), deci suma poate depăși 12.
+> Unele mesaje se potrivesc la 2 filtre (ex. două categorii de același tip), deci suma poate depăși 12.
 
 **Observație:** **0 mesaje** de azi sunt notificări ale agenților tăi (Jules și GitHub Actions pe repo-urile proprii). Categoria dedicata lor e `Optimus CD`, care a primit 0 mesaje azi, iar filtrul ei functioneaza efectiv. In rest, **6 din 8 categorii** primesc mesaje, iar 2 nu primesc.
 
@@ -104,7 +104,7 @@ Clasificarea e făcută din date, nu dintr-o listă scrisă cu mâna: 0 cer răs
 ---
 ## 2. Joburi — scorate cu `ALEX-KIT/scoring.gs`
 
-**64 joburi analizate** (IQads 43 + designproject.io 21) → 36 păstrate în tabele, 28 drop-uri, din care **15 cu verdict amânat** (locația nu e publicată de sursă). **0 joburi noi** față de 2026-11-21.
+**64 joburi analizate** (IQads 43 + designproject.io 21) → 36 păstrate în tabele, 28 drop-uri, plus **15 cu verdict amânat** (locația nu e publicată de sursă). **0 joburi noi** față de 2026-11-21.
 
 Surse: **IQads** (tabloul AdJob activ, citit azi) + **designproject.io** (România + București).
 
@@ -290,7 +290,7 @@ Surse: **IQads** (tabloul AdJob activ, citit azi) + **designproject.io** (Român
 | Sursă | Cum am măsurat | Rezultat |
 |---|---|---|
 | **IQads** | ID-ul ad-ului crește monoton cu postarea. Cel mai mare ID din setul de ieri: **24021** | **0 anunțuri noi** |
-| **designproject.io** | data de publicare vs. ultima rulare | **0 anunțuri noi** — cel mai recent de pe site e din **2026-11-05** |
+| **designproject.io** | data de publicare vs. ultima rulare | **0 anunțuri noi** — cel mai recent pe listările folosite (România/București) e din **2026-11-05** |
 
 **Concluzie:** **nicio postare nouă față de ultima rulare.** Piața nu a produs nimic nou relevant azi.
 
@@ -301,22 +301,24 @@ Surse: **IQads** (tabloul AdJob activ, citit azi) + **designproject.io** (Român
 
 1. **2 din 8 categorii nu mai primesc nimic** (2 n-a fost folosită niciodată). Cauza pentru 2 dintre ele: **nu au filtru creat** (`De raspuns`, `Facturi si Conturi`) — deci nimic nu le poate eticheta, oricare ar fi criteriul. Starea filtrelor, masurata azi: **6 functioneaza** (7 filtre lovesc mesaje, dar unul nu adauga eticheta de categorie: `CATEGORY_PERSONAL` — e eticheta de SISTEM a Gmail, nu una din categoriile tale). ~287 mesaje/7 zile stau in inbox.
  Etichete: categoriile `Personal` **nu mai exista in Gmail** (rearanjare) — nu se mai pot masura si nu au filtru care sa le puna; etichete `MAVIS/*` necunoscute pentru taxonomie: `MAVIS/Joburi/IQ Adds` — **goala** (0 mesaje azi, 0 in 7 zile). Mesaje de azi rămase necategorizate din cauza lor: **0**.
-2. **designproject.io servește descrieri foarte inegale** (3096–30619 de caractere pe cele 21 de joburi, măsurat azi). Cele mai lungi sunt rescrise de AI și injectează cuvinte-cheie care ridică axele — vezi §6.2.
+2. **designproject.io servește descrieri foarte inegale** (3096–30619 de caractere pe cele 21 de joburi, măsurat azi pe pagina live de sondă). Cele mai lungi sunt rescrise de AI și injectează cuvinte-cheie care ridică axele — vezi §6.2.
 3. **Celelalte două câmpuri de engagement ale designproject.io sunt inutilizabile.** `employmentType` din JSON-LD spune `FULL_TIME` pentru 21 din 21, iar badge-ul din listing spune "Full-time" pentru 21 din 21. Singura sură corectă e linia **"Job Type:"** din descriere — prezentă la 7 din 21. Am folosit asta.
 4. **Paginatia IQads nu funcționează.** `?page=2` și `?page=3` servesc exact pagina 0 (aceleași 43 de linkuri — verificat azi pe 0, 2, 3). Catalogul complet e pe pagina 0 — nu iterez pagini.
-5. **Cota Google: 123 cereri pe 200** (în limita plafonului). Consumul pe etape:
+5. **Cota Google: 141 cereri pe 200** (în limita plafonului). Consumul pe etape:
 
 | Etapă | Cereri |
 |---|---|
 | `report-mail-count.js` | 61 |
 | `report-filter-state.js` | 27 |
 | `report-simulate-sort.js` | 14 |
+| `report-folder-discover.js` | 10 |
 | `report-inbox-counts.js` | 6 |
-| `report-folder-discover.js` | 5 |
-| `report-label-stray.js` | 3 |
 | `report-build.js` | 4 |
+| `report-label-stray.js` | 3 |
 | `report-verify-upload.js` | 3 |
-| **total** | **123** |
+| `inline` | 3 |
+| `report-refresh-files.js` | 10 |
+| **total** | **141** |
 
 > Rulare 2026-11-22 (raport zilnic). Contor pornit de la zero.
 
@@ -334,7 +336,7 @@ Ce a consumat cel mai mult: corpurile complete ale mesajelor de azi (12) — fă
 
 "Remote" apare în text, dar jobul **nu** e remote. `L` ar trebui să fie 8 (București) sau -5 (necunoscut), nu 10. Diferență: **0.4 puncte** per job. Nu am atins motorul — portul e fidel prin design.
 
-**Trei mecanisme, măsurate pe 05.11:** (1) **negatie** — anunțul spune exact contrariul; (2) **eticheta** — linia `Remote Status: Hybrid` e citită ca remote; (3) **cultura** — „distributed team setting", „we are a global team", jobul fiind on-site într-un oraș anume.
+**Trei mecanisme, măsurate pe 05.11** (măsurătoare de referință, nu de azi): (1) **negatie** — anunțul spune exact contrariul; (2) **eticheta** — linia `Remote Status: Hybrid` e citită ca remote; (3) **cultura** — „distributed team setting", „we are a global team", jobul fiind on-site într-un oraș anume.
 
 ### 6.2 Axa D ridicată de prosa, nu de titlu — 20 joburi (24 semnalări)
 
@@ -388,13 +390,12 @@ Motorul are chei de **design** (`graphic designer`, `dtp designer`…) și de **
 - `mavis-tools/jobs-2026-11-21.json` — setul normalizat de ieri (cu care s-a comparat)
 - `mavis-tools/report-mail-count.json` — numărătoare pe etichetele de categorie
 - `mavis-tools/report-inbox-counts.json` — numărătoare exactă inbox
-- `mavis-tools/report-simulate-sort.json` — simularea sortării + mesajele de azi
+- `mavis-tools/report-simulate-sort.json` — simularea sortării + mesajele de azi — **local, necomitat în repo** (conține corpuri de mesaje; stă în workspace-ul cloud)
 - `mavis-tools/report-source-probe.json` — sonda de surse (comportamentul iqads.ro / designproject.io, măsurat azi)
 - `mavis-tools/report-filter-state.json` — starea filtrelor Gmail + testul paranteze-vs-acolade (măsurat azi)
 - `mavis-tools/report-label-stray.json` — etichetele `MAVIS/*` necunoscute pentru taxonomie + mesajele rămase necategorizate (măsurat azi)
 - `mavis-tools/report-triage.js` — clasificatorul mesajelor (needs-reply / needs-action / fyi / noise)
 - `mavis-tools/taxonomy.js` — sursa unică pentru numele etichetelor de categorie (rezolvate live, nu hardcodate)
-
 ---
 
 *Generat de Mavis Cloud. Nimic nu a fost șters, nimic nu a fost trimis, nimic nu a fost modificat în Gmail sau Drive. Totul e anulabil.*

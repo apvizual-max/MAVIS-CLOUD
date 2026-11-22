@@ -45,10 +45,17 @@ repară **la sursă** (script), nu în raport — altfel dispare la următoarea 
 | 5 | `report-folder-discover.js` | folderul țintă pe Drive |
 | 6 | `report-label-stray.js` | etichete necunoscute pentru taxonomie |
 | 7 | `scrape-iqads.js` + `scrape-designproject.js` | `jobs-*.json` (text integral) |
-| 8 | `score-run.js` (cu `ALEX-KIT/scoring.gs`) | `scoring-result-<data>.json` |
+| 8 | `report-score.js` (cu `ALEX-KIT/scoring.gs`) | `scoring-result-<data>.json` + setul normalizat `jobs-<data>.json` |
 | 9 | `report-build.js` | raportul, din JSON-urile de mai sus |
 | 10 | `report-verify-upload.js` | upload + citire înapoi de pe Drive |
 | 11 | `report-triage.js` | clasificarea mesajelor (needs-reply / needs-action / fyi / noise) |
+
+> **Etapa 8 = `report-score.js`, NU `score-run.js`.** Măsurat 22.11.2026: `score-run.js`
+> scria într-un nume HARDCODAT (`scoring-result-2026-10-22.json`), deci cu setul de
+> azi nu producea rezultatul zilei și **săpra istoricul din 22.10**. S-a reparat
+> (numele se deduce acum din `_meta.date` al setului), dar `report-score.js` e
+> scriptul care produce efectiv `scoring-result-<data>.json` — cu diagnosticele
+> `remoteFalsePositives`, `axisFromProse`, `genuinelyNew`.
 
 ## Cele două straturi de verificare
 
