@@ -1,47 +1,47 @@
 {
-  "today": "2026/11/21",
+  "today": "2026/11/22",
   "labels": [
     {
       "key": "joburi",
       "title": "Joburi",
       "name": "MAVIS/Joburi",
       "counts": {
-        "azi": 14,
-        "24h": 42,
-        "7z": 227,
-        "30z": 891
+        "azi": 8,
+        "24h": 24,
+        "7z": 217,
+        "30z": 914
       },
       "newest": {
-        "id": "1a1fd043bbc85dfd",
-        "subject": "💼 22 new job opportunities posted in the past 24 hours",
-        "date": "Sat, 21 Nov 2026 07:31:14 +0000",
-        "from": "Twine Team <no-reply@twinehq.com>"
+        "id": "1a2022422b79ca68",
+        "subject": "MARKQUEN EUROPE is hiring Creative Lead & 3D Designer",
+        "date": "Sun, 22 Nov 2026 09:20:11 +0200",
+        "from": "Bestjobs <contact@bestjobs.eu>"
       },
-      "newestDate": "Sat, 21 Nov 2026 07:31:14 +0000",
+      "newestDate": "Sun, 22 Nov 2026 09:20:11 +0200",
       "samples": [
         {
-          "id": "1a1fd043bbc85dfd",
-          "subject": "💼 22 new job opportunities posted in the past 24 hours",
-          "date": "Sat, 21 Nov 2026 07:31:14 +0000",
-          "from": "Twine Team <no-reply@twinehq.com>"
+          "id": "1a2022422b79ca68",
+          "subject": "MARKQUEN EUROPE is hiring Creative Lead & 3D Designer",
+          "date": "Sun, 22 Nov 2026 09:20:11 +0200",
+          "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a1fcee85e5fe8d5",
-          "subject": "🔔 Pergole retractabile, copertine retractabile - Prestige Art Design caută Personal productie  și 70 mai multe oferte noi de muncă",
-          "date": "Sat, 21 Nov 2026 07:07:32 +0000",
+          "id": "1a202172a22d5373",
+          "subject": "🔔 Mecomag Holding caută Specialist marketing & vânzări - Feldioara și 70 mai multe oferte noi de muncă",
+          "date": "Sun, 22 Nov 2026 07:10:02 +0000",
           "from": "Jooble <subscribe@ro.jooble.org>"
         },
         {
-          "id": "1a1fce9ad5fbf54e",
-          "subject": "Săptămâna aceasta în Industria Smart City (14 - 21 Noiembrie)",
-          "date": "Sat, 21 Nov 2026 07:02:14 +0000 (GMT)",
-          "from": "Eduard Dumitrascu via LinkedIn <newsletters-noreply@linkedin.com>"
+          "id": "1a201e414592ecc7",
+          "subject": "Candidates like you applied for these jobs",
+          "date": "Sun, 22 Nov 2026 08:14:11 +0200",
+          "from": "Bestjobs <contact@bestjobs.eu>"
         },
         {
-          "id": "1a1fce9a9b554bb9",
-          "subject": "UX Jobs Weekly | 85th Ed.",
-          "date": "Sat, 21 Nov 2026 07:02:13 +0000 (GMT)",
-          "from": "UX Jobs via LinkedIn <newsletters-noreply@linkedin.com>"
+          "id": "1a201ddbc237c769",
+          "subject": "🔔 KONECTA SERVICE ROMANIA S.R.L. caută Reprezentant servicii clienți/reprezentantă servicii clienți/remote și 56 mai multe oferte noi de muncă",
+          "date": "Sun, 22 Nov 2026 06:07:18 +0000",
+          "from": "Jooble <subscribe@ro.jooble.org>"
         }
       ]
     },
@@ -50,42 +50,42 @@
       "title": "AI si comunitati",
       "name": "AI Folder/AI si Comunitati",
       "counts": {
-        "azi": 4,
-        "24h": 14,
-        "7z": 90,
-        "30z": 357
+        "azi": 1,
+        "24h": 9,
+        "7z": 82,
+        "30z": 365
       },
       "newest": {
-        "id": "1a1fd043bbc85dfd",
-        "subject": "💼 22 new job opportunities posted in the past 24 hours",
-        "date": "Sat, 21 Nov 2026 07:31:14 +0000",
-        "from": "Twine Team <no-reply@twinehq.com>"
+        "id": "1a201d831604db07",
+        "subject": "Claude is Replacing Every App You Pay For",
+        "date": "Sun, 22 Nov 2026 06:01:14 +0000 (UTC)",
+        "from": "Jay E <robonuggets@mail.beehiiv.com>"
       },
-      "newestDate": "Sat, 21 Nov 2026 07:31:14 +0000",
+      "newestDate": "Sun, 22 Nov 2026 06:01:14 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a1fd043bbc85dfd",
-          "subject": "💼 22 new job opportunities posted in the past 24 hours",
-          "date": "Sat, 21 Nov 2026 07:31:14 +0000",
-          "from": "Twine Team <no-reply@twinehq.com>"
+          "id": "1a201d831604db07",
+          "subject": "Claude is Replacing Every App You Pay For",
+          "date": "Sun, 22 Nov 2026 06:01:14 +0000 (UTC)",
+          "from": "Jay E <robonuggets@mail.beehiiv.com>"
         },
         {
-          "id": "1a1fcb8ce10743c1",
-          "subject": "Define TOTAL BULL POOP!",
-          "date": "Sat, 21 Nov 2026 06:08:46 +0000",
-          "from": "Ken wheeler from Ken Theoria Apophasis Substack <kenwheeler@substack.com>"
+          "id": "1a1ff68d285b892d",
+          "subject": "Stephen Miller TAKES OVER Trump’s press conference - What happens next is unbelievable",
+          "date": "Sat, 21 Nov 2026 18:28:36 +0000",
+          "from": "PolitiBrawl <politibrawl@substack.com>"
         },
         {
-          "id": "1a1fba1d55a75ad3",
-          "subject": "Last Seats.",
-          "date": "Sat, 21 Nov 2026 01:02:26 +0000",
+          "id": "1a1fe688cb7a6878",
+          "subject": "Felix & Winston Are LIVE NOW!",
+          "date": "Sat, 21 Nov 2026 13:55:24 +0000",
           "from": "\"Felix & Winston 🐶\" <felix@goatacademy.org>"
         },
         {
-          "id": "1a1fb91cfb5e875a",
-          "subject": "After the Midterm Slaughter, Show Us the Receipts",
-          "date": "Sat, 21 Nov 2026 00:32:21 +0000",
-          "from": "PolitiBrawl <politibrawl@substack.com>"
+          "id": "1a1fe56760c5f0bf",
+          "subject": "⏩ FP! Week In Review #57",
+          "date": "Sat, 21 Nov 2026 13:40:23 +0000",
+          "from": "\"James Pethokoukis: Faster, Please!\" <fasterplease@substack.com>"
         }
       ]
     },
@@ -95,40 +95,40 @@
       "name": "Socials",
       "counts": {
         "azi": 0,
-        "24h": 5,
+        "24h": 4,
         "7z": 35,
-        "30z": 118
+        "30z": 122
       },
       "newest": {
-        "id": "1a1f90a36eeb2e74",
-        "subject": "2 new notifications since 3:49 pm (Nov 19, 2026)",
-        "date": "Fri, 20 Nov 2026 12:59:17 +0000 (UTC)",
-        "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
+        "id": "1a1ff0b063a3ba1e",
+        "subject": "Jonathan Pritchard posted \"What I Worked On This Week. How About You? \"",
+        "date": "Sat, 21 Nov 2026 16:57:54 +0000 (UTC)",
+        "from": "ZAVANT University <noreply@skool.com>"
       },
-      "newestDate": "Fri, 20 Nov 2026 12:59:17 +0000 (UTC)",
+      "newestDate": "Sat, 21 Nov 2026 16:57:54 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a1f90a36eeb2e74",
-          "subject": "2 new notifications since 3:49 pm (Nov 19, 2026)",
-          "date": "Fri, 20 Nov 2026 12:59:17 +0000 (UTC)",
+          "id": "1a1ff0b063a3ba1e",
+          "subject": "Jonathan Pritchard posted \"What I Worked On This Week. How About You? \"",
+          "date": "Sat, 21 Nov 2026 16:57:54 +0000 (UTC)",
+          "from": "ZAVANT University <noreply@skool.com>"
+        },
+        {
+          "id": "1a1feb33de51f0cc",
+          "subject": "3 new notifications since 7:18 pm (Nov 20, 2026)",
+          "date": "Sat, 21 Nov 2026 15:22:01 +0000 (UTC)",
           "from": "\"AI Automation Society (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a1f9054d96dc463",
-          "subject": "1 new notification since 1:25 pm (Nov 19, 2026)",
-          "date": "Fri, 20 Nov 2026 12:53:56 +0000 (UTC)",
-          "from": "\"ZAVANT University (Skool)\" <noreply@skool.com>"
-        },
-        {
-          "id": "1a1f8e6ffaefd464",
-          "subject": "20 new notifications since 3:37 pm (Nov 19, 2026)",
-          "date": "Fri, 20 Nov 2026 12:20:50 +0000 (UTC)",
+          "id": "1a1fe1fae6d9e728",
+          "subject": "20 new notifications since 3:23 pm (Nov 20, 2026)",
+          "date": "Sat, 21 Nov 2026 12:40:50 +0000 (UTC)",
           "from": "\"AI Money Lab (Skool)\" <noreply@skool.com>"
         },
         {
-          "id": "1a1f8c96a89664dc",
-          "subject": "1 new notification since 12:45 pm (Nov 19, 2026)",
-          "date": "Fri, 20 Nov 2026 11:48:31 +0000 (UTC)",
+          "id": "1a1fd4a3fcbeb545",
+          "subject": "1 event happening tomorrow",
+          "date": "Sat, 21 Nov 2026 08:47:42 +0000 (UTC)",
           "from": "\"Samin's Free AI Resource Hub (Skool)\" <noreply@skool.com>"
         }
       ]
@@ -138,42 +138,42 @@
       "title": "Newsletter",
       "name": "Newsletter",
       "counts": {
-        "azi": 7,
-        "24h": 52,
-        "7z": 279,
-        "30z": 1114
+        "azi": 3,
+        "24h": 25,
+        "7z": 272,
+        "30z": 1138
       },
       "newest": {
-        "id": "1a1fd043bbc85dfd",
-        "subject": "💼 22 new job opportunities posted in the past 24 hours",
-        "date": "Sat, 21 Nov 2026 07:31:14 +0000",
-        "from": "Twine Team <no-reply@twinehq.com>"
+        "id": "1a201d831604db07",
+        "subject": "Claude is Replacing Every App You Pay For",
+        "date": "Sun, 22 Nov 2026 06:01:14 +0000 (UTC)",
+        "from": "Jay E <robonuggets@mail.beehiiv.com>"
       },
-      "newestDate": "Sat, 21 Nov 2026 07:31:14 +0000",
+      "newestDate": "Sun, 22 Nov 2026 06:01:14 +0000 (UTC)",
       "samples": [
         {
-          "id": "1a1fd043bbc85dfd",
-          "subject": "💼 22 new job opportunities posted in the past 24 hours",
-          "date": "Sat, 21 Nov 2026 07:31:14 +0000",
-          "from": "Twine Team <no-reply@twinehq.com>"
+          "id": "1a201d831604db07",
+          "subject": "Claude is Replacing Every App You Pay For",
+          "date": "Sun, 22 Nov 2026 06:01:14 +0000 (UTC)",
+          "from": "Jay E <robonuggets@mail.beehiiv.com>"
         },
         {
-          "id": "1a1fce9ad5fbf54e",
-          "subject": "Săptămâna aceasta în Industria Smart City (14 - 21 Noiembrie)",
-          "date": "Sat, 21 Nov 2026 07:02:14 +0000 (GMT)",
-          "from": "Eduard Dumitrascu via LinkedIn <newsletters-noreply@linkedin.com>"
+          "id": "1a201b75b24afd1e",
+          "subject": "Important updates in Gemini Apps",
+          "date": "Sat, 21 Nov 2026 21:25:23 -0800",
+          "from": "Google Gemini <google-gemini-noreply@google.com>"
         },
         {
-          "id": "1a1fce9a9b554bb9",
-          "subject": "UX Jobs Weekly | 85th Ed.",
-          "date": "Sat, 21 Nov 2026 07:02:13 +0000 (GMT)",
-          "from": "UX Jobs via LinkedIn <newsletters-noreply@linkedin.com>"
+          "id": "1a200f0c203cd8ff",
+          "subject": "Twentoo has an opportunity for you. Apply Now.",
+          "date": "Sun, 22 Nov 2026 01:48:27 +0000 (UTC)",
+          "from": "Glassdoor Jobs <noreply@glassdoor.com>"
         },
         {
-          "id": "1a1fcb251b9a24e6",
-          "subject": "Expozitia „Grai Viu: O calatorie audiovizuala prin identitatile lingvistice ale Romaniei”",
-          "date": "Sat, 21 Nov 2026 06:01:46 +0000 (GMT)",
-          "from": "\"Cafenea   ☕️☕️☕️ via LinkedIn\" <newsletters-noreply@linkedin.com>"
+          "id": "1a200174a4cb59c7",
+          "subject": "Alexandru, looking for a new job?",
+          "date": "Sat, 21 Nov 2026 21:50:56 +0000 (GMT)",
+          "from": "LinkedIn <jobs-noreply@linkedin.com>"
         }
       ]
     },
@@ -183,18 +183,24 @@
       "name": "Finante",
       "counts": {
         "azi": 0,
-        "24h": 0,
-        "7z": 24,
-        "30z": 71
+        "24h": 1,
+        "7z": 25,
+        "30z": 72
       },
       "newest": {
-        "id": "1a1f75572ab10a8a",
-        "subject": "Anthropic Opened Trading Today At $111.50. Here's How Day One Went.",
-        "date": "Fri, 20 Nov 2026 05:02:14 +0000 (GMT)",
-        "from": "Forbes via LinkedIn <newsletters-noreply@linkedin.com>"
+        "id": "1a1fe7956b25bdb4",
+        "subject": "New idea by Cryptollica — check it out",
+        "date": "Sat, 21 Nov 2026 14:18:47 -0000",
+        "from": "TradingView <noreply@tradingview.com>"
       },
-      "newestDate": "Fri, 20 Nov 2026 05:02:14 +0000 (GMT)",
+      "newestDate": "Sat, 21 Nov 2026 14:18:47 -0000",
       "samples": [
+        {
+          "id": "1a1fe7956b25bdb4",
+          "subject": "New idea by Cryptollica — check it out",
+          "date": "Sat, 21 Nov 2026 14:18:47 -0000",
+          "from": "TradingView <noreply@tradingview.com>"
+        },
         {
           "id": "1a1f75572ab10a8a",
           "subject": "Anthropic Opened Trading Today At $111.50. Here's How Day One Went.",
@@ -212,12 +218,6 @@
           "subject": "How much can you borrow?",
           "date": "Thu, 19 Nov 2026 19:05:55 +0000",
           "from": "Kraken <no-reply@email.kraken.com>"
-        },
-        {
-          "id": "1a1f51ed047d0390",
-          "subject": "New idea by BtheTrade — check it out",
-          "date": "Thu, 19 Nov 2026 18:43:19 -0000",
-          "from": "TradingView <noreply@tradingview.com>"
         }
       ]
     },
@@ -255,16 +255,28 @@
         "azi": 0,
         "24h": 2,
         "7z": 18,
-        "30z": 826
+        "30z": 791
       },
       "newest": {
-        "id": "1a1f9965467ea679",
-        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (8e4d2f6)",
-        "date": "Fri, 20 Nov 2026 07:32:20 -0800",
+        "id": "1a1fe90c94bb7e0c",
+        "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (8ee7fa1)",
+        "date": "Sat, 21 Nov 2026 06:44:22 -0800",
         "from": "apvizual-max <notifications@github.com>"
       },
-      "newestDate": "Fri, 20 Nov 2026 07:32:20 -0800",
+      "newestDate": "Sat, 21 Nov 2026 06:44:22 -0800",
       "samples": [
+        {
+          "id": "1a1fe90c94bb7e0c",
+          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (8ee7fa1)",
+          "date": "Sat, 21 Nov 2026 06:44:22 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
+        {
+          "id": "1a1fde65f31bcc24",
+          "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
+          "date": "Sat, 21 Nov 2026 03:38:14 -0800",
+          "from": "apvizual-max <notifications@github.com>"
+        },
         {
           "id": "1a1f9965467ea679",
           "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (8e4d2f6)",
@@ -275,18 +287,6 @@
           "id": "1a1f8d6771ea17fe",
           "subject": "[apvizual-max/MAVIS-OPTIMUS-CI] Run failed: CI-verify - main (485440d)",
           "date": "Fri, 20 Nov 2026 04:02:45 -0800",
-          "from": "apvizual-max <notifications@github.com>"
-        },
-        {
-          "id": "1a1f5807a1804b33",
-          "subject": "Jules on OPTIMUS-Backbone",
-          "date": "Thu, 19 Nov 2026 12:29:57 -0800",
-          "from": "Etai Gabbai <etai.gabbai@gmail.com>"
-        },
-        {
-          "id": "1a1f480ca0f136a1",
-          "subject": "[apvizual-max/MAVIS-CLOUD] Run failed: google-access - main (9b7b05d)",
-          "date": "Thu, 19 Nov 2026 07:50:43 -0800",
           "from": "apvizual-max <notifications@github.com>"
         }
       ]
@@ -303,9 +303,9 @@
     }
   ],
   "totals": {
-    "azi": 25,
-    "24h": 115,
-    "7z": 673,
-    "30z": 3377
+    "azi": 12,
+    "24h": 65,
+    "7z": 649,
+    "30z": 3402
   }
 }
