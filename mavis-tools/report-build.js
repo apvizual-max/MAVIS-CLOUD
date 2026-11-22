@@ -18,6 +18,7 @@ const path = require('path');
 const k = require('./kit.js');
 const { triage } = require('./report-triage.js');
 const TAX = require('./taxonomy.js');
+const RF = require('./report-files.js');
 
 const DIR = __dirname;
 const DATE = process.argv[2] || new Date().toISOString().slice(0, 10);
@@ -42,6 +43,22 @@ try { filterState = JSON.parse(fs.readFileSync(path.join(DIR, 'report-filter-sta
 let strayLabels = null;
 try { strayLabels = JSON.parse(fs.readFileSync(path.join(DIR, 'report-label-stray.json'), 'utf8')); } catch (e) {}
 const tri = triage(sim.rows || []);
+// COMPANION SANITIZAT (22.11.2026): cifrele de triaj, fără conținut personal.
+// Dumpul complet (`report-simulate-sort.json`) e gitignored — repo-ul e PUBLIC
+// și conține corpuri de mesaje. Fără acest companion, cifrele de triaj din
+// raport nu pot fi verificate de nimeni din repo: promisiune fără umbră.
+// Aici intră DOAR cifre și clase — zero corp, zero subiect, zero expedent.
+try {
+  fs.writeFileSync(path.join(DIR, 'report-simulate-sort-clasificare.json'), JSON.stringify({
+    date: sim.date || DATE,
+    total: sim.total,
+    unmatched: sim.unmatched,
+    counts: sim.counts,
+    triage: tri.counts,
+    bodyCap: sim.bodyCap,
+    nota: 'fără corpuri/subiecte/expedenți — conținut personal nu intră în repo public',
+  }, null, 2));
+} catch (e) { console.log('!! companion de clasificare nescris: ' + e.message); }
 // consumul real de cereri Google, acumulat de kit.js la iesirea fiecarui script
 let usage = {};
 try { usage = JSON.parse(fs.readFileSync(path.join(DIR, '.api-usage.json'), 'utf8')); } catch (e) {}
@@ -827,25 +844,15 @@ md += `
 ## 7. Fișiere
 
 `;
-const files = [
-  ['rapoarte/RAPORT-ZILNIC-' + COMPACT.slice(0, 6) + '-' + COMPACT.slice(6) + '.md', 'raportul acesta (și în repo)'],
-  ['mavis-tools/scoring-result-' + DATE + '.json', 'scoruri + secțiuni + diagnostice'],
-  ['mavis-tools/jobs-iqads-' + DATE + '.json', 'joburi IQads, text integral'],
-  ['mavis-tools/jobs-designproject-' + DATE + '.json', 'joburi designproject.io, JSON-LD'],
-  ['mavis-tools/jobs-' + (sc.prevDate || '') + '.json', 'setul normalizat de ieri (cu care s-a comparat)'],
-  ['mavis-tools/report-mail-count.json', 'numărătoare pe etichetele de categorie'],
-  ['mavis-tools/report-inbox-counts.json', 'numărătoare exactă inbox'],
-  ['mavis-tools/report-simulate-sort.json', 'simularea sortării + mesajele de azi'],
-  ['mavis-tools/report-source-probe.json', 'sonda de surse (comportamentul iqads.ro / designproject.io, măsurat azi)'],
-  ['mavis-tools/report-filter-state.json', 'starea filtrelor Gmail + testul paranteze-vs-acolade (măsurat azi)'],
-  ['mavis-tools/report-label-stray.json', 'etichetele `MAVIS/*` necunoscute pentru taxonomie + mesajele rămase necategorizate (măsurat azi)'],
-  ['mavis-tools/report-triage.js', 'clasificatorul mesajelor (needs-reply / needs-action / fyi / noise)'],
-  ['mavis-tools/taxonomy.js', 'sursa unică pentru numele etichetelor de categorie (rezolvate live, nu hardcodate)'],
-];
-for (const [f, dsc] of files) {
-  const p = path.join(DIR, '..', f);
-  if (fs.existsSync(p)) md += `- \`${f}\` — ${dsc}\n`;
-}
+// Lista de fișiere e GENERATĂ, cu proveniență explicită (raport-files.js):
+// ce e în repo, ce e doar local (dump de corpuri de mesaje, repo public).
+// Măsurat 22.11.2026: raportul lista un fișier inexistent în repo, fără să
+// spună că e local — deci promisiune neîndeplinită, fără semn.
+md += RF.render({
+  date: DATE,
+  compact: COMPACT,
+  prevDate: sc.prevDate || '',
+}) + '\n';
 
 md += `
 ---
